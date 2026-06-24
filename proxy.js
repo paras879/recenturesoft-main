@@ -6,8 +6,8 @@ export async function proxy(request) {
 
     // Check if the route is an admin route
     if (pathname.startsWith("/admin")) {
-        // Exclude the login page itself
-        if (pathname === "/admin/login") {
+        // Exclude the login page and reset-password page
+        if (pathname === "/admin/login" || pathname === "/admin/reset-password") {
             return NextResponse.next();
         }
 
