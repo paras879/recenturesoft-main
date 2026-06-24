@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 const RecentureAIWrapper = dynamic(() => import("@/components/ai/RecentureAIWrapper"));
 import { ThemeProvider } from "@/components/ThemeProvider";
 import RoutePreloader from "@/components/RoutePreloader";
+import { ProjectModalProvider } from "@/components/providers/ProjectModalProvider";
+import { MeetingModalProvider } from "@/components/providers/MeetingModalProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,9 +43,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <RoutePreloader />
-          {children}
-          <RecentureAIWrapper />
+          <ProjectModalProvider>
+            <MeetingModalProvider>
+              <RoutePreloader />
+              {children}
+              <RecentureAIWrapper />
+            </MeetingModalProvider>
+          </ProjectModalProvider>
         </ThemeProvider>
       </body>
     </html>

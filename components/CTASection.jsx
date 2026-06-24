@@ -1,4 +1,10 @@
+"use client";
+import { useProjectModal } from "@/components/providers/ProjectModalProvider";
+import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
+
 export default function CTASection({ title = "Ready to build something extraordinary?", description = "Let's turn your vision into reality. Partner with us to engineer digital experiences that scale.", primaryBtnText = "Start a Project", secondaryBtnText = "Schedule a Call" }) {
+    const { openModal } = useProjectModal();
+    const { openMeetingModal } = useMeetingModal();
     return (
         <section className="relative pt-2 pb-10 md:pt-4 md:pb-14 lg:pt-6 lg:pb-20 overflow-hidden bg-background flex items-center justify-center transition-colors duration-300">
             {/* Background Elements (Static for optimal scroll performance) */}
@@ -27,10 +33,16 @@ export default function CTASection({ title = "Ready to build something extraordi
                     <div
                         className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
                     >
-                        <button className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-semibold rounded-full hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                        <button 
+                            onClick={openModal}
+                            className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-semibold rounded-full hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                        >
                             {primaryBtnText}
                         </button>
-                        <button className="w-full sm:w-auto px-8 py-4 bg-slate-200/50 dark:bg-white/[0.05] text-slate-800 dark:text-white border border-slate-300 dark:border-white/10 font-semibold rounded-full hover:bg-slate-300/50 dark:hover:bg-white/[0.1] transition-all duration-300 transform hover:scale-105 active:scale-95">
+                        <button 
+                            onClick={openMeetingModal}
+                            className="w-full sm:w-auto px-8 py-4 bg-slate-200/50 dark:bg-white/[0.05] text-slate-800 dark:text-white border border-slate-300 dark:border-white/10 font-semibold rounded-full hover:bg-slate-300/50 dark:hover:bg-white/[0.1] transition-all duration-300 transform hover:scale-105 active:scale-95"
+                        >
                             {secondaryBtnText}
                         </button>
                     </div>

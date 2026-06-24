@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 // Statically import or declare the SVG Hero graphic to replace WebGL
 function HeroGraphic({ accent }) {
     return (
@@ -210,6 +211,7 @@ const slideIn = {
 export default function Hero() {
     const [current, setCurrent] = useState(0);
     const heroRef = useRef(null);
+    const { openModal } = useProjectModal();
     const INTERVAL = 3000;
 
     // ── Scroll parallax (Static/CSS optimized) ──────────────────────
@@ -332,6 +334,7 @@ export default function Hero() {
                                 className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
                             >
                                 <button
+                                    onClick={openModal}
                                     className="group relative px-6 md:px-8 py-3.5 md:py-4 rounded-full font-[600] text-white shadow-lg md:hover:scale-105 active:scale-[0.98] transition-all duration-300 overflow-hidden w-full sm:w-auto text-center"
                                     style={{
                                         background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`,

@@ -1,5 +1,8 @@
+"use client";
 import Image from "next/image";
 import { aboutImages } from "@/data/aboutImages";
+import { useProjectModal } from "@/components/providers/ProjectModalProvider";
+import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
 // ==========================================
 // SECTION 1: HERO
@@ -233,16 +236,50 @@ function OurProcess() {
 
                 <div className="relative w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4">
                     {/* Horizontal Line Desktop */}
-                    <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-white/5 -translate-y-1/2" />
-                    <div
-                        className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 origin-left -translate-y-1/2 animate-scale-x"
-                    />
+                    <div className="hidden md:block absolute top-[24px] md:top-[32px] left-[40px] md:left-[48px] right-[40px] md:right-[48px] h-[2px] bg-slate-200 dark:bg-white/10 -translate-y-1/2 z-0" />
+                    
+                    {/* Animated Traveling Rocket & Glow (Desktop) */}
+                    <div className="hidden md:block absolute top-[24px] md:top-[32px] left-[40px] md:left-[48px] right-[40px] md:right-[48px] h-[2px] -translate-y-1/2 z-0">
+                        <div 
+                            className="absolute top-1/2 -translate-y-1/2 flex items-center"
+                            style={{ animation: "travelRight 7s ease-in-out infinite" }}
+                        >
+                            {/* Glow trail behind rocket */}
+                            <div className="w-[80px] h-[3px] bg-gradient-to-r from-transparent to-cyan-400 blur-[2px] -mr-2" />
+                            {/* Rocket Icon */}
+                            <span className="text-2xl drop-shadow-[0_0_10px_rgba(6,182,212,0.8)] transform rotate-45">🚀</span>
+                        </div>
+                    </div>
 
                     {/* Mobile Vertical Line */}
-                    <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2" />
-                    <div
-                        className="md:hidden absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-500 to-purple-600 origin-top -translate-x-1/2 animate-scale-y"
-                    />
+                    <div className="md:hidden absolute left-1/2 top-[24px] bottom-[24px] w-[2px] bg-slate-200 dark:bg-white/10 -translate-x-1/2 z-0" />
+                    
+                    {/* Animated Traveling Rocket (Mobile) */}
+                    <div className="md:hidden absolute left-1/2 top-[24px] bottom-[24px] w-[2px] -translate-x-1/2 z-0">
+                        <div 
+                            className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center"
+                            style={{ animation: "travelDown 7s ease-in-out infinite" }}
+                        >
+                            {/* Glow trail behind rocket */}
+                            <div className="w-[3px] h-[60px] bg-gradient-to-b from-transparent to-cyan-400 blur-[2px] -mb-2" />
+                            <span className="text-xl drop-shadow-[0_0_10px_rgba(6,182,212,0.8)] transform rotate-135">🚀</span>
+                        </div>
+                    </div>
+
+                    <style dangerouslySetInnerHTML={{__html: `
+                        @keyframes travelRight {
+                            0% { left: 0%; opacity: 0; transform: scale(0.8); }
+                            10% { opacity: 1; transform: scale(1); }
+                            90% { opacity: 1; transform: scale(1); }
+                            100% { left: 100%; opacity: 0; transform: scale(0.8); }
+                        }
+                        @keyframes travelDown {
+                            0% { top: 0%; opacity: 0; transform: scale(0.8); }
+                            10% { opacity: 1; transform: scale(1); }
+                            90% { opacity: 1; transform: scale(1); }
+                            100% { top: 100%; opacity: 0; transform: scale(0.8); }
+                        }
+                    `}} />
 
                     {PROCESS_STEPS.map((step, idx) => (
                         <div
@@ -265,22 +302,42 @@ function OurProcess() {
 // ==========================================
 // SECTION 7: TECHNOLOGY ECOSYSTEM
 // ==========================================
-const TECHNOLOGIES = ["React", "Next.js", "Node.js", "Java", "Spring Boot", "MongoDB", "AWS", "Docker", "Kubernetes", "AI"];
+const TECHNOLOGIES = [
+    { name: "React", dot: "bg-[#61DAFB]" },
+    { name: "Next.js", dot: "bg-slate-900 dark:bg-white" },
+    { name: "Node.js", dot: "bg-[#339933]" },
+    { name: "Java", dot: "bg-[#e32c2e]" },
+    { name: "Spring Boot", dot: "bg-[#6DB33F]" },
+    { name: "MongoDB", dot: "bg-[#47A248]" },
+    { name: "AWS", dot: "bg-[#FF9900]" },
+    { name: "Docker", dot: "bg-[#2496ED]" },
+    { name: "Kubernetes", dot: "bg-[#326CE5]" },
+    { name: "AI & ML", dot: "bg-purple-500" }
+];
 
 function TechnologyEcosystem() {
     return (
         <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16 items-center text-center">
+            {/* Ambient Background Blur */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] pointer-events-none rounded-full" />
+            
+            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16 items-center text-center relative z-10">
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">Technology <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Ecosystem</span></h2>
 
-                <div className="flex flex-wrap justify-center gap-6 max-w-4xl">
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-5xl">
                     {TECHNOLOGIES.map((tech, idx) => (
                         <div
                             key={idx}
-                            className="px-4 py-2 sm:px-5 sm:py-3 text-[13px] md:text-sm lg:text-base rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-[500] cursor-default hover:bg-slate-50 dark:hover:bg-cyan-500/20 hover:border-cyan-500 dark:hover:border-cyan-400 hover:shadow-sm dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 backdrop-blur-md shadow-sm dark:shadow-none hover:scale-[1.1] animate-scale-in"
+                            className="group relative flex items-center gap-3 px-5 py-3 sm:px-8 sm:py-4 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-[600] cursor-default hover:-translate-y-2 transition-all duration-500 backdrop-blur-xl shadow-lg shadow-slate-200/50 dark:shadow-none hover:shadow-2xl hover:shadow-slate-300/50 dark:hover:shadow-cyan-500/10 hover:border-slate-300 dark:hover:border-white/20 dark:hover:bg-white/10 animate-scale-in"
                             style={{ animationDelay: `${(idx % 5) * 0.1}s` }}
                         >
-                            {tech}
+                            {/* Colored Dot indicator */}
+                            <span className={`relative z-10 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${tech.dot} group-hover:scale-[1.3] transition-transform duration-300 shadow-sm`} />
+                            
+                            <span className="relative z-10 text-sm sm:text-base tracking-wide">{tech.name}</span>
+                            
+                            {/* Hover ambient inner glow */}
+                            <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-10 dark:group-hover:opacity-20 blur-md transition-opacity duration-500 ${tech.dot}`} />
                         </div>
                     ))}
                 </div>
@@ -300,7 +357,7 @@ function LeadershipMessage() {
                 style={{ animationDelay: "0.2s" }}
             >
                 <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-full overflow-hidden relative flex-shrink-0 border-4 border-white/10" style={{ position: "relative" }}>
-                    <Image src={aboutImages.leadership} alt="Leadership" fill sizes="(max-width: 768px) 100vw, 200px" className="object-cover" />
+                    <Image src="/images/events/testimonial_1.jpg" alt="Shivanand" fill sizes="(max-width: 768px) 100vw, 200px" className="object-cover" />
                 </div>
                 <div className="flex flex-col gap-6  text-center md:text-left ">
                     <div className="text-cyan-600 dark:text-cyan-400 text-6xl leading-none">"</div>
@@ -308,7 +365,7 @@ function LeadershipMessage() {
                         Our goal is simple: We engineer technology that gives our clients an unfair advantage in the global market.
                     </h3>
                     <div>
-                        <h4 className="text-base md:text-xl font-[500] text-slate-900 dark:text-white">Alex Mercer</h4>
+                        <h4 className="text-base md:text-xl font-[500] text-slate-900 dark:text-white">Shivanand</h4>
                         <p className="text-slate-600 dark:text-slate-400">Founder & CEO, RecentureSoft</p>
                     </div>
                 </div>
@@ -321,6 +378,8 @@ function LeadershipMessage() {
 // SECTION 9: OUR CTA
 // ==========================================
 function AboutCTA() {
+    const { openModal } = useProjectModal();
+    const { openMeetingModal } = useMeetingModal();
     return (
         <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden flex justify-center border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-50 dark:to-cyan-950/20 pointer-events-none" />
@@ -332,10 +391,16 @@ function AboutCTA() {
                     Let's Build The <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Future</span> Together
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full mt-4 md:mt-8">
-                    <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-[500] rounded-xl shadow-md">
+                    <button 
+                        onClick={openModal}
+                        className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-[500] rounded-xl shadow-md"
+                    >
                         Start Your Project
                     </button>
-                    <button className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-[500] rounded-xl shadow-sm dark:shadow-none hover:bg-slate-50 dark:hover:bg-white/10 transition-colors">
+                    <button 
+                        onClick={openMeetingModal}
+                        className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-[500] rounded-xl shadow-sm dark:shadow-none hover:bg-slate-50 dark:hover:bg-white/10 transition-colors"
+                    >
                         Schedule Consultation
                     </button>
                 </div>

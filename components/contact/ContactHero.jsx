@@ -1,3 +1,7 @@
+"use client";
+import { useProjectModal } from "@/components/providers/ProjectModalProvider";
+import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
+
 const STATS = [
     { value: "500+", label: "Projects Delivered" },
     { value: "120+", label: "Global Clients" },
@@ -251,6 +255,8 @@ function CSSGlobe() {
 }
 
 export default function ContactHero() {
+    const { openModal } = useProjectModal();
+    const { openMeetingModal } = useMeetingModal();
     return (
         <section className="relative w-full pt-20 md:pt-24 lg:pt-28 pb-10 md:pb-14 lg:pb-20">
             {/* Ambient Bounded Background Glows */}
@@ -282,10 +288,16 @@ export default function ContactHero() {
                             className="flex flex-col sm:flex-row w-full gap-3 pt-2 animate-fade-in-up"
                             style={{ animationDelay: "300ms" }}
                         >
-                            <button className="px-7 py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-lg transition-colors">
+                            <button 
+                                onClick={openModal}
+                                className="px-7 py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-lg transition-colors"
+                            >
                                 Start a Project
                             </button>
-                            <button className="px-7 py-3.5 bg-slate-200/50 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-semibold rounded-lg transition-colors backdrop-blur-sm">
+                            <button 
+                                onClick={openMeetingModal}
+                                className="px-7 py-3.5 bg-slate-200/50 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-semibold rounded-lg transition-colors backdrop-blur-sm"
+                            >
                                 Schedule Consultation
                             </button>
                         </div>
