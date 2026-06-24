@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Globe, Award, Users, Building } from "lucide-react";
 import EventGalleryModal from "./EventGalleryModal";
 
 // ==========================================
@@ -199,38 +200,61 @@ function EventBentoGallery({ events, onSelectEvent }) {
 // SECTION 4: EVENT TIMELINE
 // ==========================================
 const TIMELINE_EVENTS = [
-    { year: "2026", title: "Global Team Retreat", desc: "Our teams from 5 countries gathered for a massive synergy event." },
-    { year: "2025", title: "Series B Celebration", desc: "Celebrating our massive growth phase with the entire engineering crew." },
-    { year: "2024", title: "Women's Day Summit", desc: "Empowering our female leaders across the technology landscape." },
-    { year: "2023", title: "First Office Inauguration", desc: "The foundation of RecentureSoft's core engineering hub." },
+    { year: "2026", title: "Global Team Retreat", desc: "Our teams from 5 countries gathered for a massive synergy event.", icon: Globe, color: "from-blue-500 to-cyan-400", shadow: "shadow-blue-500/20" },
+    { year: "2025", title: "Series B Celebration", desc: "Celebrating our massive growth phase with the entire engineering crew.", icon: Award, color: "from-purple-500 to-pink-500", shadow: "shadow-purple-500/20" },
+    { year: "2024", title: "Women's Day Summit", desc: "Empowering our female leaders across the technology landscape.", icon: Users, color: "from-orange-500 to-red-500", shadow: "shadow-orange-500/20" },
+    { year: "2023", title: "First Office Inauguration", desc: "The foundation of RecentureSoft's core engineering hub.", icon: Building, color: "from-emerald-500 to-teal-400", shadow: "shadow-emerald-500/20" },
 ];
 
 function EventTimeline() {
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-4xl mx-auto relative">
-                {/* Static Gradient Center Line */}
-                <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500 to-purple-600 rounded-full transform md:-translate-x-1/2" />
+        <section className="relative w-full pt-4 md:pt-8 lg:pt-12 pb-10 md:pb-14 lg:pb-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300 overflow-hidden">
+            {/* Background Decor to fix "empty" feeling */}
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-                <div className="flex flex-col gap-8 md:gap-12 lg:gap-16">
-                    {TIMELINE_EVENTS.map((item, idx) => {
-                        const isEven = idx % 2 === 0;
-                        return (
-                            <div key={idx} className={`relative flex flex-col md:flex-row items-start md:items-center ${isEven ? 'md:flex-row-reverse' : ''} pl-12 md:pl-0`}>
-                                {/* Timeline Dot */}
-                                <div className="absolute left-[24px] md:left-1/2 w-4 h-4 bg-cyan-500 rounded-full border-4 border-slate-50 dark:border-[#020617] shadow-[0_0_15px_rgba(6,182,212,0.8)] transform -translate-x-1/2 mt-1.5 md:mt-0 z-10" />
+            <div className="max-w-7xl mx-auto flex flex-col gap-5 md:gap-6 relative z-10">
+                <div className="text-center max-w-2xl mx-auto">
+                    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1.5 tracking-tight">
+                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500">Journey</span>
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base">
+                        From our humble beginnings to a global engineering force. Here are the key milestones that define who we are today.
+                    </p>
+                </div>
 
-                                {/* Content Card */}
-                                <div
-                                    className={`w-full md:w-[45%] flex flex-col gap-3 p-4 md:p-6 lg:p-8 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none ${isEven ? 'md:text-left' : 'md:text-right'}`}
-                                >
-                                    <span className="text-cyan-600 dark:text-cyan-400 font-bold tracking-widest text-sm">{item.year}</span>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{item.title}</h3>
-                                    <p className="text-slate-600 dark:text-slate-400">{item.desc}</p>
+                <div className="max-w-4xl mx-auto relative w-full mt-4">
+                    {/* Static Gradient Center Line */}
+                    <div className="absolute left-[28px] md:left-1/2 top-2 bottom-2 w-1.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 rounded-full transform md:-translate-x-1/2 opacity-20 dark:opacity-30" />
+
+                    <div className="flex flex-col gap-4 md:gap-6">
+                        {TIMELINE_EVENTS.map((item, idx) => {
+                            const isEven = idx % 2 === 0;
+                            const Icon = item.icon;
+                            return (
+                                <div key={idx} className={`relative flex flex-col md:flex-row items-start md:items-center ${isEven ? 'md:flex-row-reverse' : ''} pl-14 md:pl-0 group`}>
+                                    
+                                    {/* Timeline Node/Dot */}
+                                    <div className={`absolute left-[28px] md:left-1/2 w-10 h-10 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-50 dark:border-[#020617] shadow-md transform -translate-x-1/2 -mt-1 md:mt-0 z-10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110`}>
+                                        <div className={`w-full h-full rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                                            <Icon className="w-4 h-4 text-white drop-shadow-sm" />
+                                        </div>
+                                    </div>
+
+                                    {/* Content Card */}
+                                    <div
+                                        className={`w-full md:w-[45%] flex flex-col gap-2.5 p-5 md:p-6 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-md hover:shadow-lg hover:${item.shadow} transition-all duration-500 hover:-translate-y-1 group-hover:border-slate-300 dark:group-hover:border-white/20 ${isEven ? 'md:text-left' : 'md:text-right'}`}
+                                    >
+                                        <div className={`inline-flex w-fit px-4 py-1.5 rounded-full bg-gradient-to-r ${item.color} text-white font-bold tracking-widest text-xs shadow-sm ${isEven ? '' : 'md:ml-auto'}`}>
+                                            {item.year}
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{item.title}</h3>
+                                        <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed">{item.desc}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </section>

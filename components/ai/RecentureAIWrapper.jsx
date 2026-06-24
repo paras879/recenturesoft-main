@@ -24,8 +24,11 @@ const RecentureAI = dynamic(() => import("./RecentureAI"), {
     )
 });
 
+import { usePathname } from "next/navigation";
+
 export default function RecentureAIWrapper() {
     const [shouldRender, setShouldRender] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         // Desktop loads immediately
@@ -54,6 +57,11 @@ export default function RecentureAIWrapper() {
             cleanUp();
         };
     }, []);
+
+    // Disable chatbot on all admin pages
+    if (pathname?.startsWith("/admin")) {
+        return null;
+    }
 
     if (!shouldRender) return null;
 
