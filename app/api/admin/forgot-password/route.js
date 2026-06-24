@@ -24,8 +24,10 @@ export async function POST(req) {
         admin.resetTokenExpiry = resetTokenExpiry;
         await admin.save();
 
-        // Construct reset link
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+        // Construct reset link using request headers to automatically work on Vercel
+        const protocol = req.headers.get("x-forwarded-proto") || "http";
+        const host = req.headers.get("host") || "localhost:3000";
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || `${protocol}://${host}`;
         const resetLink = `${baseUrl}/admin/reset-password?token=${resetToken}`;
 
         // Configure Nodemailer transporter
