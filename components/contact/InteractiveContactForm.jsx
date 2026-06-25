@@ -98,7 +98,7 @@ export default function InteractiveContactForm() {
                                 </div>
                                 <div>
                                     <h4 className="text-slate-900 dark:text-white font-semibold mb-1">Global HQ</h4>
-                                    <p className="text-slate-600 dark:text-gray-400 font-light">A-125, Sector-63,<br />Noida, UP 201301</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&destination=A-125,+Sector-63,+Noida,+Uttar+Pradesh+201301,+India" target="_blank" rel="noopener noreferrer" className="text-slate-600 dark:text-gray-400 font-light hover:text-cyan-500 transition-colors block">A-125, Sector-63,<br />Noida, UP 201301</a>
                                 </div>
                             </div>
                         </div>

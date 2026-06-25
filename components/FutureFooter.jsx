@@ -199,7 +199,7 @@ export default function FutureFooter() {
                                 </div>
                                 <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Headquarters </span>
                             </div>
-                            <span className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12">A-125, Sector-63,<br />Noida, UP 201301</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=A-125,+Sector-63,+Noida,+Uttar+Pradesh+201301,+India" target="_blank" rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors block">A-125, Sector-63,<br />Noida, UP 201301</a>
                         </div>
                     </GlassCard>
                 </div>
