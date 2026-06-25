@@ -60,7 +60,7 @@ export default function CookiesContent() {
   };
 
   const handleDownloadPDF = () => {
-    alert("Downloading Cookies Policy as PDF...");
+    window.print();
   };
 
   return (

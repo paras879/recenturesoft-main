@@ -61,7 +61,7 @@ export default function TermsContent() {
   };
 
   const handleDownloadPDF = () => {
-    alert("Downloading Terms of Service as PDF...");
+    window.print();
   };
 
   return (

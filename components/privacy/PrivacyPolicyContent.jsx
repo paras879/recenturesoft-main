@@ -67,8 +67,7 @@ export default function PrivacyPolicyContent() {
   };
 
   const handleDownloadPDF = () => {
-    // Placeholder function
-    alert("Downloading Privacy Policy as PDF...");
+    window.print();
   };
 
   return (
