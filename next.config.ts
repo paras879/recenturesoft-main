@@ -32,6 +32,20 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(import.meta.dirname || "."),
   },
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/admin/:path*',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
