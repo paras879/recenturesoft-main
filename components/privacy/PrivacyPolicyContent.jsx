@@ -68,16 +68,31 @@ export default function PrivacyPolicyContent() {
 
   const handleDownloadPDF = async () => {
     try {
+      // Inject CSS to force RGB colors and avoid html2canvas "lab" color parsing errors
+      const style = document.createElement('style');
+      style.innerHTML = `
+        #policy-content, #policy-content * {
+          color: rgb(15, 23, 42) !important;
+          background-color: rgb(255, 255, 255) !important;
+          border-color: rgb(226, 232, 240) !important;
+        }
+      `;
+      document.head.appendChild(style);
+
       const html2pdf = (await import('html2pdf.js')).default;
       const element = document.getElementById('policy-content');
       const opt = {
-        margin:       0.5,
+        margin:       [0.5, 0.5, 0.5, 0.5],
         filename:     'Privacy_Policy.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
+        html2canvas:  { scale: 2, useCORS: true },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
-      html2pdf().set(opt).from(element).save();
+      
+      await html2pdf().set(opt).from(element).save();
+      
+      // Remove the injected CSS
+      document.head.removeChild(style);
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
@@ -136,7 +151,7 @@ export default function PrivacyPolicyContent() {
 
       <QuickSummary />
 
-      <div className="flex flex-col lg:flex-row gap-12 relative items-start">
+      <div className="flex flex-col lg:flex-row gap-12 relative">
         {/* Sidebar */}
         <div className="w-full lg:w-52 flex-shrink-0 order-2 lg:order-1">
           <TableOfContents sections={SECTIONS} activeSection={activeSection} />
