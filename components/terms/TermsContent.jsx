@@ -60,12 +60,25 @@ export default function TermsContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleDownloadPDF = () => {
-    window.print();
+  const handleDownloadPDF = async () => {
+    try {
+      const html2pdf = (await import('html2pdf.js')).default;
+      const element = document.getElementById('policy-content');
+      const opt = {
+        margin:       0.5,
+        filename:     'Terms_of_Service.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" id="policy-content">
       <div className="mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <motion.div
@@ -114,8 +127,8 @@ export default function TermsContent() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-12 relative">
-        <div className="w-full lg:w-64 flex-shrink-0 order-2 lg:order-1">
+      <div className="flex flex-col lg:flex-row gap-12 relative items-start">
+        <div className="w-full lg:w-52 flex-shrink-0 order-2 lg:order-1">
           <TableOfContents sections={SECTIONS} activeSection={activeSection} />
         </div>
 
@@ -203,25 +216,7 @@ export default function TermsContent() {
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-zinc-900 dark:bg-zinc-800 text-white shadow-xl mt-8 mb-16 border border-zinc-800 dark:border-zinc-700">
-            <h4 className="text-lg font-bold mb-4">Acknowledge Terms</h4>
-            <label className="flex items-start gap-4 cursor-pointer group">
-              <div className="relative flex items-center justify-center mt-1">
-                <input
-                  type="checkbox"
-                  checked={accepted}
-                  onChange={(e) => setAccepted(e.target.checked)}
-                  className="peer sr-only"
-                />
-                <div className="w-6 h-6 rounded border-2 border-zinc-600 peer-checked:border-blue-500 peer-checked:bg-blue-500 transition-colors"></div>
-                <Check className="absolute w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity" />
-              </div>
-              <div>
-                <p className="font-medium">I have read and agree to the Terms of Service</p>
-                <p className="text-sm text-zinc-400 mt-1">By checking this box, you acknowledge that you are bound by these terms.</p>
-              </div>
-            </label>
-          </div>
+
 
         </div>
       </div>
