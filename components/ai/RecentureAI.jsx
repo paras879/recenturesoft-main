@@ -124,15 +124,27 @@ export default function RecentureAI() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                        initial={{ 
+                            opacity: 0, 
+                            y: 50, 
+                            scale: 0.95,
+                            width: windowWidth < 768 ? "75vw" : isMinimized ? "300px" : windowWidth < 1024 ? "400px" : "450px",
+                            height: windowWidth < 768 ? "60vh" : isMinimized ? "auto" : "min(720px, 85vh)"
+                        }}
                         animate={{
                             opacity: 1,
                             y: 0,
                             scale: 1,
-                            height: windowWidth < 768 ? "60vh" : isMinimized ? "auto" : "min(720px, 85vh)",
-                            width: windowWidth < 768 ? "75vw" : isMinimized ? "300px" : windowWidth < 1024 ? "400px" : "450px"
+                            width: windowWidth < 768 ? "75vw" : isMinimized ? "300px" : windowWidth < 1024 ? "400px" : "450px",
+                            height: windowWidth < 768 ? "60vh" : isMinimized ? "auto" : "min(720px, 85vh)"
                         }}
-                        exit={{ opacity: 0, y: 50, scale: 0.95 }}
+                        exit={{ 
+                            opacity: 0, 
+                            y: 50, 
+                            scale: 0.95,
+                            width: windowWidth < 768 ? "75vw" : isMinimized ? "300px" : windowWidth < 1024 ? "400px" : "450px",
+                            height: windowWidth < 768 ? "60vh" : isMinimized ? "auto" : "min(720px, 85vh)"
+                        }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         className={`mb-0 md:mb-4 bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-[0_20px_50px_rgba(8,_145,_178,_0.1)] overflow-hidden flex flex-col origin-bottom md:origin-bottom-right pointer-events-auto transition-all ${windowWidth < 768 ? 'rounded-3xl mb-4 mr-4 w-[75vw]' : 'rounded-3xl'
                             }`}

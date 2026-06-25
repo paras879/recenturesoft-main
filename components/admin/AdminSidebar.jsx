@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
     LayoutDashboard, 
@@ -15,13 +15,26 @@ import {
     BotMessageSquare,
     Menu,
     X,
-    Sparkles
+    Sparkles,
+    Activity,
+    UserCog
 } from "lucide-react";
 
 export default function AdminSidebar() {
     const pathname = usePathname();
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
+
+    const [role, setRole] = useState('super_admin');
+
+    useEffect(() => {
+        fetch('/api/admin/me')
+            .then(res => res.json())
+            .then(data => {
+                if (data.role) setRole(data.role);
+            })
+            .catch(console.error);
+    }, []);
 
     const handleLogout = async () => {
         document.cookie = "admin_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -36,6 +49,10 @@ export default function AdminSidebar() {
         { name: "Meeting Requests", href: "/admin/meetings", icon: CalendarCheck },
         { name: "Blogs Content", href: "/admin/blogs", icon: FileText },
         { name: "AI Chat History", href: "/admin/chats", icon: BotMessageSquare },
+        ...(role === "super_admin" ? [
+            { name: "Activity Logs", href: "/admin/activity", icon: Activity },
+            { name: "Manage Admins", href: "/admin/admins", icon: UserCog }
+        ] : []),
         { name: "Settings", href: "/admin/settings", icon: Settings },
     ];
 

@@ -23,6 +23,10 @@ const ContactSchema = new mongoose.Schema(
             required: [true, "Message is required"],
             trim: true,
         },
+        status: {
+            type: String,
+            default: "new",
+        }
     },
     {
         timestamps: true,

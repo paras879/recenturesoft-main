@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Search, MessageSquare, Clock, User, Bot, LayoutList, Flame, Snowflake } from "lucide-react";
+import { Search, MessageSquare, Clock, User, Bot, LayoutList, Flame, Snowflake, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ChatHistory({ chats }) {
+    const router = useRouter();
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedChat, setSelectedChat] = useState(chats.length > 0 ? chats[0] : null);
+    const [isDeleting, setIsDeleting] = useState(false);
     const messagesEndRef = useRef(null);
 
     // Filter chats based on search
@@ -23,6 +26,32 @@ export default function ChatHistory({ chats }) {
         return new Date(dateString).toLocaleString("en-US", {
             month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
         });
+    };
+
+    const handleDeleteChat = async (chatId, e) => {
+        e.stopPropagation(); // Prevent selecting the chat when clicking delete
+        if (!window.confirm("Are you sure you want to delete this chat session? This action cannot be undone.")) return;
+        
+        setIsDeleting(true);
+        try {
+            const res = await fetch(`/api/admin/chats/${chatId}`, {
+                method: "DELETE",
+            });
+            
+            if (res.ok) {
+                if (selectedChat?._id === chatId) {
+                    setSelectedChat(null);
+                }
+                router.refresh(); // Refresh the server component to get updated data
+            } else {
+                alert("Failed to delete chat");
+            }
+        } catch (error) {
+            console.error("Error deleting chat:", error);
+            alert("An error occurred while deleting the chat");
+        } finally {
+            setIsDeleting(false);
+        }
     };
 
     return (
@@ -58,10 +87,10 @@ export default function ChatHistory({ chats }) {
                 <div className="flex-1 overflow-y-auto p-2 flex flex-col gap-1 custom-scrollbar">
                     {filteredChats.length > 0 ? (
                         filteredChats.map((chat) => (
-                            <button
+                            <div
                                 key={chat._id}
                                 onClick={() => setSelectedChat(chat)}
-                                className={`w-full text-left p-3 rounded-xl transition-all flex flex-col gap-2 ${
+                                className={`w-full text-left p-3 rounded-xl transition-all flex flex-col gap-2 cursor-pointer ${
                                     selectedChat?._id === chat._id 
                                         ? "bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-100 dark:border-cyan-500/20 shadow-sm" 
                                         : "bg-transparent border border-transparent hover:bg-slate-50 dark:hover:bg-white/5"
@@ -81,13 +110,23 @@ export default function ChatHistory({ chats }) {
                                     <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 italic">
                                         "{chat.messages[0]?.content || "Empty Chat"}"
                                     </p>
-                                    {chat.leadStatus === "hot" ? (
-                                        <Flame className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-                                    ) : (
-                                        <Snowflake className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                                    )}
+                                    <div className="flex items-center gap-2">
+                                        {chat.leadStatus === "hot" ? (
+                                            <Flame className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                                        ) : (
+                                            <Snowflake className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                                        )}
+                                        <button 
+                                            onClick={(e) => handleDeleteChat(chat._id, e)}
+                                            disabled={isDeleting}
+                                            className="text-slate-400 hover:text-red-500 transition-colors p-1 rounded-md hover:bg-red-50 dark:hover:bg-red-500/10"
+                                            title="Delete chat"
+                                        >
+                                            <Trash2 className="w-3.5 h-3.5" />
+                                        </button>
+                                    </div>
                                 </div>
-                            </button>
+                            </div>
                         ))
                     ) : (
                         <div className="p-8 text-center flex flex-col items-center justify-center h-full gap-3 text-slate-500">
@@ -119,6 +158,14 @@ export default function ChatHistory({ chats }) {
                                     <span>{selectedChat.totalMessages} Messages</span>
                                 </p>
                             </div>
+                            <button
+                                onClick={(e) => handleDeleteChat(selectedChat._id, e)}
+                                disabled={isDeleting}
+                                className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 rounded-lg transition-colors border border-red-100 dark:border-red-500/20"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                                <span>Delete Session</span>
+                            </button>
                         </div>
 
                         {/* Messages Area */}

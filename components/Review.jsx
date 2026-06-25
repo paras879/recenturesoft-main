@@ -254,7 +254,7 @@ export default function Review() {
     };
 
     return (
-        <section className="relative pt-[clamp(1.5rem,4vw,4.5rem)] pb-0 bg-background transition-colors duration-300 overflow-hidden select-none border-t border-slate-200 dark:border-white/5">
+        <section className="relative pt-[clamp(0.5rem,2vw,1rem)] pb-0 bg-background transition-colors duration-300 overflow-hidden select-none">
             {/* Inject organic card floating & grab cursor styling */}
             <style dangerouslySetInnerHTML={{__html: `
                 @keyframes testimonial-float {
@@ -285,7 +285,7 @@ export default function Review() {
 
             <div className="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-6 md:mb-10">
+                <div className="text-center mb-2 md:mb-4">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mt-2 tracking-tight leading-[1.15]">
                         What Our Clients Say
                         <span className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 dark:from-cyan-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent mt-1.5">

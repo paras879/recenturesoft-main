@@ -183,16 +183,16 @@ export default function EnterpriseServices() {
     }, []);
 
     return (
-        <section className="font-manrope relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-background px-4 md:px-8 lg:px-12 border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
+        <section className="font-manrope relative w-full py-[clamp(0.5rem,2vw,1rem)] bg-background px-4 md:px-8 lg:px-12 transition-colors duration-300">
             <style>{`
                 /* No additional animations needed, standard React transitions handle the crossfade */
             `}</style>
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-[clamp(1.25rem,2.5vw,2rem)]">
+            <div className="max-w-[1400px] mx-auto flex flex-col gap-4">
 
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
                     <h2
-                        className="text-[2rem] md:text-[3rem] lg:text-[4.5rem] font-[600] text-foreground mb-4 tracking-[-0.04em] leading-[1.05]"
+                        className="text-[2rem] md:text-[3rem] lg:text-[4.5rem] font-[600] text-foreground mb-1 tracking-[-0.04em] leading-[1.05]"
                     >
                         Enterprise <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Solutions</span>
                     </h2>

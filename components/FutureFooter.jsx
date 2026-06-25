@@ -28,7 +28,7 @@ function GlassCard({ children, hoverColorClass = "from-primary to-accent", class
             className={`group relative rounded-2xl cursor-pointer hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_60px_rgba(99,102,241,0.15)] transition-all duration-500 ${className}`}
         >
             <div
-                className={`relative p-8 rounded-2xl min-h-[180px] h-full overflow-hidden flex flex-col z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
+                className={`relative p-5 md:p-6 rounded-2xl min-h-[120px] h-full overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
             >
                 {/* Border trace animation on hover */}
                 <div

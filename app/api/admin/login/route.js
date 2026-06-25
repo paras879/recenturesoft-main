@@ -21,7 +21,8 @@ export async function POST(req) {
             await Admin.create({
                 username: defaultUsername,
                 email: "parastomar851@gmail.com", // Default email
-                password: hashedPassword
+                password: hashedPassword,
+                role: "super_admin"
             });
         }
 
@@ -42,13 +43,15 @@ export async function POST(req) {
                 { status: 401 }
             );
         }
+        
+        // Login activity logging removed per user request
 
         // Create JWT token
         const secret = new TextEncoder().encode(
             process.env.ADMIN_JWT_SECRET || "fallback_super_secret_recenturesoft_key_2026"
         );
 
-        const token = await new SignJWT({ role: "admin", username })
+        const token = await new SignJWT({ role: admin.role || "super_admin", username })
             .setProtectedHeader({ alg: "HS256" })
             .setIssuedAt()
             .setExpirationTime("24h")

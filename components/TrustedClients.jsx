@@ -304,7 +304,7 @@ function InfiniteMarquee() {
    ═══════════════════════════════════════════════════════ */
 export default function TrustedClients() {
   return (
-    <section className="relative py-10 md:py-14 lg:py-20 overflow-hidden bg-background border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
+    <section className="relative py-2 md:py-4 lg:py-6 overflow-hidden bg-background border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
       {/* Ambient Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Aurora */}
@@ -317,14 +317,14 @@ export default function TrustedClients() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-[clamp(1rem,2vw,2rem)]">
         {/* Performance Dashboard Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 mb-10 text-center sm:text-left border-b border-slate-200 dark:border-white/5 pb-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 mb-4 text-center sm:text-left border-b border-slate-200 dark:border-white/5 pb-2">
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Performance Dashboard
           </h2>
         </div>
 
         {/* Live Counters & Performance Stats - Bento Grid */}
-        <div className="relative mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto items-stretch">
+        <div className="relative mt-4 grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto items-stretch">
 
           {/* Animated Connecting Pipeline SVG - Desktop Only */}
           <div className="absolute inset-0 pointer-events-none z-20 hidden lg:block overflow-visible">

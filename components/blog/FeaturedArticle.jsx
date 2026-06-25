@@ -14,7 +14,7 @@ export default function FeaturedArticle({ article }) {
     };
 
     return (
-        <section className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
+        <section className="pt-8 pb-8 lg:pt-12 lg:pb-12 bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
             <div className="container mx-auto px-4 max-w-[1200px]">
                 <div className="flex justify-between items-end mb-12">
                     <h2 className="text-[clamp(2rem,3vw,3rem)] font-extrabold text-slate-900 dark:text-white">Featured Insight</h2>
@@ -61,21 +61,7 @@ export default function FeaturedArticle({ article }) {
                                 <p className="text-gray-300 text-lg lg:text-xl font-light mb-8 max-w-2xl line-clamp-2">
                                     {article.excerpt}
                                 </p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-white/20 overflow-hidden">
-                                        <Image 
-                                            src="https://randomuser.me/api/portraits/men/68.jpg" 
-                                            alt={article.author || 'Author'} 
-                                            width={48}
-                                            height={48}
-                                            className="w-full h-full object-cover" 
-                                        />
-                                    </div>
-                                    <div>
-                                        <p className="text-white font-semibold">{article.author}</p>
-                                        <p className="text-gray-400 text-sm">Author</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

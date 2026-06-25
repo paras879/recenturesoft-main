@@ -1,18 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { User, Lock, Globe, Bell, Mail, Save, Check, Users } from "lucide-react";
 import { updateAdminPassword, createNewAdmin } from "@/app/admin/actions";
 
-export default function SettingsTabs() {
+export default function SettingsTabs({ currentUsername = "Admin" }) {
     const [activeTab, setActiveTab] = useState("account");
     const [saved, setSaved] = useState(false);
     const [pwdMsg, setPwdMsg] = useState("");
     const [pwdError, setPwdError] = useState("");
     const [adminMsg, setAdminMsg] = useState("");
     const [adminError, setAdminError] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState(null);
+    const [firstName, setFirstName] = useState(currentUsername);
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("parastomar@recenturesoft.com");
+    const [role, setRole] = useState('super_admin');
+    const fileInputRef = useRef(null);
 
-    const handleSave = (e) => {
+    useEffect(() => {
+        fetch('/api/admin/me')
+            .then(res => res.json())
+            .then(data => {
+                if (data.role) setRole(data.role);
+            })
+            .catch(console.error);
+    }, []);
+
+    useEffect(() => {
+        const savedAvatar = localStorage.getItem(`adminAvatar_${currentUsername}`);
+        if (savedAvatar) setAvatarUrl(savedAvatar);
+
+        const savedFirstName = localStorage.getItem(`adminFirstName_${currentUsername}`);
+        if (savedFirstName) setFirstName(savedFirstName);
+
+        const savedLastName = localStorage.getItem(`adminLastName_${currentUsername}`);
+        if (savedLastName) setLastName(savedLastName);
+
+        const savedEmail = localStorage.getItem(`adminEmail_${currentUsername}`);
+        if (savedEmail) setEmail(savedEmail);
+    }, [currentUsername]);
+
+    const handleAvatarChange = (e) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            if (file.size > 1024 * 1024) {
+                alert("File size exceeds 1MB limit.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result;
+                setAvatarUrl(base64String);
+                localStorage.setItem(`adminAvatar_${currentUsername}`, base64String);
+                window.dispatchEvent(new CustomEvent("avatarUpdated", { detail: { currentUsername } }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSaveProfile = (e) => {
+        e.preventDefault();
+        localStorage.setItem(`adminFirstName_${currentUsername}`, firstName);
+        localStorage.setItem(`adminLastName_${currentUsername}`, lastName);
+        localStorage.setItem(`adminEmail_${currentUsername}`, email);
+        window.dispatchEvent(new CustomEvent("profileUpdated", { detail: { currentUsername } }));
+        
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+    };
+
+    const handleSaveConfig = (e) => {
         e.preventDefault();
         setSaved(true);
         setTimeout(() => setSaved(false), 3000);
@@ -93,13 +151,15 @@ export default function SettingsTabs() {
                     <Bell className="w-5 h-5" />
                     Notifications
                 </button>
-                <button 
-                    onClick={() => setActiveTab("admins")}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors text-left w-full ${activeTab === "admins" ? "bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400" : "hover:bg-slate-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400"}`}
-                >
-                    <Users className="w-5 h-5" />
-                    Manage Admins
-                </button>
+                {role === "super_admin" && (
+                    <button 
+                        onClick={() => setActiveTab("add_admin")}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors text-left w-full ${activeTab === "add_admin" ? "bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400" : "hover:bg-slate-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400"}`}
+                    >
+                        <Users className="w-5 h-5" />
+                        Add New Admin
+                    </button>
+                )}
             </div>
 
             {/* Right Content Area */}
@@ -114,24 +174,44 @@ export default function SettingsTabs() {
                         </div>
                         
                         <div className="flex items-center gap-6 pb-6 border-b border-slate-100 dark:border-white/5">
-                            <div className="w-20 h-20 bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 rounded-full flex items-center justify-center text-2xl font-bold">
-                                PT
+                            <div 
+                                onClick={() => fileInputRef.current?.click()}
+                                className="w-20 h-20 bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 rounded-full flex items-center justify-center text-2xl font-bold overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-cyan-500 hover:ring-offset-2 dark:hover:ring-offset-slate-900 transition-all"
+                                title="Click to change avatar"
+                            >
+                                {avatarUrl ? (
+                                    <img src={avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+                                ) : (
+                                    `${firstName ? firstName.charAt(0).toUpperCase() : ""}${lastName ? lastName.charAt(0).toUpperCase() : ""}` || "A"
+                                )}
                             </div>
                             <div className="flex flex-col gap-2">
-                                <button className="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors">
+                                <input 
+                                    type="file" 
+                                    ref={fileInputRef} 
+                                    onChange={handleAvatarChange} 
+                                    accept="image/jpeg, image/png, image/gif" 
+                                    className="hidden" 
+                                />
+                                <button 
+                                    type="button"
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors w-fit"
+                                >
                                     Change Avatar
                                 </button>
                                 <p className="text-xs text-slate-500 dark:text-slate-400">JPG, GIF or PNG. 1MB max.</p>
                             </div>
                         </div>
 
-                        <form onSubmit={handleSave} className="flex flex-col gap-5">
+                        <form onSubmit={handleSaveProfile} className="flex flex-col gap-5">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div className="space-y-1.5">
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
                                     <input 
                                         type="text" 
-                                        defaultValue="Paras"
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
                                         className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none text-slate-900 dark:text-white text-sm"
                                     />
                                 </div>
@@ -139,7 +219,8 @@ export default function SettingsTabs() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
                                     <input 
                                         type="text" 
-                                        defaultValue="Tomar"
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
                                         className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none text-slate-900 dark:text-white text-sm"
                                     />
                                 </div>
@@ -153,7 +234,8 @@ export default function SettingsTabs() {
                                     </div>
                                     <input 
                                         type="email" 
-                                        defaultValue="parastomar@recenturesoft.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className="w-full pl-9 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none text-slate-900 dark:text-white text-sm"
                                     />
                                 </div>
@@ -178,7 +260,7 @@ export default function SettingsTabs() {
                             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Manage global website settings and SEO defaults.</p>
                         </div>
 
-                        <form onSubmit={handleSave} className="flex flex-col gap-5">
+                        <form onSubmit={handleSaveConfig} className="flex flex-col gap-5">
                             <div className="space-y-1.5">
                                 <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Website Name</label>
                                 <input 
@@ -285,7 +367,7 @@ export default function SettingsTabs() {
                             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Choose what you want to be notified about.</p>
                         </div>
 
-                        <form onSubmit={handleSave} className="flex flex-col gap-6">
+                        <form onSubmit={handleSaveConfig} className="flex flex-col gap-6">
                             <div className="flex flex-col gap-4">
                                 <label className="flex items-center justify-between cursor-pointer group">
                                     <div className="flex flex-col">
@@ -332,8 +414,8 @@ export default function SettingsTabs() {
                     </div>
                 )}
 
-                {/* MANAGE ADMINS TAB */}
-                {activeTab === "admins" && (
+                {/* ADD NEW ADMIN TAB */}
+                {activeTab === "add_admin" && role === "super_admin" && (
                     <div className="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
                         <div>
                             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Add New Admin</h2>

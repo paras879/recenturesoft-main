@@ -71,7 +71,7 @@ const FLOWS = {
         ]
     },
     handoff: {
-        message: "Thank you! Please provide your email address so our team can reach out to you directly.",
+        message: "Thank you! Please provide your Name, Email address, and Contact number so our team can reach out to you directly.",
         options: [] // Expecting text input here
     }
 };
@@ -103,7 +103,9 @@ export default function ChatInterface({ onClose, isMinimized }) {
     const sessionIdRef = useRef(null);
 
     const scrollToBottom = useCallback(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
     }, []);
 
     useEffect(() => {
@@ -137,8 +139,22 @@ export default function ChatInterface({ onClose, isMinimized }) {
     }, []);
 
     useEffect(() => {
-        if (isLoaded) {
+        if (isLoaded && messages.length > 0) {
             localStorage.setItem("recenture_ai_chat_history", JSON.stringify(messages));
+            
+            // Sync chat history to database silently
+            const timeoutId = setTimeout(() => {
+                fetch("/api/chat/sync", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        sessionId: sessionIdRef.current,
+                        messages: messages.map(m => ({ role: m.role, content: m.content }))
+                    })
+                }).catch(err => console.error("Chat sync failed", err));
+            }, 1000);
+            
+            return () => clearTimeout(timeoutId);
         }
     }, [messages, isLoaded]);
 
@@ -210,13 +226,7 @@ export default function ChatInterface({ onClose, isMinimized }) {
 
         console.log("Send handler attached and executing...");
         const userMsg = { role: "user", content: text };
-        setMessages(prev => {
-            const newMessages = [...prev];
-            if (newMessages.length > 0 && newMessages[newMessages.length - 1].role === "assistant") {
-                newMessages[newMessages.length - 1].options = [];
-            }
-            return [...newMessages, userMsg];
-        });
+        setMessages(prev => [...prev, userMsg]);
 
         setInput("");
 
@@ -226,11 +236,11 @@ export default function ChatInterface({ onClose, isMinimized }) {
         }
 
         const lastMsg = messages[messages.length - 1];
-        if (lastMsg && lastMsg.content.includes("email address")) {
+        if (lastMsg && (lastMsg.content.includes("email address") || lastMsg.content.includes("Contact number"))) {
             setTimeout(() => {
                 setMessages(prev => [...prev, {
                     role: "assistant",
-                    content: "Got it. Our team will contact you at that address shortly. Is there anything else you'd like to add regarding your requirements?",
+                    content: "Got it. Our team will contact you shortly with these details. Is there anything else you'd like to add regarding your requirements?",
                     options: [{ label: "No, that's all", next: "home" }]
                 }]);
             }, 600);
@@ -425,7 +435,7 @@ export default function ChatInterface({ onClose, isMinimized }) {
                                 />
                             ))}
                             {isStreaming && messages.length > 0 && messages[messages.length - 1].role === "user" && (
-                                <div className="flex flex-col items-start w-full mb-3 md:mb-4">
+                                <div className="flex flex-col items-start w-full mb-6 md:mb-8">
                                     <div className="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 rounded-2xl p-3 md:p-4 rounded-tl-sm shadow-sm dark:shadow-none backdrop-blur-sm">
                                         <div className="flex gap-1.5 h-4 items-center">
                                             <span className="w-1.5 h-1.5 bg-cyan-500 dark:bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -435,7 +445,7 @@ export default function ChatInterface({ onClose, isMinimized }) {
                                     </div>
                                 </div>
                             )}
-                            <div ref={messagesEndRef} className="h-4" />
+                            <div ref={messagesEndRef} className="h-6" />
                         </div>
                     )}
                 </div>

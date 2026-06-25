@@ -27,7 +27,7 @@ export default function ArticleGrid({ articles = [] }) {
     });
 
     return (
-        <section className="py-[clamp(1.5rem,5vw,5rem)] bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
+        <section className="pt-[clamp(1rem,2vw,2rem)] pb-[clamp(1.5rem,5vw,5rem)] bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
             <div className="container mx-auto px-6 max-w-7xl">
 
                 {/* Filters and Search */}

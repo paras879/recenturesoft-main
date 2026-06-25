@@ -7,7 +7,7 @@ const PROCESS_STEPS = [
 
     export default function SolutionsProcess() {
         return (
-        <section className="font-manrope relative w-full py-8 md:py-12 bg-slate-50 dark:bg-[#020617] px-4 lg:px-8 border-t border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
+        <section className="font-manrope relative w-full py-8 md:py-12 bg-slate-50 dark:bg-[#020617] px-4 lg:px-8 overflow-hidden transition-colors duration-300">
             <div className="max-w-[800px] mx-auto flex flex-col gap-4 md:gap-6">
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">

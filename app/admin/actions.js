@@ -176,3 +176,21 @@ export async function createNewAdmin(username, email, password) {
         return { success: false, error: "An error occurred while creating admin." };
     }
 }
+
+export async function deleteAdmin(id) {
+    try {
+        await connectDB();
+        
+        const admin = await Admin.findById(id);
+        if (!admin) return { success: false, error: "Admin not found." };
+        if (admin.username === 'superadmin') {
+            return { success: false, error: "Cannot delete the master superadmin." };
+        }
+
+        await Admin.findByIdAndDelete(id);
+        return { success: true };
+    } catch (error) {
+        console.error("Error deleting admin:", error);
+        return { success: false, error: "Failed to delete admin." };
+    }
+}

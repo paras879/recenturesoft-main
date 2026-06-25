@@ -183,7 +183,7 @@ export default function TechArchitecture() {
     }, []);
 
     return (
-        <section className="font-manrope relative w-full py-[clamp(2.5rem,6vw,6rem)] bg-slate-50/50 dark:bg-background transition-colors duration-300 px-4 sm:px-6 lg:px-12 border-t border-slate-200 dark:border-white/5 overflow-hidden">
+        <section className="font-manrope relative w-full py-[clamp(2.5rem,6vw,6rem)] bg-slate-50/50 dark:bg-background transition-colors duration-300 px-4 sm:px-6 lg:px-12 overflow-hidden">
             {/* Soft decorative background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 dark:bg-indigo-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
 

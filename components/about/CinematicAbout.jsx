@@ -9,7 +9,7 @@ import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 // ==========================================
 function AboutHero() {
     return (
-        <section className="relative min-h-[auto] lg:min-h-[50vh] w-full flex items-center justify-center pt-[clamp(4rem,6vw,6rem)] pb-[clamp(2rem,4vw,4rem)] overflow-hidden bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
+        <section className="relative min-h-[auto] lg:min-h-[50vh] w-full flex items-center justify-center pt-[clamp(2rem,3vw,3rem)] pb-[clamp(1rem,2vw,2rem)] overflow-hidden bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px]" />
@@ -54,7 +54,7 @@ const STORY_TIMELINE = [
 
 function CompanyStory() {
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-5 sm:px-8 lg:px-12 xl:px-16 border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
+        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-5 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-16 items-start">
 
                 {/* Left: Premium Image Card */}
@@ -111,7 +111,7 @@ const BENTO_FEATURES = [
 
 function WhyChooseUs() {
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
+        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16">
                 <div className="text-center max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-4 leading-tight">Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Choose Us</span></h2>
@@ -170,7 +170,7 @@ function CompanyStats() {
     ];
 
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 border-y border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
+        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
                 {stats.map((stat, i) => (
                     <div
@@ -192,7 +192,7 @@ function CompanyStats() {
 // ==========================================
 function CultureGallery() {
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
+        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
                     <div>
@@ -228,7 +228,7 @@ const PROCESS_STEPS = ["Discover", "Plan", "Design", "Develop", "Deploy", "Scale
 
 function OurProcess() {
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 border-t border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
+        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20">
                 <div className="text-center">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-6 leading-tight">The Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Process</span></h2>
@@ -317,7 +317,7 @@ const TECHNOLOGIES = [
 
 function TechnologyEcosystem() {
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
+        <section className="relative w-full pt-[clamp(1rem,2.5vw,2rem)] pb-[clamp(1rem,2vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             {/* Ambient Background Blur */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] pointer-events-none rounded-full" />
             
@@ -351,7 +351,7 @@ function TechnologyEcosystem() {
 // ==========================================
 function LeadershipMessage() {
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 flex justify-center transition-colors duration-300">
+        <section className="relative w-full pt-[clamp(1rem,2vw,2rem)] pb-[clamp(1rem,2vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
                 className="w-full max-w-5xl rounded-[3rem] bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none backdrop-blur-2xl p-6 md:p-10 lg:p-16 flex flex-col md:flex-row items-center gap-6 md:gap-12 animate-fade-up"
                 style={{ animationDelay: "0.2s" }}
@@ -381,7 +381,7 @@ function AboutCTA() {
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
     return (
-        <section className="relative w-full py-[clamp(1.5rem,4vw,4.5rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden flex justify-center border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
+        <section className="relative w-full pt-[clamp(1rem,2vw,2rem)] pb-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden flex justify-center transition-colors duration-300">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-50 dark:to-cyan-950/20 pointer-events-none" />
             <div
                 className="relative z-10 max-w-4xl w-full text-center flex flex-col items-center gap-4 md:gap-8 animate-scale-in"

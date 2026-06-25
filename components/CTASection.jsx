@@ -6,7 +6,7 @@ export default function CTASection({ title = "Ready to build something extraordi
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
     return (
-        <section className="relative pt-2 pb-10 md:pt-4 md:pb-14 lg:pt-6 lg:pb-20 overflow-hidden bg-background flex items-center justify-center transition-colors duration-300">
+        <section className="relative pt-2 pb-4 md:pt-4 md:pb-6 lg:pt-6 lg:pb-8 overflow-hidden bg-background flex items-center justify-center transition-colors duration-300">
             {/* Background Elements (Static for optimal scroll performance) */}
             <div className="absolute inset-0 z-0 pointer-events-none opacity-20 dark:opacity-50">
                 <div className="absolute top-[10%] left-[15%] w-72 h-72 bg-blue-600/20 dark:bg-blue-600/10 rounded-full blur-[100px]" />

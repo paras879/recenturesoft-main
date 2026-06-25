@@ -30,7 +30,7 @@ const MeetingRequestSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            default: "scheduled",
+            default: "new",
         }
     },
     {

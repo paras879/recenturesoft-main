@@ -317,7 +317,7 @@ export default function TechStack() {
 
 
     return (
-        <section className="relative py-[clamp(1.5rem,4vw,4.5rem)] bg-background transition-colors duration-300 overflow-hidden select-none">
+        <section className="relative py-[clamp(0.5rem,2vw,1rem)] bg-background transition-colors duration-300 overflow-hidden select-none">
             {/* Soft Glowing Accent Spotlights */}
             <div className="absolute top-1/4 right-0 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-cyan-400/10 dark:bg-cyan-950/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 left-0 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-indigo-400/10 dark:bg-indigo-950/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
@@ -325,7 +325,7 @@ export default function TechStack() {
             <div className="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
 
                 {/* Header Section */}
-                <div className="text-center mb-8 md:mb-12">
+                <div className="text-center mb-4">
                     <span className="inline-block px-3 py-1 rounded-full bg-cyan-100/50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800/20 text-cyan-700 dark:text-cyan-300 font-semibold text-[10px] tracking-[0.25em] uppercase mb-2">
                         ⚡ Core Ecosystem
                     </span>

@@ -23,6 +23,25 @@ export default function NotificationDropdown({ initialNotifications, initialTota
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    // Fetch notifications once on mount
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                // Add timestamp to prevent browser caching
+                const res = await fetch(`/api/admin/notifications?t=${Date.now()}`);
+                const data = await res.json();
+                if (data.success) {
+                    setNotifications(data.notifications);
+                    setTotalCount(data.totalCount);
+                }
+            } catch(e) {
+                console.error("Fetch error", e);
+            }
+        };
+
+        fetchNotifications();
+    }, []);
+
     const handleNotificationClick = async (notification) => {
         // Optimistically update UI to remove it
         setNotifications(prev => prev.filter(n => n._id !== notification._id));

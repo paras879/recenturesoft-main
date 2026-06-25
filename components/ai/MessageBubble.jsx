@@ -69,7 +69,7 @@ const MessageBubble = memo(({ message, isLatest, onOptionSelect }) => {
             </div>
 
             {/* Render Guided Options if present */}
-            {isAi && message.options && message.options.length > 0 && (
+            {isAi && isLatest && message.options && message.options.length > 0 && (
                 <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}

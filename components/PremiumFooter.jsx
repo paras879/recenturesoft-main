@@ -12,14 +12,14 @@ import NewsletterForm from "./NewsletterForm";
 
 export default function PremiumFooter() {
     return (
-        <footer className="relative bg-slate-50 dark:bg-[#020617] pt-10 md:pt-14 lg:pt-20 pb-8 md:pb-12 lg:pb-16 border-t border-slate-200 dark:border-white/10 overflow-hidden transition-colors duration-300">
+        <footer className="relative bg-slate-50 dark:bg-[#020617] pt-10 md:pt-14 lg:pt-20 pb-4 md:pb-6 lg:pb-8 border-t border-slate-200 dark:border-white/10 overflow-hidden transition-colors duration-300">
             {/* Background elements */}
             <div className="absolute inset-0 pointer-events-none opacity-20">
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-cyan-600/20 blur-[100px] rounded-full" />
             </div>
 
             <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-[1400px]">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 md:gap-8 lg:gap-8 mb-6 md:mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 md:gap-8 lg:gap-8 mb-6 md:mb-10 lg:mb-12">
 
                     {/* Brand Column */}
                     <div className="lg:col-span-4">
@@ -28,7 +28,7 @@ export default function PremiumFooter() {
                                 RECENTURE<span className="text-cyan-500 dark:text-cyan-400">SOFT</span>
                             </span>
                         </Link>
-                        <p className="text-slate-600 dark:text-gray-400 font-light leading-relaxed mb-8 max-w-sm">
+                        <p className="text-slate-700 dark:text-gray-300 font-medium leading-relaxed mb-8 max-w-sm">
                             Engineering extraordinary digital experiences. We partner with visionaries to build high-performance software, web, and mobile solutions.
                         </p>
                         <div className="flex gap-4">
@@ -64,7 +64,7 @@ export default function PremiumFooter() {
                         <ul className="space-y-2 md:space-y-4">
                             {["About Us", "Portfolio", "Careers", "News", "Contact"].map((link) => (
                                 <li key={link}>
-                                    <Link href={`/${link.toLowerCase().replace(" ", "")}`} className="text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors text-sm font-light">
+                                    <Link href={`/${link.toLowerCase().replace(" ", "")}`} className="text-slate-600 hover:text-slate-900 dark:text-gray-300 dark:hover:text-white transition-colors text-sm font-medium">
                                         {link}
                                     </Link>
                                 </li>
@@ -77,7 +77,7 @@ export default function PremiumFooter() {
                         <ul className="space-y-2 md:space-y-4">
                             {["Software Dev", "Web Development", "Mobile Apps", "UI/UX Design", "Marketing"].map((link) => (
                                 <li key={link}>
-                                    <Link href="/solutions" className="text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors text-sm font-light">
+                                    <Link href="/solutions" className="text-slate-600 hover:text-slate-900 dark:text-gray-300 dark:hover:text-white transition-colors text-sm font-medium">
                                         {link}
                                     </Link>
                                 </li>
@@ -87,7 +87,7 @@ export default function PremiumFooter() {
 
                     <div className="lg:col-span-3">
                         <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide">Newsletter</h4>
-                        <p className="text-slate-500 dark:text-gray-400 text-sm font-light mb-2 md:mb-4 leading-relaxed">
+                        <p className="text-slate-600 dark:text-gray-300 text-sm font-medium mb-2 md:mb-4 leading-relaxed">
                             Subscribe to our newsletter for the latest insights in enterprise tech.
                         </p>
                         <NewsletterForm />
@@ -95,13 +95,13 @@ export default function PremiumFooter() {
 
                 </div>
 
-                <div className="pt-8 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-slate-500 dark:text-gray-500 text-sm font-light">
                         &copy; {new Date().getFullYear()} RecentureSoft. All rights reserved.
                     </p>
                     <div className="flex gap-6">
-                        <Link href="/privacy_policy" className="text-slate-500 hover:text-slate-800 dark:text-gray-500 dark:hover:text-gray-300 text-sm font-light transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="text-slate-500 hover:text-slate-800 dark:text-gray-500 dark:hover:text-gray-300 text-sm font-light transition-colors">Terms of Service</Link>
+                        <Link href="/privacy_policy" className="text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors">Privacy Policy</Link>
+                        <Link href="/terms" className="text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors">Terms of Service</Link>
                     </div>
                 </div>
             </div>

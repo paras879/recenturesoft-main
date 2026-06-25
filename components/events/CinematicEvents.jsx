@@ -30,7 +30,7 @@ const IMAGES = {
 // ==========================================
 function EventsHero() {
     return (
-        <section className="relative min-h-[auto] lg:min-h-[50vh] w-full flex flex-col items-center justify-center pt-20 md:pt-24 lg:pt-28 pb-10 md:pb-14 lg:pb-20 overflow-hidden bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
+        <section className="relative min-h-[auto] lg:min-h-[50vh] w-full flex flex-col items-center justify-center pt-20 md:pt-24 lg:pt-28 pb-2 md:pb-3 overflow-hidden bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
             {/* Gradient Background */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/20 rounded-full blur-[120px]" />
@@ -59,7 +59,7 @@ function FeaturedEvent({ event, onViewGallery }) {
     if (!event) return null;
 
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
                 onClick={onViewGallery}
                 className="relative w-full max-w-7xl h-[320px] sm:h-[400px] md:h-[600px] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-cyan-500/20 dark:hover:border-cyan-400/20 hover:-translate-y-2 transition-all duration-500"
@@ -162,8 +162,8 @@ function EventBentoGallery({ events, onSelectEvent }) {
     ];
 
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto flex flex-col gap-8 md:gap-12">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
+            <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
                 <div className="flex flex-col gap-3 text-center items-center">
                     <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-900 dark:text-white">
                         Moments <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Captured</span>
@@ -208,7 +208,7 @@ const TIMELINE_EVENTS = [
 
 function EventTimeline() {
     return (
-        <section className="relative w-full pt-4 md:pt-8 lg:pt-12 pb-10 md:pb-14 lg:pb-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300 overflow-hidden">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300 overflow-hidden">
             {/* Background Decor to fix "empty" feeling */}
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -273,7 +273,7 @@ function CultureStats() {
     ];
 
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 border-y border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 overflow-hidden transition-colors duration-300">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000')] bg-cover bg-center opacity-5 mix-blend-screen dark:mix-blend-screen" />
             <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {stats.map((stat, i) => (
@@ -295,7 +295,7 @@ function CultureStats() {
 // ==========================================
 function VideoReelPreview() {
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
                 className="relative w-full max-w-6xl h-[50vh] md:h-[70vh] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none"
             >
@@ -321,7 +321,7 @@ function VideoReelPreview() {
 // ==========================================
 function InfiniteEventMarquee() {
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] overflow-hidden transition-colors duration-300">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] overflow-hidden transition-colors duration-300">
             <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-[200%]">
                 {[...IMAGES.marquee, ...IMAGES.marquee].map((src, i) => (
                     <div key={i} className="relative w-[300px] md:w-[400px] h-[250px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/10">
@@ -348,8 +348,8 @@ function InfiniteEventMarquee() {
 // ==========================================
 function EmployeeTestimonials() {
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto flex flex-col gap-8 md:gap-12">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
+            <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
                 <div className="text-center">
                     <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-900 dark:text-white mb-3 md:mb-4">
                         Hear From Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-600 dark:from-purple-400 dark:to-cyan-500">Team</span>
@@ -388,7 +388,7 @@ function EmployeeTestimonials() {
 // ==========================================
 function EventsCTA() {
     return (
-        <section className="relative w-full py-10 md:py-14 lg:py-20 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 overflow-hidden flex justify-center transition-colors duration-300">
+        <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 overflow-hidden flex justify-center transition-colors duration-300">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-50 dark:to-cyan-950/20 pointer-events-none" />
             <div
                 className="relative z-10 max-w-4xl w-full p-5 md:p-10 lg:p-16 rounded-[3rem] bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl text-center flex flex-col items-center gap-6 md:gap-8 shadow-sm dark:shadow-none"
@@ -400,11 +400,11 @@ function EventsCTA() {
                     Whether you&apos;re looking to join our engineering teams or partner with us for your next digital transformation, we&apos;re ready.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
-                    <button className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1">
+                    <button 
+                        onClick={() => window.location.href = '/contact'}
+                        className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1"
+                    >
                         Join Our Team
-                    </button>
-                    <button className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold rounded-xl transition-all backdrop-blur-sm hover:-translate-y-1">
-                        Contact Us
                     </button>
                 </div>
             </div>

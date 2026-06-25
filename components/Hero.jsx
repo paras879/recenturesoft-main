@@ -233,7 +233,7 @@ export default function Hero() {
     const slide = SLIDES[current];
 
     return (
-        <section ref={heroRef} className="relative min-h-screen overflow-hidden bg-background transition-colors duration-300">
+        <section ref={heroRef} className="relative h-[100svh] min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
             {/* ── Background image slideshow ── */}
             <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 bg-black">

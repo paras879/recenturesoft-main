@@ -6,6 +6,8 @@ import Contact from "@/models/Contact";
 import NotificationDropdown from "./NotificationDropdown";
 import ProfileDropdown from "./ProfileDropdown";
 import ThemeToggle from "@/components/ThemeToggle";
+import { cookies } from "next/headers";
+import { jwtVerify } from "jose";
 
 // Helper function to format time ago
 const timeAgo = (date) => {
@@ -25,6 +27,21 @@ const timeAgo = (date) => {
 
 export default async function AdminHeader() {
     await connectDB();
+    
+    const cookieStore = await cookies();
+    const token = cookieStore.get("admin_token")?.value;
+    let currentUsername = "Admin";
+    if (token) {
+        try {
+            const secret = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET || "fallback_super_secret_recenturesoft_key_2026");
+            const { payload } = await jwtVerify(token, secret);
+            if (payload && payload.username) {
+                currentUsername = payload.username;
+            }
+        } catch (e) {
+            console.error("JWT Verify Error in AdminHeader", e);
+        }
+    }
     
     // Fallback to 0 if count fails, just in case a model is missing the status field initially
     let newProjects = [];
@@ -99,7 +116,7 @@ export default async function AdminHeader() {
                 />
 
                 {/* Admin Profile Dropdown Component */}
-                <ProfileDropdown />
+                <ProfileDropdown currentUsername={currentUsername} />
 
             </div>
         </header>
