@@ -36,12 +36,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/admin',
-        destination: '/',
+        destination: 'https://recenture-soft-admin.vercel.app/admin',
         permanent: true,
       },
       {
         source: '/admin/:path*',
-        destination: '/',
+        destination: 'https://recenture-soft-admin.vercel.app/admin/:path*',
         permanent: true,
       },
     ];
