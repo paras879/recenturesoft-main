@@ -61,13 +61,21 @@ export default function CookiesContent() {
 
   const handleDownloadPDF = async () => {
     try {
-      // Inject CSS to force RGB colors and avoid html2canvas "lab" color parsing errors
+      // Inject comprehensive CSS to force RGB colors and remove shadows/gradients
+      // This prevents html2canvas from crashing on Tailwind's "oklch" or "lab" colors
       const style = document.createElement('style');
       style.innerHTML = `
         #policy-content, #policy-content * {
           color: rgb(15, 23, 42) !important;
           background-color: rgb(255, 255, 255) !important;
           border-color: rgb(226, 232, 240) !important;
+          outline-color: rgb(226, 232, 240) !important;
+          text-decoration-color: rgb(15, 23, 42) !important;
+          fill: rgb(15, 23, 42) !important;
+          stroke: rgb(15, 23, 42) !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+          background-image: none !important;
         }
       `;
       document.head.appendChild(style);
@@ -84,7 +92,6 @@ export default function CookiesContent() {
       
       await html2pdf().set(opt).from(element).save();
       
-      // Remove the injected CSS
       document.head.removeChild(style);
     } catch (error) {
       console.error("Error generating PDF:", error);
