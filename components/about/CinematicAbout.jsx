@@ -357,7 +357,7 @@ function LeadershipMessage() {
                 style={{ animationDelay: "0.2s" }}
             >
                 <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-full overflow-hidden relative flex-shrink-0 border-4 border-white/10" style={{ position: "relative" }}>
-                    <Image src="/images/events/testimonial_1.jpg" alt="Shivanand" fill sizes="(max-width: 768px) 100vw, 200px" className="object-cover" />
+                    <Image src="/manager.png" alt="Shivanand" fill sizes="(max-width: 768px) 100vw, 200px" className="object-cover" />
                 </div>
                 <div className="flex flex-col gap-6  text-center md:text-left ">
                     <div className="text-cyan-600 dark:text-cyan-400 text-6xl leading-none">"</div>
