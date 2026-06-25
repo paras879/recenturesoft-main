@@ -215,7 +215,7 @@ export default function FutureFooter() {
                     <div className="flex flex-wrap justify-center gap-10 sm:gap-8 order-1 md:order-2">
                         <Link href="/privacy_policy" className="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</Link>
-                        <Link href="#" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>
+                        <Link href="/cookies" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>
                     </div>
                 </div>
 
