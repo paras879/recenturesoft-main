@@ -28,7 +28,7 @@ function GlassCard({ children, hoverColorClass = "from-primary to-accent", class
             className={`group relative rounded-2xl cursor-pointer hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_60px_rgba(99,102,241,0.15)] transition-all duration-500 ${className}`}
         >
             <div
-                className={`relative p-5 md:p-6 rounded-2xl min-h-[120px] h-full overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
+                className={`relative p-3 md:p-4 rounded-2xl min-h-[80px] h-full overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
             >
                 {/* Border trace animation on hover */}
                 <div
@@ -171,7 +171,7 @@ export default function FutureFooter() {
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-10">
                     <GlassCard hoverColorClass="from-cyan-400 to-blue-500">
                         <div className="flex flex-col h-full justify-center">
-                            <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-3 mb-1">
                                 <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
                                     <Icons.Email />
                                 </div>
@@ -182,7 +182,7 @@ export default function FutureFooter() {
                     </GlassCard>
                     <GlassCard hoverColorClass="from-blue-500 to-indigo-500">
                         <div className="flex flex-col h-full justify-center">
-                            <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-3 mb-1">
                                 <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
                                     <Icons.Phone />
                                 </div>
@@ -193,7 +193,7 @@ export default function FutureFooter() {
                     </GlassCard>
                     <GlassCard hoverColorClass="from-purple-500 to-pink-500">
                         <div className="flex flex-col h-full justify-center">
-                            <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-3 mb-1">
                                 <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
                                     <Icons.MapPin />
                                 </div>
