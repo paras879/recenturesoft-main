@@ -275,7 +275,7 @@ function TechCard({ tech, activeTech, setActiveTech }) {
 // ── Bento Cell Grid Wrapper ──
 function BentoCell({ colSpan, rowSpan, className, children }) {
     return (
-        <div className={`bento-cell relative ${colSpan} ${rowSpan} bg-slate-50/50 dark:bg-[#0a1225]/50 border border-slate-200 dark:border-white/5 rounded-3xl p-5 md:p-6 lg:p-8 overflow-hidden flex flex-col justify-between shadow-premium dark:shadow-none transition-colors duration-300 ${className}`}>
+        <div className={`bento-cell relative ${colSpan} ${rowSpan} bg-slate-50/50 dark:bg-[#0a1225]/50 border border-slate-200 dark:border-white/5 rounded-3xl p-4 md:p-5 lg:p-5 overflow-hidden flex flex-col justify-between shadow-premium dark:shadow-none transition-colors duration-300 ${className}`}>
             {children}
         </div>
     );
@@ -326,9 +326,6 @@ export default function TechStack() {
 
                 {/* Header Section */}
                 <div className="text-center mb-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-cyan-100/50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800/20 text-cyan-700 dark:text-cyan-300 font-semibold text-[10px] tracking-[0.25em] uppercase mb-2">
-                        ⚡ Core Ecosystem
-                    </span>
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mt-2 tracking-tight leading-[1.15]">
                         What Does Recenturesoft Infotech
                         <span className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 dark:from-cyan-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent mt-1.5">
@@ -347,42 +344,34 @@ export default function TechStack() {
                 {/* Bento Grid Layout */}
                 <div className="grid grid-cols-12 gap-6 auto-rows-[auto]">
 
-                    {/* Bento Card 1: Core Value Vision Statement */}
+
                     <BentoCell colSpan="col-span-12 lg:col-span-7" rowSpan="row-span-1" className="flex flex-col justify-between">
-                        <div>
-                            <span className="text-cyan-700 dark:text-cyan-300 font-mono text-sm uppercase tracking-widest font-semibold">Vision & Strategy</span>
-                            <h3 className="text-slate-900 dark:text-gray-100 text-3xl md:text-4xl font-extrabold mt-3 mb-4 tracking-tight">
-                                High-Performance Engineering
+                        <div className="mb-6">
+                            <h3 className="text-slate-900 dark:text-gray-100 text-xl font-bold mt-2 tracking-tight">
+                                Technologies Stack
                             </h3>
-                            <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-normal max-w-2xl">
-                                We employ modular, cross-compatible frameworks and reliable infrastructure strategies to build clean digital products. From highly interactive Single Page Apps to massive database scaling pipelines, our technology parameters align with next-gen speed.
-                            </p>
                         </div>
-                        <div className="flex gap-6 mt-8 border-t border-slate-200 dark:border-white/5 pt-6 flex-wrap">
-                            <div className="flex items-center">
-                                <span className="text-cyan-700 dark:text-cyan-300 text-xl font-bold font-mono">01/</span>
-                                <span className="text-slate-700 dark:text-gray-300 text-xs font-semibold ml-2">Clean Codebase</span>
-                            </div>
-                            <div className="flex items-center">
-                                <span className="text-blue-500 dark:text-blue-400 text-xl font-bold font-mono">02/</span>
-                                <span className="text-slate-700 dark:text-gray-300 text-xs font-semibold ml-2">Elastic Auto-scaling</span>
-                            </div>
-                            <div className="flex items-center">
-                                <span className="text-purple-500 dark:text-purple-400 text-xl font-bold font-mono">03/</span>
-                                <span className="text-slate-700 dark:text-gray-300 text-xs font-semibold ml-2">Modular APIs</span>
-                            </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4 w-full">
+                            {techList.map((tech) => (
+                                <TechCard
+                                    key={tech.id}
+                                    tech={tech}
+                                    activeTech={activeTech}
+                                    setActiveTech={setActiveTech}
+                                />
+                            ))}
                         </div>
                     </BentoCell>
 
                     {/* Bento Card 2: Interactive Node Ecosystem (Lightweight & Compositor Accelerated) */}
-                    <BentoCell colSpan="col-span-12 lg:col-span-5" rowSpan="row-span-2" className="hidden lg:flex flex-col justify-between relative min-h-[380px] overflow-hidden">
+                    <BentoCell colSpan="col-span-12 lg:col-span-5" rowSpan="row-span-2" className="hidden lg:flex flex-col justify-between relative min-h-[250px] overflow-hidden">
                         <div className="absolute inset-0 z-0 opacity-90 hidden lg:block">
                             <EcosystemMap activeTech={activeTech} setActiveTech={setActiveTech} />
                         </div>
 
                         <div className="relative z-10 pointer-events-none md:mb-0 mb-4">
                             <span className="text-blue-400 font-mono text-xs uppercase tracking-widest font-semibold font-bold">Integrated Map</span>
-                            <h3 className="text-gray-100 text-xl font-bold mt-2 tracking-tight">
+                            <h3 className="text-gray-900 dark:text-gray-100 text-xl font-bold mt-2 tracking-tight">
                                 Ecosystem Architecture
                             </h3>
                         </div>
@@ -407,7 +396,7 @@ export default function TechStack() {
                         </div>
 
                         {/* Telemetry log replacing generic instructions text */}
-                        <div className="hidden lg:block relative z-10 text-xs leading-relaxed max-w-xs md:max-w-xs w-full bg-slate-100/90 dark:bg-slate-950/85 p-4 rounded-2xl border border-slate-200 dark:border-white/5 shadow-premium dark:shadow-2xl font-mono mt-auto backdrop-blur-md">
+                        <div className="hidden lg:block relative z-10 text-xs leading-relaxed w-full max-w-none bg-slate-100/90 dark:bg-slate-950/85 p-4 rounded-2xl border border-slate-200 dark:border-white/5 shadow-premium dark:shadow-2xl font-mono mt-auto backdrop-blur-md">
                             <div className="flex items-center gap-2 mb-3">
                                 <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
                                 <span className="text-slate-700 dark:text-gray-300 font-bold uppercase tracking-wider text-[10px]">System Telemetry</span>
@@ -428,25 +417,37 @@ export default function TechStack() {
                         </div>
                     </BentoCell>
 
-                    {/* Bento Card 3: Interactive Technology Stack Grid */}
+                    {/* Bento Card 1: Core Value Vision Statement */}
                     <BentoCell colSpan="col-span-12 lg:col-span-7" rowSpan="row-span-1" className="flex flex-col justify-between">
-                        <div className="mb-6">
-                            <span className="text-purple-600 dark:text-purple-400 font-mono text-xs uppercase tracking-widest font-bold">Interactive Deck</span>
-                            <h3 className="text-slate-900 dark:text-gray-100 text-xl font-bold mt-2 tracking-tight">
-                                Technologies Stack
+                        <div>
+                            <span className="text-cyan-700 dark:text-cyan-300 font-mono text-sm uppercase tracking-widest font-semibold">Vision & Strategy</span>
+                            <h3 className="text-slate-900 dark:text-gray-100 text-3xl md:text-4xl font-extrabold mt-3 mb-4 tracking-tight">
+                                High-Performance Engineering
                             </h3>
+                            <p className="text-slate-700 dark:text-gray-300 leading-relaxed text-base font-normal max-w-2xl">
+                                We employ modular, cross-compatible frameworks and reliable infrastructure strategies to build clean digital products. From highly interactive Single Page Apps to massive database scaling pipelines, our technology parameters align with next-gen speed.
+                            </p>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4 w-full">
-                            {techList.map((tech) => (
-                                <TechCard
-                                    key={tech.id}
-                                    tech={tech}
-                                    activeTech={activeTech}
-                                    setActiveTech={setActiveTech}
-                                />
-                            ))}
+                        <div className="flex gap-6 mt-4 border-t border-slate-200 dark:border-white/5 pt-4 flex-wrap">
+                            <div className="flex items-center">
+                                <span className="text-cyan-700 dark:text-cyan-300 text-xl font-bold font-mono">01/</span>
+                                <span className="text-slate-700 dark:text-gray-300 text-xs font-semibold ml-2">Clean Codebase</span>
+                            </div>
+                            <div className="flex items-center">
+                                <span className="text-blue-500 dark:text-blue-400 text-xl font-bold font-mono">02/</span>
+                                <span className="text-slate-700 dark:text-gray-300 text-xs font-semibold ml-2">Elastic Auto-scaling</span>
+                            </div>
+                            <div className="flex items-center">
+                                <span className="text-purple-500 dark:text-purple-400 text-xl font-bold font-mono">03/</span>
+                                <span className="text-slate-700 dark:text-gray-300 text-xs font-semibold ml-2">Modular APIs</span>
+                            </div>
                         </div>
                     </BentoCell>
+
+
+
+                    {/* Bento Card 3: Interactive Technology Stack Grid */}
+
 
                     {/* Bento Card 4: Categorized Technology Stack Groups */}
                     <BentoCell colSpan="col-span-12" rowSpan="row-span-1" className="py-8 flex flex-col gap-6">

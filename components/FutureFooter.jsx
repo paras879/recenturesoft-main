@@ -28,7 +28,7 @@ function GlassCard({ children, hoverColorClass = "from-primary to-accent", class
             className={`group relative rounded-2xl cursor-pointer hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_60px_rgba(99,102,241,0.15)] transition-all duration-500 ${className}`}
         >
             <div
-                className={`relative p-3 md:p-4 rounded-2xl min-h-[80px] h-full overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
+                className={`relative p-2 md:p-4 rounded-2xl min-h-[55px] h-full overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
             >
                 {/* Border trace animation on hover */}
                 <div
@@ -95,7 +95,7 @@ function FooterBackground() {
 export default function FutureFooter() {
     return (
         <footer
-            className="relative bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950 text-slate-800 dark:text-slate-300 overflow-hidden pt-8 md:pt-10 lg:pt-12 pb-8 border-t border-slate-200 dark:border-white/5 transition-colors duration-300"
+            className="relative bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950 text-slate-800 dark:text-slate-300 overflow-hidden pt-8 md:pt-10 lg:pt-12 pb-8 transition-colors duration-300"
         >
             <FooterBackground />
 
@@ -105,7 +105,7 @@ export default function FutureFooter() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-8 mb-8 md:mb-10 lg:mb-12">
 
                     {/* LEFT COLUMN: Logo & Socials */}
-                    <div className="lg:col-span-5 flex flex-col pr-0 lg:pr-10">
+                    <div className="order-2 lg:order-1 lg:col-span-5 flex flex-col pr-0 lg:pr-10">
                         <div
                             className="flex items-center gap-4 mb-4 md:mb-8"
                         >
@@ -121,7 +121,7 @@ export default function FutureFooter() {
                         </p>
 
                         <div
-                            className="flex gap-4 justify-center lg:justify-start"
+                            className="flex justify-center sm:justify-start gap-2 overflow-x-auto"
                         >
                             {[
                                 { name: "Facebook", icon: FaFacebookF, bg: "bg-[#4267B2]", url: "https://facebook.com/recenturesoft" },
@@ -146,7 +146,7 @@ export default function FutureFooter() {
                     </div>
 
                     {/* CENTER COLUMNS: Navigation Links */}
-                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+                    <div className="order-1 lg:order-2 lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
                         {Object.entries(FOOTER_LINKS).map(([category, links]) => (
                             <div
                                 key={category}
@@ -199,20 +199,17 @@ export default function FutureFooter() {
                                 </div>
                                 <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Headquarters </span>
                             </div>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=A-125,+Sector-63,+Noida,+Uttar+Pradesh+201301,+India" target="_blank" rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors block">A-125, Sector-63,<br />Noida, UP 201301</a>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=A-125,+Sector-63,+Noida,+Uttar+Pradesh+201301,+India" target="_blank" rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors block">A-125, Sector-63, Noida, UP 201301</a>
                         </div>
                     </GlassCard>
                 </div>
 
                 {/* ════ PREMIUM BOTTOM BAR ════ */}
-                <div className="relative pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-600 dark:text-gray-400">
-                    <div
-                        className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 dark:via-white/15 to-transparent"
-                    />
+                <div className="relative pt-2 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-600 dark:text-gray-400">
 
                     <p className="order-2 md:order-1 font-medium tracking-wide">© 2026 Recenturesoft. All rights reserved.</p>
 
-                    <div className="flex flex-wrap justify-center gap-10 sm:gap-8 order-1 md:order-2">
+                    <div className="flex justify-center gap-4 md:gap-8 whitespace-nowrap order-1 md:order-2">
                         <Link href="/privacy_policy" className="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</Link>
                         <Link href="/cookies" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>

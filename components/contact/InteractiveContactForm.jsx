@@ -51,9 +51,9 @@ export default function InteractiveContactForm() {
     };
 
     return (
-        <section className="py-10 md:py-16 lg:py-24 bg-slate-50 dark:bg-[#020617] relative transition-colors duration-300">
-            <div className="container mx-auto px-4 max-w-[1200px]">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+        <section className="py-1 md:py-2 lg:py-4 bg-slate-50 dark:bg-[#020617] relative transition-colors duration-300">
+            <div className="container mx-auto px-4 max-w-[1400px]">
+                <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10">
 
                     {/* Contact Info */}
                     <div>
@@ -88,6 +88,7 @@ export default function InteractiveContactForm() {
                                     <p className="text-slate-600 dark:text-gray-400 font-light">info@recenturesoft.com</p>
                                 </div>
                             </div>
+
 
                             <div className="flex items-start gap-4">
                                 <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
@@ -126,26 +127,32 @@ export default function InteractiveContactForm() {
                             </div>
                         ) : null}
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">First Name</label>
-                                    <input required type="text" name="firstName" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
+                                    <input required type="text" name="firstName" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Last Name</label>
-                                    <input required type="text" name="lastName" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
+                                    <input required type="text" name="lastName" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
                                 </div>
                             </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Work Email</label>
-                                <input required type="email" name="email" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Email</label>
+                                    <input required type="text" name="emial" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Phone Number</label>
+                                    <input required type="text" name="phone" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
+                                </div>
                             </div>
 
                             <div>
                                 <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Company Size</label>
-                                <select name="companySize" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors appearance-none">
+                                <select name="companySize" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors appearance-none">
                                     <option value="1-50">1 - 50 employees</option>
                                     <option value="51-200">51 - 200 employees</option>
                                     <option value="201-1000">201 - 1000 employees</option>

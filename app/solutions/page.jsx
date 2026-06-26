@@ -5,13 +5,26 @@ import EnterpriseServices from "@/components/Service";
 import TechArchitecture from "@/components/solutions/TechArchitecture";
 import SolutionsProcess from "@/components/solutions/SolutionsProcess";
 import CTASection from "@/components/CTASection";
+import { connectDB } from "@/lib/mongodb";
+import Service from "@/models/Service";
 
 export const metadata = {
     title: "Enterprise Solutions | RecentureSoft",
     description: "Explore our premium enterprise solutions, digital intelligence, and modern technology architecture.",
 };
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+    await connectDB();
+    const records = await Service.find({ status: true }).lean();
+    
+    // Ensure all ObjectIds are mapped to strings for client components
+    const servicesData = records.map(s => ({
+        ...s,
+        _id: s._id.toString(),
+        createdAt: s.createdAt?.toISOString(),
+        updatedAt: s.updatedAt?.toISOString()
+    }));
+
     return (
         <main className="bg-slate-50 dark:bg-[#020617] transition-colors duration-300 min-h-screen">
             <Navbar />
@@ -23,7 +36,7 @@ export default function SolutionsPage() {
                 description="Discover our comprehensive suite of enterprise-grade solutions. We architect scalable, secure, and blazing fast digital products."
             />
 
-            <EnterpriseServices />
+            <EnterpriseServices services={servicesData} />
 
             <TechArchitecture />
 

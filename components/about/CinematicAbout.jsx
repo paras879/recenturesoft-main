@@ -9,7 +9,7 @@ import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 // ==========================================
 function AboutHero() {
     return (
-        <section className="relative min-h-[auto] lg:min-h-[50vh] w-full flex items-center justify-center pt-[clamp(2rem,3vw,3rem)] pb-[clamp(1rem,2vw,2rem)] overflow-hidden bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
+        <section className="relative min-h-auto w-full flex items-center justify-center pt-28 md:pt-32 lg:pt-36 pb-0 overflow-hidden bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             {/* Background Atmosphere */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px]" />
@@ -19,7 +19,7 @@ function AboutHero() {
 
             <div className="max-w-[1400px] w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                 {/* Left Content */}
-                <div className="lg:col-span-12 flex flex-col items-start gap-6">
+                <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
                     <h1
                         className="text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4rem] font-[600] text-slate-900 dark:text-white tracking-[-0.04em] leading-[1.05] tracking-tight animate-fade-up"
                         style={{ animationDelay: "0.1s" }}
@@ -59,10 +59,15 @@ function CompanyStory() {
 
                 {/* Left: Premium Image Card */}
                 <div
-                    className="relative w-full h-[220px] sm:h-[300px] md:h-[420px] lg:h-[700px] rounded-[2rem] overflow-hidden lg:sticky lg:top-32 border border-white/10 animate-fade-left"
+                    className="relative w-full h-[220px] sm:h-[300px] md:h-[420px] lg:h-[700px] rounded-[2rem] overflow-hidden lg:sticky lg:top-0 border border-white/10 animate-fade-left"
                     style={{ position: "relative", animationDelay: "0.1s" }}
                 >
-                    <Image src={aboutImages.story} alt="Company Story" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                    <Image
+                        src={aboutImages.story}
+                        alt="Company Story"
+                        fill
+                        className="object-cover object-[center_20%]"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-50 dark:from-[#020617] via-transparent to-transparent opacity-80" />
                     <div className="absolute bottom-10 left-10">
                         <h3 className="text-3xl font-[500] text-slate-900 dark:text-white mb-2">Our Journey</h3>
@@ -73,21 +78,27 @@ function CompanyStory() {
                 {/* Right: Vertical Timeline */}
                 <div className="relative py-6 md:py-10 pl-6 md:pl-12">
                     {/* Track Line */}
-                    <div className="absolute left-[3px] md:left-[27px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-500 to-purple-600 opacity-60" />
+                    <div className="absolute left-[3px] md:left-[27px] -top-0 bottom-24 w-[2px] bg-gradient-to-b from-cyan-500 to-purple-600 opacity-60" />
 
-                    <div className="flex flex-col gap-8 md:gap-12 lg:gap-16">
+                    <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
                         {STORY_TIMELINE.map((item, idx) => (
                             <div
                                 key={idx}
-                                className="relative pl-10 md:pl-16 animate-fade-right"
-                                style={{ animationDelay: `${idx * 0.15}s` }}
+                                className={`relative pl-10 md:pl-16 p-3 md:p-4 rounded-2xl bg-white/60 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 ${idx === 0 ? "-mt-12" : ""
+                                    }`}
                             >
                                 {/* Dot */}
-                                <div className="absolute left-[-2px] md:left-[4px] w-3 h-3 bg-cyan-500 rounded-full border-[3px] border-slate-50 dark:border-[#020617] shadow-[0_0_10px_rgba(6,182,212,0.8)] mt-2" />
+                                <div className="absolute left-[20px] md:left-[26px] top-1/2 -translate-y-1/2 w-3 h-3 bg-cyan-500 rounded-full border-[2px] border-slate-50 dark:border-[#020617] shadow-[0_0_15px_rgba(6,182,212,0.9)]" />
 
-                                <h4 className="text-3xl md:text-4xl font-[700] tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-800 dark:from-slate-500 dark:to-slate-700 mb-2">{item.year}</h4>
-                                <h5 className="text-2xl font-[500] text-slate-900 dark:text-white mb-3">{item.title}</h5>
-                                <p className="text-slate-600 dark:text-slate-400 text-[13px] md:text-sm lg:text-base lg:text-lg leading-relaxed">{item.desc}</p>
+                                <h4 className="text-2xl md:text-3xl font-bold">
+                                    <span className="text-cyan-600">
+                                        {item.year},
+                                    </span>{" "}
+                                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                        {item.title}
+                                    </span>
+                                </h4>
+                                <p className="max-w-[500px] text-slate-600 dark:text-slate-400 leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -112,9 +123,9 @@ const BENTO_FEATURES = [
 function WhyChooseUs() {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16">
+            <div className="max-w-[1400px] mx-auto flex flex-col gap-3 md:gap-4 lg:gap-5">
                 <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-4 leading-tight">Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Choose Us</span></h2>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-2 leading-tight">Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Choose Us</span></h2>
                     <p className="text-[13px] md:text-sm lg:text-base lg:text-lg text-slate-600 dark:text-slate-400">We don't just write code. We build scalable digital businesses with a mindset engineered for success.</p>
                 </div>
 
@@ -170,7 +181,7 @@ function CompanyStats() {
     ];
 
     return (
-        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
+        <section className="relative w-full pt-2 pb-6 bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
                 {stats.map((stat, i) => (
                     <div
@@ -193,8 +204,8 @@ function CompanyStats() {
 function CultureGallery() {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="mmax-w-[1400px] mx-auto flex flex-col gap-4 md:gap-6 lg:gap-8">
+                <div className="text-center max-w-3xl mx-auto">
                     <div>
                         <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-4 leading-tight">Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-500">Culture</span></h2>
                         <p className="text-[13px] md:text-sm lg:text-base lg:text-lg text-slate-600 dark:text-slate-400 max-w-xl">A glimpse into our collaborative workspaces, team synergy, and global ecosystem.</p>
@@ -237,10 +248,10 @@ function OurProcess() {
                 <div className="relative w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4">
                     {/* Horizontal Line Desktop */}
                     <div className="hidden md:block absolute top-[24px] md:top-[32px] left-[40px] md:left-[48px] right-[40px] md:right-[48px] h-[2px] bg-slate-200 dark:bg-white/10 -translate-y-1/2 z-0" />
-                    
+
                     {/* Animated Traveling Rocket & Glow (Desktop) */}
                     <div className="hidden md:block absolute top-[24px] md:top-[32px] left-[40px] md:left-[48px] right-[40px] md:right-[48px] h-[2px] -translate-y-1/2 z-0">
-                        <div 
+                        <div
                             className="absolute top-1/2 -translate-y-1/2 flex items-center"
                             style={{ animation: "travelRight 7s ease-in-out infinite" }}
                         >
@@ -253,10 +264,10 @@ function OurProcess() {
 
                     {/* Mobile Vertical Line */}
                     <div className="md:hidden absolute left-1/2 top-[24px] bottom-[24px] w-[2px] bg-slate-200 dark:bg-white/10 -translate-x-1/2 z-0" />
-                    
+
                     {/* Animated Traveling Rocket (Mobile) */}
                     <div className="md:hidden absolute left-1/2 top-[24px] bottom-[24px] w-[2px] -translate-x-1/2 z-0">
-                        <div 
+                        <div
                             className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center"
                             style={{ animation: "travelDown 7s ease-in-out infinite" }}
                         >
@@ -266,7 +277,8 @@ function OurProcess() {
                         </div>
                     </div>
 
-                    <style dangerouslySetInnerHTML={{__html: `
+                    <style dangerouslySetInnerHTML={{
+                        __html: `
                         @keyframes travelRight {
                             0% { left: 0%; opacity: 0; transform: scale(0.8); }
                             10% { opacity: 1; transform: scale(1); }
@@ -317,11 +329,11 @@ const TECHNOLOGIES = [
 
 function TechnologyEcosystem() {
     return (
-        <section className="relative w-full pt-[clamp(1rem,2.5vw,2rem)] pb-[clamp(1rem,2vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
+        <section className="relative w-full flex items-center justify-center pt-4 md:pt-6 lg:pt-8 pb-8">
             {/* Ambient Background Blur */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] pointer-events-none rounded-full" />
-            
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-12 lg:gap-16 items-center text-center relative z-10">
+
+            <div className="max-w-[1400px] mx-auto flex flex-col gap-4 md:gap-6 lg:gap-8 items-center text-center relative z-10">
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">Technology <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Ecosystem</span></h2>
 
                 <div className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-5xl">
@@ -333,9 +345,9 @@ function TechnologyEcosystem() {
                         >
                             {/* Colored Dot indicator */}
                             <span className={`relative z-10 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${tech.dot} group-hover:scale-[1.3] transition-transform duration-300 shadow-sm`} />
-                            
+
                             <span className="relative z-10 text-sm sm:text-base tracking-wide">{tech.name}</span>
-                            
+
                             {/* Hover ambient inner glow */}
                             <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-10 dark:group-hover:opacity-20 blur-md transition-opacity duration-500 ${tech.dot}`} />
                         </div>
@@ -391,13 +403,13 @@ function AboutCTA() {
                     Let's Build The <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Future</span> Together
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full mt-4 md:mt-8">
-                    <button 
+                    <button
                         onClick={openModal}
                         className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-[500] rounded-xl shadow-md"
                     >
                         Start Your Project
                     </button>
-                    <button 
+                    <button
                         onClick={openMeetingModal}
                         className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-[500] rounded-xl shadow-sm dark:shadow-none hover:bg-slate-50 dark:hover:bg-white/10 transition-colors"
                     >
@@ -416,7 +428,8 @@ export default function CinematicAbout() {
     return (
         <div className="font-manrope w-full flex flex-col bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
             {/* CSS entry animations */}
-            <style dangerouslySetInnerHTML={{__html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes fadeInUp {
                     from { opacity: 0; transform: translateY(25px); }
                     to { opacity: 1; transform: translateY(0); }

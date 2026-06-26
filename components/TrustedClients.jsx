@@ -317,7 +317,7 @@ export default function TrustedClients() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-[clamp(1rem,2vw,2rem)]">
         {/* Performance Dashboard Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 mb-4 text-center sm:text-left border-b border-slate-200 dark:border-white/5 pb-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 mb-2 text-center sm:text-left pb-2">
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Performance Dashboard
           </h2>
@@ -670,7 +670,7 @@ export default function TrustedClients() {
         </div>
       </div>
 
-      <div className="relative z-10 mt-10 md:mt-16 flex flex-col gap-6">
+      <div className="relative z-10 mt-6 md:mt-2 flex flex-col gap-2">
         <InfiniteMarquee />
 
         {/* Cinematic Infinite Technology Marquee Ribbon (Moved from TechStack) */}

@@ -55,7 +55,10 @@ function LazySection({ children, minHeight, id }) {
     );
 }
 
-export default function HomeSectionsContainer() {
+/**
+ * @param {{ services: object[] }} props
+ */
+export default function HomeSectionsContainer({ services = [] }) {
     return (
         <>
             <LazySection minHeight="500px" id="about-lazy">
@@ -63,7 +66,7 @@ export default function HomeSectionsContainer() {
             </LazySection>
 
             <LazySection minHeight="700px" id="service-lazy">
-                <Service />
+                <Service services={services} />
             </LazySection>
 
             <LazySection minHeight="600px" id="techstack-lazy">
@@ -88,3 +91,4 @@ export default function HomeSectionsContainer() {
         </>
     );
 }
+
