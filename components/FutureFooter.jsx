@@ -13,10 +13,33 @@ import {
    TOKENS & DATA
    ═══════════════════════════════════════════════════════ */
 const FOOTER_LINKS = {
-    "Quick Links": ["About Us", "Our Approach", "Careers", "Contact"],
-    "Services": ["Custom Software", "Cloud Engineering", "AI Solutions", "Mobile Apps"],
-    "Technologies": ["React & Next.js", "Node & Python", "AWS Cloud", "Docker & K8s"],
-    "Resources": ["Case Studies", "Blog", "Documentation", "API References"],
+    "Quick Links": [
+        { name: "About Us", href: "/about" },
+        { name: "Our Approach", href: "/solutions" },
+        { name: "Careers", href: "#" }, // baad me /careers
+        { name: "Contact", href: "/contact" },
+    ],
+
+    "Services": [
+        { name: "Custom Software", href: "#" },
+        { name: "Cloud Engineering", href: "#" },
+        { name: "AI Solutions", href: "#" },
+        { name: "Mobile Apps", href: "#" },
+    ],
+
+    "Technologies": [
+        { name: "React & Next.js", href: "#" },
+        { name: "Node & Python", href: "#" },
+        { name: "AWS Cloud", href: "#" },
+        { name: "Docker & K8s", href: "#" },
+    ],
+
+    "Resources": [
+        { name: "Case Studies", href: "#" },
+        { name: "Blog", href: "/blog" },
+        { name: "Documentation", href: "#" },
+        { name: "API References", href: "#" },
+    ],
 };
 
 /* ═══════════════════════════════════════════════════════
@@ -155,8 +178,13 @@ export default function FutureFooter() {
                                 <ul className="space-y-4">
                                     {links.map((link, linkIdx) => (
                                         <li key={linkIdx}>
-                                            <Link href="#" className="text-slate-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-white transition-colors relative group block w-fit">
-                                                <span className="relative z-10 group-hover:translate-x-2 inline-block transition-transform duration-300">{link}</span>
+                                            <Link
+                                                href={link.href}
+                                                className="text-slate-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-white transition-colors relative group block w-fit"
+                                            >
+                                                <span className="relative z-10 group-hover:translate-x-2 inline-block transition-transform duration-300">
+                                                    {link.name}
+                                                </span>
                                                 <span className="absolute left-0 -bottom-1 w-0 h-[1px] transition-all duration-300 group-hover:w-full bg-primary" />
                                             </Link>
                                         </li>

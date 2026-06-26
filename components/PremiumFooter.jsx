@@ -9,6 +9,21 @@ import {
 } from "react-icons/fa";
 import NewsletterForm from "./NewsletterForm";
 
+const companyLinks = [
+    { name: "About Us", href: "/about" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Careers", href: "#" }, // baad me /careers kar dena
+    { name: "News", href: "/news" },
+    { name: "Contact", href: "/contact" },
+];
+
+const serviceLinks = [
+    { name: "Software Dev", href: "#" },
+    { name: "Web Development", href: "#" },
+    { name: "Mobile Apps", href: "#" },
+    { name: "UI/UX Design", href: "#" },
+    { name: "Marketing", href: "#" },
+];
 
 export default function PremiumFooter() {
     return (
@@ -59,13 +74,16 @@ export default function PremiumFooter() {
                     </div>
 
                     {/* Links Columns */}
-                    <div className="lg:col-span-2 order-2 md:order-2 lg:order-3">
-                        <h4 className="text-slate-900 dark:text-white font-semibold mb-3 md:mb-6 tracking-wide">Company</h4>
+                    <div className="col-span-2 lg:col-span-2 order-2 md:order-2">
+                        <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide">Company</h4>
                         <ul className="space-y-2 md:space-y-4">
-                            {["About Us", "Portfolio", "Careers", "News", "Contact"].map((link) => (
-                                <li key={link}>
-                                    <Link href={`/${link.toLowerCase().replace(" ", "")}`} className="text-slate-600 hover:text-slate-900 dark:text-gray-300 dark:hover:text-white transition-colors text-sm font-medium">
-                                        {link}
+                            {companyLinks.map((link) => (
+                                <li key={link.name}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-slate-600 hover:text-slate-900 dark:text-gray-300 dark:hover:text-white transition-colors text-sm font-medium"
+                                    >
+                                        {link.name}
                                     </Link>
                                 </li>
                             ))}
@@ -104,7 +122,7 @@ export default function PremiumFooter() {
                     <div className="flex gap-6">
                         <Link href="/privacy_policy" className="text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors">Terms of Service</Link>
-                        <Link href="/cookie_policy" className="text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors">Cookie Policy</Link>
+                        <Link href="/cookies" className="text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-sm font-medium transition-colors">Cookie Policy</Link>
                     </div>
                 </div>
             </div>
