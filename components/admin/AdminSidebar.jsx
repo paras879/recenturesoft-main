@@ -17,7 +17,8 @@ import {
     X,
     Sparkles,
     Activity,
-    UserCog
+    UserCog,
+    Star
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -48,6 +49,7 @@ export default function AdminSidebar() {
         { name: "Project Inquiries", href: "/admin/projects", icon: MessageSquare },
         { name: "Meeting Requests", href: "/admin/meetings", icon: CalendarCheck },
         { name: "Blogs Content", href: "/admin/blogs", icon: FileText },
+        { name: "Client Reviews", href: "/admin/reviews", icon: Star },
         { name: "AI Chat History", href: "/admin/chats", icon: BotMessageSquare },
         ...(role === "super_admin" ? [
             { name: "Activity Logs", href: "/admin/activity", icon: Activity },

@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-// ── Testimonials Data ──
-const TESTIMONIALS = [
+const FALLBACK_TESTIMONIALS = [
     {
         id: "franklin",
         name: "Franklin Brice",
@@ -58,9 +57,6 @@ const TESTIMONIALS = [
         text: "From UI/UX redesign to automated deployments, their full-stack Laravel/React team exceeded our expectations. Our checkout conversion rates increased by 40% immediately."
     }
 ];
-
-// Duplicate items for seamless continuous marquee looping
-const DUPLICATED_TESTIMONIALS = [...TESTIMONIALS, ...TESTIMONIALS];
 
 function ReviewCard({ review, index }) {
     return (
@@ -140,11 +136,35 @@ export default function Review() {
     const scrollLeftRef = useRef(0);
     const requestRef = useRef(null);
     const isPausedRef = useRef(false);
+    const [reviewsData, setReviewsData] = useState([]);
+
+    useEffect(() => {
+        // Fetch reviews from API
+        const fetchReviews = async () => {
+            try {
+                const res = await fetch('/api/reviews');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.length > 0) {
+                        setReviewsData([...data, ...data]); // Duplicate for marquee
+                    } else {
+                        setReviewsData([...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS]);
+                    }
+                } else {
+                    setReviewsData([...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS]);
+                }
+            } catch (error) {
+                console.error("Error fetching reviews:", error);
+                setReviewsData([...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS]);
+            }
+        };
+        fetchReviews();
+    }, []);
 
     useEffect(() => {
         const container = containerRef.current;
         const track = trackRef.current;
-        if (!container || !track) return;
+        if (!container || !track || reviewsData.length === 0) return;
 
         // Auto-scroll loop using requestAnimationFrame for smooth movement
         const animate = () => {
@@ -166,7 +186,7 @@ export default function Review() {
                 cancelAnimationFrame(requestRef.current);
             }
         };
-    }, []);
+    }, [reviewsData]);
 
     // Drag handlers (Mouse)
     const handleMouseDown = (e) => {
@@ -314,9 +334,9 @@ export default function Review() {
                 {/* Side gradient blur masks removed as per user request */}
 
                 <div ref={trackRef} className="reviews-marquee-track">
-                    {DUPLICATED_TESTIMONIALS.map((review, idx) => (
+                    {reviewsData.map((review, idx) => (
                         <ReviewCard
-                            key={`${review.id}-${idx}`}
+                            key={`${review._id || review.id}-${idx}`}
                             review={review}
                             index={idx}
                         />
