@@ -74,7 +74,7 @@ export default function PremiumFooter() {
                     </div>
 
                     {/* Links Columns */}
-                    <div className="col-span-2 lg:col-span-2 order-2 md:order-2">
+                    <div className="col-span-1 lg:col-span-2 order-2 md:order-2">
                         <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide">Company</h4>
                         <ul className="space-y-2 md:space-y-4">
                             {companyLinks.map((link) => (
@@ -90,7 +90,7 @@ export default function PremiumFooter() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-2 order-1 md:order-1">
+                    <div className="col-span-1 lg:col-span-2 order-1 md:order-1">
                         <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide">Services</h4>
                         <ul className="space-y-2 md:space-y-4">
                             {["Software Dev", "Web Development", "Mobile Apps", "UI/UX Design", "Marketing"].map((link) => (
