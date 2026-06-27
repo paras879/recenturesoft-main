@@ -346,7 +346,9 @@ function InfiniteEventMarquee() {
 // ==========================================
 // SECTION 8: TESTIMONIALS
 // ==========================================
-function EmployeeTestimonials() {
+function EmployeeTestimonials({ teamMembers = [] }) {
+    if (!teamMembers || teamMembers.length === 0) return null;
+
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
             <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
@@ -357,22 +359,24 @@ function EmployeeTestimonials() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    {[1, 2, 3].map((item, i) => (
+                    {teamMembers.map((member) => (
                         <div
-                            key={i}
-                            className="p-4 md:p-6 lg:p-8 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm hover:-translate-y-2 hover:border-cyan-500/30 transition-all duration-300 shadow-sm dark:shadow-none"
+                            key={member._id}
+                            className="p-4 md:p-6 lg:p-8 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm hover:-translate-y-2 hover:border-cyan-500/30 transition-all duration-300 shadow-sm dark:shadow-none flex flex-col justify-between"
                         >
-                            <div className="text-cyan-500 dark:text-cyan-400 mb-6 text-4xl text-left">&ldquo;</div>
-                            <p className="text-slate-600 dark:text-slate-300 text-lg mb-8 line-clamp-4 text-left">
-                                &ldquo;Joining RecentureSoft was the best career move. The events, the global culture, and the absolute focus on engineering excellence makes every day exciting.&rdquo;
-                            </p>
+                            <div>
+                                <div className="text-cyan-500 dark:text-cyan-400 mb-6 text-4xl text-left">&ldquo;</div>
+                                <p className="text-slate-600 dark:text-slate-300 text-lg mb-8 line-clamp-4 text-left">
+                                    &ldquo;{member.quote}&rdquo;
+                                </p>
+                            </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full overflow-hidden relative">
-                                    <Image src={IMAGES.testimonials[i % IMAGES.testimonials.length]} alt="Employee" fill sizes="48px" className="object-cover" />
+                                <div className="w-12 h-12 rounded-full overflow-hidden relative shrink-0">
+                                    <Image src={member.image} alt={member.name} fill sizes="48px" className="object-cover" />
                                 </div>
                                 <div className="text-left">
-                                    <h4 className="text-slate-900 dark:text-white font-bold">Sarah Jenkins</h4>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">Senior Cloud Architect</p>
+                                    <h4 className="text-slate-900 dark:text-white font-bold">{member.name}</h4>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">{member.role}</p>
                                 </div>
                             </div>
                         </div>
@@ -415,7 +419,7 @@ function EventsCTA() {
 // ==========================================
 // MAIN EXPORT ASSEMBLY
 // ==========================================
-export default function CinematicEvents({ events = [] }) {
+export default function CinematicEvents({ events = [], teamMembers = [] }) {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -441,7 +445,7 @@ export default function CinematicEvents({ events = [] }) {
                 <CultureStats />
                 <VideoReelPreview />
                 <InfiniteEventMarquee />
-                <EmployeeTestimonials />
+                <EmployeeTestimonials teamMembers={teamMembers} />
                 <EventsCTA />
             </div>
         );
@@ -472,7 +476,7 @@ export default function CinematicEvents({ events = [] }) {
             <CultureStats />
             <VideoReelPreview />
             <InfiniteEventMarquee />
-            <EmployeeTestimonials />
+            <EmployeeTestimonials teamMembers={teamMembers} />
             <EventsCTA />
 
             <EventGalleryModal 

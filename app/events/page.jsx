@@ -4,6 +4,7 @@ import CinematicEvents from "@/components/events/CinematicEvents";
 import { connectDB } from "@/lib/mongodb";
 import Event from "@/models/Event";
 import EventGallery from "@/models/EventGallery";
+import TeamMember from "@/models/TeamMember";
 import { resolveImagePath } from "@/lib/imageHelper";
 
 export const metadata = {
@@ -15,11 +16,13 @@ export const dynamic = "force-dynamic";
 
 export default async function EventsPage() {
     let serializedEvents = [];
+    let serializedTeam = [];
     
     try {
         await connectDB();
-        const events = await Event.find({}).lean();
         
+        // Fetch Events
+        const events = await Event.find({}).lean();
         serializedEvents = await Promise.all(
             events.map(async (event) => {
                 const photoCount = await EventGallery.countDocuments({ eventSlug: new RegExp(`^${event.slug}$`, "i") });
@@ -35,14 +38,25 @@ export default async function EventsPage() {
                 };
             })
         );
+
+        // Fetch Team Members
+        const team = await TeamMember.find({}).lean();
+        serializedTeam = team.map(member => ({
+            _id: member._id.toString(),
+            name: member.name || "",
+            role: member.role || "",
+            quote: member.quote || "",
+            image: resolveImagePath(member.image || ""),
+        }));
+
     } catch (error) {
-        console.error("Error fetching events from MongoDB:", error);
+        console.error("Error fetching data from MongoDB:", error);
     }
 
     return (
         <main className="bg-slate-50 dark:bg-[#020617] transition-colors duration-300 min-h-screen">
             <Navbar />
-            <CinematicEvents events={serializedEvents} />
+            <CinematicEvents events={serializedEvents} teamMembers={serializedTeam} />
             <PremiumFooter />
         </main>
     );
