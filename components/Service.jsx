@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 // ── Slideshow Frame: Works with ANY number of images ──
 // activeSlide = current index, images = array of URLs (any length)
@@ -16,8 +17,13 @@ function LaptopFrame({ activeSlide, images, fallbacks }) {
                             key={i}
                             className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${i === activeSlide % imgs.length ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                         >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={src} alt={`Slide ${i + 1}`} className="w-full h-full object-cover object-top block" />
+                            <Image 
+                                src={src} 
+                                alt={`Slide ${i + 1}`} 
+                                fill
+                                sizes="(max-width: 768px) 320px, (max-width: 1024px) 420px, 550px"
+                                className="object-cover object-top block" 
+                            />
                         </div>
                     ))}
                 </div>
@@ -43,8 +49,13 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
                             key={i}
                             className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${i === activeSlide % imgs.length ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                         >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={src} alt={`Mobile Slide ${i + 1}`} className="w-full h-full object-cover object-top block" />
+                            <Image 
+                                src={src} 
+                                alt={`Mobile Slide ${i + 1}`} 
+                                fill
+                                sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 160px"
+                                className="object-cover object-top block" 
+                            />
                         </div>
                     ))}
                 </div>

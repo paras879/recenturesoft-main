@@ -143,7 +143,7 @@ export default function AboutSection() {
                                     src="/about/about1.jpg"
                                     alt="Innovative digital workspace"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 400px"
+                                    sizes="320px"
                                     className="object-cover"
                                     loading="lazy"
                                 />
@@ -156,7 +156,7 @@ export default function AboutSection() {
                                     src="/about/about2.jpg"
                                     alt="Advanced Cloud infrastructure"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 400px"
+                                    sizes="290px"
                                     className="object-cover"
                                     loading="lazy"
                                 />
@@ -169,7 +169,7 @@ export default function AboutSection() {
                                     src="/about/about3.jpg"
                                     alt="AI and data integrations"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 400px"
+                                    sizes="310px"
                                     className="object-cover"
                                     loading="lazy"
                                 />
