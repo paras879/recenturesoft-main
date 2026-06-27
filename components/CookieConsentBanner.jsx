@@ -42,6 +42,7 @@ export default function CookieConsentBanner() {
                     <div className="max-w-sm w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 p-5 rounded-2xl shadow-2xl pointer-events-auto relative">
                         <button
                             onClick={() => setIsVisible(false)}
+                            aria-label="Close cookie consent banner"
                             className="absolute top-3 right-3 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 rounded-full transition-colors"
                         >
                             <X className="w-4 h-4" />

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Search, Download, Check, Info, Cookie, Settings, Shield,
+  Search, Download, Info, Cookie, Settings, Shield,
   FileText, Phone, Gavel, FileQuestion, ArrowUp, Zap
 } from 'lucide-react';
 
@@ -23,7 +23,6 @@ const SECTIONS = [
 export default function CookiesContent() {
   const [activeSection, setActiveSection] = useState(SECTIONS[0].id);
   const [searchQuery, setSearchQuery] = useState('');
-  const [accepted, setAccepted] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {

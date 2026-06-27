@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Search, Download, Check, Info, Shield, Link as LinkIcon,
+  Search, Download, Info, Shield, Link as LinkIcon,
   FileText, Phone, Gavel, FileQuestion, ArrowUp, UserCheck, AlertTriangle
 } from 'lucide-react';
 
@@ -24,7 +24,6 @@ const SECTIONS = [
 export default function TermsContent() {
   const [activeSection, setActiveSection] = useState(SECTIONS[0].id);
   const [searchQuery, setSearchQuery] = useState('');
-  const [accepted, setAccepted] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {

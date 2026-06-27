@@ -17,13 +17,6 @@ const companyLinks = [
     { name: "Contact", href: "/contact" },
 ];
 
-const serviceLinks = [
-    { name: "Software Dev", href: "#" },
-    { name: "Web Development", href: "#" },
-    { name: "Mobile Apps", href: "#" },
-    { name: "UI/UX Design", href: "#" },
-    { name: "Marketing", href: "#" },
-];
 
 export default function PremiumFooter() {
     return (

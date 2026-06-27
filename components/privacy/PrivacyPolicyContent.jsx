@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Search, Download, Check, Info, User, Cookie, Link as LinkIcon,
+  Search, Download, Info, User, Cookie, Link as LinkIcon,
   Share2, Shield, Clock, Gavel, FileText, Phone, FileQuestion, ArrowUp
 } from 'lucide-react';
 
@@ -28,7 +28,6 @@ const SECTIONS = [
 export default function PrivacyPolicyContent() {
   const [activeSection, setActiveSection] = useState(SECTIONS[0].id);
   const [searchQuery, setSearchQuery] = useState('');
-  const [accepted, setAccepted] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {

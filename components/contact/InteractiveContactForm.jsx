@@ -16,6 +16,7 @@ export default function InteractiveContactForm() {
         const firstName = formData.get("firstName") || "";
         const lastName = formData.get("lastName") || "";
         const email = formData.get("email") || "";
+        const phone = formData.get("phone") || "";
         const companySize = formData.get("companySize") || "";
         const message = formData.get("message") || "";
 
@@ -28,7 +29,7 @@ export default function InteractiveContactForm() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email, subject, message }),
+                body: JSON.stringify({ name, email, phone, subject, message }),
             });
 
             const data = await res.json();
@@ -142,7 +143,7 @@ export default function InteractiveContactForm() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Email</label>
-                                    <input required type="text" name="emial" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
+                                    <input required type="email" name="email" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Phone Number</label>

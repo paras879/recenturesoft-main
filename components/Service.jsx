@@ -6,7 +6,6 @@ import React, { useState, useEffect, useRef } from 'react';
 
 function LaptopFrame({ activeSlide, images, fallbacks }) {
     const imgs = images && images.length > 0 ? images : fallbacks;
-    const current = imgs[activeSlide % imgs.length] || imgs[0];
 
     return (
         <div className="w-full h-full flex items-center justify-center p-4">
@@ -143,7 +142,11 @@ export default function EnterpriseServices({ services = [] }) {
     // Use a ref so the interval can always see the latest maxImages
     // without needing it in the deps array (which would change size)
     const maxImagesRef = useRef(maxImages);
-    maxImagesRef.current = maxImages;
+
+    useEffect(() => {
+        // Update ref inside effect (not during render)
+        maxImagesRef.current = maxImages;
+    });
 
     useEffect(() => {
         const interval = setInterval(() => {
