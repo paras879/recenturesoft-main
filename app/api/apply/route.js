@@ -7,60 +7,13 @@ import { v2 as cloudinary } from "cloudinary";
 export async function POST(req) {
     try {
         await connectDB();
+        const data = await req.json();
         
-        let formData;
-        try {
-            formData = await req.formData();
-        } catch (err) {
-            return NextResponse.json({ error: "Failed to parse form data" }, { status: 400 });
-        }
-        
-        const name = formData.get("name");
-        const email = formData.get("email");
-        const city = formData.get("city");
-        const phone = formData.get("phone");
-        const applyFor = formData.get("applyFor");
-        const experience = formData.get("experience");
-        const message = formData.get("message");
-        const resumeFile = formData.get("resume");
+        const { name, email, city, phone, applyFor, experience, message, resumeUrl } = data;
 
-        if (!name || !email || !city || !phone || !applyFor || !experience || !resumeFile) {
+        if (!name || !email || !city || !phone || !applyFor || !experience || !resumeUrl) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
-
-        // Extract original file extension
-        const fileExt = resumeFile.name.includes('.') ? resumeFile.name.split('.').pop() : 'pdf';
-        
-        // Convert File to Buffer
-        const arrayBuffer = await resumeFile.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        
-        // Upload to Cloudinary using stream to avoid corruption
-        cloudinary.config({
-            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-            api_key: process.env.CLOUDINARY_API_KEY,
-            api_secret: process.env.CLOUDINARY_API_SECRET,
-        });
-
-        const uploadResult = await new Promise((resolve, reject) => {
-            const uploadStream = cloudinary.uploader.upload_stream(
-                { folder: "recenturesoft/resumes", resource_type: "raw" },
-                (error, result) => {
-                    if (error) {
-                        console.error("Cloudinary Error:", error);
-                        reject(error);
-                    }
-                    else resolve(result);
-                }
-            );
-            
-            const readableStream = new Readable();
-            readableStream.push(buffer);
-            readableStream.push(null);
-            readableStream.pipe(uploadStream);
-        });
-
-        const savedUrl = uploadResult.secure_url;
 
         const newApplication = new JobApplication({
             name,
@@ -70,7 +23,7 @@ export async function POST(req) {
             applyFor,
             experience,
             message,
-            resumeUrl: savedUrl,
+            resumeUrl,
         });
 
         await newApplication.save();

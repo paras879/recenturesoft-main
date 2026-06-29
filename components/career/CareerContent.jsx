@@ -23,11 +23,34 @@ export default function CareerContent({ jobs }) {
         setStatus({ type: "", message: "" });
 
         const formData = new FormData(e.target);
+        const resumeFile = formData.get("resume");
 
         try {
+            // 1. Upload Resume directly to Cloudinary to bypass Vercel limits
+            const uploadData = new FormData();
+            uploadData.append('file', resumeFile);
+            uploadData.append('upload_preset', 'recenturesoft_upload');
+            uploadData.append('cloud_name', 'dgsebwvvs');
+
+            const cloudinaryRes = await fetch('https://api.cloudinary.com/v1_1/dgsebwvvs/auto/upload', {
+                method: 'POST',
+                body: uploadData
+            });
+            const cloudinaryData = await cloudinaryRes.json();
+            
+            if (!cloudinaryData.secure_url) {
+                throw new Error(cloudinaryData.error?.message || "Failed to upload resume to cloud.");
+            }
+
+            // 2. Submit Application Data to our API
+            formData.delete("resume");
+            const applicationData = Object.fromEntries(formData.entries());
+            applicationData.resumeUrl = cloudinaryData.secure_url;
+
             const res = await fetch("/api/apply", {
                 method: "POST",
-                body: formData,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(applicationData),
             });
             
             let data;
