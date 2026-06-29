@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-
+import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight } from "lucide-react";
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -18,9 +18,82 @@ const navLinks = [
     { name: "Contact", href: "/contact" },
 ];
 
+const solutionsMenu = [
+    {
+        title: "Software Development",
+        icon: Code,
+        color: "text-blue-500",
+        bg: "bg-blue-500/10",
+        items: [
+            { name: "CRM", href: "/crm" },
+            { name: "CRS", href: "/crs" },
+            { name: "Salesforce", href: "/salesforce" },
+            { name: "Dashboard", href: "/dashboard" },
+        ]
+    },
+    {
+        title: "Web Development",
+        icon: Globe,
+        color: "text-cyan-500",
+        bg: "bg-cyan-500/10",
+        items: [
+            { name: "Next JS", href: "/next-js" },
+            { name: "React", href: "/react" },
+            { name: "Web Design", href: "/web-design" },
+        ]
+    },
+    {
+        title: "E-Commerce",
+        icon: ShoppingCart,
+        color: "text-purple-500",
+        bg: "bg-purple-500/10",
+        items: [
+            { name: "OpenCart Development", href: "/opencart-development" },
+            { name: "Magento", href: "/magento-development" },
+            { name: "eBay Store", href: "/ebay-store-management" },
+            { name: "Amazon Store", href: "/amazon-store-management" },
+            { name: "WordPress", href: "/wordpress-development" },
+        ]
+    },
+    {
+        title: "Mobile App Development",
+        icon: Smartphone,
+        color: "text-rose-500",
+        bg: "bg-rose-500/10",
+        items: [
+            { name: "iPhone Apps", href: "/iphone-app-development" },
+            { name: "iPad Apps", href: "/ipad-app-development" },
+            { name: "Android Apps", href: "/android-application-development" },
+        ]
+    },
+    {
+        title: "Technology Solution",
+        icon: Cpu,
+        color: "text-emerald-500",
+        bg: "bg-emerald-500/10",
+        items: [
+            { name: "Node JS", href: "/node-js" },
+            { name: "React Native", href: "/react-native" },
+        ]
+    },
+    {
+        title: "Digital Marketing",
+        icon: TrendingUp,
+        color: "text-amber-500",
+        bg: "bg-amber-500/10",
+        items: [
+            { name: "SEO Service", href: "/seo-service" },
+            { name: "SEO Package", href: "/seo-package" },
+            { name: "Social Networking", href: "/social-networking" },
+            { name: "Content Writing", href: "/content-writing" },
+        ]
+    }
+];
+
 export default function Navbar() {
     const [hoveredLink, setHoveredLink] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [mobileExpanded, setMobileExpanded] = useState("");
     const pathname = usePathname();
 
     // Lock body scroll when mobile menu is open
@@ -36,7 +109,7 @@ export default function Navbar() {
     return (
         <header className="fixed top-0 left-0 right-0 z-[9999] px-2 sm:px-4 lg:px-6 py-2">
             <nav className="max-w-7xl mx-auto bg-white/70 dark:bg-slate-950/70 backdrop-blur-2xl border border-white/30 dark:border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300">
-                <div className="px-4 lg:px-8 h-14 lg:h-16 flex items-center justify-between">
+                <div className="px-4 lg:px-8 h-14 lg:h-16 flex items-center justify-between relative">
 
                     {/* ════ LOGO AREA ════ */}
                     <Link
@@ -45,7 +118,7 @@ export default function Navbar() {
                         className="flex items-center gap-2 group"
                     >
                         <span className="text-[clamp(1rem,4vw,1.25rem)] font-bold tracking-wider text-slate-800 dark:text-white transition-colors duration-300 group-hover:text-primary dark:group-hover:text-cyan-400 flex-shrink-0">
-                            RECENTURE<span className="text-primary dark:text-cyan-400 group-hover:text-slate-800 dark:group-hover:text-white transition-colors duration-300">SOFT</span>
+                            <img src="/Logo.png" alt="RecentureSoft Logo" className="h-12 md:h-14 w-auto object-contain drop-shadow-sm" />
                         </span>
                     </Link>
 
@@ -54,19 +127,27 @@ export default function Navbar() {
                         {navLinks.map((link) => (
                             <li
                                 key={link.name}
-                                className="relative"
+                                className="relative group"
                                 onMouseEnter={() => setHoveredLink(link.name)}
                                 onMouseLeave={() => setHoveredLink(null)}
                             >
                                 <Link
                                     href={link.href}
                                     prefetch={true}
-                                    className="relative px-3 py-2 text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 block z-10"
+                                    className="relative px-3 py-2 text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 z-10 flex items-center gap-1"
                                 >
                                     {link.name}
+                                    {link.name === "Solutions" && (
+                                        <svg 
+                                            className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredLink === "Solutions" ? "-rotate-180" : ""}`} 
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    )}
                                 </Link>
                                 <AnimatePresence>
-                                    {hoveredLink === link.name && (
+                                    {hoveredLink === link.name && link.name !== "Solutions" && (
                                         <motion.div
                                             layoutId="navHoverPill"
                                             className="absolute inset-0 bg-slate-100 dark:bg-white/10 rounded-full z-0"
@@ -77,6 +158,63 @@ export default function Navbar() {
                                         />
                                     )}
                                 </AnimatePresence>
+
+                                {/* ════ SOLUTIONS MEGA MENU ════ */}
+                                {link.name === "Solutions" && (
+                                    <AnimatePresence>
+                                        {hoveredLink === "Solutions" && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                                className="absolute top-full left-1/2 -translate-x-[25%] pt-6 cursor-default"
+                                                style={{ width: "960px" }}
+                                            >
+                                                <div className="bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-3xl border border-slate-200/60 dark:border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] rounded-[2rem] p-7 overflow-hidden relative group/menu">
+                                                    
+                                                    {/* Glowing ambient background inside menu */}
+                                                    <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none" />
+                                                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 blur-[100px] rounded-full pointer-events-none" />
+                                                    
+                                                    {/* Top gradient border accent */}
+                                                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
+
+                                                    <div className="grid grid-cols-3 gap-x-12 gap-y-8 relative z-10">
+                                                        {solutionsMenu.map((category, idx) => {
+                                                            const Icon = category.icon;
+                                                            return (
+                                                                <div key={idx} className="flex flex-col group/cat">
+                                                                    <div className="flex items-center gap-3 mb-3">
+                                                                        <div className={`w-9 h-9 rounded-xl ${category.bg} flex items-center justify-center border border-black/5 dark:border-white/5 transition-transform duration-300 group-hover/cat:scale-110 shadow-sm`}>
+                                                                            <Icon className={`w-4 h-4 ${category.color}`} />
+                                                                        </div>
+                                                                        <h3 className="text-slate-900 dark:text-white font-bold text-[14.5px] tracking-wide">
+                                                                            {category.title}
+                                                                        </h3>
+                                                                    </div>
+                                                                    <ul className="space-y-1 pl-[3.25rem]">
+                                                                        {category.items.map((item, itemIdx) => (
+                                                                            <li key={itemIdx}>
+                                                                                <Link 
+                                                                                    href={item.href} 
+                                                                                    className="group/item flex items-center gap-2 text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 text-sm font-medium transition-all duration-300 hover:translate-x-1 py-1"
+                                                                                >
+                                                                                    {item.name}
+                                                                                    <ChevronRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300 text-cyan-500" />
+                                                                                </Link>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                )}
                             </li>
                         ))}
                     </ul>
@@ -155,6 +293,50 @@ export default function Navbar() {
                             <div className="flex flex-col gap-1 overflow-y-auto pb-4 scrollbar-hide">
                                 {navLinks.map((link, i) => {
                                     const isActive = pathname === link.href;
+
+                                    if (link.name === "Solutions") {
+                                        return (
+                                            <div key={link.name} className="flex flex-col">
+                                                <button
+                                                    className={`text-base font-medium transition-all duration-300 w-full flex items-center justify-between px-3 py-2.5 rounded-lg active:scale-[0.98] ${isActive ? "bg-primary/10 dark:bg-cyan-500/10 text-primary dark:text-cyan-400" : "text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white"}`}
+                                                    onClick={() => setMobileExpanded(mobileExpanded === "Solutions" ? "" : "Solutions")}
+                                                >
+                                                    {link.name}
+                                                    <svg className={`w-4 h-4 transition-transform duration-300 ${mobileExpanded === "Solutions" ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                    </svg>
+                                                </button>
+                                                <AnimatePresence>
+                                                    {mobileExpanded === "Solutions" && (
+                                                        <motion.div
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: "auto", opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            className="overflow-hidden"
+                                                        >
+                                                            <div className="pl-6 py-2 flex flex-col gap-4">
+                                                                {solutionsMenu.map((cat, idx) => (
+                                                                    <div key={idx}>
+                                                                        <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase mb-2">{cat.title}</h4>
+                                                                        <ul className="flex flex-col gap-2">
+                                                                            {cat.items.map((item, itemIdx) => (
+                                                                                <li key={itemIdx}>
+                                                                                    <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-600 dark:text-gray-300 hover:text-cyan-500 transition-colors">
+                                                                                        {item.name}
+                                                                                    </Link>
+                                                                                </li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+                                        );
+                                    }
+
                                     return (
                                         <Link
                                             key={link.name}

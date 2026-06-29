@@ -1,6 +1,7 @@
 "use client";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
+import SimpleContactForm from "./SimpleContactForm";
 
 const STATS = [
     { value: "500+", label: "Projects Delivered" },
@@ -320,13 +321,13 @@ export default function ContactHero() {
                         </div>
                     </div>
 
-                    {/* RIGHT: CSS ANIMATED GLOBE (55%) */}
+                    {/* RIGHT: CONTACT FORM (55%) */}
                     <div
-                        className="lg:col-span-7 w-full flex items-center justify-center order-1 lg:order-2 animate-scale-in"
+                        className="lg:col-span-7 w-full flex items-center justify-end lg:pr-4 order-1 lg:order-2 animate-scale-in"
                         style={{ animationDelay: "200ms" }}
                     >
-                        <div className="w-full max-w-[280px] sm:max-w-[360px] md:max-w-[460px] lg:max-w-[520px] mx-auto h-[280px] sm:h-[360px] md:h-[420px] lg:h-[500px] flex items-center justify-center">
-                            <CSSGlobe />
+                        <div className="w-full xl:max-w-[720px] max-w-full">
+                            <SimpleContactForm />
                         </div>
                     </div>
                 </div>

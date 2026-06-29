@@ -132,9 +132,7 @@ export default function FutureFooter() {
                         <div
                             className="flex items-center gap-4 mb-4 md:mb-8"
                         >
-                            <span className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-gray-400">
-                                Recenturesoft
-                            </span>
+                            <img src="/Logo.png" alt="RecentureSoft Logo" className="h-20 w-auto object-contain drop-shadow-sm" />
                         </div>
 
                         <p

@@ -106,80 +106,49 @@ export default function InteractiveContactForm() {
                         </div>
                     </div>
 
-                    {/* The Form */}
+                    {/* The Map */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-5 md:p-8 lg:p-12 backdrop-blur-xl relative overflow-hidden shadow-sm dark:shadow-none"
+                        className="relative w-full group min-h-[400px] lg:min-h-[500px] flex"
                     >
-                        {formStatus === "success" ? (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 dark:bg-[#020617]/80 backdrop-blur-sm z-20">
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    className="w-20 h-20 bg-emerald-50 dark:bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/50 mb-6"
+                        {/* Glowing background behind map */}
+                        <div className="absolute -inset-1 bg-gradient-to-br from-purple-500/30 via-cyan-500/30 to-blue-600/30 rounded-[3rem] blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none" />
+                        
+                        <div className="bg-white/50 dark:bg-slate-900/50 border border-white/20 dark:border-white/10 rounded-[2.5rem] p-2 md:p-3 backdrop-blur-2xl relative shadow-2xl overflow-hidden flex-grow flex flex-col group-hover:border-cyan-500/30 transition-colors duration-500">
+                            
+                            {/* Inner map container */}
+                            <div className="relative flex-grow rounded-[2rem] overflow-hidden bg-slate-100 dark:bg-slate-800 isolate">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14009.689437142078!2d77.37580665!3d28.6170669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5662bb1e17d%3A0xc3cf9c7717dc4fbc!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                                    width="100%" 
+                                    height="100%" 
+                                    style={{ border: 0, minHeight: '100%', position: 'absolute', inset: 0 }} 
+                                    allowFullScreen="" 
+                                    loading="lazy" 
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="RecentureSoft Headquarters Map"
+                                    className="grayscale-[20%] contrast-[1.1] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                                ></iframe>
+
+                                {/* Floating Overlay Gradient to blend edges */}
+                                <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_40px_rgba(0,0,0,0.4)] pointer-events-none rounded-[2rem]"></div>
+                                
+                                {/* Floating View Larger button */}
+                                <a 
+                                    href="https://www.google.com/maps/dir/?api=1&destination=A-125,+Sector-63,+Noida,+Uttar+Pradesh+201301,+India"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 dark:bg-white/95 text-white dark:text-slate-900 px-6 py-3 rounded-full font-semibold shadow-[0_10px_20px_rgba(0,0,0,0.2)] backdrop-blur-md flex items-center gap-2 hover:scale-105 hover:bg-slate-900 dark:hover:bg-white transition-all duration-300 z-10 text-sm whitespace-nowrap"
                                 >
-                                    <svg className="w-10 h-10 text-emerald-500 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.242-4.243a8 8 0 1111.314 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
-                                </motion.div>
-                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Message Sent</h3>
-                                <p className="text-slate-600 dark:text-gray-400 text-center">We'll get back to you within 24 hours.</p>
+                                    Get Directions
+                                </a>
                             </div>
-                        ) : null}
-
-                        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">First Name</label>
-                                    <input required type="text" name="firstName" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Last Name</label>
-                                    <input required type="text" name="lastName" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Email</label>
-                                    <input required type="email" name="email" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Phone Number</label>
-                                    <input required type="text" name="phone" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors" />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Company Size</label>
-                                <select name="companySize" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors appearance-none">
-                                    <option value="1-50">1 - 50 employees</option>
-                                    <option value="51-200">51 - 200 employees</option>
-                                    <option value="201-1000">201 - 1000 employees</option>
-                                    <option value="1000+">1000+ employees</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Project Details</label>
-                                <textarea required name="message" rows="4" className="w-full bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"></textarea>
-                            </div>
-
-                            {error && (
-                                <div className="text-rose-500 dark:text-rose-400 text-sm bg-rose-500/10 border border-rose-500/20 rounded-xl p-3 text-center transition-all">
-                                    {error}
-                                </div>
-                            )}
-
-                            <button
-                                type="submit"
-                                disabled={formStatus === "submitting"}
-                                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-                            >
-                                {formStatus === "submitting" ? "Sending..." : "Send Message"}
-                            </button>
-                        </form>
+                        </div>
                     </motion.div>
                 </div>
             </div>
