@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import JobApplication from "@/models/JobApplication";
-import fs from "fs/promises";
-import path from "path";
+import { Readable } from "stream";
+import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req) {
     try {
@@ -23,7 +23,6 @@ export async function POST(req) {
         const buffer = Buffer.from(base64Data, 'base64');
         
         // Upload to Cloudinary using stream to avoid corruption
-        const cloudinary = (await import("cloudinary")).v2;
         cloudinary.config({
             cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
             api_key: process.env.CLOUDINARY_API_KEY,
@@ -32,13 +31,16 @@ export async function POST(req) {
 
         const uploadResult = await new Promise((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream(
-                { folder: "recenturesoft/resumes", resource_type: "raw", format: fileExt },
+                { folder: "recenturesoft/resumes", resource_type: "raw" },
                 (error, result) => {
-                    if (error) reject(error);
+                    if (error) {
+                        console.error("Cloudinary Error:", error);
+                        reject(error);
+                    }
                     else resolve(result);
                 }
             );
-            const { Readable } = require('stream');
+            
             const readableStream = new Readable();
             readableStream.push(buffer);
             readableStream.push(null);
