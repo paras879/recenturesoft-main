@@ -1,0 +1,35 @@
+import Navbar from "@/components/Navbar";
+import PageHero from "@/components/PageHero";
+import Image from "next/image";
+import SeoPackageContent from "@/components/seo-package/SeoPackageContent";
+import PremiumFooter from "@/components/PremiumFooter";
+
+export const metadata = {
+    title: "SEO Packages In India | RecentureSoft",
+    description: "Explore our comprehensive SEO packages including Bronze, Silver, Gold, and Platinum. Get custom Website Audit, On-Page Optimization, and Content Marketing.",
+};
+
+export default function SeoPackagePage() {
+    return (
+        <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <Navbar />
+            <PageHero
+                badge="Pricing & Plans"
+                title="SEO Package"
+                highlight=""
+                description="Choose the perfect SEO package for your business. We offer highly tailored, transparent, and result-driven strategies designed to maximize your digital growth."
+                highlightClass="text-blue-500 dark:text-blue-400"
+            >
+                <Image src="/Banner/seo_package.webp" alt="seo-package Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+            </PageHero>
+
+            <section className="py-10 md:py-16 px-4 bg-slate-50 dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto">
+                    <SeoPackageContent />
+                </div>
+            </section>
+
+            <PremiumFooter />
+        </main>
+    );
+}

@@ -1,4 +1,4 @@
-export default function PageHero({ title, highlight, description, children }) {
+export default function PageHero({ title, highlight, description, banner, highlightClass, children }) {
     return (
         <section className="relative pt-24 md:pt-28 lg:pt-32 pb-2 md:pb-4 lg:pb-6 overflow-hidden bg-background min-h-fit flex items-center transition-colors duration-300">
             {/* CSS entry animations */}
@@ -29,50 +29,45 @@ export default function PageHero({ title, highlight, description, children }) {
                 }
             `}} />
             
-            {/* Background elements */}
-            <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:mix-blend-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 dark:from-blue-900/20 via-background to-background" />
-            <div className="absolute -left-[20%] top-[20%] w-[50%] h-[50%] bg-blue-500/10 dark:bg-blue-900/10 rounded-full blur-[120px] pointer-events-none z-0" />
-            <div className="absolute -right-[20%] bottom-[10%] w-[50%] h-[50%] bg-purple-500/10 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none z-0" />
+            {/* Clean Light Blue Tech Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                {/* Subtle Grid */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f61a_1px,transparent_1px),linear-gradient(to_bottom,#3b82f61a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-50 dark:opacity-20" />
+                
+                {/* Light Blue Soft Glows */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] md:w-[60%] h-[300px] bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-[120px]" />
+                <div className="absolute -left-[10%] top-[20%] w-[40%] h-[40%] bg-cyan-400/10 dark:bg-cyan-500/10 rounded-full blur-[100px]" />
+                <div className="absolute -right-[10%] top-[20%] w-[40%] h-[40%] bg-blue-300/10 dark:bg-blue-600/10 rounded-full blur-[100px]" />
+            </div>
+
+            {/* Background Image Passed as Children */}
+            {children && (
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                    <div className="absolute inset-0 z-0 opacity-100">
+                        {children}
+                    </div>
+                    {/* Dark overlay to ensure white text readability (no blur, just dim) */}
+                    <div className="absolute inset-0 bg-[#020617]/70 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent z-10" />
+                </div>
+            )}
 
             <div className="container mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 relative z-20 max-w-[1500px]">
-                <div className={`grid gap-6 md:gap-8 lg:gap-12 items-center ${children ? 'grid-cols-1 xl:grid-cols-2' : 'grid-cols-1'}`}>
+                {/* Left aligned if image is present, centered otherwise */}
+                <div className={`flex flex-col justify-center ${children ? 'items-start text-left min-h-[40vh] md:min-h-[50vh]' : 'items-center text-center'}`}>
 
-                    {/* Content Left (or centered when no children) */}
-                    <div className={`flex flex-col justify-center order-1 ${children ? 'lg:order-1 text-center lg:text-left' : 'text-center items-center'}`}>
+                    <h1
+                        className={`font-extrabold tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${children ? 'text-white drop-shadow-lg max-w-4xl' : 'text-foreground'}`}
+                    >
+                        {title} <br className="hidden md:block" />
+                        <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
+                    </h1>
 
-                        <h1
-                            className={`font-bold tracking-[-0.02em] leading-[1] text-foreground mb-4 md:mb-6 animate-fade-up-1 ${children ? 'text-[2.25rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem]' : 'text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem]'}`}
-                        >
-                            {title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-indigo-500">{highlight}</span>
-                        </h1>
-
-                        <p
-                            className={`text-slate-600 dark:text-slate-300 text-base md:text-lg lg:text-xl font-normal leading-8 animate-fade-up-2 ${children ? 'max-w-2xl mx-auto lg:mx-0' : 'max-w-3xl mx-auto'}`}
-                        >
-                            {description}
-                        </p>
-
-                        {/* Decorative accent when no 3D scene */}
-                        {!children && (
-                            <div
-                                className="mt-8 flex items-center justify-center gap-3 animate-scale-x-in"
-                            >
-                                <div className="h-[2px] w-16 bg-gradient-to-r from-transparent via-blue-500/50 to-cyan-500/50 rounded-full" />
-                                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
-                                <div className="h-[2px] w-16 bg-gradient-to-l from-transparent via-indigo-500/50 to-purple-500/50 rounded-full" />
-                            </div>
-                        )}
-                    </div>
-
-                    {/* 3D Visual Right — only when children provided */}
-                    {children && (
-                        <div
-                            className="order-2 lg:order-2 h-[180px] sm:h-[240px] md:h-[320px] lg:h-[420px] w-full relative flex items-center justify-center animate-scale-in"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-purple-500/5 rounded-full blur-3xl -z-10" />
-                            {children}
-                        </div>
-                    )}
+                    <p
+                        className={`text-base md:text-lg lg:text-xl font-normal leading-8 animate-fade-up-2 ${children ? 'text-slate-200 max-w-2xl drop-shadow-md' : 'text-slate-600 dark:text-slate-300 max-w-3xl mx-auto'}`}
+                    >
+                        {description}
+                    </p>
 
                 </div>
             </div>

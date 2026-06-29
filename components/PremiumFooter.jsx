@@ -32,9 +32,7 @@ export default function PremiumFooter() {
                     {/* Brand Column */}
                     <div className="col-span-2 lg:col-span-4 order-3 md:order-3 lg:order-1">
                         <Link href="/" className="inline-block mb-6">
-                            <span className="text-2xl font-bold tracking-wider text-slate-900 dark:text-white">
-                                RECENTURE<span className="text-cyan-500 dark:text-cyan-400">SOFT</span>
-                            </span>
+                            <img src="/Logo.png" alt="RecentureSoft" className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105" />
                         </Link>
                         <p className="text-slate-700 dark:text-gray-300 font-medium leading-relaxed mb-8 w-full">
                             Engineering extraordinary digital experiences. We partner with visionaries to build high-performance software, web, and mobile solutions.

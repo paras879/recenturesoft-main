@@ -1,0 +1,35 @@
+import Navbar from "@/components/Navbar";
+import PageHero from "@/components/PageHero";
+import Image from "next/image";
+import SalesforceContent from "@/components/salesforce/SalesforceContent";
+import PremiumFooter from "@/components/PremiumFooter";
+
+export const metadata = {
+    title: "Best Salesforce Integration Company In India | RecentureSoft",
+    description: "RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.",
+};
+
+export default function SalesforcePage() {
+    return (
+        <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <Navbar />
+            <PageHero
+                badge="Salesforce Integration"
+                title="Salesforce"
+                highlight="Solutions"
+                description="Leverage the world's leading CRM platform to transform your sales, marketing, and customer service strategy with our full-cycle consulting."
+                highlightClass="text-blue-500 dark:text-blue-400"
+            >
+                <Image src="/Banner/salesforce.webp" alt="salesforce Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+            </PageHero>
+
+            <section className="py-6 md:py-8 px-4">
+                <div className="max-w-4xl mx-auto">
+                    <SalesforceContent />
+                </div>
+            </section>
+
+            <PremiumFooter />
+        </main>
+    );
+}
