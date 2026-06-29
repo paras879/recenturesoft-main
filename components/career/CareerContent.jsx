@@ -23,36 +23,26 @@ export default function CareerContent({ jobs }) {
         setStatus({ type: "", message: "" });
 
         const formData = new FormData(e.target);
-        const resumeFile = formData.get("resume");
 
         try {
-            // Read file as base64 to avoid Next.js formData binary corruption
-            const base64Resume = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = (error) => reject(error);
-                reader.readAsDataURL(resumeFile);
-            });
-
-            // Remove file from formData to send JSON instead
-            formData.delete("resume");
-            const applicationData = Object.fromEntries(formData.entries());
-            applicationData.resumeBase64 = base64Resume;
-            applicationData.resumeName = resumeFile.name;
-
             const res = await fetch("/api/apply", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(applicationData),
+                body: formData,
             });
-            const data = await res.json();
+            
+            let data;
+            try {
+                data = await res.json();
+            } catch (err) {
+                data = { error: "Server returned an invalid response." };
+            }
 
-            if (res.ok && data.success) {
+            if (res.ok && data?.success) {
                 setStatus({ type: "success", message: "Your application has been submitted successfully! We will get back to you soon." });
                 e.target.reset();
                 setFileName("No file chosen");
             } else {
-                setStatus({ type: "error", message: data.error || "Failed to submit application. Please try again." });
+                setStatus({ type: "error", message: data?.error || "Failed to submit application. Please try again." });
             }
         } catch (error) {
             setStatus({ type: "error", message: "An unexpected error occurred. Please try again." });

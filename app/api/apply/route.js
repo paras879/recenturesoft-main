@@ -7,20 +7,33 @@ import { v2 as cloudinary } from "cloudinary";
 export async function POST(req) {
     try {
         await connectDB();
-        const data = await req.json();
         
-        const { name, email, city, phone, applyFor, experience, message, resumeBase64, resumeName } = data;
+        let formData;
+        try {
+            formData = await req.formData();
+        } catch (err) {
+            return NextResponse.json({ error: "Failed to parse form data" }, { status: 400 });
+        }
+        
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const city = formData.get("city");
+        const phone = formData.get("phone");
+        const applyFor = formData.get("applyFor");
+        const experience = formData.get("experience");
+        const message = formData.get("message");
+        const resumeFile = formData.get("resume");
 
-        if (!name || !email || !city || !phone || !applyFor || !experience || !resumeBase64 || !resumeName) {
+        if (!name || !email || !city || !phone || !applyFor || !experience || !resumeFile) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
         // Extract original file extension
-        const fileExt = resumeName.includes('.') ? resumeName.split('.').pop() : 'pdf';
+        const fileExt = resumeFile.name.includes('.') ? resumeFile.name.split('.').pop() : 'pdf';
         
-        // Convert Base64 back to binary Buffer
-        const base64Data = resumeBase64.split(';base64,').pop();
-        const buffer = Buffer.from(base64Data, 'base64');
+        // Convert File to Buffer
+        const arrayBuffer = await resumeFile.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
         
         // Upload to Cloudinary using stream to avoid corruption
         cloudinary.config({
