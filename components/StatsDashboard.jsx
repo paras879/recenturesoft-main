@@ -101,12 +101,12 @@ function HolographicCore() {
             />
             {/* Outer ring */}
             <div
-                className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full animate-holoSpin"
+                className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full md:animate-holoSpin"
                 style={{ borderWidth: 1, borderColor: `${C.primary}10`, borderStyle: "solid" }}
             />
             {/* Inner ring */}
             <div
-                className="absolute top-1/2 left-1/2 w-[340px] h-[340px] rounded-full animate-holoSpinReverse"
+                className="absolute top-1/2 left-1/2 w-[340px] h-[340px] rounded-full md:animate-holoSpinReverse"
                 style={{ borderWidth: 1, borderColor: `${C.secondary}10`, borderStyle: "solid" }}
             />
             {/* Floating geometric shapes — low opacity */}
@@ -116,20 +116,19 @@ function HolographicCore() {
                 { size: 9, top: "28%", left: "82%", delay: 4 },
                 { size: 5, top: "78%", left: "18%", delay: 1 },
             ].map((s, i) => (
-                <motion.div
+                <div
                     key={i}
-                    className="absolute rounded-sm animate-floatShape"
+                    className="absolute rounded-sm md:animate-floatShape md:animate-pulse"
                     style={{
                         width: s.size,
                         height: s.size,
                         top: s.top,
                         left: s.left,
                         animationDelay: `${s.delay}s`,
-                        rotate: 45,
+                        rotate: "45deg",
                         background: i % 2 === 0 ? `${C.primary}12` : `${C.secondary}10`,
+                        opacity: 0.25
                     }}
-                    animate={{ opacity: [0.15, 0.35, 0.15] }}
-                    transition={{ repeat: Infinity, duration: 5, delay: s.delay, ease: "easeInOut" }}
                 />
             ))}
         </div>
@@ -275,7 +274,7 @@ function AnalyticsBar({ data, maxValue, index, peakValue, chartHeight }) {
                     {/* Shimmer sweep */}
                     <div className="absolute inset-0 overflow-hidden rounded-t-xl">
                         <div
-                            className="absolute inset-0 animate-shimmer"
+                            className="absolute inset-0 md:animate-shimmer"
                             style={{ background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.05), transparent)" }}
                         />
                     </div>
@@ -327,7 +326,7 @@ function AnalyticsBar({ data, maxValue, index, peakValue, chartHeight }) {
             {/* Growth indicator dot */}
             {isHighPerformer && (
                 <div
-                    className="mt-1 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full animate-dataPulse"
+                    className="mt-1 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full md:animate-dataPulse"
                     style={{ background: C.primary, animationDelay: `${index * 0.4}s` }}
                 />
             )}
@@ -369,22 +368,15 @@ function TrendLine({ data, maxValue, chartHeight }) {
                     <stop offset="50%" stopColor={C.secondary} />
                     <stop offset="100%" stopColor={C.accent} />
                 </linearGradient>
-                <filter id="trendGlow">
-                    <feGaussianBlur stdDeviation="1" result="blur" />
-                    <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                </filter>
             </defs>
-            {/* Glow layer */}
+            {/* Glow layer (simulated with opacity instead of heavy SVG filter) */}
             <path
                 d={pathD}
                 fill="none"
                 stroke="url(#trendGrad)"
-                strokeWidth="0.6"
+                strokeWidth="2.5"
                 strokeLinecap="round"
-                filter="url(#trendGlow)"
+                opacity={0.15}
             />
             {/* Main line */}
             <path
@@ -437,6 +429,33 @@ function NetworkLines({ data, maxValue, chartHeight }) {
 }
 
 /* ═══════════════════════════════════════════════════════
+   LIVE COUNTER (Isolated to prevent full re-renders)
+   ═══════════════════════════════════════════════════════ */
+function LiveCounter() {
+    const [liveCount, setLiveCount] = useState(14580);
+    
+    useEffect(() => {
+        const id = setInterval(() => {
+            setLiveCount((p) => p + Math.floor(Math.random() * 5) + 1);
+        }, 4000);
+        return () => clearInterval(id);
+    }, []);
+
+    return (
+        <motion.span
+            className="font-semibold tabular-nums inline-block"
+            style={{ color: C.primary }}
+            key={liveCount}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+        >
+            {liveCount.toLocaleString()}
+        </motion.span>
+    );
+}
+
+/* ═══════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
 export default function StatsDashboard() {
@@ -450,17 +469,6 @@ export default function StatsDashboard() {
     const chartHeight = "var(--chart-height, 260px)";
 
     const displayData = histogramData;
-
-    /* Live value simulation */
-    const [liveCount, setLiveCount] = useState(14580);
-    useEffect(() => {
-        const id = setInterval(() => {
-            setLiveCount((p) => p + Math.floor(Math.random() * 5) + 1);
-        }, 4000);
-        return () => clearInterval(id);
-    }, []);
-
-
 
     return (
         <section
@@ -483,16 +491,7 @@ export default function StatsDashboard() {
                 </h2>
                 <p className="text-slate-600 dark:text-gray-500 text-sm sm:text-base leading-relaxed">
                     Real-time analytics tracking{" "}
-                    <motion.span
-                        className="font-semibold tabular-nums"
-                        style={{ color: C.primary }}
-                        key={liveCount}
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        {liveCount.toLocaleString()}
-                    </motion.span>{" "}
+                    <LiveCounter />{" "}
                     data points across our global operations
                 </p>
             </div>
@@ -521,10 +520,7 @@ export default function StatsDashboard() {
 
                 {/* Dashboard container */}
                 <div
-                    className="relative mt-5 rounded-3xl backdrop-blur-2xl overflow-hidden bg-slate-50 dark:bg-[#0a1225]/80 border border-slate-200 dark:border-white/[0.04]"
-                    style={{
-                        boxShadow: `0 0 80px ${C.primary}06`,
-                    }}
+                    className="relative mt-5 rounded-3xl backdrop-blur-sm md:backdrop-blur-2xl overflow-hidden bg-slate-50 dark:bg-[#0a1225]/80 border border-slate-200 dark:border-white/[0.04] shadow-none md:shadow-[0_0_80px_rgba(6,230,255,0.06)]"
                 >
                     {/* Holographic background */}
                     <HolographicCore />
@@ -551,18 +547,16 @@ export default function StatsDashboard() {
                             <div>
                                 <div className="flex items-center gap-3">
                                     <h3 className="text-lg font-bold text-slate-900 dark:text-white">Growth Analytics</h3>
-                                    <motion.div
-                                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+                                    <div
+                                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-full animate-pulse"
                                         style={{
                                             background: `${C.primary}08`,
                                             border: `1px solid ${C.primary}20`,
                                         }}
-                                        animate={{ opacity: [0.7, 1, 0.7] }}
-                                        transition={{ repeat: Infinity, duration: 2 }}
                                     >
                                         <div className="w-1.5 h-1.5 rounded-full" style={{ background: C.primary }} />
                                         <span className="text-[10px] font-semibold uppercase" style={{ color: C.primary }}>Live</span>
-                                    </motion.div>
+                                    </div>
                                 </div>
                                 <p className="text-sm text-slate-500 dark:text-gray-500 mt-1">
                                     Monthly project delivery &amp; revenue performance — 2024
