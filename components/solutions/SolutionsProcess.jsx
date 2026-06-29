@@ -7,13 +7,13 @@ const PROCESS_STEPS = [
 
     export default function SolutionsProcess() {
         return (
-        <section className="font-manrope relative w-full py-8 md:py-12 bg-slate-50 dark:bg-[#020617] px-4 lg:px-8 overflow-hidden transition-colors duration-300">
-            <div className="max-w-[800px] mx-auto flex flex-col gap-4 md:gap-6">
+        <section className="font-manrope relative w-full pt-0 pb-8 md:pt-0 md:pb-12 bg-slate-50 dark:bg-[#020617] px-4 lg:px-8 overflow-hidden transition-colors duration-300">
+            <div className="max-w-[800px] mx-auto flex flex-col gap-4 md:gap-6 mt-0">
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="max-w-2xl">
 
-                        <h2 className="text-2xl md:text-3xl font-[600] tracking-[-0.03em] text-slate-900 dark:text-white mb-2 leading-tight">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-[600] tracking-[-0.03em] text-slate-900 dark:text-white mb-3 leading-tight">
                             How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Deliver</span>
                         </h2>
                         <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 font-[400] leading-relaxed max-w-lg">

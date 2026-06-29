@@ -15,30 +15,30 @@ import {
 const FOOTER_LINKS = {
     "Quick Links": [
         { name: "About Us", href: "/about" },
-        { name: "Our Approach", href: "/solutions" },
-        { name: "Careers", href: "#" }, // baad me /careers
+        { name: "Careers", href: "/career" },
+        { name: "Our Portfolio", href: "/portfolio" },
         { name: "Contact", href: "/contact" },
     ],
 
     "Services": [
-        { name: "Custom Software", href: "#" },
-        { name: "Cloud Engineering", href: "#" },
-        { name: "AI Solutions", href: "#" },
-        { name: "Mobile Apps", href: "#" },
+        { name: "Web Design", href: "/web-design" },
+        { name: "SEO Services", href: "/seo-service" },
+        { name: "CRM Solutions", href: "/crm" },
+        { name: "Mobile App Dev", href: "/android-application-development" },
     ],
 
-    "Technologies": [
-        { name: "React & Next.js", href: "#" },
-        { name: "Node & Python", href: "#" },
-        { name: "AWS Cloud", href: "#" },
-        { name: "Docker & K8s", href: "#" },
+    "E-commerce & CMS": [
+        { name: "WordPress Dev", href: "/wordpress-development-customization" },
+        { name: "OpenCart Dev", href: "/opencart-development" },
+        { name: "Ebay Store", href: "/ebay-store-management" },
+        { name: "CMS Solutions", href: "/cms" },
     ],
 
     "Resources": [
-        { name: "Case Studies", href: "#" },
         { name: "Blog", href: "/blog" },
-        { name: "Documentation", href: "#" },
-        { name: "API References", href: "#" },
+        { name: "Latest News", href: "/news" },
+        { name: "Events", href: "/events" },
+        { name: "Our Solutions", href: "/solutions" },
     ],
 };
 

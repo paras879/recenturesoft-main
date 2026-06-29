@@ -12,7 +12,7 @@ import NewsletterForm from "./NewsletterForm";
 const companyLinks = [
     { name: "About Us", href: "/about" },
     { name: "Portfolio", href: "/portfolio" },
-    { name: "Careers", href: "#" }, // baad me /careers kar dena
+    { name: "Careers", href: "/career" },
     { name: "News", href: "/news" },
     { name: "Contact", href: "/contact" },
 ];
@@ -84,10 +84,16 @@ export default function PremiumFooter() {
                     <div className="col-span-1 lg:col-span-2 order-1 md:order-1">
                         <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide">Services</h4>
                         <ul className="space-y-2 md:space-y-4">
-                            {["Software Dev", "Web Development", "Mobile Apps", "UI/UX Design", "Marketing"].map((link) => (
-                                <li key={link}>
-                                    <Link href="/solutions" className="text-slate-600 hover:text-slate-900 dark:text-gray-300 dark:hover:text-white transition-colors text-sm font-medium">
-                                        {link}
+                            {[
+                                { name: "CMS Development", href: "/cms" },
+                                { name: "CRM Development", href: "/crm" },
+                                { name: "Web Design", href: "/web-design" },
+                                { name: "SEO Services", href: "/seo-service" },
+                                { name: "Mobile Apps", href: "/android-application-development" }
+                            ].map((link) => (
+                                <li key={link.name}>
+                                    <Link href={link.href} className="text-slate-600 hover:text-slate-900 dark:text-gray-300 dark:hover:text-white transition-colors text-sm font-medium">
+                                        {link.name}
                                     </Link>
                                 </li>
                             ))}
