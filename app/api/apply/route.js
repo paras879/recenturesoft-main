@@ -22,16 +22,30 @@ export async function POST(req) {
         const base64Data = resumeBase64.split(';base64,').pop();
         const buffer = Buffer.from(base64Data, 'base64');
         
-        // Define local file path
-        const fileName = `${name.replace(/\s+/g, '_')}_${Date.now()}_resume.${fileExt}`;
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'resumes');
-        const filePath = path.join(uploadDir, fileName);
+        // Upload to Cloudinary using stream to avoid corruption
+        const cloudinary = (await import("cloudinary")).v2;
+        cloudinary.config({
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET,
+        });
 
-        // Ensure directory exists and save file
-        await fs.mkdir(uploadDir, { recursive: true });
-        await fs.writeFile(filePath, buffer);
+        const uploadResult = await new Promise((resolve, reject) => {
+            const uploadStream = cloudinary.uploader.upload_stream(
+                { folder: "recenturesoft/resumes", resource_type: "raw", format: fileExt },
+                (error, result) => {
+                    if (error) reject(error);
+                    else resolve(result);
+                }
+            );
+            const { Readable } = require('stream');
+            const readableStream = new Readable();
+            readableStream.push(buffer);
+            readableStream.push(null);
+            readableStream.pipe(uploadStream);
+        });
 
-        const savedUrl = `/uploads/resumes/${fileName}`;
+        const savedUrl = uploadResult.secure_url;
 
         const newApplication = new JobApplication({
             name,
