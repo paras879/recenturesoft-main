@@ -53,7 +53,7 @@ const solutionsMenu = [
             { name: "Magento", href: "/magento-development" },
             { name: "eBay Store", href: "/ebay-store-management" },
             { name: "Amazon Store", href: "/amazon-store-management" },
-            { name: "WordPress", href: "/wordpress-development" },
+            { name: "WordPress", href: "/wordpress-development-customization" },
         ]
     },
     {
@@ -62,7 +62,7 @@ const solutionsMenu = [
         color: "text-rose-500",
         bg: "bg-rose-500/10",
         items: [
-            { name: "iPhone Apps", href: "/iphone-app-development" },
+            { name: "iPhone Apps", href: "/iphone-apps-development" },
             { name: "iPad Apps", href: "/ipad-app-development" },
             { name: "Android Apps", href: "/android-application-development" },
         ]
