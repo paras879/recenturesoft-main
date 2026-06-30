@@ -8,8 +8,9 @@ import TeamMember from "@/models/TeamMember";
 import { resolveImagePath } from "@/lib/imageHelper";
 
 export const metadata = {
-  title: "Events & Culture | RecentureSoft",
+    title: "Events & Culture | RecentureSoft",
   description: "Experience the passion, innovation, and global collaboration that drives our engineering teams.",
+    alternates: { canonical: "/events" }
 };
 
 export const dynamic = "force-dynamic";
@@ -55,6 +56,7 @@ export default async function EventsPage() {
 
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Events & Culture | RecentureSoft","description":"Experience the passion, innovation, and global collaboration that drives our engineering teams.","url":"https://recenturesoft.com/events"}) }} />
             <Navbar />
             <CinematicEvents events={serializedEvents} teamMembers={serializedTeam} />
             <PremiumFooter />

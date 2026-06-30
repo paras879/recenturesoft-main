@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "Best eBay Store Management Company In India | RecentureSoft",
     description: "Expert eBay store management solutions including design, product listing, marketing, and inventory management tailored for your business.",
+    alternates: { canonical: "/ebay-store-management" }
 };
 
 export default function EbayStorePage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best eBay Store Management Company In India | RecentureSoft","description":"Expert eBay store management solutions including design, product listing, marketing, and inventory management tailored for your business.","url":"https://recenturesoft.com/ebay-store-management"}) }} />
             <Navbar />
             <PageHero
                 badge="Store Management"

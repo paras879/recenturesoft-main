@@ -6,11 +6,13 @@ import ReactNativeContent from "@/components/react-native/ReactNativeContent";
 export const metadata = {
     title: "React Native App Development Company | RecentureSoft",
     description: "Hire the best React Native app developers in India. We build high-performance, cross-platform mobile apps for iOS and Android.",
+    alternates: { canonical: "/react-native" }
 };
 
 export default function ReactNativePage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-indigo-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React Native App Development Company | RecentureSoft","description":"Hire the best React Native app developers in India. We build high-performance, cross-platform mobile apps for iOS and Android.","url":"https://recenturesoft.com/react-native"}) }} />
             <Navbar />
             
             <PageHero

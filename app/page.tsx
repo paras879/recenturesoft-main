@@ -5,6 +5,12 @@ import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { connectDB } from "@/lib/mongodb";
 import ServiceModel from "@/models/Service";
 
+
+export const metadata = {
+    title: "Home | RecentureSoft",
+    description: "Explore our expert services and solutions at RecentureSoft.",
+    alternates: { canonical: "/" }
+};
 // Always fetch fresh data from MongoDB on every request (like dev mode)
 export const dynamic = "force-dynamic";
 
@@ -58,6 +64,7 @@ export default async function Home() {
   return (
     <>
       <main>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"RecentureSoft","description":"RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.","url":"https://recenturesoft.com"}) }} />
         <Navbar />
         <Hero />
         <HomeSectionsContainer services={services} />

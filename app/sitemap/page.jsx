@@ -12,12 +12,14 @@ export const metadata = {
         url: "https://recenturesoft.com/sitemap",
         siteName: "RecentureSoft",
         type: "website",
-    }
+    },
+    alternates: { canonical: "/sitemap" }
 };
 
 export default function SitemapPage() {
     return (
         <main className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Sitemap | RecentureSoft","description":"Navigate through all pages, services, and resources available on the RecentureSoft platform. Find the information you need quickly and easily.","url":"https://recenturesoft.com/sitemap"}) }} />
             <Navbar />
             <div className="flex-grow">
                 <SitemapClient />

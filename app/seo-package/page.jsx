@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "SEO Packages In India | RecentureSoft",
     description: "Explore our comprehensive SEO packages including Bronze, Silver, Gold, and Platinum. Get custom Website Audit, On-Page Optimization, and Content Marketing.",
+    alternates: { canonical: "/seo-package" }
 };
 
 export default function SeoPackagePage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"SEO Packages In India | RecentureSoft","description":"Explore our comprehensive SEO packages including Bronze, Silver, Gold, and Platinum. Get custom Website Audit, On-Page Optimization, and Content Marketing.","url":"https://recenturesoft.com/seo-package"}) }} />
             <Navbar />
             <PageHero
                 badge="Pricing & Plans"

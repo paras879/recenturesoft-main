@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "Best Amazon Store Management Company In India | RecentureSoft",
     description: "Expert Amazon store management and FBA setup services in India. Improve revenue, product listings, and discoverability with our top-class solutions.",
+    alternates: { canonical: "/amazon-store-management" }
 };
 
 export default function AmazonStorePage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Amazon Store Management Company In India | RecentureSoft","description":"Expert Amazon store management and FBA setup services in India. Improve revenue, product listings, and discoverability with our top-class solutions.","url":"https://recenturesoft.com/amazon-store-management"}) }} />
             <Navbar />
             <PageHero
                 badge="Store Management"

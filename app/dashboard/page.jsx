@@ -6,11 +6,13 @@ import DashboardContent from "@/components/dashboard/DashboardContent";
 export const metadata = {
     title: "Custom Dashboard Development Company | RecentureSoft",
     description: "Build custom, high-performance, data-driven dashboard applications with RecentureSoft. Transform raw data into actionable insights.",
+    alternates: { canonical: "/dashboard" }
 };
 
 export default function DashboardPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Custom Dashboard Development Company | RecentureSoft","description":"Build custom, high-performance, data-driven dashboard applications with RecentureSoft. Transform raw data into actionable insights.","url":"https://recenturesoft.com/dashboard"}) }} />
             <Navbar />
             
             {/* Note: Omitted 'children' since we don't have a specific banner image yet. 

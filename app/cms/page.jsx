@@ -8,11 +8,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "Best CMS Software Development Company In India | RecentureSoft",
     description: "RecentureSoft offers top-tier custom CMS software development services in India to manage digital content and streamline business processes.",
+    alternates: { canonical: "/cms" }
 };
 
 export default function CmsPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best CMS Software Development Company In India | RecentureSoft","description":"RecentureSoft offers top-tier custom CMS software development services in India to manage digital content and streamline business processes.","url":"https://recenturesoft.com/cms"}) }} />
             <Navbar />
             <PageHero
                 badge="CMS Development"

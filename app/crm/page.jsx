@@ -8,11 +8,13 @@ import CrmFaq from "@/components/crm/CrmFaq";
 export const metadata = {
     title: "Best CRM Software Development Company In India | RecentureSoft",
     description: "RecentureSoft is a leading CRM Development Company in India. We build powerful CRM software solutions to enhance customer relationships, marketing, and sales.",
+    alternates: { canonical: "/crm" }
 };
 
 export default function CrmPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best CRM Software Development Company In India | RecentureSoft","description":"RecentureSoft is a leading CRM Development Company in India. We build powerful CRM software solutions to enhance customer relationships, marketing, and sales.","url":"https://recenturesoft.com/crm"}) }} />
             <Navbar />
             <PageHero
                 badge="CRM Development"

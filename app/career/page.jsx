@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata = {
     title: "Careers | RecentureSoft",
     description: "Join the RecentureSoft team. Check out our current job openings and apply to build the future of tech with us.",
+    alternates: { canonical: "/career" }
 };
 
 export default async function CareerPage() {
@@ -32,6 +33,7 @@ export default async function CareerPage() {
 
     return (
         <main className="min-h-screen bg-slate-50 dark:bg-[#020617] selection:bg-cyan-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Careers | RecentureSoft","description":"Join the RecentureSoft team. Check out our current job openings and apply to build the future of tech with us.","url":"https://recenturesoft.com/career"}) }} />
             <Navbar />
             <PageHero 
                 title="Join Our Team" 

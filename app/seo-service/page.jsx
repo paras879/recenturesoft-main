@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "SEO Company In India | RecentureSoft",
     description: "RecentureSoft is a leading SEO company in India providing breakthrough E-commerce SEO solutions, on-page & off-page optimization, and high-quality traffic generation.",
+    alternates: { canonical: "/seo-service" }
 };
 
 export default function SeoPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"SEO Company In India | RecentureSoft","description":"RecentureSoft is a leading SEO company in India providing breakthrough E-commerce SEO solutions, on-page & off-page optimization, and high-quality traffic generation.","url":"https://recenturesoft.com/seo-service"}) }} />
             <Navbar />
             <PageHero
                 badge="Digital Marketing"

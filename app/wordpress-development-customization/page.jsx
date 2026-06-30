@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "WordPress Development & Customization Company In India | RecentureSoft",
     description: "Expert WordPress development and customization services in India. Build responsive, secure, and fully customized WordPress websites with our agile team.",
+    alternates: { canonical: "/wordpress-development-customization" }
 };
 
 export default function WordPressPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"WordPress Development & Customization Company In India | RecentureSoft","description":"Expert WordPress development and customization services in India. Build responsive, secure, and fully customized WordPress websites with our agile team.","url":"https://recenturesoft.com/wordpress-development-customization"}) }} />
             <Navbar />
             <PageHero
                 badge="CMS & Development"

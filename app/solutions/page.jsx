@@ -11,6 +11,7 @@ import Service from "@/models/Service";
 export const metadata = {
     title: "Enterprise Solutions | RecentureSoft",
     description: "Explore our premium enterprise solutions, digital intelligence, and modern technology architecture.",
+    alternates: { canonical: "/solutions" }
 };
 
 export default async function SolutionsPage() {
@@ -27,6 +28,7 @@ export default async function SolutionsPage() {
 
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Enterprise Solutions | RecentureSoft","description":"Explore our premium enterprise solutions, digital intelligence, and modern technology architecture.","url":"https://recenturesoft.com/solutions"}) }} />
             <Navbar />
             
             <PageHero

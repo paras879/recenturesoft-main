@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "Best Web Design Company In India | RecentureSoft",
     description: "RecentureSoft is the leading web design company in India, offering stunning, user-friendly, and AI-powered responsive web designs for your brand.",
+    alternates: { canonical: "/web-design" }
 };
 
 export default function WebDesignPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Web Design Company In India | RecentureSoft","description":"RecentureSoft is the leading web design company in India, offering stunning, user-friendly, and AI-powered responsive web designs for your brand.","url":"https://recenturesoft.com/web-design"}) }} />
             <Navbar />
             <PageHero
                 badge="UI/UX & Design"

@@ -6,11 +6,13 @@ import NodeJsContent from "@/components/node-js/NodeJsContent";
 export const metadata = {
     title: "Node.js Development Services | RecentureSoft",
     description: "Hire expert Node.js developers at RecentureSoft. We build highly scalable, secure, and lightning-fast backend REST APIs and microservices architectures.",
+    alternates: { canonical: "/node-js" }
 };
 
 export default function NodeJsPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-emerald-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Node.js Development Services | RecentureSoft","description":"Hire expert Node.js developers at RecentureSoft. We build highly scalable, secure, and lightning-fast backend REST APIs and microservices architectures.","url":"https://recenturesoft.com/node-js"}) }} />
             <Navbar />
             
             <PageHero

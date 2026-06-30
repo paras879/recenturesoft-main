@@ -11,6 +11,7 @@ export const metadata = {
     title: "Portfolio | Enterprise Projects & Case Studies | RecentureSoft",
     description:
         "Explore RecentureSoft's portfolio of enterprise software, AI solutions, web applications, mobile apps, cloud platforms, and digital transformation success stories.",
+    alternates: { canonical: "/portfolio" }
 };
 
 export const dynamic = "force-dynamic";
@@ -36,6 +37,7 @@ export default async function PortfolioPage() {
 
     return (
         <main className=" relative bg-slate-50 dark:bg-[#020617] min-h-screen overflow-x-hidden antialiased">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Portfolio | Enterprise Projects & Case Studies | RecentureSoft","description":"Explore RecentureSoft","url":"https://recenturesoft.com/portfolio"}) }} />
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] rounded-full" />

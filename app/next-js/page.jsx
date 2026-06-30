@@ -6,11 +6,13 @@ import NextJsContent from "@/components/next-js/NextJsContent";
 export const metadata = {
     title: "Next.js Development Company | Enterprise Next.js Solutions | RecentureSoft",
     description: "Hire top Next.js developers at RecentureSoft. We build lightning-fast, highly scalable, and SEO-optimized enterprise applications using Next.js and React.",
+    alternates: { canonical: "/next-js" }
 };
 
 export default function NextJsPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-slate-900/30 dark:selection:bg-white/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Next.js Development Company | Enterprise Next.js Solutions | RecentureSoft","description":"Hire top Next.js developers at RecentureSoft. We build lightning-fast, highly scalable, and SEO-optimized enterprise applications using Next.js and React.","url":"https://recenturesoft.com/next-js"}) }} />
             <Navbar />
             
             <PageHero

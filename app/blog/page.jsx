@@ -11,6 +11,7 @@ export const metadata = {
     title: "Blog & Insights | Software Engineering, AI & Digital Innovation",
     description:
         "Explore expert insights on software engineering, AI, cloud architecture, UI/UX, digital transformation, and enterprise technology.",
+    alternates: { canonical: "/blog" }
 };
 
 export const dynamic = "force-dynamic";
@@ -28,6 +29,7 @@ export default async function BlogPage() {
 
     return (
         <main className="relative min-h-screen overflow-x-hidden antialiased ">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Blog & Insights | Software Engineering, AI & Digital Innovation","description":"Explore expert insights on software engineering, AI, cloud architecture, UI/UX, digital transformation, and enterprise technology.","url":"https://recenturesoft.com/blog"}) }} />
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] rounded-full" />
                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[150px] rounded-full" />

@@ -26,6 +26,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://recenturesoft.com'),
   title: "RecentureSoft | Enterprise Software Development",
   description: "RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.",
 };

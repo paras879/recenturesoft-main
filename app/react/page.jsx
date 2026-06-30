@@ -6,11 +6,13 @@ import ReactContent from "@/components/react/ReactContent";
 export const metadata = {
     title: "React.js Development Services | RecentureSoft",
     description: "Build fast, scalable, and highly interactive web applications with RecentureSoft's elite React.js development teams.",
+    alternates: { canonical: "/react" }
 };
 
 export default function ReactPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-sky-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React.js Development Services | RecentureSoft","description":"Build fast, scalable, and highly interactive web applications with RecentureSoft","url":"https://recenturesoft.com/react"}) }} />
             <Navbar />
             
             <PageHero

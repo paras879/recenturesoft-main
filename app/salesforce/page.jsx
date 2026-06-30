@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "Best Salesforce Integration Company In India | RecentureSoft",
     description: "RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.",
+    alternates: { canonical: "/salesforce" }
 };
 
 export default function SalesforcePage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Salesforce Integration Company In India | RecentureSoft","description":"RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.","url":"https://recenturesoft.com/salesforce"}) }} />
             <Navbar />
             <PageHero
                 badge="Salesforce Integration"

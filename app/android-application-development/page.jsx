@@ -7,11 +7,13 @@ import PremiumFooter from "@/components/PremiumFooter";
 export const metadata = {
     title: "Android Application Development Company In India | RecentureSoft",
     description: "Scale your business with the best Android application development company in India. We build highly scalable, custom, and secure Android mobile apps.",
+    alternates: { canonical: "/android-application-development" }
 };
 
 export default function AndroidAppsPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Android Application Development Company In India | RecentureSoft","description":"Scale your business with the best Android application development company in India. We build highly scalable, custom, and secure Android mobile apps.","url":"https://recenturesoft.com/android-application-development"}) }} />
             <Navbar />
             <PageHero
                 badge="Mobile Development"
