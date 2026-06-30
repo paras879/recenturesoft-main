@@ -22,23 +22,48 @@ const SITEMAP_CATEGORIES = [
         ]
     },
     {
-        title: "Services",
+        title: "Software & Web Development",
         icon: <Code className="w-5 h-5" />,
         links: [
-            { name: "Software Development", href: "/solutions#software-development" },
-            { name: "Web Platforms", href: "/solutions#web-platforms" },
-            { name: "Mobile Applications", href: "/solutions#mobile-apps" },
-            { name: "Digital Analytics", href: "/solutions#digital-analytics" },
-            { name: "AI Solutions", href: "/solutions#ai-solutions" }
+            { name: "CRM Development", href: "/crm" },
+            { name: "CMS Development", href: "/cms" },
+            { name: "Dashboard Development", href: "/dashboard" },
+            { name: "Salesforce Solutions", href: "/salesforce" },
+            { name: "Next.js Development", href: "/next-js" },
+            { name: "React.js Development", href: "/react" },
+            { name: "Node.js Backend", href: "/node-js" },
+            { name: "Web Design", href: "/web-design" }
         ]
     },
     {
-        title: "Resources",
+        title: "E-Commerce Solutions",
         icon: <Library className="w-5 h-5" />,
         links: [
-            { name: "Blog", href: "/blog" },
-            { name: "News", href: "/news" },
-            { name: "Events", href: "/events" }
+            { name: "Magento Development", href: "/magento-development" },
+            { name: "OpenCart Development", href: "/opencart-development" },
+            { name: "WordPress Customization", href: "/wordpress-development-customization" },
+            { name: "Amazon Store Management", href: "/amazon-store-management" },
+            { name: "eBay Store Management", href: "/ebay-store-management" }
+        ]
+    },
+    {
+        title: "Mobile Applications",
+        icon: <Code className="w-5 h-5" />,
+        links: [
+            { name: "iPhone App Development", href: "/iphone-apps-development" },
+            { name: "iPad App Development", href: "/ipad-app-development" },
+            { name: "Android App Development", href: "/android-application-development" },
+            { name: "React Native Development", href: "/react-native" }
+        ]
+    },
+    {
+        title: "Digital Marketing",
+        icon: <Library className="w-5 h-5" />,
+        links: [
+            { name: "SEO Services", href: "/seo-service" },
+            { name: "SEO Packages", href: "/seo-package" },
+            { name: "Social Networking", href: "/social-networking" },
+            { name: "Content Writing", href: "/content-writing" }
         ]
     },
     {
