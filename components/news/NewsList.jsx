@@ -45,7 +45,6 @@ function NewsImage({ src, alt, priority = false, sizes = "", className = "" }) {
                 alt={alt}
                 fill
                 priority={priority}
-                unoptimized={true}
                 sizes={sizes}
                 className={`${className} transition-opacity duration-300 ease-in-out ${
                     isLoaded ? "opacity-100" : "opacity-0"
