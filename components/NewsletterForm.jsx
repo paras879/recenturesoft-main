@@ -50,6 +50,7 @@ export default function NewsletterForm() {
                 />
                 <button 
                     type="submit" 
+                    aria-label="Subscribe to newsletter"
                     disabled={loading}
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-white p-2 rounded-full hover:bg-cyan-400 transition-colors disabled:opacity-70 flex items-center justify-center"
                 >
