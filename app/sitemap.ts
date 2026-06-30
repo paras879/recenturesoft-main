@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/node-js',
     '/opencart-development',
     '/portfolio',
-    '/privacy_policy',
+    '/privacy-policy',
     '/react',
     '/react-native',
     '/salesforce',

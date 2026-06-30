@@ -70,7 +70,7 @@ const SITEMAP_CATEGORIES = [
         title: "Legal",
         icon: <ShieldCheck className="w-5 h-5" />,
         links: [
-            { name: "Privacy Policy", href: "/privacy_policy" },
+            { name: "Privacy Policy", href: "/privacy-policy" },
             { name: "Terms & Conditions", href: "/terms" }
         ]
     }

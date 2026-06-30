@@ -236,7 +236,7 @@ export default function FutureFooter() {
                     <p className="order-2 md:order-1 font-medium tracking-wide">© 2026 Recenturesoft. All rights reserved.</p>
 
                     <div className="flex justify-center gap-4 md:gap-8 whitespace-nowrap order-1 md:order-2">
-                        <Link href="/privacy_policy" className="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</Link>
+                        <Link href="/privacy-policy" className="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</Link>
                         <Link href="/cookies" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>
                     </div>
