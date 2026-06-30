@@ -290,7 +290,7 @@ export default function Hero() {
             {/* ── Text content (scroll parallax) ── */}
             <motion.div
                 style={{ y: contentY }}
-                className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 flex flex-col min-h-[100svh] pt-32 pb-12 sm:pt-36 sm:pb-16 md:pt-40 md:pb-16 lg:pt-48 lg:pb-20"
+                className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 flex flex-col min-h-[100svh] pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20"
             >
                 <div className="w-full max-w-[92%] lg:w-[55%] flex flex-col flex-1 mt-0">
                     <AnimatePresence mode="wait" initial={false}>
