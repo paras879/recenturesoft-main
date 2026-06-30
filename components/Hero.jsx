@@ -351,16 +351,16 @@ export default function Hero() {
                             {/* Service tags */}
                             <motion.div
                                 variants={slideIn} initial="hidden" animate="visible" exit="exit" custom={4}
-                                className="mt-6 flex flex-wrap gap-3 max-w-md md:gap-3"
+                                className="mt-6 flex flex-wrap gap-3 max-w-md md:gap-3 pb-4"
                             >
                                 {SERVICES.map((item, i) => (
-                                    <motion.span
+                                    <motion.div
                                         key={item}
                                         initial={{ opacity: 0, scale: 0.85 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.7 + i * 0.08 }}
                                         whileHover={{ scale: 1.08 }}
-                                        className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 text-[12px] sm:text-[13px] md:text-sm font-[500] cursor-pointer backdrop-blur-sm transition-all duration-300"
+                                        className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 text-[12px] sm:text-[13px] md:text-sm font-[500] cursor-pointer backdrop-blur-sm transition-all duration-300 inline-flex items-center justify-center"
                                         onMouseEnter={(e) => {
                                             e.currentTarget.style.borderColor = slide.accent + "90";
                                             e.currentTarget.style.color = slide.accent;
@@ -373,7 +373,7 @@ export default function Hero() {
                                         }}
                                     >
                                         {item}
-                                    </motion.span>
+                                    </motion.div>
                                 ))}
                             </motion.div>
 
