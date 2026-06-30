@@ -47,7 +47,7 @@ export default function NodeJsContent() {
         <CinematicServiceTemplate
             title="Power Your Backend with"
             subtitle="Node.js"
-            themeColor="emerald"
+            themeColor="sky"
             introParagraphs={[
                 "Node.js has fundamentally transformed backend development. By bringing JavaScript to the server, it enables developers to build highly scalable, data-intensive, and real-time applications that perform brilliantly under heavy loads.",
                 "At RecentureSoft, our backend engineering teams specialize in architecting robust Node.js solutions. Whether it is a massive microservices architecture, a real-time chat application using WebSockets, or a high-throughput API gateway, we write clean, secure, and highly optimized Node.js code that powers enterprise businesses."

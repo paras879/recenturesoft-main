@@ -47,7 +47,7 @@ export default function NextJsContent() {
         <CinematicServiceTemplate
             title="Build the Future of the Web with"
             subtitle="Next.js"
-            themeColor="slate"
+            themeColor="sky"
             introParagraphs={[
                 "Next.js has revolutionized web development by combining the interactive developer experience of React with the performance benefits of traditional server-rendered applications. At RecentureSoft, we leverage Next.js to build enterprise-grade applications that are insanely fast, highly scalable, and loved by search engines.",
                 "Whether you are building a massive e-commerce storefront, a complex SaaS dashboard, or a content-heavy corporate portal, our Next.js experts utilize the latest App Router, React Server Components, and Edge Runtime features to deliver unparalleled digital experiences."
