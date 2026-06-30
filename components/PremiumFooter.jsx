@@ -33,7 +33,7 @@ export default function PremiumFooter() {
                     {/* Brand Column */}
                     <div className="col-span-2 lg:col-span-4 order-3 md:order-3 lg:order-1">
                         <Link href="/" className="inline-block mb-6">
-                            <Image src="/Logo.png" alt="RecentureSoft" width={280} height={112} className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105 drop-shadow-sm" />
+                            <Image src="/Logo.png" alt="RecentureSoft" width={200} height={80} className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105 drop-shadow-sm" />
                         </Link>
                         <p className="text-slate-700 dark:text-gray-300 font-medium leading-relaxed mb-8 w-full">
                             Engineering extraordinary digital experiences. We partner with visionaries to build high-performance software, web, and mobile solutions.
