@@ -80,7 +80,6 @@ export default function ArticleGrid({ articles = [] }) {
                                             src={article.image}
                                             alt={article.title || 'Article Image'}
                                             fill
-                                            unoptimized={true}
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         />

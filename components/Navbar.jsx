@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight } from "lucide-react";
@@ -118,7 +119,7 @@ export default function Navbar() {
                         className="flex items-center gap-2 group"
                     >
                         <span className="text-[clamp(1rem,4vw,1.25rem)] font-bold tracking-wider text-slate-800 dark:text-white transition-colors duration-300 group-hover:text-primary dark:group-hover:text-cyan-400 flex-shrink-0">
-                            <img src="/Logo.png" alt="RecentureSoft Logo" className="h-12 md:h-14 w-auto object-contain drop-shadow-sm" />
+                            <Image src="/Logo.png" alt="RecentureSoft Logo" width={280} height={112} priority className="h-12 md:h-14 w-auto object-contain drop-shadow-sm" />
                         </span>
                     </Link>
 

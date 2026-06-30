@@ -42,7 +42,7 @@ export default function FeaturedArticle({ article }) {
                                 alt={article.title || 'Featured Article'} 
                                 fill
                                 priority
-                                unoptimized={true}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                                 className="object-cover transform group-hover:scale-105 transition-transform duration-1000" 
                             />
                         </div>
