@@ -31,7 +31,7 @@ export default function ProjectGallery({ initialProjects = [] }) {
                             {initialProjects.map((project, index) => (
                                 <motion.div
                                     layout
-                                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                    initial={index <= 2 ? false : { opacity: 0, scale: 0.95, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
                                     transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
@@ -58,6 +58,7 @@ export default function ProjectGallery({ initialProjects = [] }) {
                                                 width={1200}
                                                 height={800}
                                                 priority={index <= 2}
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700 ease-in-out border-b border-slate-100 dark:border-slate-800"
                                             />
                                         ) : (
