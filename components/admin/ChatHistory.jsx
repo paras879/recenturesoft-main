@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Search, MessageSquare, Clock, User, Bot, LayoutList, Flame, Snowflake, Trash2 } from "lucide-react";
+import { Search, MessageSquare, Clock, User, Bot, LayoutList, Flame, Snowflake, Trash2, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function ChatHistory({ chats }) {
@@ -158,14 +158,23 @@ export default function ChatHistory({ chats }) {
                                     <span>{selectedChat.totalMessages} Messages</span>
                                 </p>
                             </div>
-                            <button
-                                onClick={(e) => handleDeleteChat(selectedChat._id, e)}
-                                disabled={isDeleting}
-                                className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 rounded-lg transition-colors border border-red-100 dark:border-red-500/20"
-                            >
-                                <Trash2 className="w-4 h-4" />
-                                <span>Delete Session</span>
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={() => window.open(`/api/admin/chats/${selectedChat._id}/summary`, '_blank')}
+                                    className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-500/10 hover:bg-cyan-100 dark:hover:bg-cyan-500/20 rounded-lg transition-colors border border-cyan-100 dark:border-cyan-500/20"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    <span>Download</span>
+                                </button>
+                                <button
+                                    onClick={(e) => handleDeleteChat(selectedChat._id, e)}
+                                    disabled={isDeleting}
+                                    className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 rounded-lg transition-colors border border-red-100 dark:border-red-500/20"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                    <span>Delete Session</span>
+                                </button>
+                            </div>
                         </div>
 
                         {/* Messages Area */}

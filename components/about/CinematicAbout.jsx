@@ -14,7 +14,16 @@ function AboutHero() {
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000')] bg-cover bg-center opacity-5 mix-blend-screen" />
+                <div className="absolute inset-0 opacity-5 mix-blend-screen">
+                    <Image
+                        src="https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000"
+                        alt="Atmosphere Background"
+                        fill
+                        priority
+                        className="object-cover object-center"
+                        sizes="100vw"
+                    />
+                </div>
             </div>
 
             <div className="max-w-[1400px] w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
@@ -66,6 +75,8 @@ function CompanyStory() {
                         src={aboutImages.story}
                         alt="Company Story"
                         fill
+                        sizes="(max-width: 1280px) 100vw, 50vw"
+                        priority
                         className="object-cover object-[center_20%]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-50 dark:from-[#020617] via-transparent to-transparent opacity-80" />
