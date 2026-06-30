@@ -83,18 +83,22 @@ files.forEach(file => {
     }
 
     // 2. INJECT SCHEMA (JSON-LD)
-    if (!content.includes('application/ld+json')) {
-        const schemaObj = {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": title,
-            "description": desc,
-            "url": `https://recenturesoft.com${route === '/' ? '' : route}`
-        };
-        const schemaString = JSON.stringify(schemaObj);
-        
-        const schemaScript = `\n            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(${schemaString}) }} />`;
-        
+    const schemaObj = {
+        "@context": "https://schema.org",
+        "@type": "Organization", // Organization triggers Google Rich Results
+        "name": "RecentureSoft",
+        "url": `https://recenturesoft.com${route === '/' ? '' : route}`,
+        "logo": "https://recenturesoft.com/icon.png",
+        "description": desc
+    };
+    const schemaString = JSON.stringify(schemaObj);
+    const schemaScript = `\n            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(${schemaString}) }} />`;
+
+    // Replace existing schema or inject if missing
+    if (content.includes('application/ld+json')) {
+        content = content.replace(/<script type="application\/ld\+json"[^>]*><\/script>/i, schemaScript.trim());
+        content = content.replace(/<script type="application\/ld\+json"[^\/]*\/>/i, schemaScript.trim());
+    } else {
         // Find <main> and inject after it
         const mainMatch = content.match(/(<main[^>]*>)/i);
         if (mainMatch) {
