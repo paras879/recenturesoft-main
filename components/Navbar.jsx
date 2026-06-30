@@ -27,7 +27,7 @@ const solutionsMenu = [
         bg: "bg-blue-500/10",
         items: [
             { name: "CRM", href: "/crm" },
-            { name: "CRS", href: "/crs" },
+            { name: "CMS", href: "/cms" },
             { name: "Salesforce", href: "/salesforce" },
             { name: "Dashboard", href: "/dashboard" },
         ]
