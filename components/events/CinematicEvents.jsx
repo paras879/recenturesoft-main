@@ -67,14 +67,18 @@ function FeaturedEvent({ event, onViewGallery }) {
                 {/* Background Image */}
                 <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]">
                     <Image 
-                        src={event.heroImage} 
+                        src={
+                            event.heroImage.includes('res.cloudinary.com') 
+                                ? event.heroImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low,w_800/') 
+                                : event.heroImage
+                        }
+                        unoptimized={true}
                         alt={event.title} 
                         fill 
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" 
                         className="object-cover" 
                         priority
                         fetchPriority="high"
-                        quality={50}
                     />
                     {/* Dark Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/95 via-[#020617]/40 to-transparent" />
@@ -130,7 +134,18 @@ function BentoCard({ src, colSpan, rowSpan, title, date, photoCount, onClick }) 
             className={`relative rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/5 bg-white dark:bg-white/5 shadow-md hover:shadow-2xl hover:border-cyan-500/20 dark:hover:border-cyan-400/20 ${colSpan} ${rowSpan} hover:-translate-y-2.5 hover:z-10 transition-all duration-300`}
         >
             <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]">
-                <Image src={src} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={50} className="object-cover" />
+                <Image 
+                    src={
+                        src.includes('res.cloudinary.com') 
+                            ? src.replace('/image/upload/', '/image/upload/f_auto,q_auto:low,w_600/') 
+                            : src
+                    } 
+                    unoptimized={true}
+                    alt={title} 
+                    fill 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                    className="object-cover" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
