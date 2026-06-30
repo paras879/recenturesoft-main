@@ -47,7 +47,7 @@ export default function ReactNativeContent() {
         <CinematicServiceTemplate
             title="Dominate Both App Stores with"
             subtitle="React Native"
-            themeColor="indigo"
+            themeColor="sky"
             introParagraphs={[
                 "Building separate mobile applications for iOS and Android requires massive engineering resources. React Native solves this by allowing developers to write truly native mobile applications using React and JavaScript—cutting development costs in half.",
                 "RecentureSoft houses top-tier mobile engineering teams that specialize in React Native. We build robust, high-performance cross-platform apps for startups and enterprises alike. From complex state management to integrating native C++ modules, we ensure your app performs flawlessly on every device."

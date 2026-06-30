@@ -70,6 +70,9 @@ export default function CinematicServiceTemplate({
             {/* Ambient Background Glows */}
             <div className={`absolute top-0 right-0 w-[500px] h-[500px] ${t.bgGlow} blur-[120px] rounded-full pointer-events-none opacity-50 dark:opacity-30`} />
             <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] ${t.bgGlow} blur-[100px] rounded-full pointer-events-none opacity-40 dark:opacity-20`} />
+            
+            {/* Added subtle light blue central glow */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-sky-400/15 dark:bg-sky-500/10 blur-[120px] rounded-full pointer-events-none" />
 
             {/* 1. Glassmorphic Overview Section */}
             <motion.div
