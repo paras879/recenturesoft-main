@@ -147,7 +147,7 @@ export default function FutureFooter() {
                             {[
                                 { name: "Facebook", icon: FaFacebookF, bg: "bg-[#4267B2]", url: "https://facebook.com/recenturesoft" },
                                 { name: "Twitter", icon: FaTwitter, bg: "bg-[#1DA1F2]", url: "https://x.com/recenturesoft" },
-                                { name: "LinkedIn", icon: FaLinkedinIn, bg: "bg-[#0A66C2]", url: "https://linkedin.com/company/recenturesoft" },
+                                { name: "LinkedIn", icon: FaLinkedinIn, bg: "bg-[#0A66C2]", url: "https://www.linkedin.com/company/recenturesoft/posts/?feedView=all" },
                                 { name: "Pinterest", icon: FaPinterestP, bg: "bg-[#E60023]", url: "https://pinterest.com/recenturesoft" },
                                 { name: "Instagram", icon: FaInstagram, bg: "bg-gradient-to-r from-pink-500 to-fuchsia-500", url: "https://instagram.com/recenturesoft" },
                                 { name: "YouTube", icon: FaYoutube, bg: "bg-[#FF0000]", url: "https://youtube.com/@recenturesoft" }
