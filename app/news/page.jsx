@@ -9,7 +9,27 @@ export const metadata = {
     description: "Stay informed with the latest breaking global technology news, tech industry updates, developer trends, and digital innovations.",
 };
 
-export default function NewsPage() {
+async function getInitialNews() {
+    try {
+        const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || vercelUrl || 'http://localhost:3000';
+        const res = await fetch(`${baseUrl}/api/news`, {
+            next: { revalidate: 3600 }
+        });
+        if (!res.ok) return { results: [], nextPage: null };
+        const data = await res.json();
+        return {
+            results: data.results || [],
+            nextPage: data.nextPage || null
+        };
+    } catch (e) {
+        return { results: [], nextPage: null };
+    }
+}
+
+export default async function NewsPage() {
+    const initialData = await getInitialNews();
+
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
             <Navbar />
@@ -21,7 +41,7 @@ export default function NewsPage() {
             />
 
             <div className="relative -mt-6 md:-mt-4">
-                <NewsList />
+                <NewsList initialData={initialData.results} initialNextPage={initialData.nextPage} />
             </div>
 
             <div className="relative -mt-6 md:-mt-6">

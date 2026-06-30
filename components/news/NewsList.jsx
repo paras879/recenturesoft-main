@@ -57,10 +57,10 @@ function NewsImage({ src, alt, priority = false, sizes = "", className = "" }) {
     );
 }
 
-export default function NewsList() {
-    const [newsItems, setNewsItems] = useState([]);
-    const [nextPageToken, setNextPageToken] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+export default function NewsList({ initialData = [], initialNextPage = null }) {
+    const [newsItems, setNewsItems] = useState(initialData);
+    const [nextPageToken, setNextPageToken] = useState(initialNextPage);
+    const [isLoading, setIsLoading] = useState(initialData.length === 0);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
     const [error, setError] = useState(null);
 
@@ -120,10 +120,17 @@ export default function NewsList() {
         }
     }, [activeCategory, debouncedSearch]);
 
+    // Flag to prevent fetching on mount if we have initial data
+    const [isInitialRender, setIsInitialRender] = useState(true);
+
     // Trigger fetch on query or category changes
     useEffect(() => {
+        if (isInitialRender && initialData.length > 0 && activeCategory === "all" && debouncedSearch === "") {
+            setIsInitialRender(false);
+            return;
+        }
         fetchNews("", false);
-    }, [activeCategory, debouncedSearch, fetchNews]);
+    }, [activeCategory, debouncedSearch, fetchNews, isInitialRender, initialData]);
 
     const handleLoadMore = () => {
         if (nextPageToken) {
