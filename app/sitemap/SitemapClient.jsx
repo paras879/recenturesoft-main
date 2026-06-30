@@ -71,7 +71,8 @@ const SITEMAP_CATEGORIES = [
         icon: <ShieldCheck className="w-5 h-5" />,
         links: [
             { name: "Privacy Policy", href: "/privacy-policy" },
-            { name: "Terms & Conditions", href: "/terms" }
+            { name: "Terms & Conditions", href: "/terms" },
+            { name: "Cookies", href: "/cookies" }
         ]
     }
 ];
