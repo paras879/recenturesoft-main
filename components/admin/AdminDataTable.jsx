@@ -62,6 +62,27 @@ export default function AdminDataTable({ title, data, type }) {
         }
     };
 
+    const handleAddCategory = async () => {
+        const name = window.prompt("Enter new category name:");
+        if (!name) return;
+        try {
+            const res = await fetch('/api/admin/blog-categories', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                alert(`Category "${name}" added successfully!`);
+                router.refresh();
+            } else {
+                alert(data.error || "Failed to add category");
+            }
+        } catch (e) {
+            alert("Error adding category");
+        }
+    };
+
     const toggleSelectAll = (e) => {
         if (e.target.checked) {
             setSelectedIds(paginatedData.map(item => item._id));
@@ -240,6 +261,11 @@ export default function AdminDataTable({ title, data, type }) {
                     <button onClick={handleExportCSV} className="p-2 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300" title="Export CSV">
                         <Download className="w-5 h-5" />
                     </button>
+                    {type === "blog" && (
+                        <button onClick={handleAddCategory} className="px-4 py-2 bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/20 rounded-xl hover:bg-cyan-100 dark:hover:bg-cyan-500/20 text-sm font-semibold transition-colors flex items-center gap-1">
+                            + Category
+                        </button>
+                    )}
                 </div>
             </div>
 

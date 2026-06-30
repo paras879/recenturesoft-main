@@ -1,6 +1,7 @@
 import CreateBlogForm from "@/components/admin/CreateBlogForm";
 import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
+import BlogCategory from "@/models/BlogCategory";
 import { notFound } from "next/navigation";
 
 export const metadata = {
@@ -33,5 +34,8 @@ export default async function EditBlogPage({ params }) {
         seoDescription: blog.seoDescription || ""
     };
 
-    return <CreateBlogForm initialData={initialData} />;
+    const categories = await BlogCategory.find().sort({ createdAt: 1 }).lean();
+    const catNames = categories.map(c => c.name);
+
+    return <CreateBlogForm initialData={initialData} categories={catNames} />;
 }

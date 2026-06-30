@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-const categories = ["All", "Design", "Backend", "Mobile", "Frontend", "Marketing"];
-
-export default function ArticleGrid({ articles = [] }) {
+export default function ArticleGrid({ articles = [], categories = [] }) {
+    const displayCategories = ["All", ...(categories.length > 0 ? categories : ["Design", "Backend", "Mobile", "Frontend", "Marketing"])];
     const [activeFilter, setActiveFilter] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -33,7 +32,7 @@ export default function ArticleGrid({ articles = [] }) {
                 {/* Filters and Search */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 md:mb-12">
                     <div className="flex flex-wrap gap-2">
-                        {categories.map(cat => (
+                        {displayCategories.map(cat => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveFilter(cat)}

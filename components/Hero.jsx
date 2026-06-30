@@ -303,7 +303,7 @@ export default function Hero() {
                                 animate={isDesktop ? "visible" : { opacity: 1, y: 0 }}
                                 exit="exit"
                                 custom={1}
-                                className="text-[2.2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[5rem] font-[500] tracking-[-0.05em] leading-[0.9] text-foreground"
+                                className="text-[2.2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[5rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
                             >
                                 {slide.heading1}
                                 <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>

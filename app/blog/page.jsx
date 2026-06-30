@@ -6,6 +6,7 @@ import ArticleGrid from "@/components/blog/ArticleGrid";
 import CTASection from "@/components/CTASection";
 import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
+import BlogCategory from "@/models/BlogCategory";
 
 export const metadata = {
     title: "Blog & Insights | Software Engineering, AI & Digital Innovation",
@@ -22,6 +23,10 @@ export default async function BlogPage() {
 
     const featuredArticle = blogs.find(b => b.featured) || blogs[0] || null;
     const gridArticles = featuredArticle ? blogs.filter(b => b.slug !== featuredArticle.slug) : blogs;
+
+    // Fetch dynamic categories
+    const categories = await BlogCategory.find().sort({ createdAt: 1 }).lean();
+    const catNames = categories.map(c => c.name);
 
     // Serialize database documents safely to pass as props
     const serializedFeatured = featuredArticle ? JSON.parse(JSON.stringify(featuredArticle)) : null;
@@ -44,7 +49,7 @@ export default async function BlogPage() {
             />
 
             <FeaturedArticle article={serializedFeatured} />
-            <ArticleGrid articles={serializedGrid} />
+            <ArticleGrid articles={serializedGrid} categories={catNames} />
 
             <CTASection
                 title="Never Miss an Update"
