@@ -73,6 +73,8 @@ function FeaturedEvent({ event, onViewGallery }) {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" 
                         className="object-cover" 
                         priority
+                        fetchPriority="high"
+                        quality={60}
                     />
                     {/* Dark Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/95 via-[#020617]/40 to-transparent" />
@@ -128,7 +130,7 @@ function BentoCard({ src, colSpan, rowSpan, title, date, photoCount, onClick }) 
             className={`relative rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/5 bg-white dark:bg-white/5 shadow-md hover:shadow-2xl hover:border-cyan-500/20 dark:hover:border-cyan-400/20 ${colSpan} ${rowSpan} hover:-translate-y-2.5 hover:z-10 transition-all duration-300`}
         >
             <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]">
-                <Image src={src} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
+                <Image src={src} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={60} className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
@@ -299,7 +301,7 @@ function VideoReelPreview() {
             <div
                 className="relative w-full max-w-6xl h-[50vh] md:h-[70vh] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none"
             >
-                <Image src={IMAGES.videoThumb} alt="Culture Reel" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" className="object-cover transition-transform duration-1000 group-hover:scale-105" />
+                <Image src={IMAGES.videoThumb} alt="Culture Reel" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" quality={60} className="object-cover transition-transform duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors duration-500" />
 
                 {/* Play Button */}
@@ -325,7 +327,7 @@ function InfiniteEventMarquee() {
             <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-[200%]">
                 {[...IMAGES.marquee, ...IMAGES.marquee].map((src, i) => (
                     <div key={i} className="relative w-[300px] md:w-[400px] h-[250px] rounded-2xl overflow-hidden flex-shrink-0 border border-white/10">
-                        <Image src={src} alt="Event" fill sizes="400px" className="object-cover" />
+                        <Image src={src} alt="Event" fill sizes="400px" quality={60} className="object-cover" />
                     </div>
                 ))}
             </div>
