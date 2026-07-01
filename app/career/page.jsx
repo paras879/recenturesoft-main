@@ -1,6 +1,6 @@
 import CareerContent from "@/components/career/CareerContent";
 import Navbar from "@/components/Navbar";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import { connectDB } from "@/lib/mongodb";
 import JobOpening from "@/models/JobOpening";
@@ -40,7 +40,7 @@ export default async function CareerPage() {
                 subtitle="Build the future of digital engineering with RecentureSoft. We are always looking for passionate minds."
             />
             <CareerContent jobs={jobs} />
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

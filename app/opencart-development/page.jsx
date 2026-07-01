@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import OpenCartContent from "@/components/opencart-development/OpenCartContent";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 
 export const metadata = {
     title: "Best OpenCart Development Company In India | RecentureSoft",
@@ -31,7 +31,7 @@ export default function OpenCartPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

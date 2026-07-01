@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import IphoneAppsContent from "@/components/iphone-apps-development/IphoneAppsContent";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 
 export const metadata = {
     title: "iPhone App Development Company In India | RecentureSoft",
@@ -31,7 +31,7 @@ export default function IphoneAppsPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

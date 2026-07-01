@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Navbar from "@/components/Navbar"
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import remarkGfm from "remark-gfm";
 import Blog from "@/models/Blog";
 import { connectDB } from "@/lib/mongodb";
@@ -233,7 +233,7 @@ dark:prose-th:bg-slate-800
                     </div>
                 </div>
             </main>
-            <PremiumFooter />
+            <FutureFooter />
         </>
     );
 }

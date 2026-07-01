@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import DashboardContent from "@/components/dashboard/DashboardContent";
 
@@ -31,7 +31,7 @@ export default function DashboardPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

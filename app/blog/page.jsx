@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import FeaturedArticle from "@/components/blog/FeaturedArticle";
 import ArticleGrid from "@/components/blog/ArticleGrid";
 import CTASection from "@/components/CTASection";
@@ -57,7 +57,7 @@ export default async function BlogPage() {
                 primaryBtnText="Subscribe Now"
                 secondaryBtnText="Follow on Twitter"
             />
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

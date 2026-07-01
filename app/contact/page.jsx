@@ -1,6 +1,6 @@
 import ContactHero from "@/components/contact/ContactHero";
 import InteractiveContactForm from "@/components/contact/InteractiveContactForm";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import Navbar from "@/components/Navbar";
 
 
@@ -19,7 +19,7 @@ export default function ContactPage() {
 
             <InteractiveContactForm />
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

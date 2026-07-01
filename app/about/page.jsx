@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import CinematicAbout from "@/components/about/CinematicAbout";
 
 export const metadata = {
@@ -19,7 +19,7 @@ export default function AboutPage() {
             </div>
             <Navbar />
             <CinematicAbout />
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

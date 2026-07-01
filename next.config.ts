@@ -3,6 +3,7 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   images: {
+    qualities: [50, 75],
     remotePatterns: [
       {
         protocol: "https",

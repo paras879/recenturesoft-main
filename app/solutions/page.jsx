@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import EnterpriseServices from "@/components/Service";
 import TechArchitecture from "@/components/solutions/TechArchitecture";
 import SolutionsProcess from "@/components/solutions/SolutionsProcess";
@@ -51,7 +51,7 @@ export default async function SolutionsPage() {
                 secondaryBtnText="Schedule Consultation"
             />
             
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

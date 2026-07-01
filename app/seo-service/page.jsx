@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import SeoContent from "@/components/seo-service/SeoContent";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 
 export const metadata = {
     title: "SEO Company In India | RecentureSoft",
@@ -31,7 +31,7 @@ export default function SeoPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

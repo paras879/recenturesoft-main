@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import CinematicEvents from "@/components/events/CinematicEvents";
 import { connectDB } from "@/lib/mongodb";
 import Event from "@/models/Event";
@@ -59,7 +59,7 @@ export default async function EventsPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Events & Culture | RecentureSoft","description":"Experience the passion, innovation, and global collaboration that drives our engineering teams.","url":"https://recenturesoft.com/events"}) }} />
             <Navbar />
             <CinematicEvents events={serializedEvents} teamMembers={serializedTeam} />
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

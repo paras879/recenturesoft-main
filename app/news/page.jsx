@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import NewsList from "@/components/news/NewsList";
 import CTASection from "@/components/CTASection";
 
@@ -54,7 +54,7 @@ export default async function NewsPage() {
                     secondaryBtnText="Download Press Kit"
                 />
             </div>
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

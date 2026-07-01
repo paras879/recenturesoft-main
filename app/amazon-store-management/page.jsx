@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import AmazonStoreContent from "@/components/amazon-store-management/AmazonStoreContent";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 
 export const metadata = {
     title: "Best Amazon Store Management Company In India | RecentureSoft",
@@ -31,7 +31,7 @@ export default function AmazonStorePage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

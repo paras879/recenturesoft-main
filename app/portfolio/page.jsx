@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import ProjectGallery from "@/components/portfolio/ProjectGallery";
 import Transformations from "@/components/portfolio/Transformations";
 import CTASection from "@/components/CTASection";
@@ -59,7 +59,7 @@ export default async function PortfolioPage() {
                 primaryBtnText="Start Your Project"
                 secondaryBtnText="Explore Case Studies"
             />
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

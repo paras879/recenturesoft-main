@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import CmsContent from "@/components/cms/CmsContent";
 import CmsFaq from "@/components/cms/CmsFaq";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 
 export const metadata = {
     title: "Best CMS Software Development Company In India | RecentureSoft",
@@ -33,7 +33,7 @@ export default function CmsPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

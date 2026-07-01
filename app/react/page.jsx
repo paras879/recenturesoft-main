@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import ReactContent from "@/components/react/ReactContent";
 
@@ -29,7 +29,7 @@ export default function ReactPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }

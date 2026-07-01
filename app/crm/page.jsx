@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PremiumFooter from "@/components/PremiumFooter";
+import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import CrmContent from "@/components/crm/CrmContent";
@@ -34,7 +34,7 @@ export default function CrmPage() {
                 </div>
             </section>
 
-            <PremiumFooter />
+            <FutureFooter />
         </main>
     );
 }
