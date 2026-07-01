@@ -42,10 +42,14 @@ export async function POST(req) {
             const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
             const recaptchaData = await recaptchaRes.json();
 
-            // Typically, score >= 0.5 is considered human.
-            if (!recaptchaData.success || recaptchaData.score < 0.5) {
+            // v2 check just needs success === true
+            if (!recaptchaData.success) {
                 console.warn("reCAPTCHA validation failed:", recaptchaData);
-                return NextResponse.json({ success: false, message: "Security verification failed. Our systems detected suspicious activity." }, { status: 400 });
+                return NextResponse.json({ 
+                    success: false, 
+                    message: "Security verification failed. Please check the 'I am not a robot' box.",
+                    debugData: recaptchaData 
+                }, { status: 400 });
             }
         }
 

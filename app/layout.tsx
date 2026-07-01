@@ -7,7 +7,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import RoutePreloader from "@/components/RoutePreloader";
 import { ProjectModalProvider } from "@/components/providers/ProjectModalProvider";
 import { MeetingModalProvider } from "@/components/providers/MeetingModalProvider";
-import RecaptchaWrapper from "@/components/RecaptchaWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +43,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <RecaptchaWrapper>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <ProjectModalProvider>
               <MeetingModalProvider>
@@ -54,7 +52,6 @@ export default function RootLayout({
               </MeetingModalProvider>
             </ProjectModalProvider>
           </ThemeProvider>
-        </RecaptchaWrapper>
       </body>
     </html>
   );

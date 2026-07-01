@@ -3,16 +3,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, Phone, MessageSquare, Send, CheckCircle2 } from "lucide-react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function SimpleContactForm() {
     const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
     const [error, setError] = useState(null);
     const [focusedField, setFocusedField] = useState(null);
-    const { executeRecaptcha } = useGoogleReCaptcha();
+    const [recaptchaToken, setRecaptchaToken] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (!recaptchaToken) {
+            setError("Please complete the reCAPTCHA verification.");
+            return;
+        }
+
         setFormStatus("submitting");
         setError(null);
 
@@ -27,13 +33,6 @@ export default function SimpleContactForm() {
         const subject = `Recenture Inquiry from ${name}`;
 
         try {
-            let recaptchaToken = "";
-            if (executeRecaptcha) {
-                recaptchaToken = await executeRecaptcha("contact_form_submit");
-            } else {
-                console.warn("Execute recaptcha not available yet");
-            }
-
             const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: {
@@ -51,7 +50,11 @@ export default function SimpleContactForm() {
                     setFormStatus("idle");
                 }, 4000);
             } else {
-                setError(data.message || "Failed to send message. Please try again.");
+                let errorMsg = data.message || "Failed to send message. Please try again.";
+                if (data.debugData) {
+                    errorMsg += " Debug: " + JSON.stringify(data.debugData);
+                }
+                setError(errorMsg);
                 setFormStatus("idle");
             }
         } catch (err) {
@@ -173,12 +176,20 @@ export default function SimpleContactForm() {
                         </motion.div>
                     )}
 
+                    <div className="flex justify-center my-4">
+                        <ReCAPTCHA
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
+                            onChange={(token) => setRecaptchaToken(token)}
+                            theme="light"
+                        />
+                    </div>
+
                     <motion.button
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: recaptchaToken ? 1.01 : 1 }}
+                        whileTap={{ scale: recaptchaToken ? 0.98 : 1 }}
                         type="submit"
-                        disabled={formStatus === "submitting"}
-                        className="group w-full relative overflow-hidden bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold py-4 rounded-2xl shadow-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        disabled={formStatus === "submitting" || !recaptchaToken}
+                        className="group w-full relative overflow-hidden bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold py-4 rounded-2xl shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
