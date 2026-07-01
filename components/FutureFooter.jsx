@@ -126,6 +126,14 @@ export default async function FutureFooter() {
     let phone = "+91 777 000 3288";
     let address = "A-125, Sector-63, Noida, UP 201301";
     let inactivePaths = [];
+    let socialLinks = {
+        facebook: "https://facebook.com/recenturesoft",
+        twitter: "https://x.com/recenturesoft",
+        linkedin: "https://www.linkedin.com/company/recenturesoft/posts/?feedView=all",
+        pinterest: "https://pinterest.com/recenturesoft",
+        instagram: "https://instagram.com/recenturesoft",
+        youtube: "https://youtube.com/@recenturesoft"
+    };
 
     try {
         await connectDB();
@@ -135,6 +143,9 @@ export default async function FutureFooter() {
             if (settings.email) email = settings.email;
             if (settings.phone) phone = settings.phone;
             if (settings.address) address = settings.address;
+            if (settings.socialLinks) {
+                socialLinks = { ...socialLinks, ...settings.socialLinks };
+            }
         }
 
         const pages = await WebPage.find({}, { path: 1, status: 1 }).lean();
@@ -181,13 +192,14 @@ export default async function FutureFooter() {
                             className="flex justify-center sm:justify-start gap-2 overflow-x-auto"
                         >
                             {[
-                                { name: "Facebook", icon: FaFacebookF, bg: "bg-[#4267B2]", url: "https://facebook.com/recenturesoft" },
-                                { name: "Twitter", icon: FaTwitter, bg: "bg-[#1DA1F2]", url: "https://x.com/recenturesoft" },
-                                { name: "LinkedIn", icon: FaLinkedinIn, bg: "bg-[#0A66C2]", url: "https://www.linkedin.com/company/recenturesoft/posts/?feedView=all" },
-                                { name: "Pinterest", icon: FaPinterestP, bg: "bg-[#E60023]", url: "https://pinterest.com/recenturesoft" },
-                                { name: "Instagram", icon: FaInstagram, bg: "bg-gradient-to-r from-pink-500 to-fuchsia-500", url: "https://instagram.com/recenturesoft" },
-                                { name: "YouTube", icon: FaYoutube, bg: "bg-[#FF0000]", url: "https://youtube.com/@recenturesoft" }
+                                { name: "Facebook", icon: FaFacebookF, bg: "bg-[#4267B2]", url: socialLinks.facebook },
+                                { name: "Twitter", icon: FaTwitter, bg: "bg-[#1DA1F2]", url: socialLinks.twitter },
+                                { name: "LinkedIn", icon: FaLinkedinIn, bg: "bg-[#0A66C2]", url: socialLinks.linkedin },
+                                { name: "Pinterest", icon: FaPinterestP, bg: "bg-[#E60023]", url: socialLinks.pinterest },
+                                { name: "Instagram", icon: FaInstagram, bg: "bg-gradient-to-r from-pink-500 to-fuchsia-500", url: socialLinks.instagram },
+                                { name: "YouTube", icon: FaYoutube, bg: "bg-[#FF0000]", url: socialLinks.youtube }
                             ].map(({ name, icon: Icon, bg, url }) => (
+                                url ? (
                                 <a
                                     key={name}
                                     href={url}
@@ -198,6 +210,7 @@ export default async function FutureFooter() {
                                 >
                                     <Icon size={18} />
                                 </a>
+                                ) : null
                             ))}
                         </div>
                     </div>
