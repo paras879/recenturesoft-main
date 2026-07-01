@@ -458,7 +458,7 @@ function LiveCounter() {
 /* ═══════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
-export default function StatsDashboard() {
+export default function StatsDashboard({ cmsData = {} }) {
     const containerRef = useRef(null);
     const chartRef = useRef(null);
 
@@ -481,12 +481,12 @@ export default function StatsDashboard() {
             {/* ═══ Section header ═══ */}
             <div className="relative z-10 text-center max-w-3xl mx-auto px-6 mb-8 md:mb-12">
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-3 md:mb-4">
-                    Business Intelligence{" "}
+                    {cmsData.stats?.heading1 || "Business Intelligence"}{" "}
                     <span
                         className="bg-clip-text text-transparent font-semibold"
                         style={{ backgroundImage: C.gradient }}
                     >
-                        Command Center
+                        {cmsData.stats?.headingAccent || "Command Center"}
                     </span>
                 </h2>
                 <p className="text-slate-600 dark:text-gray-500 text-sm sm:text-base leading-relaxed">
@@ -499,13 +499,13 @@ export default function StatsDashboard() {
             <div
                 className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             >
-                {counters.map((c) => (
+                {counters.map((c, i) => (
                     <div key={c.id}>
                         <Counter3D
                             icon={c.icon}
-                            value={c.value}
+                            value={cmsData.stats?.[`counter${i+1}Value`] || c.value}
                             suffix={c.suffix}
-                            label={c.label}
+                            label={cmsData.stats?.[`counter${i+1}Label`] || c.label}
                         />
                     </div>
                 ))}

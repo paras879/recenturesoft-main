@@ -47,6 +47,7 @@ const FOOTER_LINKS = {
 /* ═══════════════════════════════════════════════════════
    UTILITY COMPONENTS
    ═══════════════════════════════════════════════════════ */
+import WebPage from "@/models/WebPage";
 function GlassCard({ children, hoverColorClass = "from-primary to-accent", className = "" }) {
     return (
         <div
@@ -115,13 +116,15 @@ function FooterBackground() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   MAIN FOOTER COMPONENT
+   MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
 export default async function FutureFooter() {
     let logoUrl = "/Logo.png";
     let email = "info@recenturesoft.com";
     let phone = "+91 777 000 3288";
     let address = "A-125, Sector-63, Noida, UP 201301";
+    let inactivePaths = [];
+
     try {
         await connectDB();
         const settings = await SiteSettings.findOne({ type: "global" }).lean();
@@ -131,8 +134,20 @@ export default async function FutureFooter() {
             if (settings.phone) phone = settings.phone;
             if (settings.address) address = settings.address;
         }
+
+        const pages = await WebPage.find({}, { path: 1, status: 1 }).lean();
+        inactivePaths = pages.filter(p => p.status === "inactive").map(p => p.path);
     } catch (error) {
-        console.error("Failed to fetch site settings for footer", error);
+        console.error("Failed to fetch site settings or page statuses", error);
+    }
+
+    const isPathActive = (path) => !inactivePaths.includes(path);
+    const activeFooterLinks = {};
+    for (const [category, links] of Object.entries(FOOTER_LINKS)) {
+        const filteredLinks = links.filter(link => isPathActive(link.href));
+        if (filteredLinks.length > 0) {
+            activeFooterLinks[category] = filteredLinks;
+        }
     }
 
     return (
@@ -187,7 +202,7 @@ export default async function FutureFooter() {
 
                     {/* CENTER COLUMNS: Navigation Links */}
                     <div className="order-1 lg:order-2 lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-                        {Object.entries(FOOTER_LINKS).map(([category, links]) => (
+                        {Object.entries(activeFooterLinks).map(([category, links]) => (
                             <div
                                 key={category}
                             >

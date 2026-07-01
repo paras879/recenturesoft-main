@@ -208,7 +208,7 @@ const slideIn = {
 /* ═══════════════════════════════════════════
    HERO COMPONENT
    ═══════════════════════════════════════════ */
-export default function Hero() {
+export default function Hero({ cmsData = {} }) {
     const [current, setCurrent] = useState(0);
     const heroRef = useRef(null);
     const { openModal } = useProjectModal();
@@ -231,37 +231,51 @@ export default function Hero() {
     }, []);
 
     const slide = SLIDES[current];
+    const slideIndex = current + 1;
+    const cmsSlide = cmsData.hero?.[`slide${slideIndex}`];
+
+    // CMS overrides for the current slide
+    const displayHeading1 = cmsSlide?.heading1 || slide.heading1;
+    const displayHeadingAccent = cmsSlide?.headingAccent || slide.headingAccent;
+    const displayHeading2 = cmsSlide?.heading2 || slide.heading2;
+    const displayDesc = cmsSlide?.desc || slide.desc;
+    const displayCta1 = cmsSlide?.cta1 || slide.cta;
+    const displayCta2 = cmsSlide?.cta2 || slide.cta2;
+    const displayBg = cmsSlide?.bg || slide.bg;
 
     return (
         <section ref={heroRef} className="relative h-[100svh] min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
             {/* ── Background image slideshow ── */}
             <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 bg-black">
-                {SLIDES.map((s, index) => (
-                    <div
-                        key={s.id + "-bg"}
-                        className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
-                        style={{ opacity: current === index ? 1 : 0, zIndex: current === index ? 10 : 0 }}
-                    >
-                        {(index === 0 || current === index) && (
-                            <Image
-                                src={s.bg}
-                                alt={`Hero ${index}`}
-                                fill
-                                priority={index === 0}
-                                sizes="(max-width: 768px) 480px, 100vw"
-                                className="object-cover"
-                                quality={75}
-                            />
-                        )}
+                {SLIDES.map((s, index) => {
+                    const slideBg = cmsData.hero?.[`slide${index + 1}`]?.bg || s.bg;
+                    return (
+                        <div
+                            key={s.id + "-bg"}
+                            className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+                            style={{ opacity: current === index ? 1 : 0, zIndex: current === index ? 10 : 0 }}
+                        >
+                            {(index === 0 || current === index) && (
+                                <Image
+                                    src={slideBg}
+                                    alt={`Hero ${index}`}
+                                    fill
+                                    priority={index === 0}
+                                    sizes="(max-width: 768px) 480px, 100vw"
+                                    className="object-cover"
+                                    quality={75}
+                                />
+                            )}
                         {/* Darken overlay */}
                         <div className="absolute inset-0 bg-white/70 dark:bg-[#030712]/75 md:dark:bg-[#030712]/65" />
                         {/* Gradient from left so text is legible */}
                         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:via-white/80 dark:from-[#030712] dark:via-[#030712]/90 md:dark:via-[#030712]/80 via-60% md:via-40% to-transparent" />
-                        {/* Bottom fade */}
-                        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
-                    </div>
-                ))}
+                            {/* Bottom fade */}
+                            <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
+                        </div>
+                    );
+                })}
             </motion.div>
 
             {/* ── Ambient glow blob (accent coloured) ── */}
@@ -305,11 +319,11 @@ export default function Hero() {
                                 custom={1}
                                 className="text-[2.2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[5rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
                             >
-                                {slide.heading1}
+                                {displayHeading1}
                                 <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>
-                                    {slide.headingAccent}
+                                    {displayHeadingAccent}
                                 </span>
-                                {slide.heading2}
+                                {displayHeading2}
                             </motion.h1>
 
                             {/* Description */}
@@ -321,7 +335,7 @@ export default function Hero() {
                                 custom={2}
                                 className="mt-6 text-[15px] md:text-[18px] text-slate-600 dark:text-slate-400 max-w-xl leading-8 font-[400]"
                             >
-                                {slide.desc}
+                                {displayDesc}
                             </motion.p>
 
                             {/* CTA buttons */}
@@ -341,10 +355,10 @@ export default function Hero() {
                                         boxShadow: `0 8px 32px ${slide.accent}40`,
                                     }}
                                 >
-                                    <span className="relative z-10">{slide.cta}</span>
+                                    <span className="relative z-10">{displayCta1}</span>
                                 </button>
                                 <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 text-slate-800 dark:text-white font-[500] md:hover:bg-slate-100 dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-sm transition-all duration-300 w-full sm:w-auto text-center">
-                                    {slide.cta2}
+                                    {displayCta2}
                                 </button>
                             </motion.div>
 

@@ -144,7 +144,7 @@ function ServiceCard({ service, activeSlide }) {
 }
 
 // Default export: receives services as props from server component (page.tsx)
-export default function EnterpriseServices({ services = [] }) {
+export default function EnterpriseServices({ services = [], cmsData = {} }) {
     const [activeSlide, setActiveSlide] = useState(0);
 
     // Max images across all services — drives how many slides to cycle through
@@ -177,10 +177,10 @@ export default function EnterpriseServices({ services = [] }) {
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
                     <h2 className="text-[2rem] md:text-[3rem] lg:text-[4.5rem] font-[600] text-foreground mb-1 tracking-[-0.04em] leading-[1.05]">
-                        Enterprise <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Solutions</span>
+                        {cmsData.services?.heading1 || "Enterprise"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{cmsData.services?.headingAccent || "Solutions"}</span>
                     </h2>
-                    <p className="text-[0.95rem] md:text-base lg:text-lg text-slate-600 dark:text-slate-400 font-[400] leading-7 max-w-2xl">
-                        Scalable architecture built for the modern web. We transform complex problems into elegant, high-performance digital products.
+                    <p className="text-[0.95rem] md:text-base lg:text-lg text-slate-600 dark:text-slate-400 font-[400] leading-7 max-w-2xl whitespace-pre-line">
+                        {cmsData.services?.desc || "Scalable architecture built for the modern web. We transform complex problems into elegant, high-performance digital products."}
                     </p>
                 </div>
 

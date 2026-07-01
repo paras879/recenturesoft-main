@@ -18,17 +18,17 @@ function LazySection({ children, id }) {
 }
 
 /**
- * @param {{ services: object[], footer: React.ReactNode }} props
+ * @param {{ services: object[], cmsData: object, footer: React.ReactNode }} props
  */
-export default function HomeSectionsContainer({ services = [], footer }) {
+export default function HomeSectionsContainer({ services = [], cmsData = {}, footer }) {
     return (
         <>
             <LazySection minHeight="500px" id="about-lazy">
-                <AboutSection />
+                <AboutSection cmsData={cmsData} />
             </LazySection>
 
             <LazySection minHeight="700px" id="service-lazy">
-                <Service services={services} />
+                <Service services={services} cmsData={cmsData} />
             </LazySection>
 
             <LazySection minHeight="600px" id="techstack-lazy">
@@ -40,7 +40,7 @@ export default function HomeSectionsContainer({ services = [], footer }) {
             </LazySection>
 
             <LazySection minHeight="800px" id="status-lazy">
-                <Status />
+                <Status cmsData={cmsData} />
             </LazySection>
 
             <LazySection minHeight="250px" id="clients-lazy">

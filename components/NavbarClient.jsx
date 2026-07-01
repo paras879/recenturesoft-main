@@ -91,11 +91,22 @@ const solutionsMenu = [
     }
 ];
 
-export default function NavbarClient({ logoUrl = "/Logo.png" }) {
+export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = [] }) {
     const [hoveredLink, setHoveredLink] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [mobileExpanded, setMobileExpanded] = useState("");
     const pathname = usePathname();
+
+    // Filter dynamic navigation based on active DB status
+    const isPathActive = (path) => !inactivePaths.includes(path);
+    
+    const activeNavLinks = navLinks.filter(link => isPathActive(link.href));
+    
+    // Filter solutions menu categories and their items
+    const activeSolutionsMenu = solutionsMenu.map(category => ({
+        ...category,
+        items: category.items.filter(item => isPathActive(item.href))
+    })).filter(category => category.items.length > 0);
 
     // Lock body scroll when mobile menu is open
     useEffect(() => {
@@ -125,7 +136,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png" }) {
 
                     {/* ════ DESKTOP NAV LINKS ════ */}
                     <ul className="hidden lg:flex items-center gap-1">
-                        {navLinks.map((link) => (
+                        {activeNavLinks.map((link) => (
                             <li
                                 key={link.name}
                                 className="relative group"
@@ -182,7 +193,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png" }) {
                                                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
 
                                                     <div className="grid grid-cols-3 gap-x-12 gap-y-8 relative z-10">
-                                                        {solutionsMenu.map((category, idx) => {
+                                                        {activeSolutionsMenu.map((category, idx) => {
                                                             const Icon = category.icon;
                                                             return (
                                                                 <div key={idx} className="flex flex-col group/cat">
@@ -292,7 +303,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png" }) {
 
                             {/* Menu Links */}
                             <div className="flex flex-col gap-1 overflow-y-auto pb-4 scrollbar-hide">
-                                {navLinks.map((link, i) => {
+                                {activeNavLinks.map((link, i) => {
                                     const isActive = pathname === link.href;
 
                                     if (link.name === "Solutions") {
@@ -316,7 +327,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png" }) {
                                                             className="overflow-hidden"
                                                         >
                                                             <div className="pl-6 py-2 flex flex-col gap-4">
-                                                                {solutionsMenu.map((cat, idx) => (
+                                                                {activeSolutionsMenu.map((cat, idx) => (
                                                                     <div key={idx}>
                                                                         <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase mb-2">{cat.title}</h4>
                                                                         <ul className="flex flex-col gap-2">

@@ -63,11 +63,19 @@ function TiltCard({ children, className }) {
     );
 }
 
-export default function AboutSection() {
+export default function AboutSection({ cmsData = {} }) {
     const [isLargeScreen, setIsLargeScreen] = useState(false);
     useEffect(() => {
         setIsLargeScreen(window.innerWidth >= 1024);
     }, []);
+
+    const d = cmsData.about || {};
+    const featuresList = d.features ? d.features.split('\n').filter(Boolean) : [
+        "Enterprise Web Applications",
+        "Mobile App Development",
+        "Cloud & DevOps Solutions",
+        "AI & Automation Services",
+    ];
 
     return (
         <section id="aboutUs" className="relative py-[clamp(1.5rem,4vw,4.5rem)] bg-background transition-colors duration-300 overflow-hidden select-none">
@@ -86,29 +94,23 @@ export default function AboutSection() {
                         <h2
                             className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight text-foreground tracking-tight"
                         >
-                            <span className="block md:whitespace-nowrap">Software Development</span>
+                            <span className="block md:whitespace-nowrap">{d.heading1 || "Software Development"}</span>
                             <span className="block bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                                & Digital Innovation
+                                {d.headingAccent || "& Digital Innovation"}
                             </span>
-                            <span className="block md:whitespace-nowrap">For Modern Businesses</span>
+                            <span className="block md:whitespace-nowrap">{d.heading2 || "For Modern Businesses"}</span>
                         </h2>
 
                         {/* Description */}
                         <p
                             className="mt-4 text-sm md:text-base lg:text-lg text-slate-600 dark:text-gray-400 leading-relaxed"
                         >
-                            At RecentureSoft, we create powerful digital experiences through custom software development,
-                            cloud solutions, AI integration, and scalable web applications that help businesses accelerate growth.
+                            {d.desc || "At RecentureSoft, we create powerful digital experiences through custom software development, cloud solutions, AI integration, and scalable web applications that help businesses accelerate growth."}
                         </p>
 
                         {/* Features checklist */}
                         <div className="mt-6 space-y-3 md:space-y-4">
-                            {[
-                                "Enterprise Web Applications",
-                                "Mobile App Development",
-                                "Cloud & DevOps Solutions",
-                                "AI & Automation Services",
-                            ].map((item) => (
+                            {featuresList.map((item) => (
                                 <div key={item} className="flex items-start md:items-center gap-3 group">
                                     <CheckCircle size={20} className="text-cyan-400 group-hover:scale-110 transition duration-300 mt-0.5 md:mt-0 flex-shrink-0" />
                                     <span className="text-slate-600 dark:text-gray-300 group-hover:text-slate-900 dark:group-hover:text-cyan-300 transition duration-300 text-sm md:text-base">
@@ -140,7 +142,7 @@ export default function AboutSection() {
                             {/* Image Card 1 */}
                             <TiltCard className="absolute top-0 right-0 w-[320px] h-[210px] z-10 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                                 <Image
-                                    src="/about/about1.jpg"
+                                    src={d.image1 || "/about/about1.jpg"}
                                     alt="Innovative digital workspace"
                                     fill
                                     sizes="320px"
@@ -153,7 +155,7 @@ export default function AboutSection() {
                             {/* Image Card 2 */}
                             <TiltCard className="absolute top-[160px] left-0 w-[290px] h-[210px] z-20 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                                 <Image
-                                    src="/about/about2.jpg"
+                                    src={d.image2 || "/about/about2.jpg"}
                                     alt="Advanced Cloud infrastructure"
                                     fill
                                     sizes="290px"
@@ -166,7 +168,7 @@ export default function AboutSection() {
                             {/* Image Card 3 */}
                             <TiltCard className="absolute bottom-0 right-12 w-[310px] h-[210px] z-10 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                                 <Image
-                                    src="/about/about3.jpg"
+                                    src={d.image3 || "/about/about3.jpg"}
                                     alt="AI and data integrations"
                                     fill
                                     sizes="310px"

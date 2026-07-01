@@ -5,6 +5,7 @@ import CookieConsentBanner from "@/components/CookieConsentBanner";
 import FutureFooter from "@/components/FutureFooter";
 import { connectDB } from "@/lib/mongodb";
 import ServiceModel from "@/models/Service";
+import WebPageModel from "@/models/WebPage";
 
 
 export const metadata = {
@@ -59,16 +60,29 @@ async function getServices(): Promise<ServiceData[]> {
   }
 }
 
+async function getHomePageData() {
+  try {
+    await connectDB();
+    const pageData = await WebPageModel.findOne({ path: "/" }).lean();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (pageData as any)?.content || {};
+  } catch (err) {
+    console.error("Failed to fetch home page CMS data:", err);
+    return {};
+  }
+}
+
 export default async function Home() {
   const services = await getServices();
+  const cmsData = await getHomePageData();
 
   return (
     <>
       <main>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"RecentureSoft","description":"RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.","url":"https://recenturesoft.com"}) }} />
         <Navbar />
-        <Hero />
-        <HomeSectionsContainer services={services} footer={<FutureFooter />} />
+        <Hero cmsData={cmsData} />
+        <HomeSectionsContainer services={services} cmsData={cmsData} footer={<FutureFooter />} />
       </main>
       <CookieConsentBanner />
     </>
