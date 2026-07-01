@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { connectDB } from "@/lib/mongodb";
 import SiteSettings from "@/models/SiteSettings";
+import { unstable_noStore as noStore } from "next/cache";
 import {
     FaFacebookF,
     FaTwitter,
@@ -119,6 +120,7 @@ function FooterBackground() {
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
 export default async function FutureFooter() {
+    noStore();
     let logoUrl = "/Logo.png";
     let email = "info@recenturesoft.com";
     let phone = "+91 777 000 3288";

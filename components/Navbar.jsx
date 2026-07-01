@@ -4,8 +4,10 @@ import WebPage from "@/models/WebPage";
 import NavbarClient from "./NavbarClient";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 
 export default async function Navbar() {
+    noStore();
     let logoUrl = "/Logo.png";
     let inactivePaths = [];
     try {
