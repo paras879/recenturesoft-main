@@ -57,7 +57,7 @@ export async function POST(req) {
                 return NextResponse.json({ 
                     success: false, 
                     message: "Security verification failed. Please check the 'I am not a robot' box.",
-                    debugData: recaptchaData 
+                    debugData: { ...recaptchaData, secretPrefix: secretKey.substring(0, 5) }
                 }, { status: 400 });
             }
         }
