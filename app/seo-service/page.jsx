@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/seo-service" }
 };
 
-export default function SeoPage() {
+export default async function SeoPage() {
+    const isActive = await checkPageStatus("/seo-service");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"SEO Company In India | RecentureSoft","description":"RecentureSoft is a leading SEO company in India providing breakthrough E-commerce SEO solutions, on-page & off-page optimization, and high-quality traffic generation.","url":"https://recenturesoft.com/seo-service"}) }} />

@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/opencart-development" }
 };
 
-export default function OpenCartPage() {
+export default async function OpenCartPage() {
+    const isActive = await checkPageStatus("/opencart-development");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best OpenCart Development Company In India | RecentureSoft","description":"RecentureSoft is the leading OpenCart development company in India, offering robust, scalable, and feature-packed eCommerce solutions tailored to your needs.","url":"https://recenturesoft.com/opencart-development"}) }} />

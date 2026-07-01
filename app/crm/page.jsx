@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
@@ -11,7 +13,10 @@ export const metadata = {
     alternates: { canonical: "/crm" }
 };
 
-export default function CrmPage() {
+export default async function CrmPage() {
+    const isActive = await checkPageStatus("/crm");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best CRM Software Development Company In India | RecentureSoft","description":"RecentureSoft is a leading CRM Development Company in India. We build powerful CRM software solutions to enhance customer relationships, marketing, and sales.","url":"https://recenturesoft.com/crm"}) }} />

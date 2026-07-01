@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/wordpress-development-customization" }
 };
 
-export default function WordPressPage() {
+export default async function WordPressPage() {
+    const isActive = await checkPageStatus("/wordpress-development-customization");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"WordPress Development & Customization Company In India | RecentureSoft","description":"Expert WordPress development and customization services in India. Build responsive, secure, and fully customized WordPress websites with our agile team.","url":"https://recenturesoft.com/wordpress-development-customization"}) }} />

@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/amazon-store-management" }
 };
 
-export default function AmazonStorePage() {
+export default async function AmazonStorePage() {
+    const isActive = await checkPageStatus("/amazon-store-management");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Amazon Store Management Company In India | RecentureSoft","description":"Expert Amazon store management and FBA setup services in India. Improve revenue, product listings, and discoverability with our top-class solutions.","url":"https://recenturesoft.com/amazon-store-management"}) }} />

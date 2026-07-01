@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/salesforce" }
 };
 
-export default function SalesforcePage() {
+export default async function SalesforcePage() {
+    const isActive = await checkPageStatus("/salesforce");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Salesforce Integration Company In India | RecentureSoft","description":"RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.","url":"https://recenturesoft.com/salesforce"}) }} />

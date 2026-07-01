@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import React from 'react';
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
@@ -16,7 +18,10 @@ export const metadata = {
     alternates: { canonical: "/sitemap" }
 };
 
-export default function SitemapPage() {
+export default async function SitemapPage() {
+    const isActive = await checkPageStatus("/sitemap");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#020617]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Sitemap | RecentureSoft","description":"Navigate through all pages, services, and resources available on the RecentureSoft platform. Find the information you need quickly and easily.","url":"https://recenturesoft.com/sitemap"}) }} />

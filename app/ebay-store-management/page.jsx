@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/ebay-store-management" }
 };
 
-export default function EbayStorePage() {
+export default async function EbayStorePage() {
+    const isActive = await checkPageStatus("/ebay-store-management");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best eBay Store Management Company In India | RecentureSoft","description":"Expert eBay store management solutions including design, product listing, marketing, and inventory management tailored for your business.","url":"https://recenturesoft.com/ebay-store-management"}) }} />

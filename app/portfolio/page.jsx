@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import FutureFooter from "@/components/FutureFooter";
@@ -17,6 +19,9 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function PortfolioPage() {
+    const isActive = await checkPageStatus("/portfolio");
+    if (!isActive) return notFound();
+
     let projects = [];
     
     try {

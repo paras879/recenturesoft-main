@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import CareerContent from "@/components/career/CareerContent";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
@@ -14,6 +16,9 @@ export const metadata = {
 };
 
 export default async function CareerPage() {
+    const isActive = await checkPageStatus("/career");
+    if (!isActive) return notFound();
+
     let jobs = [];
     try {
         await connectDB();

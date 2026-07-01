@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PrivacyPolicyContent from "@/components/privacy/PrivacyPolicyContent";
 import FutureFooter from "@/components/FutureFooter";
@@ -8,7 +10,10 @@ export const metadata = {
     alternates: { canonical: "/privacy-policy" }
 };
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+    const isActive = await checkPageStatus("/privacy-policy");
+    if (!isActive) return notFound();
+
     return (
         <>
             <main className="min-h-screen bg-white dark:bg-[#0a0a0a] overflow-x-clip selection:bg-blue-500/30 selection:text-blue-900 dark:selection:text-blue-100">

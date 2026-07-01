@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HomeSectionsContainer from "@/components/HomeSectionsContainer";
@@ -73,6 +75,9 @@ async function getHomePageData() {
 }
 
 export default async function Home() {
+    const isActive = await checkPageStatus("/");
+    if (!isActive) return notFound();
+
   const services = await getServices();
   const cmsData = await getHomePageData();
 

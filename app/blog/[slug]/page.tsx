@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,6 +16,9 @@ export default async function BlogDetail({
 }: {
     params: Promise<{ slug: string }>;
 }) {
+    const isActive = await checkPageStatus("/blog/[slug]");
+    if (!isActive) return notFound();
+
     const { slug } = await params;
 
     await connectDB();

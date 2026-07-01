@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import FutureFooter from "@/components/FutureFooter";
@@ -29,6 +31,9 @@ async function getInitialNews() {
 }
 
 export default async function NewsPage() {
+    const isActive = await checkPageStatus("/news");
+    if (!isActive) return notFound();
+
     const initialData = await getInitialNews();
 
     return (

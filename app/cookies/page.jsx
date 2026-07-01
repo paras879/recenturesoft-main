@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import CookiesContent from "@/components/cookies/CookiesContent";
 import FutureFooter from "@/components/FutureFooter";
@@ -8,7 +10,10 @@ export const metadata = {
     alternates: { canonical: "/cookies" }
 };
 
-export default function CookiesPage() {
+export default async function CookiesPage() {
+    const isActive = await checkPageStatus("/cookies");
+    if (!isActive) return notFound();
+
     return (
         <>
             <main className="min-h-screen bg-white dark:bg-[#0a0a0a] overflow-x-clip selection:bg-blue-500/30 selection:text-blue-900 dark:selection:text-blue-100">

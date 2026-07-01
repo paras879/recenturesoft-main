@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
@@ -10,7 +12,10 @@ export const metadata = {
     alternates: { canonical: "/content-writing" }
 };
 
-export default function ContentWritingPage() {
+export default async function ContentWritingPage() {
+    const isActive = await checkPageStatus("/content-writing");
+    if (!isActive) return notFound();
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Content Writing Company In India | RecentureSoft","description":"Partner with the best content writing company in India. We provide high-quality webpage content, technical writing, blogs, and academic writing services.","url":"https://recenturesoft.com/content-writing"}) }} />

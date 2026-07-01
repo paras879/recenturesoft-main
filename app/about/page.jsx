@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import CinematicAbout from "@/components/about/CinematicAbout";
@@ -9,7 +11,10 @@ export const metadata = {
     alternates: { canonical: "/about" }
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+    const isActive = await checkPageStatus("/about");
+    if (!isActive) return notFound();
+
     return (
         <main className="relative bg-slate-50 dark:bg-[#020617] min-h-screen overflow-x-hidden">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"About RecentureSoft | Digital Innovation & Enterprise Technology","description":"Discover RecentureSoft","url":"https://recenturesoft.com/about"}) }} />

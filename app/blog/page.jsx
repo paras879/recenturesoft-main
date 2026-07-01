@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import FutureFooter from "@/components/FutureFooter";
@@ -18,6 +20,9 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
+    const isActive = await checkPageStatus("/blog");
+    if (!isActive) return notFound();
+
     await connectDB();
     const blogs = await Blog.find({ published: true }).sort({ createdAt: -1 }).lean();
 

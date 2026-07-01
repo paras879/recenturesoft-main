@@ -1,3 +1,5 @@
+import { checkPageStatus } from "@/lib/checkPageStatus";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import FutureFooter from "@/components/FutureFooter";
@@ -15,6 +17,9 @@ export const metadata = {
 };
 
 export default async function SolutionsPage() {
+    const isActive = await checkPageStatus("/solutions");
+    if (!isActive) return notFound();
+
     await connectDB();
     const records = await Service.find({ status: true }).lean();
     
