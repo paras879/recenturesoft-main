@@ -38,8 +38,13 @@ export async function POST(req) {
             if (!recaptchaToken) {
                 return NextResponse.json({ success: false, message: "Security verification failed. Token missing." }, { status: 400 });
             }
-            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
-            const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+            const recaptchaRes = await fetch("https://www.google.com/recaptcha/api/siteverify", { 
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: `secret=${secretKey}&response=${recaptchaToken}`
+            });
             const recaptchaData = await recaptchaRes.json();
 
             // v2 check just needs success === true
