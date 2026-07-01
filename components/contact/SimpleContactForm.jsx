@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, Phone, MessageSquare, Send, CheckCircle2 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -10,6 +10,7 @@ export default function SimpleContactForm() {
     const [error, setError] = useState(null);
     const [focusedField, setFocusedField] = useState(null);
     const [recaptchaToken, setRecaptchaToken] = useState("");
+    const recaptchaRef = useRef(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,6 +47,10 @@ export default function SimpleContactForm() {
             if (res.ok && data.success) {
                 setFormStatus("success");
                 e.target.reset();
+                setRecaptchaToken("");
+                if (recaptchaRef.current) {
+                    recaptchaRef.current.reset();
+                }
                 setTimeout(() => {
                     setFormStatus("idle");
                 }, 4000);
@@ -56,11 +61,19 @@ export default function SimpleContactForm() {
                 }
                 setError(errorMsg);
                 setFormStatus("idle");
+                setRecaptchaToken("");
+                if (recaptchaRef.current) {
+                    recaptchaRef.current.reset();
+                }
             }
         } catch (err) {
             console.error("Form submit error:", err);
             setError("Network error. Please check your connection and try again.");
             setFormStatus("idle");
+            setRecaptchaToken("");
+            if (recaptchaRef.current) {
+                recaptchaRef.current.reset();
+            }
         }
     };
 
@@ -178,6 +191,7 @@ export default function SimpleContactForm() {
 
                     <div className="flex justify-center my-4">
                         <ReCAPTCHA
+                            ref={recaptchaRef}
                             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
                             onChange={(token) => setRecaptchaToken(token)}
                             theme="light"
