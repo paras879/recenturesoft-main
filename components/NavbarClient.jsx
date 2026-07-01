@@ -234,23 +234,27 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                     {/* ════ DESKTOP CTA BUTTON & THEME TOGGLE ════ */}
                     <div className="hidden lg:flex items-center gap-4">
                         <ThemeToggle />
-                        <button className="relative group px-6 py-3.5 rounded-full min-h-[44px] overflow-hidden font-semibold text-sm text-white shadow-lg shadow-cyan-500/20 hover:scale-105 hover:shadow-cyan-500/40 transition-all duration-300">
-                            <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent dark:from-cyan-500 dark:to-indigo-600 transition-transform duration-300 group-hover:scale-105" />
-                            <Link href="/contact" prefetch={true} className="relative z-10">Get A Quote</Link>
-                        </button>
+                        {isPathActive("/contact") && (
+                            <button className="relative group px-6 py-3.5 rounded-full min-h-[44px] overflow-hidden font-semibold text-sm text-white shadow-lg shadow-cyan-500/20 hover:scale-105 hover:shadow-cyan-500/40 transition-all duration-300">
+                                <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent dark:from-cyan-500 dark:to-indigo-600 transition-transform duration-300 group-hover:scale-105" />
+                                <Link href="/contact" prefetch={true} className="relative z-10">Get A Quote</Link>
+                            </button>
+                        )}
                     </div>
 
                     {/* ════ MOBILE/TABLET CONTROLS (<1024px) ════ */}
                     <div className="flex lg:hidden items-center gap-3">
                         <ThemeToggle />
                         {/* Quote Button */}
-                        <Link
-                            href="/contact"
-                            prefetch={true}
-                            className="hidden sm:inline-block px-4 py-2 bg-gradient-to-r from-primary to-accent dark:from-cyan-500 dark:to-indigo-600 rounded-full font-bold text-sm text-white shadow-md shadow-cyan-500/20 hover:scale-105 transition-all duration-300"
-                        >
-                            Quote
-                        </Link>
+                        {isPathActive("/contact") && (
+                            <Link
+                                href="/contact"
+                                prefetch={true}
+                                className="hidden sm:inline-block px-4 py-2 bg-gradient-to-r from-primary to-accent dark:from-cyan-500 dark:to-indigo-600 rounded-full font-bold text-sm text-white shadow-md shadow-cyan-500/20 hover:scale-105 transition-all duration-300"
+                            >
+                                Quote
+                            </Link>
+                        )}
 
                         {/* Hamburger Button */}
                         <motion.button
