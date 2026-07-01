@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, Phone, MessageSquare, Send, CheckCircle2 } from "lucide-react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function SimpleContactForm() {
     const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
     const [error, setError] = useState(null);
     const [focusedField, setFocusedField] = useState(null);
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,12 +27,19 @@ export default function SimpleContactForm() {
         const subject = `Recenture Inquiry from ${name}`;
 
         try {
+            let recaptchaToken = "";
+            if (executeRecaptcha) {
+                recaptchaToken = await executeRecaptcha("contact_form_submit");
+            } else {
+                console.warn("Execute recaptcha not available yet");
+            }
+
             const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email, phone, subject, message }),
+                body: JSON.stringify({ name, email, phone, subject, message, recaptchaToken }),
             });
 
             const data = await res.json();

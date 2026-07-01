@@ -7,7 +7,7 @@ export async function POST(req) {
         await connectDB();
 
         const body = await req.json();
-        const { name, email, phone, subject, message } = body;
+        const { name, email, phone, subject, message, recaptchaToken } = body;
 
         // Validation of required fields
         if (!name || !email || !message) {
@@ -30,6 +30,23 @@ export async function POST(req) {
                 },
                 { status: 400 }
             );
+        }
+
+        // Verify reCAPTCHA token if a secret key is configured
+        const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+        if (secretKey) {
+            if (!recaptchaToken) {
+                return NextResponse.json({ success: false, message: "Security verification failed. Token missing." }, { status: 400 });
+            }
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+            const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+            const recaptchaData = await recaptchaRes.json();
+
+            // Typically, score >= 0.5 is considered human.
+            if (!recaptchaData.success || recaptchaData.score < 0.5) {
+                console.warn("reCAPTCHA validation failed:", recaptchaData);
+                return NextResponse.json({ success: false, message: "Security verification failed. Our systems detected suspicious activity." }, { status: 400 });
+            }
         }
 
         const contact = await Contact.create({
