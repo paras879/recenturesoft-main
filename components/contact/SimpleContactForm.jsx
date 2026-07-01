@@ -51,11 +51,7 @@ export default function SimpleContactForm() {
                     setFormStatus("idle");
                 }, 4000);
             } else {
-                let errorMsg = data.message || "Failed to send message. Please try again.";
-                if (data.debugData) {
-                    errorMsg += " Debug: " + JSON.stringify(data.debugData);
-                }
-                setError(errorMsg);
+                setError(data.message || "Failed to send message. Please try again.");
                 setFormStatus("idle");
             }
         } catch (err) {

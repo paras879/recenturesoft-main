@@ -45,11 +45,7 @@ export async function POST(req) {
             // Typically, score >= 0.5 is considered human.
             if (!recaptchaData.success || recaptchaData.score < 0.5) {
                 console.warn("reCAPTCHA validation failed:", recaptchaData);
-                return NextResponse.json({ 
-                    success: false, 
-                    message: "Security verification failed. Our systems detected suspicious activity.",
-                    debugData: recaptchaData // Temporarily send back to client for debugging
-                }, { status: 400 });
+                return NextResponse.json({ success: false, message: "Security verification failed. Our systems detected suspicious activity." }, { status: 400 });
             }
         }
 
