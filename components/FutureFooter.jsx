@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { connectDB } from "@/lib/mongodb";
+import SiteSettings from "@/models/SiteSettings";
 import {
     FaFacebookF,
     FaTwitter,
@@ -115,7 +117,24 @@ function FooterBackground() {
 /* ═══════════════════════════════════════════════════════
    MAIN FOOTER COMPONENT
    ═══════════════════════════════════════════════════════ */
-export default function FutureFooter() {
+export default async function FutureFooter() {
+    let logoUrl = "/Logo.png";
+    let email = "info@recenturesoft.com";
+    let phone = "+91 777 000 3288";
+    let address = "A-125, Sector-63, Noida, UP 201301";
+    try {
+        await connectDB();
+        const settings = await SiteSettings.findOne({ type: "global" }).lean();
+        if (settings) {
+            if (settings.logoUrl) logoUrl = settings.logoUrl;
+            if (settings.email) email = settings.email;
+            if (settings.phone) phone = settings.phone;
+            if (settings.address) address = settings.address;
+        }
+    } catch (error) {
+        console.error("Failed to fetch site settings for footer", error);
+    }
+
     return (
         <footer
             className="relative bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950 text-slate-800 dark:text-slate-300 overflow-hidden pt-8 md:pt-10 lg:pt-12 pb-8 transition-colors duration-300"
@@ -132,7 +151,7 @@ export default function FutureFooter() {
                         <div
                             className="flex items-center gap-4 mb-4 md:mb-8"
                         >
-                            <img src="/Logo.png" alt="RecentureSoft Logo" className="h-20 w-auto object-contain drop-shadow-sm" />
+                            <img src={logoUrl} alt="RecentureSoft Logo" className="h-20 w-auto object-contain drop-shadow-sm" />
                         </div>
 
                         <p
@@ -203,7 +222,7 @@ export default function FutureFooter() {
                                 </div>
                                 <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Email Us</span>
                             </div>
-                            <span className="text-slate-800 dark:text-white font-medium hover:text-primary transition-colors cursor-pointer text-lg">info@recenturesoft.com</span>
+                            <span className="text-slate-800 dark:text-white font-medium hover:text-primary transition-colors cursor-pointer text-lg">{email}</span>
                         </div>
                     </GlassCard>
                     <GlassCard hoverColorClass="from-blue-500 to-indigo-500">
@@ -214,7 +233,7 @@ export default function FutureFooter() {
                                 </div>
                                 <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Call Us</span>
                             </div>
-                            <span className="text-slate-800 dark:text-white font-medium text-lg">+91 777 000 3288</span>
+                            <span className="text-slate-800 dark:text-white font-medium text-lg">{phone}</span>
                         </div>
                     </GlassCard>
                     <GlassCard hoverColorClass="from-purple-500 to-pink-500">
@@ -225,7 +244,7 @@ export default function FutureFooter() {
                                 </div>
                                 <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Headquarters </span>
                             </div>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=A-125,+Sector-63,+Noida,+Uttar+Pradesh+201301,+India" target="_blank" rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors block">A-125, Sector-63, Noida, UP 201301</a>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`} target="_blank" rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors block">{address}</a>
                         </div>
                     </GlassCard>
                 </div>

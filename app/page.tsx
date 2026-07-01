@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HomeSectionsContainer from "@/components/HomeSectionsContainer";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
+import FutureFooter from "@/components/FutureFooter";
 import { connectDB } from "@/lib/mongodb";
 import ServiceModel from "@/models/Service";
 
@@ -67,7 +68,7 @@ export default async function Home() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"RecentureSoft","description":"RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.","url":"https://recenturesoft.com"}) }} />
         <Navbar />
         <Hero />
-        <HomeSectionsContainer services={services} />
+        <HomeSectionsContainer services={services} footer={<FutureFooter />} />
       </main>
       <CookieConsentBanner />
     </>
