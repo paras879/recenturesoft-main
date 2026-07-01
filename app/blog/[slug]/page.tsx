@@ -2,7 +2,6 @@ import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Navbar from "@/components/Navbar"
 import FutureFooter from "@/components/FutureFooter";
