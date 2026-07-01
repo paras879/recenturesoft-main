@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Briefcase, MapPin, Clock, Upload, CheckCircle, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function CareerContent({ jobs }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState({ type: "", message: "" });
     const [fileName, setFileName] = useState("No file chosen");
+    const [recaptchaToken, setRecaptchaToken] = useState("");
+    const recaptchaRef = useRef(null);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -46,6 +49,7 @@ export default function CareerContent({ jobs }) {
             formData.delete("resume");
             const applicationData = Object.fromEntries(formData.entries());
             applicationData.resumeUrl = cloudinaryData.secure_url;
+            applicationData.recaptchaToken = recaptchaToken;
 
             const res = await fetch("/api/apply", {
                 method: "POST",
@@ -64,11 +68,17 @@ export default function CareerContent({ jobs }) {
                 setStatus({ type: "success", message: "Your application has been submitted successfully! We will get back to you soon." });
                 e.target.reset();
                 setFileName("No file chosen");
+                setRecaptchaToken("");
+                if (recaptchaRef.current) recaptchaRef.current.reset();
             } else {
                 setStatus({ type: "error", message: data?.error || "Failed to submit application. Please try again." });
+                setRecaptchaToken("");
+                if (recaptchaRef.current) recaptchaRef.current.reset();
             }
         } catch (error) {
             setStatus({ type: "error", message: "An unexpected error occurred. Please try again." });
+            setRecaptchaToken("");
+            if (recaptchaRef.current) recaptchaRef.current.reset();
         } finally {
             setIsSubmitting(false);
         }
@@ -205,6 +215,15 @@ export default function CareerContent({ jobs }) {
                                         </div>
                                     </div>
                                     <span className="text-xs text-slate-500 ml-1 mt-1">Accepted formats: PDF, DOC, DOCX</span>
+                                </div>
+
+                                <div className="flex justify-center my-4">
+                                    <ReCAPTCHA
+                                        ref={recaptchaRef}
+                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
+                                        onChange={(token) => setRecaptchaToken(token)}
+                                        theme="light"
+                                    />
                                 </div>
 
                                 <button 

@@ -7,7 +7,7 @@ export async function POST(req) {
         await connectDB();
 
         const body = await req.json();
-        const { name, email, projectType, projectDetails } = body;
+        const { name, email, projectType, projectDetails, recaptchaToken } = body;
 
         // Validation of required fields
         if (!name || !email || !projectType || !projectDetails) {
@@ -30,6 +30,33 @@ export async function POST(req) {
                 },
                 { status: 400 }
             );
+        }
+
+        // Verify reCAPTCHA token
+        const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+        if (secretKey) {
+            if (!recaptchaToken) {
+                return NextResponse.json({ success: false, message: "Security verification failed. Token missing." }, { status: 400 });
+            }
+            const params = new URLSearchParams();
+            params.append("secret", secretKey);
+            params.append("response", recaptchaToken);
+
+            const recaptchaRes = await fetch("https://www.google.com/recaptcha/api/siteverify", { 
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: params.toString()
+            });
+            const recaptchaData = await recaptchaRes.json();
+
+            if (!recaptchaData.success) {
+                return NextResponse.json({ 
+                    success: false, 
+                    message: "Security verification failed. Please check the 'I am not a robot' box."
+                }, { status: 400 });
+            }
         }
 
         const inquiry = await ProjectInquiry.create({

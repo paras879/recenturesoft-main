@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CalendarCheck, Loader2, Calendar, Clock, ChevronDown } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef } from "react";
 
 export default function ScheduleMeetingModal({ isOpen, onClose }) {
     const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ export default function ScheduleMeetingModal({ isOpen, onClose }) {
     
     const [status, setStatus] = useState("idle"); // idle, loading, success, error
     const [errorMessage, setErrorMessage] = useState("");
+    const [recaptchaToken, setRecaptchaToken] = useState("");
+    const recaptchaRef = useRef(null);
 
     // Prevent body scroll when modal is open
     useEffect(() => {
@@ -26,6 +30,7 @@ export default function ScheduleMeetingModal({ isOpen, onClose }) {
                 if(status === "success") {
                     setStatus("idle");
                     setFormData({ name: "", email: "", date: "", time: "", topic: "" });
+                    setRecaptchaToken("");
                 }
             }, 300);
         }
@@ -46,20 +51,26 @@ export default function ScheduleMeetingModal({ isOpen, onClose }) {
             const res = await fetch("/api/schedule-meeting", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, recaptchaToken }),
             });
 
             const data = await res.json();
 
             if (res.ok && data.success) {
                 setStatus("success");
+                setRecaptchaToken("");
+                if (recaptchaRef.current) recaptchaRef.current.reset();
             } else {
                 setStatus("error");
                 setErrorMessage(data.message || "Failed to schedule meeting.");
+                setRecaptchaToken("");
+                if (recaptchaRef.current) recaptchaRef.current.reset();
             }
         } catch {
             setStatus("error");
             setErrorMessage("An unexpected error occurred. Please try again.");
+            setRecaptchaToken("");
+            if (recaptchaRef.current) recaptchaRef.current.reset();
         }
     };
 
@@ -210,6 +221,15 @@ export default function ScheduleMeetingModal({ isOpen, onClose }) {
                                                     <ChevronDown className="w-4 h-4" />
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div className="flex justify-center my-4">
+                                            <ReCAPTCHA
+                                                ref={recaptchaRef}
+                                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
+                                                onChange={(token) => setRecaptchaToken(token)}
+                                                theme="light"
+                                            />
                                         </div>
 
                                         {status === "error" && (

@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Loader2 } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function NewsletterForm() {
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState({ type: "", message: "" });
     const [loading, setLoading] = useState(false);
+    const [recaptchaToken, setRecaptchaToken] = useState("");
+    const recaptchaRef = useRef(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,7 +22,7 @@ export default function NewsletterForm() {
             const res = await fetch("/api/subscribe", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email, recaptchaToken }),
             });
             
             const data = await res.json();
@@ -27,11 +30,17 @@ export default function NewsletterForm() {
             if (res.ok && data.success) {
                 setStatus({ type: "success", message: "Thanks for subscribing!" });
                 setEmail("");
+                setRecaptchaToken("");
+                if (recaptchaRef.current) recaptchaRef.current.reset();
             } else {
                 setStatus({ type: "error", message: data.error || "Failed to subscribe." });
+                setRecaptchaToken("");
+                if (recaptchaRef.current) recaptchaRef.current.reset();
             }
         } catch (error) {
             setStatus({ type: "error", message: "Something went wrong." });
+            setRecaptchaToken("");
+            if (recaptchaRef.current) recaptchaRef.current.reset();
         } finally {
             setLoading(false);
         }
@@ -63,6 +72,14 @@ export default function NewsletterForm() {
                     )}
                 </button>
             </form>
+            <div className="flex justify-start my-2 transform scale-75 origin-left">
+                <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
+                    onChange={(token) => setRecaptchaToken(token)}
+                    theme="light"
+                />
+            </div>
             {status.message && (
                 <p className={`text-xs px-2 ${status.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
                     {status.message}
