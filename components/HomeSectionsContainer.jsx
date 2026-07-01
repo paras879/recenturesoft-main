@@ -7,6 +7,7 @@ import TechStack from "./TechStack";
 import Review from "./Review";
 import Status from "./StatsDashboard";
 import TrustedClients from "./TrustedClients";
+import FAQSection from "./FAQSection";
 
 // Standard wrapper without lazy rendering so the browser paints everything upfront, eliminating scroll stutter.
 function LazySection({ children, id }) {
@@ -18,9 +19,9 @@ function LazySection({ children, id }) {
 }
 
 /**
- * @param {{ services: object[], cmsData: object, footer: React.ReactNode }} props
+ * @param {{ services: object[], faqs: object[], cmsData: object, footer: React.ReactNode }} props
  */
-export default function HomeSectionsContainer({ services = [], cmsData = {}, footer }) {
+export default function HomeSectionsContainer({ services = [], faqs = [], cmsData = {}, footer }) {
     return (
         <>
             <LazySection minHeight="500px" id="about-lazy">
@@ -45,6 +46,10 @@ export default function HomeSectionsContainer({ services = [], cmsData = {}, foo
 
             <LazySection minHeight="250px" id="clients-lazy">
                 <TrustedClients />
+            </LazySection>
+
+            <LazySection minHeight="500px" id="faq-lazy">
+                <FAQSection faqs={faqs} />
             </LazySection>
 
             <LazySection minHeight="500px" id="footer-lazy">

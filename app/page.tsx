@@ -8,6 +8,7 @@ import FutureFooter from "@/components/FutureFooter";
 import { connectDB } from "@/lib/mongodb";
 import ServiceModel from "@/models/Service";
 import WebPageModel from "@/models/WebPage";
+import FAQModel from "@/models/FAQ";
 
 
 export const metadata = {
@@ -74,12 +75,29 @@ async function getHomePageData() {
   }
 }
 
+async function getFaqs() {
+  try {
+    await connectDB();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rawFaqs: any[] = await FAQModel.find({ isActive: true }).sort({ order: 1, createdAt: -1 }).lean();
+    return rawFaqs.map((f) => ({
+      _id: f._id.toString(),
+      question: f.question || "",
+      answer: f.answer || "",
+    }));
+  } catch (err) {
+    console.error("Failed to fetch FAQs:", err);
+    return [];
+  }
+}
+
 export default async function Home() {
     const isActive = await checkPageStatus("/");
     if (!isActive) return notFound();
 
   const services = await getServices();
   const cmsData = await getHomePageData();
+  const faqs = await getFaqs();
 
   return (
     <>
@@ -87,7 +105,7 @@ export default async function Home() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"RecentureSoft","description":"RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.","url":"https://recenturesoft.com"}) }} />
         <Navbar />
         <Hero cmsData={cmsData} />
-        <HomeSectionsContainer services={services} cmsData={cmsData} footer={<FutureFooter />} />
+        <HomeSectionsContainer services={services} faqs={faqs} cmsData={cmsData} footer={<FutureFooter />} />
       </main>
       <CookieConsentBanner />
     </>
