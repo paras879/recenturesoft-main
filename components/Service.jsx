@@ -22,7 +22,7 @@ function LaptopFrame({ activeSlide, images, fallbacks }) {
                                 alt={`Slide ${i + 1}`}
                                 fill
                                 sizes="(max-width: 768px) 320px, (max-width: 1024px) 420px, 550px"
-                                className="object-cover object-top block"
+                                className="object-contain block bg-white dark:bg-slate-900"
                             />
                         </div>
                     ))}
@@ -41,7 +41,7 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
 
     return (
         <div className="w-full h-full flex items-center justify-center p-4">
-            <div className="relative w-[100px] md:w-[140px] lg:w-[160px] aspect-[9/19] bg-slate-900 rounded-[2rem] border-[5px] md:border-[6px] border-slate-900 shadow-2xl overflow-hidden group">
+            <div className="relative w-[100px] md:w-[140px] lg:w-[160px] aspect-[9/19] bg-white dark:bg-slate-900 rounded-[1rem] border-[5px] md:border-[6px] border-slate-900 shadow-2xl overflow-hidden group">
                 {/* iPhone Notch */}
                 <div className="w-full h-full relative z-10">
                     {imgs.map((src, i) => (
@@ -54,7 +54,7 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
                                 alt={`Mobile Slide ${i + 1}`}
                                 fill
                                 sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 160px"
-                                className="object-cover object-top block"
+                                className="object-contain block bg-white dark:bg-slate-900"
                             />
                         </div>
                     ))}
