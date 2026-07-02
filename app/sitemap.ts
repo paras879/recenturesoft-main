@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
     '/about',
+    '/ai-seo',
     '/amazon-store-management',
     '/android-application-development',
     '/blog',

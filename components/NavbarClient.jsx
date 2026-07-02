@@ -87,6 +87,7 @@ const solutionsMenu = [
             { name: "SEO Package", href: "/seo-package" },
             { name: "Social Networking", href: "/social-networking" },
             { name: "Content Writing", href: "/content-writing" },
+            { name: "AI SEO", href: "/ai-seo" },
         ]
     }
 ];
