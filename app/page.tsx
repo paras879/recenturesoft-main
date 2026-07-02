@@ -16,8 +16,8 @@ export const metadata = {
     description: "Explore our expert services and solutions at RecentureSoft.",
     alternates: { canonical: "/" }
 };
-// Always fetch fresh data from MongoDB on every request (like dev mode)
-export const dynamic = "force-dynamic";
+// Use Incremental Static Regeneration (ISR) to cache the page for 60 seconds
+export const revalidate = 60;
 
 type ServiceData = {
   _id: string;
