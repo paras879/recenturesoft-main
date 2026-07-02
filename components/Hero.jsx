@@ -136,7 +136,7 @@ const HeroScene = HeroGraphic;
 const SLIDES = [
     {
         id: 0,
-        bg: "/hero_bg_1.jpg",
+        bg: "/hero_bg_1.webp",
         accent: "#0ea5e9",
         accentGrad: "from-cyan-500 via-blue-500 to-indigo-500",
         glowColor: "bg-cyan-500/20",
@@ -152,7 +152,7 @@ const SLIDES = [
     },
     {
         id: 1,
-        bg: "/hero_bg_2.jpg",
+        bg: "/hero_bg_2.webp",
         accent: "#a855f7",
         accentGrad: "from-purple-500 via-pink-500 to-indigo-500",
         glowColor: "bg-purple-500/20",
@@ -168,7 +168,7 @@ const SLIDES = [
     },
     {
         id: 2,
-        bg: "/hero_bg_3.jpg",
+        bg: "/hero_bg_3.webp",
         accent: "#10b981",
         accentGrad: "from-emerald-500 via-teal-500 to-cyan-500",
         glowColor: "bg-emerald-500/20",
@@ -247,33 +247,23 @@ export default function Hero({ cmsData = {} }) {
         <section ref={heroRef} className="relative h-[100svh] min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
             {/* ── Background image slideshow ── */}
-            <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 z-0 bg-black">
-                {SLIDES.map((s, index) => {
-                    const slideBg = cmsData.hero?.[`slide${index + 1}`]?.bg || s.bg;
-                    return (
-                        <div
-                            key={s.id + "-bg"}
-                            className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
-                            style={{ opacity: current === index ? 1 : 0, zIndex: current === index ? 10 : 0 }}
-                        >
-                            <Image
-                                src={slideBg}
-                                alt={`Hero ${index}`}
-                                fill
-                                priority={index === 0}
-                                sizes="100vw"
-                                className="object-cover"
-                                quality={60}
-                            />
-                            {/* Darken overlay */}
-                            <div className="absolute inset-0 bg-white/70 dark:bg-[#030712]/75 md:dark:bg-[#030712]/65" />
-                            {/* Gradient from left so text is legible */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:via-white/80 dark:from-[#030712] dark:via-[#030712]/90 md:dark:via-[#030712]/80 via-60% md:via-40% to-transparent" />
-                            {/* Bottom fade */}
-                            <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
-                        </div>
-                    );
-                })}
+            <motion.div
+                style={{ scale: bgScale, opacity: bgOpacity }}
+                className="absolute inset-0 z-0 bg-black"
+            >
+                <Image
+                    src={slide.bg}
+                    alt="Hero Background"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
+                    quality={60}
+                />
+
+                <div className="absolute inset-0 bg-white/70 dark:bg-[#030712]/75 md:dark:bg-[#030712]/65" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:via-white/80 dark:from-[#030712] dark:via-[#030712]/90 md:dark:via-[#030712]/80 via-60% md:via-40% to-transparent" />
+                <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
             </motion.div>
 
             {/* ── Ambient glow blob (accent coloured) ── */}

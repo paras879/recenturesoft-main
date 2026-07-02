@@ -12,7 +12,9 @@ async function getPageData(path: string) {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string[] } }) {
-    const path = "/" + params.slug.join("/");
+    const path = params?.slug?.length
+        ? "/" + params.slug.join("/")
+        : "/";
     const page = await getPageData(path);
     if (!page) return {};
     return {
@@ -22,9 +24,11 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
 }
 
 export default async function DynamicPage({ params }: { params: { slug: string[] } }) {
-    const path = "/" + params.slug.join("/");
+    const path = params?.slug?.length
+        ? "/" + params.slug.join("/")
+        : "/";
     const page = await getPageData(path);
-    
+
     if (!page) {
         notFound();
     }
