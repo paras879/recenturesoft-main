@@ -3,11 +3,13 @@
 // React hooks removed for native CSS optimization
 import AboutSection from "./AboutSection";
 import Service from "./Service";
-import TechStack from "./TechStack";
-import Review from "./Review";
-import Status from "./StatsDashboard";
-import TrustedClients from "./TrustedClients";
-import FAQSection from "./FAQSection";
+import dynamic from "next/dynamic";
+
+const TechStack = dynamic(() => import("./TechStack"));
+const Review = dynamic(() => import("./Review"));
+const Status = dynamic(() => import("./StatsDashboard"));
+const TrustedClients = dynamic(() => import("./TrustedClients"));
+const FAQSection = dynamic(() => import("./FAQSection"));
 
 // Standard wrapper without lazy rendering so the browser paints everything upfront, eliminating scroll stutter.
 function LazySection({ children, id }) {
