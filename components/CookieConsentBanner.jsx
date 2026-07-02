@@ -47,21 +47,21 @@ export default function CookieConsentBanner() {
                         >
                             <X className="w-4 h-4" />
                         </button>
-                        
+
                         <div className="flex items-center gap-3 mb-3">
                             <div className="p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl shrink-0">
                                 <Cookie className="w-5 h-5" />
                             </div>
                             <h3 className="text-base font-bold text-slate-900 dark:text-white">We use cookies</h3>
                         </div>
-                        
+
                         <p className="text-sm text-slate-600 dark:text-gray-400 mb-5 leading-relaxed">
                             We use cookies to improve your experience and analyze traffic. See our{" "}
                             <Link href="/cookies" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
                                 Cookies Policy
                             </Link>.
                         </p>
-                        
+
                         <div className="flex items-center gap-3 w-full">
                             <button
                                 onClick={handleDecline}

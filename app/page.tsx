@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HomeSectionsContainer from "@/components/HomeSectionsContainer";
 import dynamic from "next/dynamic";
-const CookieConsentBanner = dynamic(() => import("@/components/CookieConsentBanner"), { ssr: false });
+const CookieConsentBanner = dynamic(() => import("@/components/CookieConsentBanner"));
 const FutureFooter = dynamic(() => import("@/components/FutureFooter"));
 import { connectDB } from "@/lib/mongodb";
 import ServiceModel from "@/models/Service";
