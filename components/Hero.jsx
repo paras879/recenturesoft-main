@@ -221,13 +221,35 @@ export default function Hero({ cmsData = {} }) {
     const sphereY = 0;
 
     // ── Auto-slide timer & Desktop check ─────
+    // FIX #3 (duplicate image fetches on Lighthouse mobile run):
+    // The carousel used to start immediately on mount. Under Lighthouse's
+    // "Slow 4G" mobile throttling, a full page load can take 20-30s+, so the
+    // 6s interval was firing multiple times *before* the page had even
+    // finished loading — causing every slide image to be fetched twice
+    // during a single throttled run. We now wait for the `load` event
+    // before starting the carousel, so only the first (LCP) image is
+    // requested while the page is loading.
     const [isDesktop, setIsDesktop] = useState(false);
     useEffect(() => {
         setIsDesktop(window.innerWidth >= 768);
-        const timer = setInterval(() => {
-            setCurrent((c) => (c + 1) % SLIDES.length);
-        }, INTERVAL);
-        return () => clearInterval(timer);
+
+        let timer;
+        const startCarousel = () => {
+            timer = setInterval(() => {
+                setCurrent((c) => (c + 1) % SLIDES.length);
+            }, INTERVAL);
+        };
+
+        if (document.readyState === "complete") {
+            startCarousel();
+        } else {
+            window.addEventListener("load", startCarousel, { once: true });
+        }
+
+        return () => {
+            clearInterval(timer);
+            window.removeEventListener("load", startCarousel);
+        };
     }, []);
 
     const slide = SLIDES[current];
@@ -251,11 +273,20 @@ export default function Hero({ cmsData = {} }) {
                 style={{ scale: bgScale, opacity: bgOpacity }}
                 className="absolute inset-0 z-0 bg-black"
             >
+                {/*
+                  FIX (LCP / duplicate & competing fetches):
+                  `priority` was previously always `true`, meaning every slide
+                  change re-fetched its image with fetchpriority="high" — this
+                  competed with the actual LCP image (slide 0) for bandwidth
+                  and pushed LCP up. Only slide 0 should be high priority; the
+                  rest should load lazily/normally as the user reaches them.
+                */}
                 <Image
                     src={slide.bg}
                     alt="Hero Background"
                     fill
-                    priority
+                    priority={current === 0}
+                    fetchPriority={current === 0 ? "high" : "auto"}
                     sizes="100vw"
                     className="object-cover"
                     quality={60}
