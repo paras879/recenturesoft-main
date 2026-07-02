@@ -23,8 +23,6 @@ function LaptopFrame({ activeSlide, images, fallbacks }) {
                                 fill
                                 sizes="(max-width: 768px) 320px, (max-width: 1024px) 420px, 550px"
                                 className="object-contain block bg-white dark:bg-slate-900"
-                                quality={60}
-                                loading="lazy"
                             />
                         </div>
                     ))}
@@ -57,8 +55,6 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
                                 fill
                                 sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 160px"
                                 className="object-contain block bg-white dark:bg-slate-900"
-                                quality={60}
-                                loading="lazy"
                             />
                         </div>
                     ))}
