@@ -212,7 +212,7 @@ export default function Hero({ cmsData = {} }) {
     const [current, setCurrent] = useState(0);
     const heroRef = useRef(null);
     const { openModal } = useProjectModal();
-    const INTERVAL = 3000;
+    const INTERVAL = 6000;
 
     // ── Scroll parallax (Static/CSS optimized) ──────────────────────
     const contentY = 0;
@@ -256,21 +256,19 @@ export default function Hero({ cmsData = {} }) {
                             className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
                             style={{ opacity: current === index ? 1 : 0, zIndex: current === index ? 10 : 0 }}
                         >
-                            {(index === 0 || current === index) && (
-                                <Image
-                                    src={slideBg}
-                                    alt={`Hero ${index}`}
-                                    fill
-                                    priority={index === 0}
-                                    sizes="(max-width: 480px) 280px, (max-width: 768px) 480px, 100vw"
-                                    className="object-cover"
-                                    quality={60}
-                                />
-                            )}
-                        {/* Darken overlay */}
-                        <div className="absolute inset-0 bg-white/70 dark:bg-[#030712]/75 md:dark:bg-[#030712]/65" />
-                        {/* Gradient from left so text is legible */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:via-white/80 dark:from-[#030712] dark:via-[#030712]/90 md:dark:via-[#030712]/80 via-60% md:via-40% to-transparent" />
+                            <Image
+                                src={slideBg}
+                                alt={`Hero ${index}`}
+                                fill
+                                priority={index === 0}
+                                sizes="100vw"
+                                className="object-cover"
+                                quality={60}
+                            />
+                            {/* Darken overlay */}
+                            <div className="absolute inset-0 bg-white/70 dark:bg-[#030712]/75 md:dark:bg-[#030712]/65" />
+                            {/* Gradient from left so text is legible */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:via-white/80 dark:from-[#030712] dark:via-[#030712]/90 md:dark:via-[#030712]/80 via-60% md:via-40% to-transparent" />
                             {/* Bottom fade */}
                             <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
                         </div>
