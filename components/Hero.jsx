@@ -136,7 +136,7 @@ const HeroScene = HeroGraphic;
 const SLIDES = [
     {
         id: 0,
-        bg: "/hero_bg_1.webp",
+        bg: "/hero_bg_1.jpg",
         accent: "#0ea5e9",
         accentGrad: "from-cyan-500 via-blue-500 to-indigo-500",
         glowColor: "bg-cyan-500/20",
@@ -152,7 +152,7 @@ const SLIDES = [
     },
     {
         id: 1,
-        bg: "/hero_bg_2.webp",
+        bg: "/hero_bg_2.jpg",
         accent: "#a855f7",
         accentGrad: "from-purple-500 via-pink-500 to-indigo-500",
         glowColor: "bg-purple-500/20",
@@ -168,7 +168,7 @@ const SLIDES = [
     },
     {
         id: 2,
-        bg: "/hero_bg_3.webp",
+        bg: "/hero_bg_3.jpg",
         accent: "#10b981",
         accentGrad: "from-emerald-500 via-teal-500 to-cyan-500",
         glowColor: "bg-emerald-500/20",
