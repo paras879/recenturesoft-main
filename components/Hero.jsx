@@ -262,9 +262,9 @@ export default function Hero({ cmsData = {} }) {
                                     alt={`Hero ${index}`}
                                     fill
                                     priority={index === 0}
-                                    sizes="(max-width: 768px) 480px, 100vw"
+                                    sizes="(max-width: 480px) 280px, (max-width: 768px) 480px, 100vw"
                                     className="object-cover"
-                                    quality={75}
+                                    quality={60}
                                 />
                             )}
                         {/* Darken overlay */}

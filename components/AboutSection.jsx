@@ -145,9 +145,10 @@ export default function AboutSection({ cmsData = {} }) {
                                     src={d.image1 || "/about/about1.jpg"}
                                     alt="Innovative digital workspace"
                                     fill
-                                    sizes="320px"
+                                    sizes="(max-width: 768px) 100vw, 320px"
                                     className="object-cover"
                                     loading="lazy"
+                                    quality={60}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             </TiltCard>
@@ -158,9 +159,10 @@ export default function AboutSection({ cmsData = {} }) {
                                     src={d.image2 || "/about/about2.jpg"}
                                     alt="Advanced Cloud infrastructure"
                                     fill
-                                    sizes="290px"
+                                    sizes="(max-width: 768px) 100vw, 290px"
                                     className="object-cover"
                                     loading="lazy"
+                                    quality={60}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             </TiltCard>
@@ -171,9 +173,10 @@ export default function AboutSection({ cmsData = {} }) {
                                     src={d.image3 || "/about/about3.jpg"}
                                     alt="AI and data integrations"
                                     fill
-                                    sizes="310px"
+                                    sizes="(max-width: 768px) 100vw, 310px"
                                     className="object-cover"
                                     loading="lazy"
+                                    quality={60}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             </TiltCard>
