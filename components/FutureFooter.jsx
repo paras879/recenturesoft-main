@@ -179,7 +179,7 @@ export default async function FutureFooter() {
                         <div
                             className="flex items-center gap-4 mb-4 md:mb-8"
                         >
-                            <img src={logoUrl} alt="RecentureSoft Logo" className="h-20 w-auto object-contain drop-shadow-sm" />
+                            <img src={logoUrl} alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm" />
                         </div>
 
                         <p
