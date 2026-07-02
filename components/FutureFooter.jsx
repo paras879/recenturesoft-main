@@ -199,16 +199,16 @@ export default async function FutureFooter() {
                                 { name: "YouTube", icon: FaYoutube, bg: "bg-[#FF0000]", url: socialLinks.youtube }
                             ].map(({ name, icon: Icon, bg, url }) => (
                                 url ? (
-                                <a
-                                    key={name}
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={name}
-                                    className={`w-12 h-12 rounded-full ${bg} flex items-center justify-center text-white hover:scale-110 transition-all`}
-                                >
-                                    <Icon size={18} />
-                                </a>
+                                    <a
+                                        key={name}
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={name}
+                                        className={`w-12 h-12 rounded-full ${bg} flex items-center justify-center text-white hover:scale-110 transition-all`}
+                                    >
+                                        <Icon size={18} />
+                                    </a>
                                 ) : null
                             ))}
                         </div>
@@ -243,39 +243,71 @@ export default async function FutureFooter() {
 
                 {/* ════ CONTACT & CERTIFICATIONS CARDS ════ */}
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-10">
-                    <GlassCard hoverColorClass="from-cyan-400 to-blue-500">
-                        <div className="flex flex-col h-full justify-center">
-                            <div className="flex items-center gap-3 mb-1">
-                                <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
-                                    <Icons.Email />
+                    <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block h-full"
+                    >
+                        <GlassCard hoverColorClass="from-purple-500 to-pink-500">
+                            <div className="flex flex-col h-full justify-center">
+                                <div className="flex items-center gap-3 mb-1">
+                                    <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
+                                        <Icons.MapPin />
+                                    </div>
+                                    <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">
+                                        Headquarters
+                                    </span>
                                 </div>
-                                <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Email Us</span>
+
+                                <span className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12">
+                                    {address}
+                                </span>
                             </div>
-                            <span className="text-slate-800 dark:text-white font-medium hover:text-primary transition-colors cursor-pointer text-lg">{email}</span>
-                        </div>
-                    </GlassCard>
-                    <GlassCard hoverColorClass="from-blue-500 to-indigo-500">
-                        <div className="flex flex-col h-full justify-center">
-                            <div className="flex items-center gap-3 mb-1">
-                                <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
-                                    <Icons.Phone />
+                        </GlassCard>
+                    </a>
+                    <a
+                        href="https://api.whatsapp.com/send?phone=917770003288&text=Hi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block h-full"
+                    >
+                        <GlassCard hoverColorClass="from-blue-500 to-indigo-500">
+                            <div className="flex flex-col h-full justify-center">
+                                <div className="flex items-center gap-3 mb-1">
+                                    <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
+                                        <Icons.Phone />
+                                    </div>
+                                    <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">
+                                        Call Us
+                                    </span>
                                 </div>
-                                <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Call Us</span>
+                                <span className="text-slate-800 dark:text-white font-medium text-lg">
+                                    {phone}
+                                </span>
                             </div>
-                            <span className="text-slate-800 dark:text-white font-medium text-lg">{phone}</span>
-                        </div>
-                    </GlassCard>
-                    <GlassCard hoverColorClass="from-purple-500 to-pink-500">
-                        <div className="flex flex-col h-full justify-center">
-                            <div className="flex items-center gap-3 mb-1">
-                                <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
-                                    <Icons.MapPin />
+                        </GlassCard>
+                    </a>
+                    <a
+                        href={`mailto:${email}`}
+                        className="block h-full"
+                    >
+                        <GlassCard hoverColorClass="from-cyan-400 to-blue-500">
+                            <div className="flex flex-col h-full justify-center">
+                                <div className="flex items-center gap-3 mb-1">
+                                    <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-gray-400">
+                                        <Icons.Email />
+                                    </div>
+                                    <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">
+                                        Email Us
+                                    </span>
                                 </div>
-                                <span className="text-xs uppercase tracking-widest text-slate-600 dark:text-gray-400 font-semibold">Headquarters </span>
+                                <span className="text-slate-800 dark:text-white font-medium text-lg">
+                                    {email}
+                                </span>
                             </div>
-                            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`} target="_blank" rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors block">{address}</a>
-                        </div>
-                    </GlassCard>
+                        </GlassCard>
+                    </a>
                 </div>
 
                 {/* ════ PREMIUM BOTTOM BAR ════ */}

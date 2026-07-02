@@ -18,7 +18,7 @@ function TechOrbitBackground() {
                 <circle cx="90" cy="250" r="4" fill="#6366f1" />
                 <circle cx="410" cy="250" r="5" fill="#a855f7" />
                 <circle cx="250" cy="410" r="4" fill="#0ea5e9" />
-                
+
                 {/* Connecting lines */}
                 <path d="M 250 30 L 250 410 M 90 250 L 410 250" stroke="rgba(99, 102, 241, 0.08)" strokeWidth="1" />
                 <path d="M 137 137 L 363 363" stroke="rgba(6, 182, 212, 0.08)" strokeWidth="1" />
@@ -78,7 +78,7 @@ export default function AboutSection({ cmsData = {} }) {
     ];
 
     return (
-        <section id="aboutUs" className="relative py-[clamp(1.5rem,4vw,4.5rem)] bg-background transition-colors duration-300 overflow-hidden select-none">
+        <section id="aboutUs" className="relative py-[clamp(1.5rem,4vw,4.5rem)] bg-background transition-colors duration-300 overflow-hidden">
             {/* Ambient background glows */}
             <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-cyan-500/5 blur-[100px] md:blur-[160px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-indigo-600/5 blur-[100px] md:blur-[160px] rounded-full pointer-events-none" />
