@@ -1,3 +1,7 @@
+import { connectDB } from "@/lib/mongodb";
+import News from "@/models/News";
+import { NextResponse } from "next/server";
+
 export async function GET(request) {
     const MOCK_NEWS = [
         {
@@ -54,83 +58,70 @@ export async function GET(request) {
         const { searchParams } = new URL(request.url);
         const category = searchParams.get("category") || "all";
         const search = searchParams.get("search") || "";
-        const pageToken = searchParams.get("page") || "";
+        const pageToken = searchParams.get("page") || "1";
 
-        const apiKey = process.env.NEWSDATA_API_KEY;
+        await connectDB();
 
-        // If API key is missing, return high-quality mocked tech news gracefully
-        if (!apiKey || apiKey === "your_api_key") {
-            console.warn("NEWSDATA_API_KEY is not defined. Serving fallback mock technology news.");
-            return Response.json({
-                results: MOCK_NEWS,
-                nextPage: null
-            });
+        const query = {};
+        
+        // Map common terms to DB fields
+        if (category && category !== "all") {
+            query.categories = { $regex: category, $options: 'i' };
         }
-
-        // Map UI categories to NewsData search terms under technology category
-        const categoryMap = {
-            all: '"information technology" OR software OR developer OR cybersecurity OR ai',
-            technology: '"information technology" OR software OR developer OR programming',
-            ai: 'ai OR "artificial intelligence" OR "machine learning"',
-            cybersecurity: 'cybersecurity OR "data security" OR "cyber attack"',
-            cloud: '"cloud computing" OR aws OR azure',
-            programming: 'programming OR coding OR developer',
-            startups: 'startup OR startups OR venture'
-        };
-
-        const catQuery = categoryMap[category] || "";
-        let qTerms = "";
 
         if (search.trim()) {
-            qTerms = search.trim();
-            if (catQuery) {
-                qTerms = `(${qTerms}) AND (${catQuery})`;
-            }
-        } else if (catQuery) {
-            qTerms = catQuery;
+            query.$text = { $search: search.trim() };
         }
 
-        let newsUrl = `https://newsdata.io/api/1/news?apikey=${apiKey}&category=technology&language=en`;
-        if (qTerms) {
-            newsUrl += `&q=${encodeURIComponent(qTerms)}`;
-        }
-        if (pageToken) {
-            newsUrl += `&page=${encodeURIComponent(pageToken)}`;
+        const limit = 10;
+        const page = parseInt(pageToken, 10) || 1;
+        const skip = (page - 1) * limit;
+
+        let dbNews = [];
+        if (search.trim()) {
+            dbNews = await News.find(query)
+                .sort({ score: { $meta: "textScore" } })
+                .skip(skip)
+                .limit(limit)
+                .lean();
+        } else {
+            dbNews = await News.find(query)
+                .sort({ pubDate: -1 })
+                .skip(skip)
+                .limit(limit)
+                .lean();
         }
 
-        const res = await fetch(newsUrl, {
-            next: { revalidate: 3600 } // 1 hour caching
-        });
-
-        if (!res.ok) {
-            const errText = await res.text();
-            console.error(`NewsData API error status ${res.status}: ${errText}`);
-            // Serve mock fallback on rate limit (status 429) or other errors to protect page availability
-            return Response.json({
+        // Return MOCK_NEWS if DB is empty
+        if (dbNews.length === 0 && page === 1 && !search) {
+            return NextResponse.json({
                 results: MOCK_NEWS,
                 nextPage: null,
-                warning: "Serving mock news due to API rate limit or validation error."
+                warning: "Serving mock news (DB is empty)"
             });
         }
 
-        const data = await res.json();
-        
-        if (data.status === "error") {
-            console.error("NewsData API error payload:", data);
-            return Response.json({
-                results: MOCK_NEWS,
-                nextPage: null,
-                warning: "Serving mock news due to API payload error."
-            });
-        }
+        const formattedResults = dbNews.map(item => ({
+            title: item.title,
+            description: item.description,
+            image_url: item.image_url,
+            source_id: item.source_id,
+            pubDate: item.pubDate,
+            link: item.link,
+            category: item.categories
+        }));
 
-        return Response.json({
-            results: data.results || [],
-            nextPage: data.nextPage || null
+        const hasNextPage = formattedResults.length === limit;
+        const nextPageId = hasNextPage ? String(page + 1) : null;
+
+        return NextResponse.json({
+            results: formattedResults,
+            nextPage: nextPageId
         });
+
     } catch (error) {
-        console.error("NewsData API integration error:", error);
-        return Response.json({
+        console.error("News API DB fetch error:", error);
+        return NextResponse.json({
             results: MOCK_NEWS,
             nextPage: null,
             warning: "Serving mock news due to server integration crash."
