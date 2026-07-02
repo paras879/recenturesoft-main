@@ -145,7 +145,7 @@ export default function AboutSection({ cmsData = {} }) {
                                     src={d.image1 || "/about/about1.jpg"}
                                     alt="Innovative digital workspace"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 320px"
+                                    sizes="(max-width: 768px) 100vw, 200px"
                                     className="object-cover"
                                     loading="lazy"
                                     quality={60}
@@ -159,7 +159,7 @@ export default function AboutSection({ cmsData = {} }) {
                                     src={d.image2 || "/about/about2.jpg"}
                                     alt="Advanced Cloud infrastructure"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 290px"
+                                    sizes="(max-width: 768px) 100vw, 200px"
                                     className="object-cover"
                                     loading="lazy"
                                     quality={60}
@@ -173,7 +173,7 @@ export default function AboutSection({ cmsData = {} }) {
                                     src={d.image3 || "/about/about3.jpg"}
                                     alt="AI and data integrations"
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 310px"
+                                    sizes="(max-width: 768px) 100vw, 200px"
                                     className="object-cover"
                                     loading="lazy"
                                     quality={60}

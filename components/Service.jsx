@@ -21,7 +21,7 @@ function LaptopFrame({ activeSlide, images, fallbacks }) {
                                 src={src}
                                 alt={`Slide ${i + 1}`}
                                 fill
-                                sizes="(max-width: 768px) 320px, (max-width: 1024px) 420px, 550px"
+                                sizes="(max-width: 768px) 320px, (max-width: 1024px) 420px, 200px"
                                 className="object-contain block bg-white dark:bg-slate-900"
                             />
                         </div>
@@ -53,7 +53,7 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
                                 src={src}
                                 alt={`Mobile Slide ${i + 1}`}
                                 fill
-                                sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 160px"
+                                sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 100px"
                                 className="object-contain block bg-white dark:bg-slate-900"
                             />
                         </div>
