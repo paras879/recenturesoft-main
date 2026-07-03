@@ -6,6 +6,7 @@ import Image from "next/image";
 import IphoneAppsContent from "@/components/iphone-apps-development/IphoneAppsContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "iPhone App Development Company In India | RecentureSoft",
@@ -38,6 +39,10 @@ export default async function IphoneAppsPage() {
             </section>
 
             <SolutionContactForm serviceName="iPhone Apps Development" />
+
+
+            <PageFAQSection pageName="iphone-apps-development" />
+
 
 
             <FutureFooter />

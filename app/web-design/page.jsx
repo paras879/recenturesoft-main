@@ -6,6 +6,7 @@ import Image from "next/image";
 import WebDesignContent from "@/components/web-design/WebDesignContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Best Web Design Company In India | RecentureSoft",
@@ -38,6 +39,10 @@ export default async function WebDesignPage() {
             </section>
 
             <SolutionContactForm serviceName="Web Design" />
+
+
+            <PageFAQSection pageName="web-design" />
+
 
 
             <FutureFooter />

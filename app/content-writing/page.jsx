@@ -6,6 +6,7 @@ import Image from "next/image";
 import ContentWritingContent from "@/components/content-writing/ContentWritingContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Content Writing Company In India | RecentureSoft",
@@ -38,6 +39,10 @@ export default async function ContentWritingPage() {
             </section>
 
             <SolutionContactForm serviceName="Content Writing" />
+
+
+            <PageFAQSection pageName="content-writing" />
+
 
 
             <FutureFooter />

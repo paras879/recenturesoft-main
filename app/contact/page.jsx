@@ -4,6 +4,7 @@ import ContactHero from "@/components/contact/ContactHero";
 import InteractiveContactForm from "@/components/contact/InteractiveContactForm";
 import FutureFooter from "@/components/FutureFooter";
 import Navbar from "@/components/Navbar";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 
 export const metadata = {
@@ -23,6 +24,9 @@ export default async function ContactPage() {
             <ContactHero />
 
             <InteractiveContactForm />
+
+            <PageFAQSection pageName="contact" />
+
 
             <FutureFooter />
         </main>

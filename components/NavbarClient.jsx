@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight } from "lucide-react";
@@ -144,21 +143,27 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                 onMouseEnter={() => setHoveredLink(link.name)}
                                 onMouseLeave={() => setHoveredLink(null)}
                             >
-                                <Link
-                                    href={link.href}
-                                    prefetch={true}
-                                    className="relative px-3 py-2 text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 z-10 flex items-center gap-1"
-                                >
-                                    {link.name}
-                                    {link.name === "Solutions" && (
+                                {link.name === "Solutions" ? (
+                                    <span
+                                        className="relative px-3 py-2 text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 z-10 flex items-center gap-1 cursor-default select-none"
+                                    >
+                                        {link.name}
                                         <svg 
                                             className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredLink === "Solutions" ? "-rotate-180" : ""}`} 
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         >
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                                         </svg>
-                                    )}
-                                </Link>
+                                    </span>
+                                ) : (
+                                    <Link
+                                        href={link.href}
+                                        prefetch={true}
+                                        className="relative px-3 py-2 text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 z-10 flex items-center gap-1"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                )}
                                 <AnimatePresence>
                                     {hoveredLink === link.name && link.name !== "Solutions" && (
                                         <motion.div

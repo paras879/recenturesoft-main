@@ -2,9 +2,10 @@ import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import CmsContent from "@/components/cms/CmsContent";
-import CmsFaq from "@/components/cms/CmsFaq";
+
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Best CMS Software Development Company In India | RecentureSoft",
@@ -30,11 +31,15 @@ export default function CmsPage() {
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-4xl mx-auto">
                     <CmsContent />
-                    <CmsFaq />
+
                 </div>
             </section>
 
             <SolutionContactForm serviceName="CMS Development" />
+
+
+            <PageFAQSection pageName="cms" />
+
 
 
             <FutureFooter />

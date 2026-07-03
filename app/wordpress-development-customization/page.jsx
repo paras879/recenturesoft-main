@@ -6,6 +6,7 @@ import Image from "next/image";
 import WordPressContent from "@/components/wordpress-development-customization/WordPressContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "WordPress Development & Customization Company In India | RecentureSoft",
@@ -38,6 +39,10 @@ export default async function WordPressPage() {
             </section>
 
             <SolutionContactForm serviceName="WordPress Development" />
+
+
+            <PageFAQSection pageName="wordpress-development-customization" />
+
 
 
             <FutureFooter />

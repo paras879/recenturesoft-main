@@ -6,6 +6,7 @@ import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import { connectDB } from "@/lib/mongodb";
 import JobOpening from "@/models/JobOpening";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +46,8 @@ export default async function CareerPage() {
                 subtitle="Build the future of digital engineering with RecentureSoft. We are always looking for passionate minds."
             />
             <CareerContent jobs={jobs} />
+            <PageFAQSection pageName="career" />
+
             <FutureFooter />
         </main>
     );

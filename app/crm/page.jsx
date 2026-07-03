@@ -5,8 +5,9 @@ import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import CrmContent from "@/components/crm/CrmContent";
-import CrmFaq from "@/components/crm/CrmFaq";
+
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Best CRM Software Development Company In India | RecentureSoft",
@@ -36,11 +37,15 @@ export default async function CrmPage() {
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-4xl mx-auto">
                     <CrmContent />
-                    <CrmFaq />
+
                 </div>
             </section>
 
             <SolutionContactForm serviceName="CRM Development" />
+
+
+            <PageFAQSection pageName="crm" />
+
 
 
             <FutureFooter />

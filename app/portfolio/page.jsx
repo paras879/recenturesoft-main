@@ -8,6 +8,7 @@ import Transformations from "@/components/portfolio/Transformations";
 import CTASection from "@/components/CTASection";
 import { connectDB } from "@/lib/mongodb";
 import Portfolio from "@/models/Portfolio";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Portfolio | Enterprise Projects & Case Studies | RecentureSoft",
@@ -64,6 +65,8 @@ export default async function PortfolioPage() {
                 primaryBtnText="Start Your Project"
                 secondaryBtnText="Explore Case Studies"
             />
+            <PageFAQSection pageName="portfolio" />
+
             <FutureFooter />
         </main>
     );

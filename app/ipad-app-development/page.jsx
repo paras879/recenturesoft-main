@@ -6,6 +6,7 @@ import Image from "next/image";
 import IpadAppsContent from "@/components/ipad-app-development/IpadAppsContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "iPad App Development Company In India | RecentureSoft",
@@ -38,6 +39,10 @@ export default async function IpadAppsPage() {
             </section>
 
             <SolutionContactForm serviceName="iPad App Development" />
+
+
+            <PageFAQSection pageName="ipad-app-development" />
+
 
 
             <FutureFooter />

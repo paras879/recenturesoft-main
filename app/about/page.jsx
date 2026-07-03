@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import CinematicAbout from "@/components/about/CinematicAbout";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "About RecentureSoft | Digital Innovation & Enterprise Technology",
@@ -24,6 +25,8 @@ export default async function AboutPage() {
             </div>
             <Navbar />
             <CinematicAbout />
+            <PageFAQSection pageName="about" />
+
             <FutureFooter />
         </main>
     );

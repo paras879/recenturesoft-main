@@ -5,6 +5,7 @@ import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import ReactNativeContent from "@/components/react-native/ReactNativeContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "React Native App Development Company | RecentureSoft",
@@ -36,6 +37,10 @@ export default async function ReactNativePage() {
             </section>
 
             <SolutionContactForm serviceName="React Native Development" />
+
+
+            <PageFAQSection pageName="react-native" />
+
 
 
             <FutureFooter />

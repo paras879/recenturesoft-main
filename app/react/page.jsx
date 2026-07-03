@@ -5,6 +5,7 @@ import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import ReactContent from "@/components/react/ReactContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "React.js Development Services | RecentureSoft",
@@ -36,6 +37,10 @@ export default async function ReactPage() {
             </section>
 
             <SolutionContactForm serviceName="React Development" />
+
+
+            <PageFAQSection pageName="react" />
+
 
 
             <FutureFooter />

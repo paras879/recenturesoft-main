@@ -315,12 +315,13 @@ export default function Hero({ cmsData = {} }) {
                                 fetchPriority={i === 0 ? "high" : "auto"}
                                 sizes="100vw"
                                 className="object-cover"
-                                quality={60}
+                                quality={90}
+                                property="hero-bg"
                             />
                         </div>
                     ))}
 
-                    <div className="absolute inset-0 bg-white/0 dark:bg-[#030712]/50" />
+                    <div className="absolute inset-0 bg-white/5 md:bg-white/0 dark:bg-[#030712]/50" />
                     <div
                         className="absolute inset-0"
                         style={{
@@ -400,7 +401,7 @@ export default function Hero({ cmsData = {} }) {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit="exit"
                                     custom={2}
-                                    className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-600 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400]"
+                                    className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-800 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400]"
                                 >
                                     {displayDesc}
                                 </motion.p>
@@ -416,7 +417,7 @@ export default function Hero({ cmsData = {} }) {
                                 >
                                     <button
                                         onClick={openModal}
-                                        className="group relative px-6 md:px-8 py-3.5 md:py-4 rounded-full font-[600] text-white shadow-lg md:hover:scale-105 active:scale-[0.98] transition-all duration-300 overflow-hidden w-full sm:w-auto text-center"
+                                        className="group relative px-6 md:px-8 py-3.5 md:py-4 rounded-full font-[600] text-white shadow-lg md:hover:scale-105 active:scale-[0.98] transition-all duration-300 overflow-hidden w-full max-w-[380px] sm:w-auto text-center"
                                         style={{
                                             background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`,
                                             boxShadow: `0 8px 32px ${slide.accent}40`,
@@ -424,7 +425,7 @@ export default function Hero({ cmsData = {} }) {
                                     >
                                         <span className="relative z-10">{displayCta1}</span>
                                     </button>
-                                    <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 text-slate-800 dark:text-white font-[500] md:hover:bg-slate-100 dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-sm transition-all duration-300 w-full sm:w-auto text-center">
+                                    <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
                                         {displayCta2}
                                     </button>
                                 </motion.div>
@@ -437,7 +438,7 @@ export default function Hero({ cmsData = {} }) {
                               plain CSS fade-in with staggered transition-delay
                               — visually identical, zero JS animation cost.
                             */}
-                                <div className="mt-4 flex flex-wrap gap-2 max-w-md md:gap-3 pb-2">
+                                <div className="mt-6 flex flex-wrap gap-2 max-w-md md:gap-3 pb-2">
                                     {SERVICES.map((item, i) => (
                                         <div
                                             key={item}

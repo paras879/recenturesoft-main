@@ -80,7 +80,7 @@ async function getFaqs() {
   try {
     await connectDB();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rawFaqs: any[] = await FAQModel.find({ isActive: true }).sort({ order: 1, createdAt: -1 }).lean();
+    const rawFaqs: any[] = await FAQModel.find({ isActive: true, $or: [{ page: "home" }, { page: { $exists: false } }, { page: "" }] }).sort({ order: 1, createdAt: -1 }).lean();
     return rawFaqs.map((f) => ({
       _id: f._id.toString(),
       question: f.question || "",

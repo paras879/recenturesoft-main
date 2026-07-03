@@ -6,6 +6,7 @@ import Image from "next/image";
 import SeoPackageContent from "@/components/seo-package/SeoPackageContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "SEO Packages In India | RecentureSoft",
@@ -38,6 +39,10 @@ export default async function SeoPackagePage() {
             </section>
 
             <SolutionContactForm serviceName="SEO Package" />
+
+
+            <PageFAQSection pageName="seo-package" />
+
 
 
             <FutureFooter />

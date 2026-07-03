@@ -9,6 +9,7 @@ import SolutionsProcess from "@/components/solutions/SolutionsProcess";
 import CTASection from "@/components/CTASection";
 import { connectDB } from "@/lib/mongodb";
 import Service from "@/models/Service";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Enterprise Solutions | RecentureSoft",
@@ -55,6 +56,9 @@ export default async function SolutionsPage() {
                 primaryBtnText="Start Your Project"
                 secondaryBtnText="Schedule Consultation"
             />
+            
+            <PageFAQSection pageName="solutions" />
+
             
             <FutureFooter />
         </main>

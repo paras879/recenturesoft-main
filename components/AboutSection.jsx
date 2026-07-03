@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CheckCircle } from "lucide-react";
 
 // Elegant, high-performance SVG tech orbit background to replace 3D canvas
@@ -124,12 +125,12 @@ export default function AboutSection({ cmsData = {} }) {
 
                         {/* CTA Buttons */}
                         <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4">
-                            <button className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:scale-105 transition duration-300 text-center">
+                            <Link href="/contact" className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:scale-105 transition duration-300 text-center">
                                 Get Started
-                            </button>
-                            <button className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:border-cyan-400/40 transition duration-300 text-center">
+                            </Link>
+                            <Link href="/portfolio" className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:border-cyan-400/40 transition duration-300 text-center">
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                     </div>
 

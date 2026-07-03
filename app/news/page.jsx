@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import FutureFooter from "@/components/FutureFooter";
 import NewsList from "@/components/news/NewsList";
 import CTASection from "@/components/CTASection";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Tech Pulse | Live Technology News & Insights",
@@ -58,6 +59,8 @@ export default async function NewsPage() {
                     secondaryBtnText="Download Press Kit"
                 />
             </div>
+            <PageFAQSection pageName="news" />
+
             <FutureFooter />
         </main>
     );

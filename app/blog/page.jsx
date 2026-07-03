@@ -9,6 +9,7 @@ import CTASection from "@/components/CTASection";
 import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import BlogCategory from "@/models/BlogCategory";
+import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
     title: "Blog & Insights | Software Engineering, AI & Digital Innovation",
@@ -62,6 +63,8 @@ export default async function BlogPage() {
                 primaryBtnText="Subscribe Now"
                 secondaryBtnText="Follow on Twitter"
             />
+            <PageFAQSection pageName="blog" />
+
             <FutureFooter />
         </main>
     );
