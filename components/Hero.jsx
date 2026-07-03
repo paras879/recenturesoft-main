@@ -294,7 +294,7 @@ export default function Hero({ cmsData = {} }) {
         // used here, instead of the full feature set). Requires using the
         // `m` component instead of `motion` inside — see notes at bottom.
         <LazyMotion features={domAnimation} strict={false}>
-            <section ref={heroRef} className="relative h-[100svh] min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
+            <section ref={heroRef} className="relative min-h-screen min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
                 {/* ── Background image slideshow ── */}
                 <motion.div
@@ -320,7 +320,7 @@ export default function Hero({ cmsData = {} }) {
                         </div>
                     ))}
 
-                    <div className="absolute inset-0 bg-white/15 dark:bg-[#030712]/50" />
+                    <div className="absolute inset-0 bg-white/0 dark:bg-[#030712]/50" />
                     <div
                         className="absolute inset-0"
                         style={{
@@ -371,7 +371,7 @@ export default function Hero({ cmsData = {} }) {
                 {/* ── Text content ── */}
                 <motion.div
                     style={{ y: contentY }}
-                    className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center min-h-[100svh] pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20 gap-0 2xl:gap-16"
+                    className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-24 md:pb-12 lg:pt-28 lg:pb-16 gap-0 2xl:gap-16"
                 >
                     <div className="w-full max-w-[92%] lg:w-[70%] xl:w-[60%] 2xl:w-[55%] flex flex-col flex-1 mt-0">
                         <AnimatePresence mode="wait" initial={false}>
@@ -384,7 +384,7 @@ export default function Hero({ cmsData = {} }) {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit="exit"
                                     custom={1}
-                                    className="text-[2.2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] 2xl:text-[5.8rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
+                                    className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.6rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
                                 >
                                     {displayHeading1}
                                     <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>
@@ -437,7 +437,7 @@ export default function Hero({ cmsData = {} }) {
                               plain CSS fade-in with staggered transition-delay
                               — visually identical, zero JS animation cost.
                             */}
-                                <div className="mt-6 flex flex-wrap gap-3 max-w-md md:gap-3 pb-4">
+                                <div className="mt-4 flex flex-wrap gap-2 max-w-md md:gap-3 pb-2">
                                     {SERVICES.map((item, i) => (
                                         <div
                                             key={item}
