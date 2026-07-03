@@ -91,7 +91,7 @@ export default function AboutSection({ cmsData = {} }) {
 
 
                         {/* Title */}
-                        <h2
+                        <h1
                             className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight text-foreground tracking-tight"
                         >
                             <span className="block md:whitespace-nowrap">{d.heading1 || "Software Development"}</span>
@@ -99,7 +99,7 @@ export default function AboutSection({ cmsData = {} }) {
                                 {d.headingAccent || "& Digital Innovation"}
                             </span>
                             <span className="block md:whitespace-nowrap">{d.heading2 || "For Modern Businesses"}</span>
-                        </h2>
+                        </h1>
 
                         {/* Description */}
                         <p

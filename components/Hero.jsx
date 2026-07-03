@@ -320,7 +320,7 @@ export default function Hero({ cmsData = {} }) {
                         </div>
                     ))}
 
-                    <div className="absolute inset-0 bg-white/35 dark:bg-[#030712]/50" />
+                    <div className="absolute inset-0 bg-white/15 dark:bg-[#030712]/50" />
                     <div
                         className="absolute inset-0"
                         style={{
@@ -378,7 +378,7 @@ export default function Hero({ cmsData = {} }) {
                             <motion.div key={slide.id + "-content"}>
 
                                 {/* Heading */}
-                                <motion.h1
+                                <motion.h2
                                     variants={slideIn}
                                     initial={{ opacity: 1, y: 0 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -391,7 +391,7 @@ export default function Hero({ cmsData = {} }) {
                                         {displayHeadingAccent}
                                     </span>
                                     <span className="block 2xl:whitespace-nowrap">{displayHeading2}</span>
-                                </motion.h1>
+                                </motion.h2>
 
                                 {/* Description */}
                                 <motion.p
