@@ -65,7 +65,7 @@ function ReviewCard({ review, index }) {
             style={{ animationDelay: `${index * 0.4}s` }}
         >
             <div
-                className="group w-[85vw] sm:w-[400px] md:w-[440px] h-[300px] md:h-[340px] relative bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950/50 dark:to-slate-950/20 backdrop-blur-xl border border-slate-200 dark:border-white/[0.08] rounded-[28px] p-5 md:p-6 lg:p-8 flex flex-col justify-between cursor-pointer transition-all duration-500 overflow-hidden select-none hover:border-cyan-500/30 dark:hover:border-cyan-500/30 hover:shadow-premium dark:hover:shadow-[0_0_50px_rgba(6,182,212,0.15)] hover:-translate-y-3 hover:scale-[1.03] opacity-100"
+                className="group w-[85vw] sm:w-[400px] md:w-[440px] h-[300px] md:h-[340px] relative bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950/50 dark:to-slate-950/20 backdrop-blur-xl border border-slate-200 dark:border-white/[0.08] rounded-[28px] p-5 md:p-6 lg:p-8 flex flex-col justify-between cursor-pointer transition-all duration-500 overflow-hidden hover:border-cyan-500/30 dark:hover:border-cyan-500/30 hover:shadow-premium dark:hover:shadow-[0_0_50px_rgba(6,182,212,0.15)] hover:-translate-y-3 hover:scale-[1.03] opacity-100"
             >
                 {/* Glowing border outline on hover */}
                 <div
@@ -89,7 +89,7 @@ function ReviewCard({ review, index }) {
                                 <svg key={i} className="w-4.5 h-4.5 text-cyan-400 fill-current drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
-                             ))}
+                            ))}
                         </div>
                         {/* Quote Icon */}
                         <svg className="w-8 h-8 text-cyan-500/20 group-hover:text-cyan-400/50 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -274,9 +274,10 @@ export default function Review() {
     };
 
     return (
-        <section className="relative pt-[clamp(0.5rem,2vw,1rem)] pb-0 bg-background transition-colors duration-300 overflow-hidden select-none">
+        <section className="relative pt-[clamp(0.5rem,2vw,1rem)] pb-0 bg-background transition-colors duration-300 overflow-hidden">
             {/* Inject organic card floating & grab cursor styling */}
-            <style dangerouslySetInnerHTML={{__html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes testimonial-float {
                     0%, 100% { transform: translateY(0px); }
                     50% { transform: translateY(-7px); }
@@ -321,7 +322,7 @@ export default function Review() {
             {/* Testimonials Carousel Container */}
             <div
                 ref={containerRef}
-                className="reviews-marquee-container relative w-full overflow-hidden py-10 select-none"
+                className="reviews-marquee-container relative w-full overflow-hidden py-10"
                 onMouseDown={handleMouseDown}
                 onMouseLeave={handleMouseLeaveContainer}
                 onMouseUp={handleMouseUp}

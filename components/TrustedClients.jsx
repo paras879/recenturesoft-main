@@ -152,7 +152,7 @@ function Counter({ prefix = "", value, suffix, label, icon, showExitIcon = false
 
   if (variant === "clean") {
     return (
-      <div className="group relative flex flex-col items-center select-none w-full text-center">
+      <div className="group relative flex flex-col items-center w-full text-center">
         {/* Row containing Icon and Metric */}
         <div className="flex items-center gap-2.5 mb-1.5 justify-center">
           {/* Icon Circle Badge */}
@@ -179,7 +179,7 @@ function Counter({ prefix = "", value, suffix, label, icon, showExitIcon = false
   }
 
   return (
-    <div className={`group relative flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[#0b1329]/60 border border-slate-200/60 dark:border-white/[0.04] shadow-sm hover:border-blue-400/40 dark:hover:border-cyan-500/30 hover:shadow-[0_12px_24px_-5px_rgba(6,230,255,0.05)] hover:-translate-y-0.5 transition-all duration-300 w-full select-none h-[135px] ${showExitIcon ? "pt-4 pb-7 px-5" : "p-5"}`}>
+    <div className={`group relative flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[#0b1329]/60 border border-slate-200/60 dark:border-white/[0.04] shadow-sm hover:border-blue-400/40 dark:hover:border-cyan-500/30 hover:shadow-[0_12px_24px_-5px_rgba(6,230,255,0.05)] hover:-translate-y-0.5 transition-all duration-300 w-full h-[135px] ${showExitIcon ? "pt-4 pb-7 px-5" : "p-5"}`}>
       {/* Ambient background card glow */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-cyan-500/0 group-hover:to-cyan-500/[0.02] transition-all duration-500 pointer-events-none" />
 
@@ -251,7 +251,7 @@ function InfiniteMarquee() {
   const duplicatedLogos = [...Logos, ...Logos, ...Logos, ...Logos, ...Logos, ...Logos];
 
   return (
-    <div className="relative overflow-hidden py-10 w-full hover-pause mask-grad select-none">
+    <div className="relative overflow-hidden py-10 w-full hover-pause mask-grad">
       {/* Edge fade masks */}
       <div className="absolute left-0 top-0 bottom-0 w-32 z-20 pointer-events-none bg-gradient-to-r from-background to-transparent" />
       <div className="absolute right-0 top-0 bottom-0 w-32 z-20 pointer-events-none bg-gradient-to-l from-background to-transparent" />
@@ -422,7 +422,7 @@ export default function TrustedClients() {
             <div className="relative z-10 flex flex-col h-full justify-between">
               {/* Card Header */}
               <div className="mb-8 text-left">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/10 text-blue-600 dark:text-blue-400 font-bold text-[10px] tracking-wider uppercase mb-3 select-none">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/10 text-blue-600 dark:text-blue-400 font-bold text-[10px] tracking-wider uppercase mb-3">
                   📁 Scale & Impact
                 </span>
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2">
@@ -489,7 +489,7 @@ export default function TrustedClients() {
             <div className="relative z-10 flex flex-col h-full justify-between">
               {/* Card Header */}
               <div className="mb-8 text-left">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100/50 dark:bg-cyan-950/20 border border-cyan-200 dark:border-cyan-900/10 text-cyan-600 dark:text-cyan-400 font-bold text-[10px] tracking-wider uppercase mb-3 select-none">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100/50 dark:bg-cyan-950/20 border border-cyan-200 dark:border-cyan-900/10 text-cyan-600 dark:text-cyan-400 font-bold text-[10px] tracking-wider uppercase mb-3  ">
                   ⚡ Performance & Speed
                 </span>
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2">
@@ -501,7 +501,7 @@ export default function TrustedClients() {
               </div>
 
               {/* Desktop Diamond Network Graph Layout */}
-              <div className="hidden lg:block relative w-full h-[460px] mt-4 select-none">
+              <div className="hidden lg:block relative w-full h-[460px] mt-4 ">
                 {/* SVG Graph Lines */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 600 460" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
@@ -674,7 +674,7 @@ export default function TrustedClients() {
         <InfiniteMarquee />
 
         {/* Cinematic Infinite Technology Marquee Ribbon (Moved from TechStack) */}
-        <div className="relative w-full overflow-hidden py-4 hover-pause mask-grad select-none">
+        <div className="relative w-full overflow-hidden py-4 hover-pause mask-grad">
           {/* Edge fade masks */}
           <div className="absolute left-0 top-0 bottom-0 w-32 z-20 pointer-events-none bg-gradient-to-r from-background to-transparent" />
           <div className="absolute right-0 top-0 bottom-0 w-32 z-20 pointer-events-none bg-gradient-to-l from-background to-transparent" />

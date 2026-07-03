@@ -38,12 +38,11 @@ export default async function NewsPage() {
 
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Tech Pulse | Live Technology News & Insights","description":"Stay informed with the latest breaking global technology news, tech industry updates, developer trends, and digital innovations.","url":"https://recenturesoft.com/news"}) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", "name": "Tech Pulse | Live Technology News & Insights", "description": "Stay informed with the latest breaking global technology news, tech industry updates, developer trends, and digital innovations.", "url": "https://recenturesoft.com/news" }) }} />
             <Navbar />
             <PageHero
                 badge="Live Updates"
-                title="Tech"
-                highlight="Pulse"
+                title="Tech News"
                 description="Discover real-time global technology news, breaking industry insights, and digital innovations."
             />
 

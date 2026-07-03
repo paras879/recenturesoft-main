@@ -202,7 +202,7 @@ function EcosystemMap({ activeTech, setActiveTech }) {
                         <div
                             onMouseEnter={() => setActiveTech(key)}
                             onMouseLeave={() => setActiveTech(null)}
-                            className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer shadow-md select-none backdrop-blur-md
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md
                                 ${isHighlighted
                                     ? "bg-white dark:bg-slate-900 border-cyan-500 scale-105 shadow-[0_0_20px_rgba(6,182,212,0.4)] z-20"
                                     : isConnected
@@ -317,7 +317,7 @@ export default function TechStack() {
 
 
     return (
-        <section className="relative py-[clamp(0.5rem,2vw,1rem)] bg-background transition-colors duration-300 overflow-hidden select-none">
+        <section className="relative py-[clamp(0.5rem,2vw,1rem)] bg-background transition-colors duration-300 overflow-hidden">
             {/* Soft Glowing Accent Spotlights */}
             <div className="absolute top-1/4 right-0 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-cyan-400/10 dark:bg-cyan-950/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 left-0 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-indigo-400/10 dark:bg-indigo-950/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
