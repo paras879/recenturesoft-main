@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import ContentWritingContent from "@/components/content-writing/ContentWritingContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Content Writing Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function ContentWritingPage() {
                     <ContentWritingContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Content Writing" />
+
 
             <FutureFooter />
         </main>

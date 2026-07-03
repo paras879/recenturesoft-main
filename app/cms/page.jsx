@@ -4,6 +4,7 @@ import Image from "next/image";
 import CmsContent from "@/components/cms/CmsContent";
 import CmsFaq from "@/components/cms/CmsFaq";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best CMS Software Development Company In India | RecentureSoft",
@@ -32,6 +33,9 @@ export default function CmsPage() {
                     <CmsFaq />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="CMS Development" />
+
 
             <FutureFooter />
         </main>

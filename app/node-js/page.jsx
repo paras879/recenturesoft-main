@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import NodeJsContent from "@/components/node-js/NodeJsContent";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Node.js Development Services | RecentureSoft",
@@ -33,6 +34,9 @@ export default async function NodeJsPage() {
                     <NodeJsContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Node.js Development" />
+
 
             <FutureFooter />
         </main>

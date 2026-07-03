@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import EbayStoreContent from "@/components/ebay-store-management/EbayStoreContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best eBay Store Management Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function EbayStorePage() {
                     <EbayStoreContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="eBay Store Management" />
+
 
             <FutureFooter />
         </main>

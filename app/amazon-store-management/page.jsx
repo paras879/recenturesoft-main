@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import AmazonStoreContent from "@/components/amazon-store-management/AmazonStoreContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best Amazon Store Management Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function AmazonStorePage() {
                     <AmazonStoreContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Amazon Store Management" />
+
 
             <FutureFooter />
         </main>

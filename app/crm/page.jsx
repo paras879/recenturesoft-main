@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import CrmContent from "@/components/crm/CrmContent";
 import CrmFaq from "@/components/crm/CrmFaq";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best CRM Software Development Company In India | RecentureSoft",
@@ -38,6 +39,9 @@ export default async function CrmPage() {
                     <CrmFaq />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="CRM Development" />
+
 
             <FutureFooter />
         </main>

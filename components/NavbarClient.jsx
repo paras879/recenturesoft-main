@@ -182,7 +182,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
                                                 transition={{ duration: 0.2, ease: "easeOut" }}
                                                 className="absolute top-full left-1/2 -translate-x-[25%] pt-6 cursor-default"
-                                                style={{ width: "960px" }}
+                                                style={{ width: "min(960px, calc(100vw - 2rem))" }}
                                             >
                                                 <div className="bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-3xl border border-slate-200/60 dark:border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] rounded-[2rem] p-7 overflow-hidden relative group/menu">
                                                     

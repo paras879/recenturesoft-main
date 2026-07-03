@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import AndroidAppsContent from "@/components/android-application-development/AndroidAppsContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Android Application Development Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function AndroidAppsPage() {
                     <AndroidAppsContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Android Application Development" />
+
 
             <FutureFooter />
         </main>

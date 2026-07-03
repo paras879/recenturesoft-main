@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import WordPressContent from "@/components/wordpress-development-customization/WordPressContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "WordPress Development & Customization Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function WordPressPage() {
                     <WordPressContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="WordPress Development" />
+
 
             <FutureFooter />
         </main>

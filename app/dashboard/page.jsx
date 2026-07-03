@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import DashboardContent from "@/components/dashboard/DashboardContent";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Custom Dashboard Development Company | RecentureSoft",
@@ -30,6 +31,9 @@ export default function DashboardPage() {
                     <DashboardContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Dashboard Development" />
+
 
             <FutureFooter />
         </main>

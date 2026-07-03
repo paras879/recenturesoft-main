@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import AiSeoContent from "@/components/ai-seo/AiSeoContent";
 import FutureFooter from "@/components/FutureFooter";
 import Image from "next/image";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "AI SEO Services In India | RecentureSoft",
@@ -37,6 +38,9 @@ export default async function AiSeoPage() {
                     <AiSeoContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="AI SEO" />
+
 
             <FutureFooter />
         </main>

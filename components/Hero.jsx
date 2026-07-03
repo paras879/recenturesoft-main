@@ -145,7 +145,7 @@ const SLIDES = [
         badgeText: "text-cyan-600 dark:text-cyan-300",
         heading1: "Transforming",
         headingAccent: "Digital Experiences",
-        heading2: "For Modern Enterprises",
+        heading2: "Modern Enterprises",
         desc: "Empowering businesses through innovative web development, cloud solutions, AI integration, and digital transformation services that drive measurable growth.",
         cta: "Start Your Project",
         cta2: "Explore Services",
@@ -269,32 +269,57 @@ export default function Hero({ cmsData = {} }) {
         <section ref={heroRef} className="relative h-[100svh] min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
             {/* ── Background image slideshow ── */}
+            {/*
+              FIX: All 3 slide images are rendered simultaneously in the DOM.
+              We switch visibility using opacity/z-index instead of changing src.
+              This means each image is fetched exactly ONCE — no loop re-loading.
+              Slide 0 has priority + fetchPriority="high" for LCP.
+            */}
             <motion.div
                 style={{ scale: bgScale, opacity: bgOpacity }}
                 className="absolute inset-0 z-0 bg-black"
             >
-                {/*
-                  FIX (LCP / duplicate & competing fetches):
-                  `priority` was previously always `true`, meaning every slide
-                  change re-fetched its image with fetchpriority="high" — this
-                  competed with the actual LCP image (slide 0) for bandwidth
-                  and pushed LCP up. Only slide 0 should be high priority; the
-                  rest should load lazily/normally as the user reaches them.
-                */}
-                <Image
-                    src={slide.bg}
-                    alt="Hero Background"
-                    fill
-                    priority={current === 0}
-                    fetchPriority={current === 0 ? "high" : "auto"}
-                    sizes="100vw"
-                    className="object-cover"
-                    quality={60}
-                />
+                {SLIDES.map((s, i) => (
+                    <div
+                        key={s.id}
+                        className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0"}`}
+                        aria-hidden={i !== current}
+                    >
+                        <Image
+                            src={s.bg}
+                            alt="Hero Background"
+                            fill
+                            priority={i === 0}
+                            fetchPriority={i === 0 ? "high" : "auto"}
+                            sizes="100vw"
+                            className="object-cover"
+                            quality={60}
+                        />
+                    </div>
+                ))}
 
-                <div className="absolute inset-0 bg-white/70 dark:bg-[#030712]/75 md:dark:bg-[#030712]/65" />
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 md:via-white/80 dark:from-[#030712] dark:via-[#030712]/90 md:dark:via-[#030712]/80 via-60% md:via-40% to-transparent" />
-                <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-background to-transparent" />
+                {/* 
+                  Smooth multi-stop gradient overlays — no harsh seam.
+                  Uses inline style for precise gradient control.
+                */}
+                {/* Layer 1: Subtle global tint so image isn't too raw */}
+                <div className="absolute inset-0 bg-white/35 dark:bg-[#030712]/50" />
+                {/* Layer 2: Main left→right gradient (smooth 5-stop) */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.88) 28%, rgba(255,255,255,0.55) 48%, rgba(255,255,255,0.15) 68%, rgba(255,255,255,0) 85%)"
+                    }}
+                />
+                {/* Dark mode version */}
+                <div
+                    className="absolute inset-0 hidden dark:block"
+                    style={{
+                        background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
+                    }}
+                />
+                {/* Layer 3: Bottom fade */}
+                <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-background to-transparent" />
             </motion.div>
 
             {/* ── Ambient glow blob (accent coloured) ── */}
@@ -323,9 +348,9 @@ export default function Hero({ cmsData = {} }) {
             {/* ── Text content (scroll parallax) ── */}
             <motion.div
                 style={{ y: contentY }}
-                className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 flex flex-col min-h-[100svh] pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20"
+                className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center min-h-[100svh] pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20 gap-0 2xl:gap-16"
             >
-                <div className="w-full max-w-[92%] lg:w-[70%] flex flex-col flex-1 mt-0">
+                <div className="w-full max-w-[92%] lg:w-[70%] xl:w-[60%] 2xl:w-[55%] flex flex-col flex-1 mt-0">
                     <AnimatePresence mode="wait" initial={false}>
                         <motion.div key={slide.id + "-content"}>
 
@@ -336,13 +361,13 @@ export default function Hero({ cmsData = {} }) {
                                 animate={isDesktop ? "visible" : { opacity: 1, y: 0 }}
                                 exit="exit"
                                 custom={1}
-                                className="text-[2.2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[5rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
+                                className="text-[2.2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] 2xl:text-[5.8rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
                             >
                                 {displayHeading1}
                                 <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>
                                     {displayHeadingAccent}
                                 </span>
-                                {displayHeading2}
+                                <span className="block 2xl:whitespace-nowrap">{displayHeading2}</span>
                             </motion.h1>
 
                             {/* Description */}
@@ -352,7 +377,7 @@ export default function Hero({ cmsData = {} }) {
                                 animate={isDesktop ? "visible" : { opacity: 1, y: 0 }}
                                 exit="exit"
                                 custom={2}
-                                className="mt-6 text-[15px] md:text-[18px] text-slate-600 dark:text-slate-400 max-w-xl leading-8 font-[400]"
+                                className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-600 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400]"
                             >
                                 {displayDesc}
                             </motion.p>
@@ -415,6 +440,42 @@ export default function Hero({ cmsData = {} }) {
 
 
                 </div>
+
+                {/* ── Right-side stats panel (2xl+ only) ── */}
+                <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                        key={slide.id + "-stats"}
+                        initial={{ opacity: 0, x: 40 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="hidden 2xl:flex flex-col gap-5 flex-shrink-0 w-[300px] mt-36"
+                    >
+                        {[
+                            { value: "200+", label: "Projects Delivered", icon: "🚀" },
+                            { value: "98%", label: "Client Satisfaction", icon: "⭐" },
+                            { value: "50+", label: "Expert Engineers", icon: "👨‍💻" },
+                            { value: "10+", label: "Years of Excellence", icon: "🏆" },
+                        ].map((stat, i) => (
+                            <motion.div
+                                key={stat.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 + i * 0.1 }}
+                                className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-white/60 dark:bg-white/[0.04] border border-slate-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-sm hover:shadow-md hover:bg-white/80 dark:hover:bg-white/[0.07] transition-all duration-300 group"
+                            >
+                                <div className="text-2xl w-11 h-11 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+                                <div>
+                                    <div
+                                        className="text-2xl font-bold"
+                                        style={{ background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                                    >{stat.value}</div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">{stat.label}</div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </AnimatePresence>
             </motion.div>
 
 

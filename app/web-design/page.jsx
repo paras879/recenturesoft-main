@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import WebDesignContent from "@/components/web-design/WebDesignContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best Web Design Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function WebDesignPage() {
                     <WebDesignContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Web Design" />
+
 
             <FutureFooter />
         </main>

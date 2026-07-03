@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import SalesforceContent from "@/components/salesforce/SalesforceContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best Salesforce Integration Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function SalesforcePage() {
                     <SalesforceContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Salesforce Development" />
+
 
             <FutureFooter />
         </main>

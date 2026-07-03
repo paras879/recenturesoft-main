@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { connectDB } from "@/lib/mongodb";
 import SiteSettings from "@/models/SiteSettings";
+import { unstable_cache } from "next/cache";
 
 import {
     FaFacebookF,
@@ -119,39 +120,56 @@ function FooterBackground() {
 /* ═══════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
-export default async function FutureFooter() {
-    let logoUrl = "/Logo.png";
-    let email = "info@recenturesoft.com";
-    let phone = "+91 777 000 3288";
-    let address = "A-125, Sector-63, Noida, UP 201301";
-    let inactivePaths = [];
-    let socialLinks = {
-        facebook: "https://facebook.com/recenturesoft",
-        twitter: "https://x.com/recenturesoft",
-        linkedin: "https://www.linkedin.com/company/recenturesoft/posts/?feedView=all",
-        pinterest: "https://pinterest.com/recenturesoft",
-        instagram: "https://instagram.com/recenturesoft",
-        youtube: "https://youtube.com/@recenturesoft"
-    };
+/* ═══════════════════════════════════════════════════════
+   CACHED DATA FETCHER — tagged "inactive-pages"
+   revalidateTag("inactive-pages") from admin panel
+   instantly clears this cache on page toggle.
+   ═══════════════════════════════════════════════════════ */
+const getFooterData = unstable_cache(
+    async () => {
+        let logoUrl = "/Logo.png";
+        let email = "info@recenturesoft.com";
+        let phone = "+91 777 000 3288";
+        let address = "A-125, Sector-63, Noida, UP 201301";
+        let inactivePaths = [];
+        let socialLinks = {
+            facebook: "https://facebook.com/recenturesoft",
+            twitter: "https://x.com/recenturesoft",
+            linkedin: "https://www.linkedin.com/company/recenturesoft/posts/?feedView=all",
+            pinterest: "https://pinterest.com/recenturesoft",
+            instagram: "https://instagram.com/recenturesoft",
+            youtube: "https://youtube.com/@recenturesoft"
+        };
 
-    try {
-        await connectDB();
-        const settings = await SiteSettings.findOne({ type: "global" }).lean();
-        if (settings) {
-            if (settings.logoUrl) logoUrl = settings.logoUrl;
-            if (settings.email) email = settings.email;
-            if (settings.phone) phone = settings.phone;
-            if (settings.address) address = settings.address;
-            if (settings.socialLinks) {
-                socialLinks = { ...socialLinks, ...settings.socialLinks };
+        try {
+            await connectDB();
+            const settings = await SiteSettings.findOne({ type: "global" }).lean();
+            if (settings) {
+                if (settings.logoUrl) logoUrl = settings.logoUrl;
+                if (settings.email) email = settings.email;
+                if (settings.phone) phone = settings.phone;
+                if (settings.address) address = settings.address;
+                if (settings.socialLinks) {
+                    socialLinks = { ...socialLinks, ...settings.socialLinks };
+                }
             }
+            const pages = await WebPage.find({}, { path: 1, status: 1 }).lean();
+            inactivePaths = pages.filter(p => p.status === "inactive").map(p => p.path);
+        } catch (error) {
+            console.error("Failed to fetch footer data", error);
         }
 
-        const pages = await WebPage.find({}, { path: 1, status: 1 }).lean();
-        inactivePaths = pages.filter(p => p.status === "inactive").map(p => p.path);
-    } catch (error) {
-        console.error("Failed to fetch site settings or page statuses", error);
+        return { logoUrl, email, phone, address, inactivePaths, socialLinks };
+    },
+    ["footer-data"],
+    {
+        tags: ["inactive-pages"],
+        revalidate: 3600, // fallback: revalidate every hour even without webhook
     }
+);
+
+export default async function FutureFooter() {
+    const { logoUrl, email, phone, address, inactivePaths, socialLinks } = await getFooterData();
 
     const isPathActive = (path) => !inactivePaths.includes(path);
     const activeFooterLinks = {};

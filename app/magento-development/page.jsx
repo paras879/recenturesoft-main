@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import MagentoContent from "@/components/magento-development/MagentoContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Best Magento Development Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function MagentoPage() {
                     <MagentoContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Magento Development" />
+
 
             <FutureFooter />
         </main>

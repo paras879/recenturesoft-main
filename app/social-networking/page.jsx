@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Image from "next/image";
 import SmoContent from "@/components/social-networking/SmoContent";
 import FutureFooter from "@/components/FutureFooter";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "SMO Company In India | RecentureSoft",
@@ -35,6 +36,9 @@ export default async function SmoPage() {
                     <SmoContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Social Networking" />
+
 
             <FutureFooter />
         </main>

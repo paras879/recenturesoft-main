@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
 import NextJsContent from "@/components/next-js/NextJsContent";
+import SolutionContactForm from "@/components/shared/SolutionContactForm";
 
 export const metadata = {
     title: "Next.js Development Company | Enterprise Next.js Solutions | RecentureSoft",
@@ -33,6 +34,9 @@ export default async function NextJsPage() {
                     <NextJsContent />
                 </div>
             </section>
+
+            <SolutionContactForm serviceName="Next.js Development" />
+
 
             <FutureFooter />
         </main>
