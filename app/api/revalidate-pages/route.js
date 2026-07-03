@@ -1,19 +1,19 @@
 import { NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 /**
  * POST /api/revalidate-pages
  * Called by the Admin Panel whenever a page status is toggled.
- * Invalidates the "inactive-pages" cache tag so that FutureFooter
- * and Navbar pick up the new disabled/enabled state immediately.
+ * Invalidates navbar/footer cache and also the exact page route cache.
  *
  * Secured with REVALIDATION_SECRET to prevent abuse.
  */
 export async function POST(req) {
     try {
         const secret = process.env.REVALIDATION_SECRET;
+        const body = await req.json().catch(() => ({}));
+        const pagePath = typeof body?.path === "string" ? body.path.trim() : "";
 
-        // If a secret is configured, validate the request
         if (secret) {
             const authHeader = req.headers.get("x-revalidate-secret");
             if (authHeader !== secret) {
@@ -21,13 +21,16 @@ export async function POST(req) {
             }
         }
 
-        // Revalidate the cache tag used by FutureFooter & Navbar (unstable_cache tags)
-        // Single-arg form works with unstable_cache's tags option
         revalidateTag("inactive-pages");
+
+        if (pagePath) {
+            revalidatePath(pagePath);
+        }
 
         return NextResponse.json({
             success: true,
             revalidated: true,
+            path: pagePath || null,
             now: Date.now(),
         });
     } catch (err) {
