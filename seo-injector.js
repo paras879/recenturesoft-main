@@ -88,7 +88,7 @@ files.forEach(file => {
         "@type": "Organization", // Organization triggers Google Rich Results
         "name": "RecentureSoft",
         "url": `https://recenturesoft.com${route === '/' ? '' : route}`,
-        "logo": "https://recenturesoft.com/icon.png",
+        "logo": "https://recenturesoft.com/logo.png",
         "description": desc
     };
     const schemaString = JSON.stringify(schemaObj);
