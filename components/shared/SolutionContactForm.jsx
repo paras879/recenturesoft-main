@@ -16,7 +16,13 @@ function useRecaptcha(containerRef, onToken) {
 
         const renderWidget = () => {
             if (!containerRef.current || widgetIdRef.current !== null) return;
-            widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
+            
+            // Clear container and create a fresh wrapper for React StrictMode
+            containerRef.current.innerHTML = "";
+            const wrapper = document.createElement("div");
+            containerRef.current.appendChild(wrapper);
+
+            widgetIdRef.current = window.grecaptcha.render(wrapper, {
                 sitekey: SITE_KEY,
                 callback: (token) => onToken(token),
                 "expired-callback": () => onToken(null),
@@ -129,7 +135,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
     };
 
     return (
-        <section className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950">
+        <section id="contact-form-section" className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950">
             {/* Ambient glow blobs */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 dark:bg-cyan-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/5 dark:bg-purple-500/[0.03] rounded-full blur-[120px] pointer-events-none" />

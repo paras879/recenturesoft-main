@@ -49,7 +49,7 @@ export default async function PortfolioPage() {
                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] rounded-full" />
             </div>
             <Navbar />
-            <PageHero
+            <PageHero hideContactButton={true}
                 badge="Our Work"
                 title="Engineering"
                 highlight="Success"

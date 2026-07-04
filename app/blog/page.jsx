@@ -47,7 +47,7 @@ export default async function BlogPage() {
             </div>
 
             <Navbar />
-            <PageHero
+            <PageHero hideContactButton={true}
                 badge="Editorial"
                 title="Insights &"
                 highlight="Perspectives"

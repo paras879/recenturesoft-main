@@ -31,7 +31,7 @@ export default async function NextJsPage() {
             />
 
             <section className="py-8 md:py-12 lg:py-16 px-4">
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-6xl mx-auto">
                     <NextJsContent />
                 </div>
             </section>

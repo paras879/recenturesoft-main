@@ -29,7 +29,7 @@ export default function CmsPage() {
             </PageHero>
 
             <section className="py-6 md:py-8 px-4">
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-6xl mx-auto">
                     <CmsContent />
 
                 </div>
