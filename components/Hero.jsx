@@ -64,19 +64,6 @@ const SLIDES = [
 const SERVICES = ["Web Development", "Mobile Apps", "Cloud Solutions", "AI Integration", "UI/UX Design"];
 
 /* ═══════════════════════════════════════════
-   ANIMATION VARIANTS
-═══════════════════════════════════════════ */
-const slideIn = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (custom) => ({
-        opacity: 1,
-        y: 0,
-        transition: { delay: custom * 0.1 + 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }),
-    exit: { opacity: 0, y: -20, transition: { duration: 0.5 } }
-};
-
-/* ═══════════════════════════════════════════
    HERO COMPONENT
    ═══════════════════════════════════════════ */
 export default function Hero({ cmsData = {} }) {
@@ -99,14 +86,31 @@ export default function Hero({ cmsData = {} }) {
     // after hydration — doubling paint/style work exactly when Lighthouse's
     // desktop run measures Total Blocking Time.
     //
-    // The className already had `hidden md:block`, so the JS gate was
-    // 100% redundant — CSS was already doing the responsive hiding. We
-    // remove the JS gate entirely and let CSS alone decide visibility.
-    // The component still mounts once (SSR-safe, no extra client render),
-    // but we DEFER animation start until after window `load` so it never
-    // competes with LCP/hydration work — same pattern already used below
-    // for the carousel timer.
+    // FIX #4 (mobile LCP/Speed Index fix, added now):
+    // We bring the isDesktop check BACK, but the goal this time is the
+    // opposite problem: on mobile, `hidden md:block` only hides HeroScene
+    // visually with CSS — the component still MOUNTS, so the dynamic
+    // import() chunk for HeroGraphic still gets fetched and parsed on
+    // mobile even though nobody ever sees it. That's wasted bandwidth and
+    // JS execution competing directly with the LCP image and hero text on
+    // a throttled Slow 4G mobile test — exactly where Speed Index (7.3s)
+    // and LCP (3.8s) were failing.
+    //
+    // Fix: gate HeroScene behind an actual JS matchMedia check, in
+    // addition to the CSS `hidden md:block`, so the dynamic import chunk
+    // is never requested at all on mobile. On desktop, the animation
+    // start is still deferred to window `load` via heroSceneReady, same
+    // as before, keeping it off the critical path for TBT.
+    const [isDesktop, setIsDesktop] = useState(false);
     const [heroSceneReady, setHeroSceneReady] = useState(false);
+
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 768px)");
+        setIsDesktop(mq.matches);
+        const handleChange = (e) => setIsDesktop(e.matches);
+        mq.addEventListener("change", handleChange);
+        return () => mq.removeEventListener("change", handleChange);
+    }, []);
 
     // ── Auto-slide timer ─────
     useEffect(() => {
@@ -148,14 +152,34 @@ export default function Hero({ cmsData = {} }) {
     const displayBg = cmsSlide?.bg || slide.bg;
 
     return (
-            <section ref={heroRef} className="relative min-h-screen min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
+        <section ref={heroRef} className="relative min-h-screen min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
-                {/* ── Background image slideshow ── */}
-                <div
-                    style={{ scale: bgScale, opacity: bgOpacity }}
-                    className="absolute inset-0 z-0 bg-black"
-                >
-                    {SLIDES.map((s, i) => (
+            {/* ── Background image slideshow ── */}
+            <div
+                style={{ scale: bgScale, opacity: bgOpacity }}
+                className="absolute inset-0 z-0 bg-black"
+            >
+                {/*
+                      FIX #2 (biggest mobile LCP/Speed Index win):
+                      Previously ALL 3 slide backgrounds rendered at once,
+                      each wrapped in `absolute inset-0` + Next/Image `fill`.
+                      Since these sit inside the viewport (not below the
+                      fold), Next.js's built-in lazy-loading IntersectionObserver
+                      considers all 3 "visible" immediately and fires all 3
+                      network requests together — 3 full-size hero images
+                      downloading in parallel on a throttled Slow-4G mobile
+                      test, starving the actual LCP image of bandwidth.
+
+                      Fix: only render the image for the CURRENT slide, plus
+                      slide 0 (so the very first paint / priority image is
+                      never delayed by a JS state update on mount). The other
+                      slide images are only rendered once the user actually
+                      reaches them, so only one hero image is ever in flight
+                      at a time on first load.
+                    */}
+                {SLIDES.map((s, i) => {
+                    if (i !== current && i !== 0) return null;
+                    return (
                         <div
                             key={s.id}
                             className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0"}`}
@@ -167,180 +191,168 @@ export default function Hero({ cmsData = {} }) {
                                 fill
                                 priority={i === 0}
                                 fetchPriority={i === 0 ? "high" : "auto"}
-                                sizes="(max-width: 768px) 100vw, 100vw"
+                                sizes="100vw"
                                 className="object-cover"
-                                quality={90}
-                                property="hero-bg"
+                                // FIX #3: quality 90 on a full-viewport background
+                                // image is overkill and inflates transfer size
+                                // significantly for almost no visible gain.
+                                // 75 for the priority/LCP slide keeps it sharp
+                                // while cutting file size; non-priority slides
+                                // (loaded later, after interaction) can go a
+                                // little leaner still at 65.
+                                quality={i === 0 ? 75 : 65}
                             />
                         </div>
-                    ))}
+                    );
+                })}
 
-                    <div className="absolute inset-0 bg-white/5 md:bg-white/0 dark:bg-[#030712]/50" />
-                    <div
-                        className="absolute inset-0"
-                        style={{
-                            background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.88) 28%, rgba(255,255,255,0.55) 48%, rgba(255,255,255,0.15) 68%, rgba(255,255,255,0) 85%)"
-                        }}
-                    />
-                    <div
-                        className="absolute inset-0 hidden dark:block"
-                        style={{
-                            background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
-                        }}
-                    />
-                    <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-background to-transparent" />
-                </div>
-
-                {/* ── Ambient glow blob (accent coloured) — now plain CSS, no framer-motion ── */}
-                {/*
-              FIX #2: These two glow blobs were wrapped in motion.div with
-              fade transitions that framer-motion recalculated on every
-              slide change AND on initial mount. They're purely decorative
-              opacity blobs — replaced with a CSS transition class instead,
-              removing 2 more JS-driven animations from the critical path.
-            */}
+                <div className="absolute inset-0 bg-white/5 md:bg-white/0 dark:bg-[#030712]/50" />
                 <div
-                    key={slide.id + "-glow"}
-                    className={`absolute top-[-10%] right-[-10%] w-[250px] md:w-[600px] h-[250px] md:h-[600px] ${slide.glowColor} rounded-full pointer-events-none z-[-1] opacity-30 md:opacity-100 transition-opacity duration-1000`}
+                    className="absolute inset-0"
+                    style={{
+                        background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.88) 28%, rgba(255,255,255,0.55) 48%, rgba(255,255,255,0.15) 68%, rgba(255,255,255,0) 85%)"
+                    }}
                 />
-                <div className="absolute bottom-[-5%] left-[-5%] w-[180px] md:w-[400px] h-[180px] md:h-[400px] bg-blue-500/20 dark:bg-blue-900/20 rounded-full pointer-events-none z-[-1] opacity-20 md:opacity-100" />
+                <div
+                    className="absolute inset-0 hidden dark:block"
+                    style={{
+                        background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
+                    }}
+                />
+                <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-background to-transparent" />
+            </div>
 
-                {/* ── Hero SVG scene ── */}
-                {/*
-              FIX #1 (cont.): No more JS-driven isDesktop gate. `hidden
-              md:block` (pure CSS) handles responsive visibility, so mobile
-              never pays for this at all — same as before. We additionally
-              gate the *animation start* behind heroSceneReady so its 6
-              infinite CSS animations don't kick off until after window
-              `load`, keeping them off the critical rendering path that
-              Lighthouse measures for TBT.
-            */}
+            {/* ── Ambient glow blob (accent coloured) — plain CSS, no framer-motion ── */}
+            <div
+                key={slide.id + "-glow"}
+                className={`absolute top-[-10%] right-[-10%] w-[250px] md:w-[600px] h-[250px] md:h-[600px] ${slide.glowColor} rounded-full pointer-events-none z-[-1] opacity-30 md:opacity-100 transition-opacity duration-1000`}
+            />
+            <div className="absolute bottom-[-5%] left-[-5%] w-[180px] md:w-[400px] h-[180px] md:h-[400px] bg-blue-500/20 dark:bg-blue-900/20 rounded-full pointer-events-none z-[-1] opacity-20 md:opacity-100" />
+
+            {/* ── Hero SVG scene ── */}
+            {/*
+                  FIX #4 (cont.): `hidden md:block` still handles the CSS
+                  side of visibility (so there's no flash on desktop while
+                  isDesktop resolves), but the component is now only ever
+                  placed in the tree — and its dynamic import chunk only
+                  ever fetched — when isDesktop is actually true. Mobile
+                  never downloads or parses this chunk at all.
+                */}
+            {isDesktop && (
                 <div
                     style={{ transform: `translateY(${sphereY}px)` }}
                     className="hidden md:block absolute inset-x-0 bottom-[-10%] top-auto h-[350px] sm:h-[400px] lg:bottom-auto lg:top-0 lg:inset-0 lg:left-[45%] lg:h-full z-[-1] pointer-events-none opacity-40 sm:opacity-50 lg:opacity-100"
                 >
                     {heroSceneReady && <HeroScene accent={slide.accent} emissive="#3b82f6" />}
                 </div>
+            )}
 
-                {/* ── Text content ── */}
-                <div
-                    style={{ y: contentY }}
-                    className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-24 md:pb-12 lg:pt-28 lg:pb-16 gap-0 2xl:gap-16"
-                >
-                    <div className="w-full max-w-[92%] lg:w-[70%] xl:w-[60%] 2xl:w-[55%] flex flex-col flex-1 mt-0">
-                            <div key={slide.id + "-content"}>
+            {/* ── Text content ── */}
+            <div
+                style={{ y: contentY }}
+                className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-24 md:pb-12 lg:pt-28 lg:pb-16 gap-0 2xl:gap-16"
+            >
+                <div className="w-full max-w-[92%] lg:w-[70%] xl:w-[60%] 2xl:w-[55%] flex flex-col flex-1 mt-0">
+                    <div key={slide.id + "-content"}>
 
-                                {/* Heading */}
-                                <h2
-                                    className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.6rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground animate-fade-in-up delay-100"
-                                >
-                                    {displayHeading1}
-                                    <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>
-                                        {displayHeadingAccent}
-                                    </span>
-                                    <span className="block 2xl:whitespace-nowrap">{displayHeading2}</span>
-                                </h2>
+                        {/* Heading */}
+                        <h2
+                            className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.6rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground animate-fade-in-up delay-100"
+                        >
+                            {displayHeading1}
+                            <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>
+                                {displayHeadingAccent}
+                            </span>
+                            <span className="block 2xl:whitespace-nowrap">{displayHeading2}</span>
+                        </h2>
 
-                                {/* Description */}
-                                <p
-                                    className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-800 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400] animate-fade-in-up delay-200"
-                                >
-                                    {displayDesc}
-                                </p>
+                        {/* Description */}
+                        <p
+                            className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-800 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400] animate-fade-in-up delay-200"
+                        >
+                            {displayDesc}
+                        </p>
 
-                                {/* CTA buttons */}
-                                <div
-                                    className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto animate-fade-in-up delay-300"
-                                >
-                                    <button
-                                        onClick={openModal}
-                                        className="group relative px-6 md:px-8 py-3.5 md:py-4 rounded-full font-[600] text-white shadow-lg md:hover:scale-105 active:scale-[0.98] transition-all duration-300 overflow-hidden w-full max-w-[380px] sm:w-auto text-center"
-                                        style={{
-                                            background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`,
-                                            boxShadow: `0 8px 32px ${slide.accent}40`,
-                                        }}
-                                    >
-                                        <span className="relative z-10">{displayCta1}</span>
-                                    </button>
-                                    <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
-                                        {displayCta2}
-                                    </button>
-                                </div>
-
-                                {/*
-                              FIX #3 (cont.): Service tags used to each be a
-                              separate motion.div with a staggered delayed
-                              animation (5 elements x individual framer-motion
-                              instances calculated on mount). Converted to
-                              plain CSS fade-in with staggered transition-delay
-                              — visually identical, zero JS animation cost.
-                            */}
-                                <div className="mt-6 flex flex-wrap gap-2 max-w-md md:gap-3 pb-2">
-                                    {SERVICES.map((item, i) => (
-                                        <div
-                                            key={item}
-                                            style={{ transitionDelay: `${0.3 + i * 0.06}s` }}
-                                            className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 text-[12px] sm:text-[13px] md:text-sm font-[500] cursor-pointer backdrop-blur-sm transition-all duration-300 inline-flex items-center justify-center hover:scale-[1.08]"
-                                            onMouseEnter={(e) => {
-                                                e.currentTarget.style.borderColor = slide.accent + "90";
-                                                e.currentTarget.style.color = slide.accent;
-                                                e.currentTarget.style.background = slide.accent + "15";
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.currentTarget.style.borderColor = "";
-                                                e.currentTarget.style.color = "";
-                                                e.currentTarget.style.background = "";
-                                            }}
-                                        >
-                                            {item}
-                                        </div>
-                                    ))}
-                                </div>
-
-                            </div>
-                        
-                    </div>
-
-                    {/* ── Right-side stats panel (2xl+ only) ── */}
-                    {/*
-                  FIX #3 (cont.): Stat cards converted from 4x motion.div
-                  with individual mount animations to plain CSS. Still only
-                  visible at 2xl breakpoint (unchanged), but no longer costs
-                  JS animation work when it does render.
-                */}
-                    <div
-                        key={slide.id + "-stats"}
-                        className="hidden 2xl:flex flex-col gap-5 flex-shrink-0 w-[300px] mt-36"
-                    >
-                        {[
-                            { value: "200+", label: "Projects Delivered", icon: "🚀" },
-                            { value: "98%", label: "Client Satisfaction", icon: "⭐" },
-                            { value: "50+", label: "Expert Engineers", icon: "👨‍💻" },
-                            { value: "10+", label: "Years of Excellence", icon: "🏆" },
-                        ].map((stat) => (
-                            <div
-                                key={stat.label}
-                                className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-white/60 dark:bg-white/[0.04] border border-slate-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-sm hover:shadow-md hover:bg-white/80 dark:hover:bg-white/[0.07] transition-all duration-300 group"
+                        {/* CTA buttons */}
+                        <div
+                            className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto animate-fade-in-up delay-300"
+                        >
+                            <button
+                                onClick={openModal}
+                                className="group relative px-6 md:px-8 py-3.5 md:py-4 rounded-full font-[600] text-white shadow-lg md:hover:scale-105 active:scale-[0.98] transition-all duration-300 overflow-hidden w-full max-w-[380px] sm:w-auto text-center"
+                                style={{
+                                    background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`,
+                                    boxShadow: `0 8px 32px ${slide.accent}40`,
+                                }}
                             >
-                                <div className="text-2xl w-11 h-11 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
-                                <div>
-                                    <div
-                                        className="text-2xl font-bold"
-                                        style={{ background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-                                    >{stat.value}</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">{stat.label}</div>
+                                <span className="relative z-10">{displayCta1}</span>
+                            </button>
+                            <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
+                                {displayCta2}
+                            </button>
+                        </div>
+
+                        {/* Service tags — plain CSS staggered fade-in, no framer-motion */}
+                        <div className="mt-6 flex flex-wrap gap-2 max-w-md md:gap-3 pb-2">
+                            {SERVICES.map((item, i) => (
+                                <div
+                                    key={item}
+                                    style={{ transitionDelay: `${0.3 + i * 0.06}s` }}
+                                    className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-300 text-[12px] sm:text-[13px] md:text-sm font-[500] cursor-pointer backdrop-blur-sm transition-all duration-300 inline-flex items-center justify-center hover:scale-[1.08]"
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = slide.accent + "90";
+                                        e.currentTarget.style.color = slide.accent;
+                                        e.currentTarget.style.background = slide.accent + "15";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = "";
+                                        e.currentTarget.style.color = "";
+                                        e.currentTarget.style.background = "";
+                                    }}
+                                >
+                                    {item}
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+
                     </div>
+
                 </div>
 
-                {/* ── Scroll indicator ── */}
-                <div className="absolute bottom-10 right-10 z-20 hidden lg:flex flex-col items-center gap-2 opacity-0 animate-[fadeIn_0.6s_ease-out_2s_forwards]">
-                    <span className="text-slate-500 dark:text-gray-500 text-xs tracking-[0.2em] uppercase -rotate-90 mb-4">Scroll</span>
-                    <div className="w-px h-12 bg-gradient-to-b from-slate-400 dark:from-white/30 to-transparent animate-pulse" />
+                {/* ── Right-side stats panel (2xl+ only) ── */}
+                <div
+                    key={slide.id + "-stats"}
+                    className="hidden 2xl:flex flex-col gap-5 flex-shrink-0 w-[300px] mt-36"
+                >
+                    {[
+                        { value: "200+", label: "Projects Delivered", icon: "🚀" },
+                        { value: "98%", label: "Client Satisfaction", icon: "⭐" },
+                        { value: "50+", label: "Expert Engineers", icon: "👨‍💻" },
+                        { value: "10+", label: "Years of Excellence", icon: "🏆" },
+                    ].map((stat) => (
+                        <div
+                            key={stat.label}
+                            className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-white/60 dark:bg-white/[0.04] border border-slate-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-sm hover:shadow-md hover:bg-white/80 dark:hover:bg-white/[0.07] transition-all duration-300 group"
+                        >
+                            <div className="text-2xl w-11 h-11 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+                            <div>
+                                <div
+                                    className="text-2xl font-bold"
+                                    style={{ background: `linear-gradient(135deg, ${slide.accent}, #6366f1)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                                >{stat.value}</div>
+                                <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">{stat.label}</div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
+            </div>
 
-            </section>
+            {/* ── Scroll indicator ── */}
+            <div className="absolute bottom-10 right-10 z-20 hidden lg:flex flex-col items-center gap-2 opacity-0 animate-[fadeIn_0.6s_ease-out_2s_forwards]">
+                <span className="text-slate-500 dark:text-gray-500 text-xs tracking-[0.2em] uppercase -rotate-90 mb-4">Scroll</span>
+                <div className="w-px h-12 bg-gradient-to-b from-slate-400 dark:from-white/30 to-transparent animate-pulse" />
+            </div>
+
+        </section>
     );
 }
