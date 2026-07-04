@@ -48,16 +48,17 @@ export default function PageHero({ title, highlight, description, banner, highli
                     <div className="absolute inset-0 z-0 opacity-100">
                         {children}
                     </div>
-                    {/* Removed dark overlay and gradient per user request for clear image */}
+                    {/* Subtle dark overlay to reduce image opacity slightly and make text readable */}
+                    <div className="absolute inset-0 bg-[#020617]/50 z-10" />
                 </div>
             )}
 
             <div className="container mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 relative z-20 max-w-[1500px]">
                 {/* Left aligned if image is present, centered otherwise */}
-                <div className={`flex flex-col justify-center ${children ? 'items-start text-left min-h-[40vh] md:min-h-[50vh]' : 'items-center text-center'}`}>
+                <div className={`flex flex-col justify-center ${children ? 'items-start text-left min-h-[50vh] md:min-h-[50vh] py-12 md:py-0' : 'items-center text-center'}`}>
 
                     <h1
-                        className={`font-extrabold tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${children ? 'text-white drop-shadow-lg max-w-4xl' : 'text-foreground'}`}
+                        className={`font-extrabold tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${children ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
                     >
                         {title} <br className="hidden md:block" />
                         <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
