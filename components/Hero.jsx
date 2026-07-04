@@ -221,7 +221,6 @@ export default function Hero({ cmsData = {} }) {
                 >
                     {heroSceneReady && <HeroScene accent={slide.accent} emissive="#3b82f6" />}
                 </div>
-                <HeroGraphicStyles />
 
                 {/* ── Text content ── */}
                 <div
