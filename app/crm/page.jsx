@@ -30,7 +30,10 @@ export default async function CrmPage() {
                 banner="/Banner/crm_banner.webp"
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src="/Banner/crm_banner.webp" alt="crm Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                {/* Desktop Image */}
+                <Image src="/Banner/crm_banner.webp" alt="crm Banner" fill className="hidden md:block object-cover object-center" priority sizes="100vw" />
+                {/* Mobile Image */}
+                <Image src="/Banner/crm_mobile.webp" alt="crm Mobile Banner" fill className="block md:hidden object-cover object-bottom" priority sizes="100vw" />
             </PageHero>
 
             <section className="py-6 md:py-8 px-4">
