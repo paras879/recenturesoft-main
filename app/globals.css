@@ -65,9 +65,16 @@ html {
 
 /* OVERRIDE: Disable all massive blur filters globally to eliminate scrolling lag.
    These filters cause 100% GPU spikes on large elements during scroll. */
-[class*="blur-[80px]"], [class*="blur-[100px]"], [class*="blur-[120px]"], [class*="blur-[130px]"], [class*="blur-[140px]"], [class*="blur-[150px]"], [class*="blur-[160px]"] {
+[class*="blur-[80px]"],
+[class*="blur-[100px]"],
+[class*="blur-[120px]"],
+[class*="blur-[130px]"],
+[class*="blur-[140px]"],
+[class*="blur-[150px]"],
+[class*="blur-[160px]"] {
   filter: none !important;
-  opacity: 0.15 !important; /* Lower opacity so solid shapes don't look too harsh without blur */
+  opacity: 0.15 !important;
+  /* Lower opacity so solid shapes don't look too harsh without blur */
 }
 
 body {
@@ -88,23 +95,29 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1; /* Slate-300 for light mode visibility */
+  background: #cbd5e1;
+  /* Slate-300 for light mode visibility */
   border-radius: 20px;
-  border: 3px solid var(--background); /* Clean padding spacing */
-  min-height: 90px; /* Prevent tiny ungrab-able scrollbar thumbs */
+  border: 3px solid var(--background);
+  /* Clean padding spacing */
+  min-height: 90px;
+  /* Prevent tiny ungrab-able scrollbar thumbs */
   transition: background-color 0.2s ease;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155; /* Slate-700 for dark mode integration */
+  background: #334155;
+  /* Slate-700 for dark mode integration */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; /* Slate-400 on hover */
+  background: #94a3b8;
+  /* Slate-400 on hover */
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #475569; /* Slate-600 on hover */
+  background: #475569;
+  /* Slate-600 on hover */
 }
 
 /* ═══════════════════════════════════════════
@@ -278,6 +291,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -290,7 +304,18 @@ body {
   will-change: transform, opacity;
 }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
