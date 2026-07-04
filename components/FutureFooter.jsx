@@ -22,6 +22,7 @@ const FOOTER_LINKS = {
         { name: "Careers", href: "/career" },
         { name: "Our Portfolio", href: "/portfolio" },
         { name: "Contact", href: "/contact" },
+        { name: "Sitemap", href: "/sitemap" },
     ],
 
     "Services": [
