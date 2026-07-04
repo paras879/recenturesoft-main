@@ -62,39 +62,39 @@ export default function CookieConsentBanner() {
                     : "opacity-0 translate-y-[50px] scale-90 pointer-events-none"
                 }`}
         >
-            <div className="max-w-sm w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 p-5 rounded-2xl shadow-2xl relative">
+            <div className="max-w-sm w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 p-4 md:p-5 rounded-2xl shadow-2xl relative">
                 <button
                     onClick={() => setIsVisible(false)}
                     aria-label="Close cookie consent banner"
-                    className="absolute top-3 right-3 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 rounded-full transition-colors"
+                    className="absolute top-2 right-2 md:top-3 md:right-3 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 rounded-full transition-colors"
                 >
-                    <X className="w-4 h-4" />
+                    <X className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 </button>
 
-                <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl shrink-0">
-                        <Cookie className="w-5 h-5" />
+                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                    <div className="hidden sm:block p-2 md:p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl shrink-0">
+                        <Cookie className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white">We use cookies</h3>
+                    <h3 className="text-sm md:text-base font-bold text-slate-900 dark:text-white">We use cookies</h3>
                 </div>
 
-                <p className="text-sm text-slate-600 dark:text-gray-400 mb-5 leading-relaxed">
+                <p className="text-xs md:text-sm text-slate-600 dark:text-gray-400 mb-4 md:mb-5 leading-relaxed">
                     We use cookies to improve your experience and analyze traffic. See our{" "}
                     <Link href="/cookies" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
                         Cookies Policy
                     </Link>.
                 </p>
 
-                <div className="flex items-center gap-3 w-full">
+                <div className="flex items-center gap-2 md:gap-3 w-full">
                     <button
                         onClick={handleDecline}
-                        className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors"
+                        className="flex-1 px-3 md:px-4 py-2 md:py-2.5 rounded-xl text-xs md:text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors"
                     >
                         Decline
                     </button>
                     <button
                         onClick={handleAccept}
-                        className="flex-1 px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition-colors"
+                        className="flex-1 px-3 md:px-4 py-2 md:py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition-colors"
                     >
                         Accept Now
                     </button>
