@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export default function FAQSection({ faqs = [] }) {
@@ -22,37 +21,26 @@ export default function FAQSection({ faqs = [] }) {
 
             <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-4xl">
                 <div className="text-center mb-16 space-y-4">
-                    <motion.h2 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white"
+                    <h2 
+                        className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white animate-fade-in-up"
                     >
                         Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400">Questions</span>
-                    </motion.h2>
-                    <motion.p 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto"
+                    </h2>
+                    <p 
+                        className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto animate-fade-in-up delay-100"
                     >
                         Everything you need to know about our services and process. Can&apos;t find the answer you&apos;re looking for? Please chat to our friendly team.
-                    </motion.p>
+                    </p>
                 </div>
 
                 <div className="space-y-4">
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
                         return (
-                            <motion.div 
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05 }}
+                            <div 
                                 key={faq._id || index}
-                                className={`border rounded-2xl overflow-hidden transition-all duration-300 ${isOpen ? 'bg-white dark:bg-white/5 border-cyan-200 dark:border-cyan-500/30 shadow-lg shadow-cyan-500/5' : 'bg-white/50 dark:bg-white/[0.02] border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:bg-white dark:hover:bg-white/5'}`}
+                                className={`border rounded-2xl overflow-hidden transition-all duration-300 animate-fade-in-up ${isOpen ? 'bg-white dark:bg-white/5 border-cyan-200 dark:border-cyan-500/30 shadow-lg shadow-cyan-500/5' : 'bg-white/50 dark:bg-white/[0.02] border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:bg-white dark:hover:bg-white/5'}`}
+                                style={{ animationDelay: `${index * 50}ms` }}
                             >
                                 <button
                                     onClick={() => toggleFaq(index)}
@@ -65,22 +53,14 @@ export default function FAQSection({ faqs = [] }) {
                                         <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                                     </div>
                                 </button>
-                                
-                                <AnimatePresence initial={false}>
-                                    {isOpen && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                                        >
-                                            <div className="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-wrap">
-                                                {faq.answer}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
+                                <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                                    <div className="overflow-hidden">
+                                        <div className="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-wrap">
+                                            {faq.answer}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         );
                     })}
                 </div>

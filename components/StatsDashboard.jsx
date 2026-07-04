@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion } from "framer-motion";
 import Counter3D from "@/components/Counter3D";
 import BackgroundEffect from "@/components/BackgroundEffect";
 import KPIWidget from "@/components/KPIWidget";
@@ -442,16 +441,13 @@ function LiveCounter() {
     }, []);
 
     return (
-        <motion.span
-            className="font-semibold tabular-nums inline-block"
+        <span
+            className="font-semibold tabular-nums inline-block transition-all duration-300"
             style={{ color: C.primary }}
             key={liveCount}
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
         >
             {liveCount.toLocaleString()}
-        </motion.span>
+        </span>
     );
 }
 
