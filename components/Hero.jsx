@@ -315,7 +315,7 @@ export default function Hero({ cmsData = {} }) {
                                 fetchPriority={i === 0 ? "high" : "auto"}
                                 sizes="100vw"
                                 className="object-cover"
-                                quality={90}
+                                quality={100}
                                 property="hero-bg"
                             />
                         </div>

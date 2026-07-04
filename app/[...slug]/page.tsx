@@ -11,9 +11,10 @@ async function getPageData(path: string) {
     return page;
 }
 
-export async function generateMetadata({ params }: { params: { slug: string[] } }) {
-    const path = params?.slug?.length
-        ? "/" + params.slug.join("/")
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
+    const resolvedParams = await params;
+    const path = resolvedParams?.slug?.length
+        ? "/" + resolvedParams.slug.join("/")
         : "/";
     const page = await getPageData(path);
     if (!page) return {};
@@ -23,9 +24,10 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
     };
 }
 
-export default async function DynamicPage({ params }: { params: { slug: string[] } }) {
-    const path = params?.slug?.length
-        ? "/" + params.slug.join("/")
+export default async function DynamicPage({ params }: { params: Promise<{ slug: string[] }> }) {
+    const resolvedParams = await params;
+    const path = resolvedParams?.slug?.length
+        ? "/" + resolvedParams.slug.join("/")
         : "/";
     const page = await getPageData(path);
 
