@@ -96,9 +96,12 @@ export default async function Home() {
     const isActive = await checkPageStatus("/");
     if (!isActive) return notFound();
 
-  const services = await getServices();
-  const cmsData = await getHomePageData();
-  const faqs = await getFaqs();
+    // Parallelize data fetching to reduce TTFB (Document request latency)
+    const [services, cmsData, faqs] = await Promise.all([
+        getServices(),
+        getHomePageData(),
+        getFaqs()
+    ]);
 
   return (
     <>
