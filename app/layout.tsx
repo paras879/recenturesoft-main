@@ -11,11 +11,13 @@ import { MeetingModalProvider } from "@/components/providers/MeetingModalProvide
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 const manrope = Manrope({
@@ -23,6 +25,7 @@ const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
