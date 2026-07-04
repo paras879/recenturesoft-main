@@ -42,7 +42,6 @@ const FOOTER_LINKS = {
         { name: "Blog", href: "/blog" },
         { name: "Latest News", href: "/news" },
         { name: "Events", href: "/events" },
-        { name: "Our Solutions", href: "/solutions" },
     ],
 };
 
