@@ -1,13 +1,14 @@
 "use client";
 
-// React hooks removed for native CSS optimization
-import AboutSection from "./AboutSection";
-import Service from "./Service";
-import TechStack from "./TechStack";
-import Review from "./Review";
-import Status from "./StatsDashboard";
-import TrustedClients from "./TrustedClients";
-import FAQSection from "./FAQSection";
+import dynamic from "next/dynamic";
+// Dynamically import all sections to code-split JS and drastically improve Mobile Speed Index
+const AboutSection = dynamic(() => import("./AboutSection"), { ssr: true });
+const Service = dynamic(() => import("./Service"), { ssr: true });
+const TechStack = dynamic(() => import("./TechStack"), { ssr: true });
+const Review = dynamic(() => import("./Review"), { ssr: true });
+const Status = dynamic(() => import("./StatsDashboard"), { ssr: true });
+const TrustedClients = dynamic(() => import("./TrustedClients"), { ssr: true });
+const FAQSection = dynamic(() => import("./FAQSection"), { ssr: true });
 
 // Standard wrapper without lazy rendering so the browser paints everything upfront, eliminating scroll stutter.
 function LazySection({ children, id }) {
