@@ -14,7 +14,7 @@ export default function FAQSection({ faqs = [] }) {
     };
 
     return (
-        <section className="pt-16 pb-8 md:pt-24 md:pb-12 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50">
+        <section className="pt-8 pb-8 md:pt-12 md:pb-12 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50">
             {/* Background elements */}
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
             <div className="absolute left-1/4 top-1/4 w-96 h-96 bg-cyan-400/10 dark:bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
@@ -22,14 +22,6 @@ export default function FAQSection({ faqs = [] }) {
 
             <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-4xl">
                 <div className="text-center mb-16 space-y-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-100/50 dark:bg-cyan-500/10 border border-cyan-200 dark:border-cyan-500/20 text-cyan-800 dark:text-cyan-300 text-sm font-medium"
-                    >
-                        Got Questions?
-                    </motion.div>
                     <motion.h2 
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
