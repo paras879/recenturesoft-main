@@ -299,7 +299,7 @@ export default async function FutureFooter() {
                                         Call Us
                                     </span>
                                 </div>
-                                <span className="text-slate-800 dark:text-white font-medium text-lg">
+                                <span className="text-slate-800 dark:text-white font-medium text-lg pl-12">
                                     {phone}
                                 </span>
                             </div>
@@ -319,7 +319,7 @@ export default async function FutureFooter() {
                                         Email Us
                                     </span>
                                 </div>
-                                <span className="text-slate-800 dark:text-white font-medium text-lg">
+                                <span className="text-slate-800 dark:text-white font-medium text-lg pl-12">
                                     {email}
                                 </span>
                             </div>
