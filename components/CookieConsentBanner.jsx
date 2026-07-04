@@ -12,9 +12,11 @@ export default function CookieConsentBanner() {
         const consent = localStorage.getItem("cookieConsent");
         if (!consent) {
             // Add a small delay before showing the banner
+            const isMobile = window.innerWidth < 768;
+            const delay = isMobile ? 8000 : 1000;
             const timer = setTimeout(() => {
                 setIsVisible(true);
-            }, 1000);
+            }, delay);
             return () => clearTimeout(timer);
         }
     }, []);
