@@ -129,7 +129,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
     };
 
     return (
-        <section className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950">
+        <section className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950">
             {/* Ambient glow blobs */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 dark:bg-cyan-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/5 dark:bg-purple-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
@@ -137,11 +137,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="text-center mb-10">
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-200 dark:border-cyan-500/20 text-cyan-700 dark:text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-4">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-                        Get In Touch
-                    </span>
+                <div className="text-center mb-6">
                     <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
                         Interested in <span className="bg-gradient-to-r from-cyan-500 to-indigo-600 bg-clip-text text-transparent">{serviceName}?</span>
                     </h2>

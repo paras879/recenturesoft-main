@@ -111,7 +111,6 @@ export default function SitemapClient() {
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6"
                     >
                         Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">Sitemap</span>
@@ -119,7 +118,6 @@ export default function SitemapClient() {
                     <motion.p 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
                         className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
                     >
                         A complete overview of our platform's structure, services, and resources.
@@ -136,7 +134,6 @@ export default function SitemapClient() {
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.1 * index }}
                                 className={`rounded-2xl transition-all duration-500 overflow-hidden relative group ${
                                     isOpen 
                                     ? 'bg-white dark:bg-[#0f172a] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-white/10' 
@@ -224,7 +221,6 @@ export default function SitemapClient() {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
                     className="mt-12 md:mt-16 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group shadow-xl shadow-blue-500/20"
                 >
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay pointer-events-none" />
