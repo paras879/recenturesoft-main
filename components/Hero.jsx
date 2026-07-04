@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 
 // Statically import or declare the SVG Hero graphic to replace WebGL
@@ -289,15 +288,10 @@ export default function Hero({ cmsData = {} }) {
     const displayBg = cmsSlide?.bg || slide.bg;
 
     return (
-        // FIX #3: LazyMotion + domAnimation trims framer-motion's initial
-        // bundle/runtime cost (only loads the animation features actually
-        // used here, instead of the full feature set). Requires using the
-        // `m` component instead of `motion` inside — see notes at bottom.
-        <LazyMotion features={domAnimation} strict={false}>
             <section ref={heroRef} className="relative min-h-screen min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
                 {/* ── Background image slideshow ── */}
-                <motion.div
+                <div
                     style={{ scale: bgScale, opacity: bgOpacity }}
                     className="absolute inset-0 z-0 bg-black"
                 >
@@ -335,7 +329,7 @@ export default function Hero({ cmsData = {} }) {
                         }}
                     />
                     <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-background to-transparent" />
-                </motion.div>
+                </div>
 
                 {/* ── Ambient glow blob (accent coloured) — now plain CSS, no framer-motion ── */}
                 {/*
@@ -370,50 +364,34 @@ export default function Hero({ cmsData = {} }) {
                 <HeroGraphicStyles />
 
                 {/* ── Text content ── */}
-                <motion.div
+                <div
                     style={{ y: contentY }}
                     className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-24 md:pb-12 lg:pt-28 lg:pb-16 gap-0 2xl:gap-16"
                 >
                     <div className="w-full max-w-[92%] lg:w-[70%] xl:w-[60%] 2xl:w-[55%] flex flex-col flex-1 mt-0">
-                        <AnimatePresence mode="wait" initial={false}>
-                            <motion.div key={slide.id + "-content"}>
+                            <div key={slide.id + "-content"}>
 
                                 {/* Heading */}
-                                <motion.h2
-                                    variants={slideIn}
-                                    initial={{ opacity: 1, y: 0 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit="exit"
-                                    custom={1}
-                                    className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.6rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground"
+                                <h2
+                                    className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[5.6rem] font-[500] tracking-[-0.05em] leading-[1.1] pb-2 text-foreground animate-fade-in-up delay-100"
                                 >
                                     {displayHeading1}
                                     <span className={`block bg-gradient-to-r ${slide.accentGrad} bg-clip-text text-transparent font-[500]`}>
                                         {displayHeadingAccent}
                                     </span>
                                     <span className="block 2xl:whitespace-nowrap">{displayHeading2}</span>
-                                </motion.h2>
+                                </h2>
 
                                 {/* Description */}
-                                <motion.p
-                                    variants={slideIn}
-                                    initial={{ opacity: 1, y: 0 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit="exit"
-                                    custom={2}
-                                    className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-800 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400]"
+                                <p
+                                    className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-800 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400] animate-fade-in-up delay-200"
                                 >
                                     {displayDesc}
-                                </motion.p>
+                                </p>
 
                                 {/* CTA buttons */}
-                                <motion.div
-                                    variants={slideIn}
-                                    initial={{ opacity: 1, y: 0 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit="exit"
-                                    custom={3}
-                                    className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
+                                <div
+                                    className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto animate-fade-in-up delay-300"
                                 >
                                     <button
                                         onClick={openModal}
@@ -428,7 +406,7 @@ export default function Hero({ cmsData = {} }) {
                                     <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
                                         {displayCta2}
                                     </button>
-                                </motion.div>
+                                </div>
 
                                 {/*
                               FIX #3 (cont.): Service tags used to each be a
@@ -460,8 +438,8 @@ export default function Hero({ cmsData = {} }) {
                                     ))}
                                 </div>
 
-                            </motion.div>
-                        </AnimatePresence>
+                            </div>
+                        
                     </div>
 
                     {/* ── Right-side stats panel (2xl+ only) ── */}
@@ -496,7 +474,7 @@ export default function Hero({ cmsData = {} }) {
                             </div>
                         ))}
                     </div>
-                </motion.div>
+                </div>
 
                 {/* ── Scroll indicator ── */}
                 <div className="absolute bottom-10 right-10 z-20 hidden lg:flex flex-col items-center gap-2 opacity-0 animate-[fadeIn_0.6s_ease-out_2s_forwards]">
@@ -505,6 +483,5 @@ export default function Hero({ cmsData = {} }) {
                 </div>
 
             </section>
-        </LazyMotion>
     );
 }

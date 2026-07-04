@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight } from "lucide-react";
 
@@ -164,28 +163,15 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                         {link.name}
                                     </Link>
                                 )}
-                                <AnimatePresence>
-                                    {hoveredLink === link.name && link.name !== "Solutions" && (
-                                        <motion.div
-                                            layoutId="navHoverPill"
+                                {hoveredLink === link.name && link.name !== "Solutions" && (
+                                        <div
                                             className="absolute inset-0 bg-slate-100 dark:bg-white/10 rounded-full z-0"
-                                            initial={{ opacity: 0, scale: 0.95 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.95 }}
-                                            transition={{ duration: 0.2 }}
                                         />
                                     )}
-                                </AnimatePresence>
 
                                 {/* ════ SOLUTIONS MEGA MENU ════ */}
-                                {link.name === "Solutions" && (
-                                    <AnimatePresence>
-                                        {hoveredLink === "Solutions" && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                {link.name === "Solutions" && hoveredLink === "Solutions" && (
+                                            <div
                                                 className="absolute top-full left-1/2 -translate-x-[25%] pt-6 cursor-default"
                                                 style={{ width: "min(960px, calc(100vw - 2rem))" }}
                                             >
@@ -229,9 +215,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                         })}
                                                     </div>
                                                 </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                                            </div>
                                 )}
                             </li>
                         ))}
@@ -263,37 +247,27 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                         )}
 
                         {/* Hamburger Button */}
-                        <motion.button
+                        <button
                             aria-label="Menu"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
                             className="relative z-50 p-2 text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
-                        </motion.button>
+                        </button>
                     </div>
                 </div>
             </nav>
 
             {/* ════ FULL SCREEN MOBILE DRAWER ════ */}
-            <AnimatePresence>
                 {isMobileMenuOpen && (
-                    <motion.div
+                    <div
                         className="fixed inset-0 z-40 bg-slate-900/40 dark:bg-black/60 backdrop-blur-xl lg:hidden flex justify-end"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, transition: { delay: 0.3 } }}
                     >
                         {/* Drawer content */}
-                        <motion.div
+                        <div
                             className="w-[85vw] max-w-[320px] sm:w-[320px] sm:max-w-none h-full bg-white dark:bg-[#020617] sm:border-l border-slate-200 dark:border-white/10 p-4 sm:p-5 flex flex-col"
-                            initial={{ x: "100%" }}
-                            animate={{ x: "0%" }}
-                            exit={{ x: "100%" }}
-                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
                         >
                             {/* Header inside drawer - STICKY */}
                             <div className="sticky top-0 z-10 flex justify-between items-center bg-white dark:bg-[#020617] pb-3 border-b border-slate-200 dark:border-white/5 mb-4 pt-1">
@@ -328,12 +302,8 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                     </svg>
                                                 </button>
-                                                <AnimatePresence>
-                                                    {mobileExpanded === "Solutions" && (
-                                                        <motion.div
-                                                            initial={{ height: 0, opacity: 0 }}
-                                                            animate={{ height: "auto", opacity: 1 }}
-                                                            exit={{ height: 0, opacity: 0 }}
+                                                {mobileExpanded === "Solutions" && (
+                                                        <div
                                                             className="overflow-hidden"
                                                         >
                                                             <div className="pl-6 py-2 flex flex-col gap-4">
@@ -352,9 +322,8 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                                     </div>
                                                                 ))}
                                                             </div>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
+                                                        </div>
+                                                )}
                                             </div>
                                         );
                                     }
@@ -367,40 +336,32 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                             className={`text-base font-medium transition-all duration-300 block px-3 py-2.5 rounded-lg active:scale-[0.98] ${isActive ? "bg-primary/10 dark:bg-cyan-500/10 text-primary dark:text-cyan-400" : "text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white"}`}
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >
-                                            <motion.div
-                                                initial={{ opacity: 0, x: 20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: 0.05 * i, type: "spring", stiffness: 300, damping: 24 }}
+                                            <div
                                                 className="flex items-center justify-between"
                                             >
                                                 {link.name}
                                                 {isActive && (
-                                                    <motion.div
-                                                        layoutId="mobileActiveIndicator"
+                                                    <div
                                                         className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-cyan-400 shadow-[0_0_8px_rgba(14,165,233,0.5)] dark:shadow-[0_0_8px_rgba(34,211,238,0.8)]"
                                                     />
                                                 )}
-                                            </motion.div>
+                                            </div>
                                         </Link>
                                     )
                                 })}
                             </div>
 
-                            <motion.div
+                            <div
                                 className="mt-auto pt-4 border-t border-slate-200 dark:border-white/5"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
                             >
                                 <Link href="/contact" className="w-full relative group px-4 py-3 rounded-lg overflow-hidden font-bold text-white shadow-lg shadow-primary/20 dark:shadow-cyan-500/20 block text-center active:scale-[0.98] transition-transform" onClick={() => setIsMobileMenuOpen(false)}>
                                     <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent dark:from-cyan-500 dark:to-indigo-600" />
                                     <span className="relative z-10">Get A Quote</span>
                                 </Link>
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
+                            </div>
+                        </div>
+                    </div>
                 )}
-            </AnimatePresence>
         </header>
     );
 }
