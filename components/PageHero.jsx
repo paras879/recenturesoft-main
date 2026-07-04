@@ -54,10 +54,10 @@ export default function PageHero({ title, highlight, description, banner, highli
 
             <div className="container mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 relative z-20 max-w-[1500px] h-full">
                 {/* Left aligned if image is present, centered otherwise */}
-                <div className={`flex flex-col ${children ? 'justify-end md:justify-center items-start text-left min-h-[55vh] md:min-h-[50vh] pb-0 md:pb-0' : 'justify-center items-center text-center'}`}>
+                <div className={`flex flex-col ${children ? 'justify-end md:justify-center items-start text-left min-h-[55vh] md:min-h-[50vh] pb-0 md:pb-0 md:pt-20' : 'justify-center items-center text-center'}`}>
 
                     <h1
-                        className={`font-light tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${children ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
+                        className={`font-light md:font-medium tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${children ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
                     >
                         {title} <br className="hidden md:block" />
                         <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
@@ -69,8 +69,8 @@ export default function PageHero({ title, highlight, description, banner, highli
                         {description}
                     </p>
 
-                    {!hideContactButton && (
-                        <div className="mt-8 animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
+                    { !hideContactButton && (
+                        <div className="mt-8 md:mt-12 animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
                             <button
                                 onClick={() => document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' })}
                                 className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-light text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
