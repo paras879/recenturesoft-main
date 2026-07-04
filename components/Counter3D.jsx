@@ -19,7 +19,7 @@ const C = {
 export default function Counter3D({ icon, value, suffix = "", label }) {
   return (
     <div
-      className="relative group rounded-2xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 p-6 text-center cursor-pointer overflow-hidden shadow-sm dark:shadow-none transition-transform duration-300 hover:scale-[1.04]"
+      className="relative group rounded-2xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 p-5 text-center cursor-pointer overflow-hidden shadow-sm dark:shadow-none transition-transform duration-300 hover:scale-[1.04]"
     >
       {/* Border */}
       <div
@@ -29,20 +29,23 @@ export default function Counter3D({ icon, value, suffix = "", label }) {
 
       {/* Icon with floating animation */}
       <motion.div
-        className="mb-4"
+        className="mb-3"
         animate={{ y: [0, -5, 0] }}
         transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
       >
-        {icon}
+        {/* Scale the icon down slightly */}
+        <div className="scale-90">
+            {icon}
+        </div>
       </motion.div>
 
       {/* Counter value — bright white */}
-      <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-1">
+      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
         <CountUp start={0} end={value} duration={2} separator="," />{suffix}
       </h3>
 
       {/* Label — gray secondary text */}
-      <p className="text-sm text-slate-600 dark:text-gray-500 uppercase tracking-wider">{label}</p>
+      <p className="text-xs text-slate-600 dark:text-gray-500 uppercase tracking-wider">{label}</p>
 
       {/* Hover glow — unified primary color */}
       <div

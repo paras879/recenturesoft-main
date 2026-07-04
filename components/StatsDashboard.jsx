@@ -137,10 +137,13 @@ function HolographicCore() {
 /* ═══════════════════════════════════════════════════════
    FLOATING MINI-DASHBOARD (shown on bar hover)
    ═══════════════════════════════════════════════════════ */
-function MiniDashboard({ data, isPeak, hovered }) {
+function MiniDashboard({ data, isPeak, hovered, isLast }) {
+    const translateX = isLast ? "-translate-x-[85%]" : "-translate-x-1/2";
+    const arrowLeft = isLast ? "left-[85%]" : "left-1/2";
+
     return (
         <div
-            className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-4 z-50 w-52 pointer-events-none transition-all duration-200 ease-out origin-bottom ${hovered
+            className={`absolute bottom-full left-1/2 ${translateX} mb-4 z-50 w-52 pointer-events-none transition-all duration-200 ease-out origin-bottom ${hovered
                     ? "opacity-100 translate-y-0 scale-100 visible"
                     : "opacity-0 translate-y-2 scale-95 invisible"
                 }`}
@@ -154,7 +157,7 @@ function MiniDashboard({ data, isPeak, hovered }) {
             >
                 {/* Arrow */}
                 <div
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white/95 dark:bg-[#0a1225]/95"
+                    className={`absolute -bottom-2 ${arrowLeft} -translate-x-1/2 w-4 h-4 rotate-45 bg-white/95 dark:bg-[#0a1225]/95`}
                     style={{ borderRight: `1px solid ${C.primary}18`, borderBottom: `1px solid ${C.primary}18` }}
                 />
 
@@ -226,7 +229,7 @@ function AnalyticsBar({ data, maxValue, index, peakValue, chartHeight }) {
             className="relative flex flex-col items-center flex-1 min-w-0 group"
         >
             {/* Floating mini-dashboard on hover */}
-            <MiniDashboard data={data} isPeak={isPeak} hovered={hovered} />
+            <MiniDashboard data={data} isPeak={isPeak} hovered={hovered} isLast={index === 11} />
 
             {/* Floating value label */}
             <div
@@ -493,7 +496,7 @@ export default function StatsDashboard({ cmsData = {} }) {
             </div>
 
             <div
-                className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                className="relative z-10 max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
             >
                 {counters.map((c, i) => (
                     <div key={c.id}>
