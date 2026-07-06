@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { connectDB } from "@/lib/mongodb";
 import WebPage from "@/models/WebPage";
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://recenturesoft.com';
 
@@ -44,7 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticSitemap = routes.map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
   }));
 
   let dynamicSitemap: MetadataRoute.Sitemap = [];
@@ -55,7 +56,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     dynamicSitemap = dynamicPages.map((page: any) => ({
       url: `${baseUrl}${page.path.startsWith('/') ? page.path : `/${page.path}`}`,
-      lastModified: new Date(),
     }));
   } catch (error) {
     console.error("Error fetching dynamic pages for sitemap:", error);

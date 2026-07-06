@@ -8,7 +8,6 @@ export default function GenericLocationPage({ page }) {
     const heroContent = page.content?.crmHero || {};
     const blocks = page.content?.crmBlocks || [];
 
-    const badge = heroContent.badge;
     const title = heroContent.title || "Customer Relationship";
     const highlight = heroContent.highlight || "Management";
     const desktopBanner = heroContent.desktopBanner || "/Banner/crm_banner.webp";
@@ -26,10 +25,6 @@ export default function GenericLocationPage({ page }) {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
                         {/* Text Content */}
                         <div className="text-left max-w-2xl">
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-semibold mb-6 shadow-sm">
-                                <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
-                                {badge}
-                            </div>
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.15] mb-6 tracking-tight">
                                 {title} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">

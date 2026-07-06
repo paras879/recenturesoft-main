@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layout, Code, Library, ShieldCheck, ChevronDown, ArrowRight, MessageSquare, Calendar } from 'lucide-react';
+import { Layout, Code, Library, ShieldCheck, ChevronDown, ArrowRight, MessageSquare, Calendar, MapPin } from 'lucide-react';
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
@@ -77,7 +77,7 @@ const SITEMAP_CATEGORIES = [
     }
 ];
 
-export default function SitemapClient() {
+export default function SitemapClient({ locationLinks = [] }) {
     // Open the first section by default
     const [openSection, setOpenSection] = useState(0);
     const { openModal } = useProjectModal();
@@ -86,6 +86,15 @@ export default function SitemapClient() {
     const toggleSection = (index) => {
         setOpenSection(openSection === index ? null : index);
     };
+
+    const dynamicCategories = [...SITEMAP_CATEGORIES];
+    if (locationLinks.length > 0) {
+        dynamicCategories.push({
+            title: "Location Pages",
+            icon: <MapPin className="w-5 h-5" />,
+            links: locationLinks
+        });
+    }
 
     return (
         <div className="min-h-screen bg-slate-50/50 dark:bg-[#020617] pt-32 pb-24 relative overflow-hidden">
@@ -126,7 +135,7 @@ export default function SitemapClient() {
 
                 {/* Accordions */}
                 <div className="space-y-4 md:space-y-6">
-                    {SITEMAP_CATEGORIES.map((category, index) => {
+                    {dynamicCategories.map((category, index) => {
                         const isOpen = openSection === index;
                         
                         return (
