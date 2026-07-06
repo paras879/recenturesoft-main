@@ -109,11 +109,20 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
     if (dynamicPages && dynamicPages.length > 0) {
         dynamicPages.forEach(dp => {
             if (dp.category === "Solutions" && dp.subcategory) {
-                const cat = combinedSolutionsMenu.find(c => c.title === dp.subcategory);
+                const cat = combinedSolutionsMenu.find(c => c.title.toLowerCase() === dp.subcategory.toLowerCase());
                 if (cat) {
                     if (!cat.items.some(item => item.href === dp.path)) {
                         cat.items.push({ name: dp.name, href: dp.path });
                     }
+                } else {
+                    // Create new category block at the end if it doesn't match existing ones
+                    combinedSolutionsMenu.push({
+                        title: dp.subcategory,
+                        icon: Code,
+                        color: "text-slate-500",
+                        bg: "bg-slate-500/10",
+                        items: [{ name: dp.name, href: dp.path }]
+                    });
                 }
             }
         });
