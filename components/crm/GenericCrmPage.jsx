@@ -1,7 +1,9 @@
 import Image from "next/image";
-import SolutionContactForm from "@/components/shared/SolutionContactForm";
-import PageFAQSection from "@/components/shared/PageFAQSection";
-import CrmContent from "@/components/crm/CrmContent";
+import dynamic from "next/dynamic";
+
+const SolutionContactForm = dynamic(() => import("@/components/shared/SolutionContactForm"));
+const PageFAQSection = dynamic(() => import("@/components/shared/PageFAQSection"));
+const CrmContent = dynamic(() => import("@/components/crm/CrmContent"));
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function GenericCrmPage({ page }) {
