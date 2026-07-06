@@ -106,10 +106,32 @@ export default function Hero({ cmsData = {} }) {
 
     useEffect(() => {
         const mq = window.matchMedia("(min-width: 768px)");
-        setIsDesktop(mq.matches);
-        const handleChange = (e) => setIsDesktop(e.matches);
+        let idleCallbackId;
+        let timeoutId;
+
+        const updateIsDesktop = (matches) => {
+            if (matches) {
+                // Defer mounting heavy components on desktop to reduce initial TBT
+                if (typeof window.requestIdleCallback === 'function') {
+                    idleCallbackId = window.requestIdleCallback(() => setIsDesktop(true), { timeout: 2000 });
+                } else {
+                    timeoutId = setTimeout(() => setIsDesktop(true), 1500);
+                }
+            } else {
+                setIsDesktop(false);
+            }
+        };
+
+        // Initial check
+        updateIsDesktop(mq.matches);
+
+        const handleChange = (e) => updateIsDesktop(e.matches);
         mq.addEventListener("change", handleChange);
-        return () => mq.removeEventListener("change", handleChange);
+        return () => {
+            mq.removeEventListener("change", handleChange);
+            if (idleCallbackId) window.cancelIdleCallback(idleCallbackId);
+            if (timeoutId) clearTimeout(timeoutId);
+        };
     }, []);
 
     // ── Auto-slide timer ─────

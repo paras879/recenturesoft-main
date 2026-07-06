@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 // Dynamically import all sections to code-split JS and drastically improve Mobile Speed Index
 const AboutSection = dynamic(() => import("./AboutSection"), { ssr: true });
@@ -10,11 +11,39 @@ const Status = dynamic(() => import("./StatsDashboard"), { ssr: true });
 const TrustedClients = dynamic(() => import("./TrustedClients"), { ssr: true });
 const FAQSection = dynamic(() => import("./FAQSection"), { ssr: true });
 
-// Standard wrapper without lazy rendering so the browser paints everything upfront, eliminating scroll stutter.
-function LazySection({ children, id }) {
+// Lazy wrapper that only hydrates its children when they come within a large margin (1000px)
+// This drastically drops initial load TBT by deferring heavy components, 
+// while the large root margin ensures they render before the user scrolls, eliminating scroll stutter.
+function LazySection({ children, id, minHeight = "500px" }) {
+    const sectionRef = useRef(null);
+    const [hasIntersected, setHasIntersected] = useState(false);
+
+    useEffect(() => {
+        if (hasIntersected) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHasIntersected(true);
+                    observer.disconnect();
+                }
+            },
+            {
+                // Trigger hydration 1000px before the section enters the viewport
+                rootMargin: "1000px"
+            }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasIntersected]);
+
     return (
-        <div id={id} className="w-full relative">
-            {children}
+        <div id={id} ref={sectionRef} className="w-full relative" style={{ minHeight: hasIntersected ? 'auto' : minHeight }}>
+            {hasIntersected ? children : null}
         </div>
     );
 }
