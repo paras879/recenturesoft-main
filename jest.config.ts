@@ -1,14 +1,16 @@
-import type { Config } from 'jest';
+import nextJest from 'next/jest.js';
 
-const config: Config = {
-  testEnvironment: 'node',
+const createJestConfig = nextJest({
+  dir: './',
+});
+
+const config = {
+  testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
-  },
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/', '<rootDir>/tests/', '<rootDir>/playwright-report/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
 };
 
-export default config;
+export default createJestConfig(config);

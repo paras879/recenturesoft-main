@@ -37,6 +37,22 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://recenturesoft.com'),
   title: "RecentureSoft | Enterprise Software Development",
   description: "RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.",
+  openGraph: {
+    title: "RecentureSoft | Enterprise Software Development",
+    description: "RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.",
+    url: 'https://recenturesoft.com',
+    siteName: 'RecentureSoft',
+    images: [
+      {
+        url: '/og-image.jpg', // Assuming a default OG image exists or will be added
+        width: 1200,
+        height: 630,
+        alt: 'RecentureSoft Enterprise Software',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
