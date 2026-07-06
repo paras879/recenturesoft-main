@@ -228,15 +228,31 @@ export default function Hero({ cmsData = {} }) {
                     );
                 })}
 
-                <div className="absolute inset-0 bg-white/5 md:bg-white/0 dark:bg-[#030712]/50" />
+                <div className="absolute inset-0 bg-white/20 md:bg-white/0 dark:bg-[#030712]/60 md:dark:bg-[#030712]/50" />
+                
+                {/* Mobile-optimized gradient (more solid to ensure readability) */}
                 <div
-                    className="absolute inset-0"
+                    className="absolute inset-0 md:hidden"
+                    style={{
+                        background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.8) 80%, rgba(255,255,255,0) 100%)"
+                    }}
+                />
+                <div
+                    className="absolute inset-0 hidden md:block dark:hidden"
                     style={{
                         background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.88) 28%, rgba(255,255,255,0.55) 48%, rgba(255,255,255,0.15) 68%, rgba(255,255,255,0) 85%)"
                     }}
                 />
+                
+                {/* Dark mode gradients */}
                 <div
-                    className="absolute inset-0 hidden dark:block"
+                    className="absolute inset-0 hidden dark:block md:dark:hidden"
+                    style={{
+                        background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.95) 50%, rgba(3,7,18,0.8) 80%, rgba(3,7,18,0) 100%)"
+                    }}
+                />
+                <div
+                    className="absolute inset-0 hidden md:dark:block"
                     style={{
                         background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
                     }}
@@ -290,7 +306,7 @@ export default function Hero({ cmsData = {} }) {
 
                         {/* Description */}
                         <p
-                            className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-800 dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-8 font-[400] animate-fade-in-up delay-200"
+                            className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-900 md:text-slate-800 dark:text-slate-200 md:dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-relaxed md:leading-8 font-[500] md:font-[400] drop-shadow-sm md:drop-shadow-none animate-fade-in-up delay-200"
                         >
                             {displayDesc}
                         </p>

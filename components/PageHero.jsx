@@ -64,7 +64,7 @@ export default function PageHero({ title, highlight, description, banner, highli
                     </h1>
 
                     <p
-                        className={`text-base md:text-lg lg:text-xl font-normal leading-8 animate-fade-up-2 ${children ? 'text-slate-200 max-w-2xl drop-shadow-md' : 'text-slate-600 dark:text-slate-300 max-w-3xl mx-auto'}`}
+                        className={`text-base md:text-lg lg:text-xl leading-relaxed md:leading-8 animate-fade-up-2 ${children ? 'text-white md:text-slate-200 font-[500] md:font-normal max-w-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:drop-shadow-md' : 'text-slate-900 md:text-slate-600 dark:text-slate-200 md:dark:text-slate-300 font-[500] md:font-normal drop-shadow-sm md:drop-shadow-none max-w-3xl mx-auto'}`}
                     >
                         {description}
                     </p>
