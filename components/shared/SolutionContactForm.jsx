@@ -8,11 +8,11 @@ const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
    reCAPTCHA v2 Loader hook
    Loads the Google script once per page and renders the widget
 ──────────────────────────────────────────────────────────── */
-function useRecaptcha(containerRef, onToken) {
+function useRecaptcha(containerRef, onToken, shouldLoad) {
     const widgetIdRef = useRef(null);
 
     useEffect(() => {
-        if (!SITE_KEY) return;
+        if (!SITE_KEY || !shouldLoad) return;
 
         const renderWidget = () => {
             if (!containerRef.current || widgetIdRef.current !== null) return;
@@ -52,7 +52,7 @@ function useRecaptcha(containerRef, onToken) {
             widgetIdRef.current = null;
         };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [shouldLoad]);
 
     const resetWidget = useCallback(() => {
         if (widgetIdRef.current !== null && window.grecaptcha) {
@@ -71,10 +71,11 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
     const [recaptchaToken, setRecaptchaToken] = useState(null);
     const [status, setStatus] = useState("idle"); // idle | loading | success | error
     const [errorMsg, setErrorMsg] = useState("");
+    const [userInteracted, setUserInteracted] = useState(false);
     const captchaContainerRef = useRef(null);
     const successTimerRef = useRef(null);
 
-    const { resetWidget } = useRecaptcha(captchaContainerRef, setRecaptchaToken);
+    const { resetWidget } = useRecaptcha(captchaContainerRef, setRecaptchaToken, userInteracted);
 
     // Auto-dismiss success message after 3 seconds
     useEffect(() => {
@@ -135,7 +136,14 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
     };
 
     return (
-        <section id="contact-form-section" className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950">
+        <section 
+            id="contact-form-section" 
+            className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950"
+            onMouseEnter={() => setUserInteracted(true)} 
+            onClick={() => setUserInteracted(true)} 
+            onFocus={() => setUserInteracted(true)}
+            onTouchStart={() => setUserInteracted(true)}
+        >
             {/* Ambient glow blobs */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 dark:bg-cyan-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/5 dark:bg-purple-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
