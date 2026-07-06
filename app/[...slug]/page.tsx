@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import mongoose from "mongoose";
 import { connectDB } from "@/lib/mongodb";
 import FutureFooter from "@/components/FutureFooter";
-import NavbarClient from "@/components/NavbarClient";
+import Navbar from "@/components/Navbar";
+import GenericCrmPage from "@/components/crm/GenericCrmPage";
 
 async function getPageData(path: string) {
     await connectDB();
@@ -35,10 +36,22 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
         notFound();
     }
 
-    // Connect to SiteSettings for Footer/Navbar if needed, but they handle themselves
+    if (page.templateType === "crm-template") {
+        return (
+            <>
+                <Navbar />
+                <main>
+                    <GenericCrmPage page={page} />
+                </main>
+                <FutureFooter />
+            </>
+        );
+    }
+
+    // Default Template
     return (
         <>
-            <NavbarClient />
+            <Navbar />
             <main className="min-h-[60vh] pt-32 pb-16 bg-slate-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-200">

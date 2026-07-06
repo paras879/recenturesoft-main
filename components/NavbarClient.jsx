@@ -90,7 +90,7 @@ const solutionsMenu = [
     }
 ];
 
-export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = [] }) {
+export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = [], dynamicPages = [] }) {
     const [hoveredLink, setHoveredLink] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [mobileExpanded, setMobileExpanded] = useState("");
@@ -101,8 +101,26 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
     
     const activeNavLinks = navLinks.filter(link => isPathActive(link.href));
     
+    // Merge dynamic pages into solutions menu
+    const combinedSolutionsMenu = solutionsMenu.map(category => ({
+        ...category,
+        items: [...category.items]
+    }));
+    if (dynamicPages && dynamicPages.length > 0) {
+        dynamicPages.forEach(dp => {
+            if (dp.category === "Solutions" && dp.subcategory) {
+                const cat = combinedSolutionsMenu.find(c => c.title === dp.subcategory);
+                if (cat) {
+                    if (!cat.items.some(item => item.href === dp.path)) {
+                        cat.items.push({ name: dp.name, href: dp.path });
+                    }
+                }
+            }
+        });
+    }
+
     // Filter solutions menu categories and their items
-    const activeSolutionsMenu = solutionsMenu.map(category => ({
+    const activeSolutionsMenu = combinedSolutionsMenu.map(category => ({
         ...category,
         items: category.items.filter(item => isPathActive(item.href))
     })).filter(category => category.items.length > 0);
