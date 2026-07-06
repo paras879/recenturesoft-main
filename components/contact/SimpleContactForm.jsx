@@ -10,6 +10,7 @@ export default function SimpleContactForm() {
     const [error, setError] = useState(null);
     const [focusedField, setFocusedField] = useState(null);
     const [recaptchaToken, setRecaptchaToken] = useState("");
+    const [userInteracted, setUserInteracted] = useState(false);
     const recaptchaRef = useRef(null);
 
     const handleSubmit = async (e) => {
@@ -130,7 +131,15 @@ export default function SimpleContactForm() {
                     <p className="text-sm text-slate-500 dark:text-slate-400">Fill in your details below and our enterprise experts will get in touch.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5 relative z-10" noValidate>
+                <form 
+                    onSubmit={handleSubmit} 
+                    className="space-y-5 relative z-10" 
+                    noValidate
+                    onMouseEnter={() => setUserInteracted(true)}
+                    onClick={() => setUserInteracted(true)}
+                    onFocus={() => setUserInteracted(true)}
+                    onTouchStart={() => setUserInteracted(true)}
+                >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="relative">
                             <User className={iconClasses('firstName')} />
@@ -189,13 +198,15 @@ export default function SimpleContactForm() {
                         </motion.div>
                     )}
 
-                    <div className="flex justify-center my-4">
-                        <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
-                            onChange={(token) => setRecaptchaToken(token)}
-                            theme="light"
-                        />
+                    <div className="flex justify-center my-4 min-h-[78px]">
+                        {userInteracted && (
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "dummy_key"}
+                                onChange={(token) => setRecaptchaToken(token)}
+                                theme="light"
+                            />
+                        )}
                     </div>
 
                     <motion.button
