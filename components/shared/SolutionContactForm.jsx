@@ -201,7 +201,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                         onChange={handleChange}
                                         required
                                         placeholder="John Smith"
-                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
                                     />
                                 </div>
 
@@ -218,7 +218,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                         onChange={handleChange}
                                         required
                                         placeholder="john@company.com"
-                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
                                     />
                                 </div>
 
@@ -234,7 +234,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                         value={form.phone}
                                         onChange={handleChange}
                                         placeholder="+91 99999 99999"
-                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
                                     />
                                 </div>
 
@@ -243,7 +243,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                                         Service Interest
                                     </label>
-                                    <div className="w-full px-4 py-3 bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-white/10 rounded-xl text-sm text-slate-600 dark:text-slate-400 font-medium truncate select-none">
+                                    <div className="w-full px-4 py-3 bg-slate-100 dark:bg-slate-800/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-600 dark:text-slate-400 font-medium truncate select-none">
                                         {serviceName}
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                     required
                                     rows={4}
                                     placeholder={`Tell us about your ${serviceName} requirements...`}
-                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200 resize-none"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200 resize-none"
                                 />
                             </div>
 

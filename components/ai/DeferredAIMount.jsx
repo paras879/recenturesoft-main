@@ -15,24 +15,28 @@ export default function DeferredAIMount() {
     const [shouldLoad, setShouldLoad] = useState(false);
 
     useEffect(() => {
-        // requestIdleCallback fires once the main thread is free — i.e. after
-        // the hero content has painted and hydrated. Falls back to a fixed
-        // timeout on browsers/environments without it (e.g. some mobile
-        // Safari versions), so the widget still shows up reliably either way.
-        if ("requestIdleCallback" in window) {
-            const id = window.requestIdleCallback(() => setShouldLoad(true), {
-                timeout: 4000,
-            });
-            return () => {
-                if (window.cancelIdleCallback) {
-                    window.cancelIdleCallback(id);
-                }
-            };
-        } else {
-            const id = setTimeout(() => setShouldLoad(true), 2500);
-            return () => clearTimeout(id);
-        }
-    }, []);
+        let interactionTimeout;
+        const events = ["scroll", "mousemove", "touchstart", "keydown", "click"];
+        
+        const loadWidget = () => {
+            if (!shouldLoad) {
+                setShouldLoad(true);
+                events.forEach(e => window.removeEventListener(e, loadWidget));
+                clearTimeout(interactionTimeout);
+            }
+        };
+
+        // Load on first user interaction
+        events.forEach(e => window.addEventListener(e, loadWidget, { once: true, passive: true }));
+        
+        // Fallback: load after 10 seconds if no interaction
+        interactionTimeout = setTimeout(loadWidget, 10000);
+
+        return () => {
+            events.forEach(e => window.removeEventListener(e, loadWidget));
+            clearTimeout(interactionTimeout);
+        };
+    }, [shouldLoad]);
 
     if (!shouldLoad) return null;
     return <RecentureAIWrapper />;

@@ -80,7 +80,7 @@ export default function SimpleContactForm() {
 
     const inputClasses = (fieldName) => `
         w-full bg-slate-50/50 dark:bg-black/20 
-        border ${focusedField === fieldName ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-200 dark:border-white/10'} 
+        border ${focusedField === fieldName ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} 
         rounded-2xl pl-12 pr-4 py-3.5 
         text-slate-900 dark:text-white text-sm
         placeholder:text-slate-400 dark:placeholder:text-slate-500
@@ -186,7 +186,7 @@ export default function SimpleContactForm() {
                         <MessageSquare className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${focusedField === 'message' ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}`} />
                         <textarea 
                             required name="message" rows="4" placeholder="Tell us about your project or enterprise needs..." 
-                            className={`w-full bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'message' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-200 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none transition-all duration-300 resize-none`}
+                            className={`w-full bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'message' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none transition-all duration-300 resize-none`}
                             onFocus={() => setFocusedField('message')}
                             onBlur={() => setFocusedField(null)}
                         ></textarea>

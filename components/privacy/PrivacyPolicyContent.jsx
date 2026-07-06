@@ -282,6 +282,7 @@ export default function PrivacyPolicyContent() {
         animate={{ opacity: showBackToTop ? 1 : 0, scale: showBackToTop ? 1 : 0.8 }}
         transition={{ duration: 0.2 }}
         onClick={scrollToTop}
+        aria-label="Back to top"
         className="fixed bottom-8 right-8 p-3 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 z-50 pointer-events-auto"
         style={{ pointerEvents: showBackToTop ? 'auto' : 'none' }}
       >
