@@ -4,6 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 import FutureFooter from "@/components/FutureFooter";
 import Navbar from "@/components/Navbar";
 import GenericCrmPage from "@/components/crm/GenericCrmPage";
+import GenericLocationPage from "@/components/location/GenericLocationPage";
 
 async function getPageData(path: string) {
     await connectDB();
@@ -42,6 +43,18 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                 <Navbar />
                 <main>
                     <GenericCrmPage page={page} />
+                </main>
+                <FutureFooter />
+            </>
+        );
+    }
+
+    if (page.templateType === "location-template") {
+        return (
+            <>
+                <Navbar />
+                <main>
+                    <GenericLocationPage page={page} />
                 </main>
                 <FutureFooter />
             </>
