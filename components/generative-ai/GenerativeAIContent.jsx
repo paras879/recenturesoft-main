@@ -215,49 +215,8 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                 </div>
             </section>
 
-            {/* 6. DEVELOPMENT PROCESS */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Development Process</h2>
-                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                        <p className="text-lg text-slate-600 dark:text-slate-400">A systematic and agile approach to bringing your AI vision to life.</p>
-                    </div>
-
-                    <div className="relative">
-                        {/* Connecting Line */}
-                        <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-blue-100 dark:bg-slate-700 -translate-y-1/2"></div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 relative z-10">
-                            {[
-                                { step: 1, title: 'Requirement Analysis', desc: 'Understanding your business needs and objectives.' },
-                                { step: 2, title: 'Business Consultation', desc: 'Expert guidance on feasibility and ROI.' },
-                                { step: 3, title: 'AI Strategy', desc: 'Formulating a robust implementation plan.' },
-                                { step: 4, title: 'Model Selection', desc: 'Choosing the right LLM (GPT, Claude, Gemini).' },
-                                { step: 5, title: 'Development', desc: 'Engineering and integrating the AI solution.' },
-                                { step: 6, title: 'Testing', desc: 'Rigorous QA and performance optimization.' },
-                                { step: 7, title: 'Deployment', desc: 'Secure launch into your infrastructure.' },
-                                { step: 8, title: 'Maintenance', desc: 'Ongoing monitoring and fine-tuning.' },
-                            ].map((process, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-blue-500/50 transition-all text-center group"
-                                >
-                                    <div className="w-12 h-12 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-xl shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform">
-                                        {process.step}
-                                    </div>
-                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{process.title}</h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">{process.desc}</p>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
+            
+            
 
             {/* 7. TECHNOLOGY STACK */}
             <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
@@ -407,40 +366,8 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                 </div>
             </section>
 
-            {/* 11. CLIENT TESTIMONIALS */}
-            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Client Testimonials</h2>
-                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            { name: 'Sarah Jenkins', role: 'CTO, FinTech Innovators', review: 'RecentureSoft transformed our operations with their custom AI solution. The precision of the RAG system they built is astounding.', company: 'FinTech Innovators' },
-                            { name: 'David Chen', role: 'VP of Operations, HealthCorp', review: 'The AI document analyzer reduced our processing time from days to minutes. A truly enterprise-grade implementation.', company: 'HealthCorp' },
-                            { name: 'Emily Rodriguez', role: 'Director, Global Retail', review: 'Our new AI recommendation engine boosted sales by 35% in the first quarter. Their team is exceptionally skilled.', company: 'Global Retail' }
-                        ].map((testimonial, idx) => (
-                            <div key={idx} className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-slate-700 relative hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
-                                <Quote className="w-12 h-12 text-blue-200 dark:text-blue-900/50 absolute top-6 right-6" />
-                                <div className="flex gap-1 mb-6 text-yellow-400">
-                                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
-                                </div>
-                                <p className="text-slate-700 dark:text-slate-300 text-lg mb-8 italic relative z-10 leading-relaxed">"{testimonial.review}"</p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl shadow-sm">
-                                        {testimonial.name.charAt(0)}
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-900 dark:text-white">{testimonial.name}</h4>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400">{testimonial.role}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            
+            
 
             {/* 12. FAQ */}
             <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">

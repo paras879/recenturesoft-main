@@ -219,53 +219,8 @@ const AIChatbotContent = ({ faqs = [] }) => {
                 </div>
             </section>
 
-            {/* 6. CONSULTING PROCESS (VERTICAL TIMELINE) */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/50">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Development Process</h2>
-                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                        <p className="text-lg text-slate-600 dark:text-slate-400">A clear, phased approach to successful AI implementation.</p>
-                    </div>
-
-                    <div className="relative border-l-2 border-blue-200 dark:border-blue-900 ml-6 md:ml-12 space-y-12 pb-8">
-                        {[
-                            { title: 'Business Discovery', icon: Search, desc: 'Understanding your unique business challenges and goals.' },
-                            { title: 'Requirement Analysis', icon: FileText, desc: 'Documenting technical and operational requirements.' },
-                            { title: 'Current System Evaluation', icon: Server, desc: 'Auditing your existing data and IT infrastructure.' },
-                            { title: 'AI Opportunity Identification', icon: Target, desc: 'Pinpointing where AI can deliver the highest ROI.' },
-                            { title: 'Strategy Planning', icon: Brain, desc: 'Developing a comprehensive AI integration strategy.' },
-                            { title: 'Technology Selection', icon: Cpu, desc: 'Choosing the right models and frameworks.' },
-                            { title: 'Implementation Roadmap', icon: Compass, desc: 'Creating a phased timeline for development.' },
-                            { title: 'Deployment Guidance', icon: PlayCircle, desc: 'Overseeing the smooth rollout of AI solutions.' },
-                            { title: 'Continuous Improvement', icon: Settings, desc: 'Monitoring performance and fine-tuning models.' },
-                        ].map((step, idx) => {
-                            const Icon = step.icon;
-                            return (
-                                <motion.div 
-                                    key={idx}
-                                    initial={{ opacity: 0, x: -30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className="relative pl-10 md:pl-16 group"
-                                >
-                                    <div className="absolute -left-[21px] top-1 w-10 h-10 rounded-full bg-white dark:bg-slate-800 border-4 border-blue-100 dark:border-blue-900 flex items-center justify-center group-hover:border-blue-500 group-hover:scale-110 transition-all shadow-md">
-                                        <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                    </div>
-                                    <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-blue-500/30 transition-all">
-                                        <div className="flex items-center gap-4 mb-2">
-                                            <Icon className="w-6 h-6 text-blue-600" />
-                                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">{step.title}</h3>
-                                        </div>
-                                        <p className="text-slate-600 dark:text-slate-400">{step.desc}</p>
-                                    </div>
-                                </motion.div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </section>
+            
+            
 
             {/* 7. INDUSTRIES WE CONSULT */}
             <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
@@ -393,40 +348,8 @@ const AIChatbotContent = ({ faqs = [] }) => {
                 </div>
             </section>
 
-            {/* 10. CLIENT TESTIMONIALS */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Client Testimonials</h2>
-                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            { name: 'Michael Harrison', role: 'CEO, HealthTech Innovators', review: 'RecentureSoft provided crystal clear guidance on how we should approach LLM integration. Their strategy saved us months of development time.', company: 'HealthTech Innovators' },
-                            { name: 'Jessica Alba', role: 'Director of IT, RetailGlobal', review: 'The AI readiness assessment they conducted was incredibly thorough. We knew exactly what data we needed to organize before starting our AI journey.', company: 'RetailGlobal' },
-                            { name: 'Robert Vance', role: 'CTO, Vance Refrigeration', review: 'Excellent consulting partners. They identified AI opportunities in our supply chain we never would have thought of ourselves.', company: 'Vance Refrigeration' }
-                        ].map((testimonial, idx) => (
-                            <div key={idx} className="p-8 bg-white dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-slate-700 relative hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
-                                <Quote className="w-12 h-12 text-blue-100 dark:text-blue-900/30 absolute top-6 right-6" />
-                                <div className="flex gap-1 mb-6 text-yellow-400">
-                                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
-                                </div>
-                                <p className="text-slate-700 dark:text-slate-300 text-lg mb-8 italic relative z-10 leading-relaxed">"{testimonial.review}"</p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl shadow-sm">
-                                        {testimonial.name.charAt(0)}
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-900 dark:text-white">{testimonial.name}</h4>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400">{testimonial.role}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            
+            
 
             {/* 11. FAQ */}
             <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
