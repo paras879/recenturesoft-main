@@ -20,7 +20,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
     return (
         <div className="w-full bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 overflow-hidden">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-12 pb-12 md:pb-16 lg:pt-48 lg:pb-32 overflow-hidden bg-white dark:bg-[#020617]">
+            <section className="relative pt-24 pb-8 lg:pt-32 lg:pb-8 overflow-hidden bg-white dark:bg-[#020617]">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
                 <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
@@ -65,7 +65,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             </section>
 
             {/* 2. TRUSTED TECHNOLOGIES SECTION */}
-            <section className="py-12 md:py-16 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
+            <section className="py-8 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Technologies We Work With</h2>
@@ -90,7 +90,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             </section>
 
             {/* 3. ABOUT GENERATIVE AI */}
-            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+            <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <motion.div
@@ -132,7 +132,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             </section>
 
             {/* 4. OUR GENERATIVE AI SERVICES */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+            <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Generative AI Services</h2>
@@ -178,7 +178,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             </section>
 
             {/* 5. SOLUTIONS WE BUILD */}
-            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+            <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">AI Solutions for Every Business</h2>
@@ -219,7 +219,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             
 
             {/* 7. TECHNOLOGY STACK */}
-            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+            <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Technology Stack</h2>
@@ -252,50 +252,11 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                 </div>
             </section>
 
-            {/* 8. INDUSTRIES WE SERVE */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Industries We Serve</h2>
-                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                        <p className="text-lg text-slate-600 dark:text-slate-400">Tailored AI solutions driving innovation across diverse industry sectors.</p>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {[
-                            { name: 'Healthcare', icon: Stethoscope },
-                            { name: 'Finance', icon: Landmark },
-                            { name: 'Education', icon: Bot },
-                            { name: 'Retail', icon: ShoppingBag },
-                            { name: 'Manufacturing', icon: Cpu },
-                            { name: 'Real Estate', icon: Building2 },
-                            { name: 'Travel', icon: Plane },
-                            { name: 'Logistics', icon: Truck },
-                            { name: 'Insurance', icon: Shield },
-                            { name: 'Legal', icon: Scale },
-                            { name: 'Automotive', icon: Network },
-                            { name: 'Media', icon: Globe },
-                        ].map((industry, idx) => {
-                            const Icon = industry.icon;
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    whileHover={{ y: -5 }}
-                                    className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-center gap-4 hover:shadow-xl hover:border-blue-500/30 transition-all cursor-pointer group"
-                                >
-                                    <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-slate-700/50 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                                        <Icon className="w-8 h-8" />
-                                    </div>
-                                    <h3 className="font-bold text-slate-900 dark:text-white">{industry.name}</h3>
-                                </motion.div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </section>
+            
+            
 
             {/* 9. WHY CHOOSE RECENTURESOFT */}
-            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+            <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
@@ -327,7 +288,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             </section>
 
             {/* 10. CASE STUDIES */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+            <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Success Stories</h2>
@@ -370,7 +331,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             
 
             {/* 12. FAQ */}
-            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+            <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
@@ -410,7 +371,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             </section>
 
             {/* 13. FINAL CTA */}
-            <section className="py-16 md:py-20 relative overflow-hidden">
+            <section className="py-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700"></div>
 
                 {/* Decorative Elements */}
