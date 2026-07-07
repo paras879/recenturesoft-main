@@ -1,0 +1,525 @@
+"use client";
+// Adjusted paddings to be the sweet spot
+
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+    Brain, Cpu, Code, Database, Globe, Layers, Server, Shield,
+    Smartphone, Zap, ChevronDown, CheckCircle2, ArrowRight,
+    MessageSquare, FileText, BarChart3, Bot, Network,
+    Building2, HeartPulse, Landmark, ShoppingBag,
+    Briefcase, Truck, Scale, Plane, Stethoscope,
+    Star, Quote, CpuIcon
+} from 'lucide-react';
+
+const GenerativeAIContent = ({ faqs = [] }) => {
+    // FAQ State
+    const [openFaq, setOpenFaq] = useState(0);
+
+    return (
+        <div className="w-full bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 overflow-hidden">
+            {/* 1. HERO SECTION */}
+            <section className="relative pt-12 pb-12 md:pb-16 lg:pt-48 lg:pb-32 overflow-hidden bg-white dark:bg-[#020617]">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
+                <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
+                        >
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                                Generative AI <br className="hidden md:block" />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+                                    Development Services
+                                </span>
+                            </h1>
+                            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
+                                Build intelligent AI-powered applications using GPT, Claude, Gemini, and custom Large Language Models to automate workflows, enhance customer experiences, and drive business growth.
+                            </p>
+                            <div className="flex flex-wrap items-center gap-4">
+                                <a href="/contact" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
+                                    Get Free Consultation
+                                </a>
+                                <a href="/contact" className="px-8 py-4 bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
+                                    Talk to Experts
+                                </a>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative"
+                        >
+                            <div className="aspect-square relative rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
+                                <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
+                                <Image src="/images/generative-ai/hero_ai_illustration.png" alt="Generative AI Hero" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
+                            </div>
+
+
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 2. TRUSTED TECHNOLOGIES SECTION */}
+            <section className="py-12 md:py-16 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Technologies We Work With</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {['OpenAI', 'Claude', 'Gemini', 'Llama', 'Microsoft Azure AI', 'AWS AI', 'Google Cloud AI', 'LangChain', 'Pinecone', 'ChromaDB', 'FastAPI', 'Python', 'Node.js', 'Next.js', 'React', 'Docker'].map((tech, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.05 }}
+                                className="px-6 py-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/30 transition-all cursor-default"
+                            >
+                                <span className="font-semibold text-slate-700 dark:text-slate-300">{tech}</span>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. ABOUT GENERATIVE AI */}
+            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                            className="relative h-[600px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-center group shadow-xl"
+                        >
+                            <Image src="/images/generative-ai/about_ai_collaboration.png" alt="Human AI Collaboration" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                        >
+                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                                What is Generative AI?
+                            </h2>
+                            <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                                Generative AI enables businesses to create intelligent applications capable of generating text, images, code, documents, reports, recommendations, and business insights using advanced Large Language Models.
+                            </p>
+                            <p className="text-lg text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
+                                RecentureSoft helps organizations integrate secure and scalable AI solutions that improve productivity, automate repetitive work, reduce operational costs, and enhance customer experiences.
+                            </p>
+
+                            <div className="grid grid-cols-2 gap-6">
+                                {[
+                                    { stat: '95%', label: 'Automation Accuracy' },
+                                    { stat: '70%', label: 'Operational Cost Reduction' },
+                                    { stat: '24/7', label: 'AI Assistance' },
+                                    { stat: '10x', label: 'Productivity' }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="p-6 bg-blue-50 dark:bg-slate-800/50 rounded-2xl border border-blue-100 dark:border-slate-700/50 transition-all hover:bg-blue-100 dark:hover:bg-slate-800">
+                                        <h3 className="text-3xl font-extrabold text-blue-600 mb-2">{item.stat}</h3>
+                                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">{item.label}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. OUR GENERATIVE AI SERVICES */}
+            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Generative AI Services</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p className="text-lg text-slate-600 dark:text-slate-400">Comprehensive AI development services to transform your operational workflows and business strategies.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { title: 'Custom GPT Development', icon: Brain, desc: 'Tailor-made GPT models trained on your business data for specific use cases and workflows.' },
+                            { title: 'Custom AI Chatbot', icon: Bot, desc: 'Intelligent conversational agents that understand context and provide human-like customer support.' },
+                            { title: 'Enterprise AI Solutions', icon: Building2, desc: 'Scalable and secure AI integrations for enterprise-level automation and intelligence.' },
+                            { title: 'AI Copilot Development', icon: Cpu, desc: 'Context-aware AI assistants that work alongside your team to boost daily productivity.' },
+                            { title: 'Document Intelligence', icon: FileText, desc: 'Automate data extraction, summarization, and analysis from complex business documents.' },
+                            { title: 'AI Workflow Automation', icon: Zap, desc: 'Streamline repetitive tasks and complex processes with intelligent automation systems.' },
+                            { title: 'Knowledge Base AI', icon: Database, desc: 'Transform your static documentation into an interactive, AI-powered knowledge repository.' },
+                            { title: 'RAG Development', icon: Layers, desc: 'Retrieval-Augmented Generation systems for accurate, verifiable, and context-rich AI responses.' },
+                        ].map((service, idx) => {
+                            const Icon = service.icon;
+                            return (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="group relative p-8 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col h-full"
+                                >
+                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
+                                        <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 flex-grow">{service.desc}</p>
+                                    <div className="mt-auto flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
+                                        Learn More <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                                    </div>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. SOLUTIONS WE BUILD */}
+            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">AI Solutions for Every Business</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { title: 'AI Customer Support', icon: MessageSquare, color: 'from-blue-500 to-cyan-500' },
+                            { title: 'AI Virtual Assistant', icon: Bot, color: 'from-purple-500 to-pink-500' },
+                            { title: 'AI Document Analyzer', icon: FileText, color: 'from-emerald-500 to-teal-500' },
+                            { title: 'AI Content Generator', icon: Code, color: 'from-orange-500 to-yellow-500' },
+                            { title: 'Healthcare AI', icon: HeartPulse, color: 'from-red-500 to-rose-500' },
+                            { title: 'Finance AI', icon: Landmark, color: 'from-blue-600 to-indigo-600' },
+                            { title: 'HR AI Assistant', icon: Briefcase, color: 'from-violet-500 to-purple-500' },
+                            { title: 'Legal AI', icon: Scale, color: 'from-slate-500 to-slate-700' },
+                            { title: 'E-commerce AI Recommendation', icon: ShoppingBag, color: 'from-pink-500 to-rose-400' },
+                        ].map((solution, idx) => {
+                            const Icon = solution.icon;
+                            return (
+                                <motion.div
+                                    key={idx}
+                                    whileHover={{ scale: 1.02 }}
+                                    className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center gap-5 shadow-sm hover:shadow-lg transition-all cursor-pointer group"
+                                >
+                                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${solution.color} flex items-center justify-center flex-shrink-0 text-white shadow-inner group-hover:scale-110 transition-transform duration-300`}>
+                                        <Icon className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">{solution.title}</h3>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* 6. DEVELOPMENT PROCESS */}
+            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-20">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Development Process</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p className="text-lg text-slate-600 dark:text-slate-400">A systematic and agile approach to bringing your AI vision to life.</p>
+                    </div>
+
+                    <div className="relative">
+                        {/* Connecting Line */}
+                        <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-blue-100 dark:bg-slate-700 -translate-y-1/2"></div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 relative z-10">
+                            {[
+                                { step: 1, title: 'Requirement Analysis', desc: 'Understanding your business needs and objectives.' },
+                                { step: 2, title: 'Business Consultation', desc: 'Expert guidance on feasibility and ROI.' },
+                                { step: 3, title: 'AI Strategy', desc: 'Formulating a robust implementation plan.' },
+                                { step: 4, title: 'Model Selection', desc: 'Choosing the right LLM (GPT, Claude, Gemini).' },
+                                { step: 5, title: 'Development', desc: 'Engineering and integrating the AI solution.' },
+                                { step: 6, title: 'Testing', desc: 'Rigorous QA and performance optimization.' },
+                                { step: 7, title: 'Deployment', desc: 'Secure launch into your infrastructure.' },
+                                { step: 8, title: 'Maintenance', desc: 'Ongoing monitoring and fine-tuning.' },
+                            ].map((process, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-blue-500/50 transition-all text-center group"
+                                >
+                                    <div className="w-12 h-12 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-xl shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform">
+                                        {process.step}
+                                    </div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{process.title}</h3>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400">{process.desc}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 7. TECHNOLOGY STACK */}
+            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Technology Stack</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS'] },
+                            { category: 'Backend', items: ['Node.js', 'Python', 'FastAPI'] },
+                            { category: 'AI Frameworks', items: ['LangChain', 'LlamaIndex', 'OpenAI API', 'Gemini API', 'Claude API'] },
+                            { category: 'Databases', items: ['MongoDB', 'PostgreSQL', 'Pinecone', 'ChromaDB'] },
+                            { category: 'Cloud & DevOps', items: ['AWS', 'Azure', 'Google Cloud', 'Docker'] },
+                        ].map((stack, idx) => (
+                            <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-700">
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                                    <CpuIcon className="w-5 h-5 text-blue-600" />
+                                    {stack.category}
+                                </h3>
+                                <div className="flex flex-wrap gap-3">
+                                    {stack.items.map((item, itemIdx) => (
+                                        <span key={itemIdx} className="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm hover:border-blue-500/50 transition-colors">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 8. INDUSTRIES WE SERVE */}
+            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Industries We Serve</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p className="text-lg text-slate-600 dark:text-slate-400">Tailored AI solutions driving innovation across diverse industry sectors.</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {[
+                            { name: 'Healthcare', icon: Stethoscope },
+                            { name: 'Finance', icon: Landmark },
+                            { name: 'Education', icon: Bot },
+                            { name: 'Retail', icon: ShoppingBag },
+                            { name: 'Manufacturing', icon: Cpu },
+                            { name: 'Real Estate', icon: Building2 },
+                            { name: 'Travel', icon: Plane },
+                            { name: 'Logistics', icon: Truck },
+                            { name: 'Insurance', icon: Shield },
+                            { name: 'Legal', icon: Scale },
+                            { name: 'Automotive', icon: Network },
+                            { name: 'Media', icon: Globe },
+                        ].map((industry, idx) => {
+                            const Icon = industry.icon;
+                            return (
+                                <motion.div
+                                    key={idx}
+                                    whileHover={{ y: -5 }}
+                                    className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-center gap-4 hover:shadow-xl hover:border-blue-500/30 transition-all cursor-pointer group"
+                                >
+                                    <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-slate-700/50 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                        <Icon className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="font-bold text-slate-900 dark:text-white">{industry.name}</h3>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* 9. WHY CHOOSE RECENTURESOFT */}
+            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            { title: 'Experienced AI Engineers', desc: 'Top-tier talent with deep expertise in LLMs and machine learning architectures.', icon: Brain },
+                            { title: 'Enterprise Security', desc: 'Bank-grade security protocols ensuring your sensitive data remains private and protected.', icon: Shield },
+                            { title: 'Custom AI Solutions', desc: 'Bespoke development tailored precisely to your unique business requirements and goals.', icon: Code },
+                            { title: 'Agile Development', desc: 'Iterative processes that ensure rapid delivery and flexibility to adapt to changes.', icon: Zap },
+                            { title: '24/7 Support', desc: 'Round-the-clock maintenance and support to ensure your systems run flawlessly.', icon: MessageSquare },
+                            { title: 'Scalable Architecture', desc: 'Future-proof solutions built to grow seamlessly alongside your enterprise.', icon: Layers },
+                        ].map((reason, idx) => {
+                            const Icon = reason.icon;
+                            return (
+                                <div key={idx} className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl hover:shadow-blue-500/5 hover:border-blue-500/30 transition-all duration-300 group">
+                                    <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                        <Icon className="w-7 h-7" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{reason.title}</h3>
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{reason.desc}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* 10. CASE STUDIES */}
+            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Success Stories</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p className="text-lg text-slate-600 dark:text-slate-400">Real-world impact of our Generative AI solutions.</p>
+                    </div>
+
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        {[
+                            { title: 'AI Customer Support Platform', desc: 'Reduced support ticket resolution time by 75% while maintaining 98% CSAT scores using a custom fine-tuned LLM.', tech: 'GPT-4, Node.js, Pinecone', result: '75% Faster Resolution', image: '/images/generative-ai/case_study_support.png' },
+                            { title: 'Document Intelligence System', desc: 'Automated legal contract analysis and data extraction, saving 40+ hours per week for the legal team.', tech: 'Claude 3, Python, FastAPI', result: '40hrs/week Saved', image: '/images/generative-ai/case_study_document.png' },
+                            { title: 'Healthcare AI Assistant', desc: 'HIPAA-compliant AI diagnostic assistant that helps medical professionals quickly access patient history and research.', tech: 'Gemini, React, ChromaDB', result: '99.9% Uptime', image: '/images/generative-ai/case_study_healthcare.png' },
+                        ].map((caseStudy, idx) => {
+                            return (
+                                <div key={idx} className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-2xl transition-all group">
+                                    <div className="h-56 bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
+                                        <Image src={caseStudy.image} alt={caseStudy.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    </div>
+                                    <div className="p-8">
+                                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 transition-colors">{caseStudy.title}</h3>
+                                        <p className="text-slate-600 dark:text-slate-400 mb-6 line-clamp-3">{caseStudy.desc}</p>
+                                        <div className="mb-6 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+                                            <p className="text-sm font-semibold text-slate-900 dark:text-slate-300 mb-1">Technologies:</p>
+                                            <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">{caseStudy.tech}</p>
+                                        </div>
+                                        <div className="pt-2 flex items-center justify-between">
+                                            <span className="font-bold text-slate-900 dark:text-white text-lg">{caseStudy.result}</span>
+                                            <ArrowRight className="w-6 h-6 text-blue-600 group-hover:translate-x-2 transition-transform" />
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* 11. CLIENT TESTIMONIALS */}
+            <section className="py-16 md:py-20 bg-white dark:bg-[#020617]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Client Testimonials</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {[
+                            { name: 'Sarah Jenkins', role: 'CTO, FinTech Innovators', review: 'RecentureSoft transformed our operations with their custom AI solution. The precision of the RAG system they built is astounding.', company: 'FinTech Innovators' },
+                            { name: 'David Chen', role: 'VP of Operations, HealthCorp', review: 'The AI document analyzer reduced our processing time from days to minutes. A truly enterprise-grade implementation.', company: 'HealthCorp' },
+                            { name: 'Emily Rodriguez', role: 'Director, Global Retail', review: 'Our new AI recommendation engine boosted sales by 35% in the first quarter. Their team is exceptionally skilled.', company: 'Global Retail' }
+                        ].map((testimonial, idx) => (
+                            <div key={idx} className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-slate-700 relative hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
+                                <Quote className="w-12 h-12 text-blue-200 dark:text-blue-900/50 absolute top-6 right-6" />
+                                <div className="flex gap-1 mb-6 text-yellow-400">
+                                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
+                                </div>
+                                <p className="text-slate-700 dark:text-slate-300 text-lg mb-8 italic relative z-10 leading-relaxed">"{testimonial.review}"</p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl shadow-sm">
+                                        {testimonial.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 dark:text-white">{testimonial.name}</h4>
+                                        <p className="text-sm text-slate-500 dark:text-slate-400">{testimonial.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 12. FAQ */}
+            <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/30">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="space-y-4">
+                        {faqs.map((faq, idx) => (
+                            <div key={idx} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+                                <button
+                                    className="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none"
+                                    onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
+                                >
+                                    <span className="font-bold text-slate-900 dark:text-white text-lg pr-8">{faq.question}</span>
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${openFaq === idx ? 'bg-blue-100 dark:bg-blue-900/50' : 'bg-slate-100 dark:bg-slate-700'}`}>
+                                        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-blue-600' : 'text-slate-500'}`} />
+                                    </div>
+                                </button>
+                                <AnimatePresence>
+                                    {openFaq === idx && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 text-lg leading-relaxed border-t border-slate-100 dark:border-slate-700 mt-2">
+                                                {faq.answer}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 13. FINAL CTA */}
+            <section className="py-16 md:py-20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700"></div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl"></div>
+
+                    {/* Floating icons background */}
+                    <div className="absolute top-20 right-20 opacity-20">
+                        <Brain className="w-24 h-24 text-white" />
+                    </div>
+                    <div className="absolute bottom-20 left-20 opacity-20">
+                        <Cpu className="w-32 h-32 text-white" />
+                    </div>
+                </div>
+
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">Ready to Build Your AI Solution?</h2>
+                    <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+                        Transform your business with enterprise-grade Generative AI applications developed by RecentureSoft. Let's innovate together.
+                    </p>
+                    <div className="flex flex-wrap justify-center items-center gap-6">
+                        <a href="/contact" className="px-8 py-4 bg-white text-blue-700 hover:bg-blue-50 rounded-full font-bold text-lg transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
+                            Schedule Consultation <ArrowRight className="w-5 h-5" />
+                        </a>
+                        <a href="/contact" className="px-8 py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-bold text-lg transition-all hover:-translate-y-1">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+};
+
+export default GenerativeAIContent;
+
+
+

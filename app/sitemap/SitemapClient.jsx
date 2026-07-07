@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layout, Code, Library, ShieldCheck, ChevronDown, ArrowRight, MessageSquare, Calendar, MapPin } from 'lucide-react';
+import { Layout, Code, Library, ShieldCheck, ChevronDown, ArrowRight, MessageSquare, Calendar, MapPin, Brain } from 'lucide-react';
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
@@ -64,6 +64,17 @@ const SITEMAP_CATEGORIES = [
             { name: "SEO Packages", href: "/seo-package" },
             { name: "Social Networking", href: "/social-networking" },
             { name: "Content Writing", href: "/content-writing" }
+        ]
+    },
+    {
+        title: "AI Development Solutions",
+        icon: <Brain className="w-5 h-5" />,
+        links: [
+            { name: "Generative AI", href: "/generative-ai" },
+            { name: "AI Services", href: "/ai-services" },
+            { name: "AI Agent Development", href: "/ai-agent-development" },
+            { name: "AI Chatbot Development", href: "/ai-chatbot-development" },
+            { name: "RAG Development", href: "/rag-development" }
         ]
     },
     {

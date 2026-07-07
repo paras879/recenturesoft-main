@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
-import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight } from "lucide-react";
+import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight, Brain } from "lucide-react";
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -86,6 +86,19 @@ const solutionsMenu = [
             { name: "Social Networking", href: "/social-networking" },
             { name: "Content Writing", href: "/content-writing" },
             { name: "AI SEO", href: "/ai-seo" },
+        ]
+    },
+    {
+        title: "AI Development Solutions",
+        icon: Brain,
+        color: "text-indigo-500",
+        bg: "bg-indigo-500/10",
+        items: [
+            { name: "Generative AI", href: "/generative-ai" },
+            { name: "AI Services", href: "/ai-services" },
+            { name: "AI Agent Development", href: "/ai-agent-development" },
+            { name: "AI Chatbot Development", href: "/ai-chatbot-development" },
+            { name: "RAG Development", href: "/rag-development" },
         ]
     }
 ];
@@ -191,7 +204,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                 {link.name === "Solutions" && hoveredLink === "Solutions" && (
                                             <div
                                                 className="absolute top-full left-1/2 -translate-x-[25%] pt-6 cursor-default"
-                                                style={{ width: "min(960px, calc(100vw - 2rem))" }}
+                                                style={{ width: "min(1100px, calc(100vw - 2rem))" }}
                                             >
                                                 <div className="bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-3xl border border-slate-200/60 dark:border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] rounded-[2rem] p-7 overflow-hidden relative group/menu">
                                                     
@@ -202,7 +215,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                     {/* Top gradient border accent */}
                                                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
 
-                                                    <div className="grid grid-cols-3 gap-x-12 gap-y-8 relative z-10">
+                                                    <div className="grid grid-cols-4 gap-x-12 gap-y-8 relative z-10">
                                                         {activeSolutionsMenu.map((category, idx) => {
                                                             const Icon = category.icon;
                                                             return (
@@ -220,7 +233,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                                             <li key={itemIdx}>
                                                                                 <Link 
                                                                                     href={item.href} 
-                                                                                    className="group/item flex items-center gap-2 text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 text-sm font-medium transition-all duration-300 hover:translate-x-1 py-1"
+                                                                                    className="group/item flex items-center gap-2 text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 text-sm font-medium transition-all duration-300 hover:translate-x-1 py-1 whitespace-nowrap"
                                                                                 >
                                                                                     {item.name}
                                                                                     <ChevronRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300 text-cyan-500" />

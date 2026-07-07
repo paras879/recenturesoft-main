@@ -41,7 +41,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/solutions',
     '/terms',
     '/web-design',
-    '/wordpress-development-customization'
+    '/wordpress-development-customization',
+    '/generative-ai',
+    '/ai-services',
+    '/ai-agent-development',
+    '/ai-chatbot-development',
+    '/rag-development'
   ];
 
   const staticSitemap = routes.map((route) => ({
