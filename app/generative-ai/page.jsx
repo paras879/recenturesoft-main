@@ -1,6 +1,5 @@
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
-import NavbarClient from "@/components/NavbarClient";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import GenerativeAIContent from "@/components/generative-ai/GenerativeAIContent";

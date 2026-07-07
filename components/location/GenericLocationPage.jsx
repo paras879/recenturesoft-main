@@ -50,8 +50,7 @@ export default function GenericLocationPage({ page }) {
                                 <Image
                                     src={desktopBanner}
                                     alt={`${title} Banner`}
-                                    fill
-                                    className="object-cover object-center"
+                                    fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center"
                                     priority
                                     sizes="(max-width: 1024px) 100vw, 50vw"
                                 />
@@ -175,7 +174,7 @@ export default function GenericLocationPage({ page }) {
                                         return (
                                             <div key={index} className="relative rounded-[3rem] overflow-hidden px-6 py-12 md:px-12 md:py-20 lg:p-24 shadow-2xl border border-slate-200/50 dark:border-white/10 my-16">
                                                 <div className="absolute inset-0 z-0">
-                                                    <Image src={block.bgImageUrl} alt="Background" fill className="object-cover" quality={90} />
+                                                    <Image src={block.bgImageUrl} alt="Background" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" quality={90} />
                                                 </div>
                                                 {/* Elegant frosted glass overlay */}
                                                 <div className="absolute inset-0 bg-white/85 dark:bg-slate-950/85 backdrop-blur-2xl z-10" />

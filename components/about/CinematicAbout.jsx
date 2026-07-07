@@ -18,9 +18,7 @@ function AboutHero() {
                     <Image
                         src="https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000"
                         alt="Atmosphere Background"
-                        fill
-                        priority
-                        className="object-cover object-center"
+                        fill sizes="(max-width: 768px) 100vw, 50vw" priority className="object-cover object-center"
                         sizes="100vw"
                     />
                 </div>

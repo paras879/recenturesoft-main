@@ -357,7 +357,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
             {/* 12. FINAL CTA */}
             <section className="py-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700 z-0"></div>
-                <Image src="/images/ai-chatbot/cta_ai_chatbot_office.webp" alt="AI Office" fill className="object-cover opacity-20 mix-blend-overlay z-0" />
+                <Image src="/images/ai-chatbot/cta_ai_chatbot_office.webp" alt="AI Office" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover opacity-20 mix-blend-overlay z-0" />
 
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-10">
                     <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>

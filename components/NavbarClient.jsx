@@ -39,6 +39,8 @@ const solutionsMenu = [
             { name: "Next JS", href: "/next-js" },
             { name: "React", href: "/react" },
             { name: "Web Design", href: "/web-design" },
+            { name: "PHP Development", href: "/php-development" },
+            { name: "Laravel Development", href: "/laravel-development" },
         ]
     },
     {
@@ -73,6 +75,9 @@ const solutionsMenu = [
         items: [
             { name: "Node JS", href: "/node-js" },
             { name: "React Native", href: "/react-native" },
+            { name: "Flutter", href: "/flutter" },
+            { name: "Python Development", href: "/python-development" },
+            { name: "JavaScript Development", href: "/javascript-development" },
         ]
     },
     {
