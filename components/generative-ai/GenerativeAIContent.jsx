@@ -30,20 +30,20 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                         <motion.div
                             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
                         >
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
                                 Generative AI <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                                     Development Services
                                 </span>
                             </h1>
-                            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
+                            <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
                                 Build intelligent AI-powered applications using GPT, Claude, Gemini, and custom Large Language Models to automate workflows, enhance customer experiences, and drive business growth.
                             </p>
-                            <div className="flex flex-wrap items-center gap-4">
-                                <a href="/contact" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
+                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto">
+                                <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
                                     Get Free Consultation
                                 </a>
-                                <a href="/contact" className="px-8 py-4 bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
+                                <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
                                     Talk to Experts
                                 </a>
                             </div>
@@ -53,7 +53,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
                             className="relative"
                         >
-                            <div className="aspect-square relative rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
+                            <div className="relative h-[250px] md:h-[450px] lg:h-[600px] rounded-[40px] mt-8 lg:mt-12 overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
                                 <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
                                 <Image src="/images/generative-ai/hero_ai_illustration.png" alt="Generative AI Hero" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
                             </div>
@@ -68,11 +68,11 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Technologies We Work With</h2>
+                        <h2 className="text-3xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Technologies We Work With</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-6">
+                    <div className="flex flex-wrap justify-center gap-3 md:gap-6">
                         {['OpenAI', 'Claude', 'Gemini', 'Llama', 'Microsoft Azure AI', 'AWS AI', 'Google Cloud AI', 'LangChain', 'Pinecone', 'ChromaDB', 'FastAPI', 'Python', 'Node.js', 'Next.js', 'React', 'Docker'].map((tech, idx) => (
                             <motion.div
                                 key={idx}
@@ -80,9 +80,9 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.05 }}
-                                className="px-6 py-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/30 transition-all cursor-default"
+                                className="px-4 py-2 md:px-6 md:py-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/30 transition-all cursor-default"
                             >
-                                <span className="font-semibold text-slate-700 dark:text-slate-300">{tech}</span>
+                                <span className="text-sm md:text-base font-medium md:font-semibold text-slate-700 dark:text-slate-300">{tech}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -95,7 +95,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                            className="relative h-[600px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-center group shadow-xl"
+                            className="relative h-[250px] md:h-[400px] lg:h-[600px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-center group shadow-xl"
                         >
                             <Image src="/images/generative-ai/about_ai_collaboration.png" alt="Human AI Collaboration" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         </motion.div>
@@ -103,7 +103,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                         <motion.div
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                                 What is Generative AI?
                             </h2>
                             <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
@@ -121,8 +121,8 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                     { stat: '10x', label: 'Productivity' }
                                 ].map((item, idx) => (
                                     <div key={idx} className="p-6 bg-blue-50 dark:bg-slate-800/50 rounded-2xl border border-blue-100 dark:border-slate-700/50 transition-all hover:bg-blue-100 dark:hover:bg-slate-800">
-                                        <h3 className="text-3xl font-extrabold text-blue-600 mb-2">{item.stat}</h3>
-                                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">{item.label}</p>
+                                        <h3 className="text-3xl font-medium md:font-extrabold text-blue-600 mb-2">{item.stat}</h3>
+                                        <p className="text-sm font-medium md:font-semibold text-slate-700 dark:text-slate-300">{item.label}</p>
                                     </div>
                                 ))}
                             </div>
@@ -135,12 +135,12 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Generative AI Services</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our Generative AI Services</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                         
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
                         {[
                             { title: 'Custom GPT Development', icon: Brain, desc: 'Tailor-made GPT models trained on your business data for specific use cases and workflows.' },
                             { title: 'Custom AI Chatbot', icon: Bot, desc: 'Intelligent conversational agents that understand context and provide human-like customer support.' },
@@ -166,10 +166,10 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                         <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
                                             <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
                                         </div>
-                                        <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                        <h3 className="text-lg font-medium md:font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
                                     </div>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 flex-grow">{service.desc}</p>
-                                    <div className="mt-auto flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
+                                    <div className="mt-auto flex items-center gap-2 text-blue-600 font-medium md:font-semibold group-hover:gap-3 transition-all">
                                         Learn More <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                                     </div>
                                 </motion.div>
@@ -183,11 +183,11 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">AI Solutions for Every Business</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">AI Solutions for Every Business</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
                         {[
                             { title: 'AI Customer Support', icon: MessageSquare, color: 'from-blue-500 to-cyan-500' },
                             { title: 'AI Virtual Assistant', icon: Bot, color: 'from-purple-500 to-pink-500' },
@@ -209,7 +209,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                     <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${solution.color} flex items-center justify-center flex-shrink-0 text-white shadow-inner group-hover:scale-110 transition-transform duration-300`}>
                                         <Icon className="w-6 h-6" />
                                     </div>
-                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">{solution.title}</h3>
+                                    <h3 className="text-lg font-medium md:font-bold text-slate-900 dark:text-white">{solution.title}</h3>
                                 </motion.div>
                             )
                         })}
@@ -224,11 +224,11 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Technology Stack</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Technology Stack</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
                         {[
                             { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS'] },
                             { category: 'Backend', items: ['Node.js', 'Python', 'FastAPI'] },
@@ -237,7 +237,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                             { category: 'Cloud & DevOps', items: ['AWS', 'Azure', 'Google Cloud', 'Docker'] },
                         ].map((stack, idx) => (
                             <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-700">
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                                <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                                     <CpuIcon className="w-5 h-5 text-blue-600" />
                                     {stack.category}
                                 </h3>
@@ -261,11 +261,11 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
                         {[
                             { title: 'Experienced AI Engineers', desc: 'Top-tier talent with deep expertise in LLMs and machine learning architectures.', icon: Brain },
                             { title: 'Enterprise Security', desc: 'Bank-grade security protocols ensuring your sensitive data remains private and protected.', icon: Shield },
@@ -280,7 +280,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                     <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                         <Icon className="w-7 h-7" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{reason.title}</h3>
+                                    <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-3">{reason.title}</h3>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{reason.desc}</p>
                                 </div>
                             )
@@ -293,12 +293,12 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Success Stories</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Success Stories</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                         <p className="text-lg text-slate-600 dark:text-slate-400">Real-world impact of our Generative AI solutions.</p>
                     </div>
 
-                    <div className="grid lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
                         {[
                             { title: 'AI Customer Support Platform', desc: 'Reduced support ticket resolution time by 75% while maintaining 98% CSAT scores using a custom fine-tuned LLM.', tech: 'GPT-4, Node.js, Pinecone', result: '75% Faster Resolution', image: '/images/generative-ai/case_study_support.png' },
                             { title: 'Document Intelligence System', desc: 'Automated legal contract analysis and data extraction, saving 40+ hours per week for the legal team.', tech: 'Claude 3, Python, FastAPI', result: '40hrs/week Saved', image: '/images/generative-ai/case_study_document.png' },
@@ -311,14 +311,14 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="p-8">
-                                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 transition-colors">{caseStudy.title}</h3>
+                                        <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 transition-colors">{caseStudy.title}</h3>
                                         <p className="text-slate-600 dark:text-slate-400 mb-6 line-clamp-3">{caseStudy.desc}</p>
                                         <div className="mb-6 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
-                                            <p className="text-sm font-semibold text-slate-900 dark:text-slate-300 mb-1">Technologies:</p>
+                                            <p className="text-sm font-medium md:font-semibold text-slate-900 dark:text-slate-300 mb-1">Technologies:</p>
                                             <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">{caseStudy.tech}</p>
                                         </div>
                                         <div className="pt-2 flex items-center justify-between">
-                                            <span className="font-bold text-slate-900 dark:text-white text-lg">{caseStudy.result}</span>
+                                            <span className="font-medium md:font-bold text-slate-900 dark:text-white text-lg">{caseStudy.result}</span>
                                             <ArrowRight className="w-6 h-6 text-blue-600 group-hover:translate-x-2 transition-transform" />
                                         </div>
                                     </div>
@@ -336,7 +336,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -347,7 +347,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                     className="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none"
                                     onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
                                 >
-                                    <span className="font-bold text-slate-900 dark:text-white text-lg pr-8">{faq.question}</span>
+                                    <span className="font-medium md:font-bold text-slate-900 dark:text-white text-lg pr-8">{faq.question}</span>
                                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${openFaq === idx ? 'bg-blue-100 dark:bg-blue-900/50' : 'bg-slate-100 dark:bg-slate-700'}`}>
                                         <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-blue-600' : 'text-slate-500'}`} />
                                     </div>
@@ -391,15 +391,15 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                 </div>
 
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">Ready to Build Your AI Solution?</h2>
+                    <h2 className="text-4xl md:text-5xl font-medium md:font-extrabold text-white mb-6 leading-tight">Ready to Build Your AI Solution?</h2>
                     <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
                         Transform your business with enterprise-grade Generative AI applications developed by RecentureSoft. Let's innovate together.
                     </p>
                     <div className="flex flex-wrap justify-center items-center gap-6">
-                        <a href="/contact" className="px-8 py-4 bg-white text-blue-700 hover:bg-blue-50 rounded-full font-bold text-lg transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
+                        <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-medium md:font-bold text-lg transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
                             Schedule Consultation <ArrowRight className="w-5 h-5" />
                         </a>
-                        <a href="/contact" className="px-8 py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-bold text-lg transition-all hover:-translate-y-1">
+                        <a href="/contact" className="px-8 py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-lg transition-all hover:-translate-y-1">
                             Contact Us
                         </a>
                     </div>

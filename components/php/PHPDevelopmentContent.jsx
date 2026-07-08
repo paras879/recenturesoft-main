@@ -27,7 +27,7 @@ export default function PHPDevelopmentContent() {
                             transition={{ duration: 0.8 }}
                             className="max-w-2xl"
                         >
-                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
                                 PHP Web <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                                     Development Services
@@ -37,10 +37,10 @@ export default function PHPDevelopmentContent() {
                                 Build stunning, high-performance enterprise-grade web applications with PHP. Our developers create scalable secure backends apps from a single codebase, helping businesses launch faster while reducing development costs.
                             </p>
                             <div className="flex flex-wrap items-center gap-4">
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
+                                <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
                                     Start Your PHP Project
                                 </Link>
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
+                                <Link href="/contact" className="px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
                                     Book Free Consultation
                                 </Link>
                             </div>
@@ -50,11 +50,11 @@ export default function PHPDevelopmentContent() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, delay: 0.2 }}
-                            className="relative lg:h-[200px] md:h-[450px] lg:h-[600px] flex items-center justify-center"
+                            className="relative h-[200px] md:h-[450px] lg:h-[600px] mt-8 lg:mt-12 flex items-center justify-center"
                         >
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-3xl rounded-full"></div>
                             <Image
-                                src="/images/ai-development/hero_ai_consulting.webp"
+                                src="/images/php-development/hero_php.webp"
                                 alt="PHP Workspace"
                                 width={600}
                                 height={600}
@@ -70,7 +70,7 @@ export default function PHPDevelopmentContent() {
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Why Businesses Choose PHP</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Businesses Choose PHP</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -97,14 +97,14 @@ export default function PHPDevelopmentContent() {
                                         <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                             <Icon className="w-6 h-6" />
                                         </div>
-                                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
+                                        <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
                                         <p className="text-slate-600 dark:text-slate-400">{item.desc}</p>
                                     </motion.div>
                                 )
                             })}
                         </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid20'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -113,9 +113,9 @@ export default function PHPDevelopmentContent() {
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="lg:col-span-5 relative h-[180px] md:h-[400px] lg:h-[500px]"
+                            className="lg:col-span-5 relative h-[180px] md:h-[400px] lg:h-[500px] mt-8 lg:mt-12"
                         >
-                            <Image src="/images/ai-chatbot/hero_ai_chatbot.webp" alt="PHP Cross Platform" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-3xl shadow-xl" />
+                            <Image src="/images/php-development/about_php.webp" alt="PHP Cross Platform" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-3xl shadow-xl" />
                         </motion.div>
                     </div>
                 </div>
@@ -131,14 +131,14 @@ export default function PHPDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px]"
                         >
-                            <Image src="/images/ai-services/hero_ai_consulting.webp" alt="About PHP Development" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-[2rem] shadow-2xl" />
+                            <Image src="/images/common/generic_platform.webp" alt="About PHP Development" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-[2rem] shadow-2xl" />
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                                 Create Powerful enterprise-grade Mobile Experiences
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-8"></div>
@@ -154,7 +154,7 @@ export default function PHPDevelopmentContent() {
                                     { value: '50%', label: 'Lower Development Cost' },
                                 ].map((stat, idx) => (
                                     <div key={idx} className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
-                                        <div className="text-4xl font-extrabold text-blue-600 mb-2">{stat.value}</div>
+                                        <div className="text-4xl font-medium md:font-extrabold text-blue-600 mb-2">{stat.value}</div>
                                         <div className="text-sm font-medium text-slate-600 dark:text-slate-400">{stat.label}</div>
                                     </div>
                                 ))}
@@ -168,7 +168,7 @@ export default function PHPDevelopmentContent() {
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our PHP Development Services</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our PHP Development Services</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                     </div>
 
@@ -197,7 +197,7 @@ export default function PHPDevelopmentContent() {
                                         <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-blue-600 transition-all duration-300">
                                             <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
                                         </div>
-                                        <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                        <h3 className="text-base md:text-lg font-medium md:font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
                                     </div>
                                     <p className="text-slate-600 dark:text-slate-400 flex-grow">{service.desc}</p>
                                 </motion.div>
@@ -205,7 +205,7 @@ export default function PHPDevelopmentContent() {
                         })}
                     </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid10'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -221,12 +221,12 @@ export default function PHPDevelopmentContent() {
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-5"
                         >
-                            <h2 className="text-3xl lg:text-3xl xl:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight lg:whitespace-nowrap">
+                            <h2 className="text-3xl lg:text-3xl xl:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight lg:whitespace-nowrap">
                                 PHP Solutions for Every Industry
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
-                            <div className={`space-y-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:block'}`}>
+                            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
                                 {[
                                     'E-Commerce Apps',
                                     'Healthcare Apps',
@@ -235,8 +235,7 @@ export default function PHPDevelopmentContent() {
                                     'Education Apps',
                                     'Finance Apps',
                                     'Travel Apps',
-                                    'Fitness Apps'
-                                ].map((app, idx) => (
+                                    'Fitness Apps'].map((app, idx) => (
                                     <motion.div
                                         key={idx}
                                         whileHover={{ scale: 1.02, x: 10 }}
@@ -245,12 +244,12 @@ export default function PHPDevelopmentContent() {
                                         <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                                             <CheckCircle2 className="w-4 h-4" />
                                         </div>
-                                        <h3 className="text-md font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{app}</h3>
+                                        <h3 className="text-md font-medium md:font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{app}</h3>
                                     </motion.div>
                                 ))}
                             </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid21': !prev['grid21']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid21': !prev['grid21']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid21'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -261,7 +260,7 @@ export default function PHPDevelopmentContent() {
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-7 relative h-[200px] md:h-[200px] lg:h-[540px] lg:mt-32 rounded-[32px] overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/rag-development/hero_rag.webp" alt="Industry Apps" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src="/images/common/generic_process.webp" alt="Industry Apps" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                     </div>
                 </div>
@@ -271,7 +270,7 @@ export default function PHPDevelopmentContent() {
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our Development Process</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our Development Process</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -282,7 +281,7 @@ export default function PHPDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px] rounded-[2rem] overflow-hidden"
                         >
-                            <Image src="/images/ai-development/hero_ai_development.webp" alt="Process" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src="/images/common/generic_dashboard.webp" alt="Process" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                         <div className="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 dark:before:via-slate-700 before:to-transparent">
                             {[
@@ -300,12 +299,12 @@ export default function PHPDevelopmentContent() {
                                     transition={{ delay: idx * 0.1 }}
                                     className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
                                 >
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 font-medium md:font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                         {item.step}
                                     </div>
                                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 shadow-sm group-hover:border-blue-500/30 transition-colors">
                                         <div className="flex flex-col">
-                                            <h3 className="font-bold text-slate-900 dark:text-white mb-1">{item.title}</h3>
+                                            <h3 className="font-medium md:font-bold text-slate-900 dark:text-white mb-1">{item.title}</h3>
                                             <p className="text-sm text-slate-600 dark:text-slate-400">{item.desc}</p>
                                         </div>
                                     </div>
@@ -321,7 +320,7 @@ export default function PHPDevelopmentContent() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">Powerful Features We Integrate</h2>
+                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Powerful Features We Integrate</h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
                             <div className={`grid sm:grid-cols-2 gap-4 ${expandedGrids['grid1'] ? '' : '[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex'}`}>
@@ -348,13 +347,13 @@ export default function PHPDevelopmentContent() {
                                             <div className="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
                                                 <Icon className="w-5 h-5" />
                                             </div>
-                                            <span className="font-semibold text-slate-800 dark:text-slate-200">{feature.title}</span>
+                                            <span className="font-medium md:font-semibold text-slate-800 dark:text-slate-200">{feature.title}</span>
                                         </motion.div>
                                     )
                                 })}
                             </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid1'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -366,7 +365,7 @@ export default function PHPDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/ai-development/why_choose_ai_team.webp" alt="Features Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src="/images/common/generic_team.webp" alt="Features Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                     </div>
                 </div>
@@ -375,7 +374,7 @@ export default function PHPDevelopmentContent() {
             {/* 8. TECHNOLOGY STACK */}
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">Our Technology Stack</h2>
+                    <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Our Technology Stack</h2>
                     <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6 md:mb-12"></div>
 
                     <div className={`flex flex-wrap justify-center gap-4 ${expandedGrids['grid11'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
@@ -389,14 +388,14 @@ export default function PHPDevelopmentContent() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.05 }}
-                                className="px-6 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full font-semibold text-slate-700 dark:text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all cursor-pointer shadow-sm"
+                                className="px-6 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full font-medium md:font-semibold text-slate-700 dark:text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all cursor-pointer shadow-sm"
                             >
                                 {tech}
                             </motion.div>
                         ))}
                     </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid11': !prev['grid11']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid11': !prev['grid11']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid11'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -408,7 +407,7 @@ export default function PHPDevelopmentContent() {
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -419,7 +418,7 @@ export default function PHPDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px] rounded-[2rem] overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/ai-services/why_choose_handshake.webp" alt="Why Choose Us" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src="/images/common/generic_cta.webp" alt="Why Choose Us" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
 
                         <div className={`grid gap-6 ${expandedGrids['grid12'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
@@ -445,7 +444,7 @@ export default function PHPDevelopmentContent() {
                                             <Icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-white mb-1">{item.title}</h3>
+                                            <h3 className="text-base md:text-lg font-medium md:font-bold text-slate-900 dark:text-white mb-1">{item.title}</h3>
                                             <p className="text-slate-600 dark:text-slate-400">{item.desc}</p>
                                         </div>
                                     </motion.div>
@@ -453,7 +452,7 @@ export default function PHPDevelopmentContent() {
                             })}
                         </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid12': !prev['grid12']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid12': !prev['grid12']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid12'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -466,7 +465,7 @@ export default function PHPDevelopmentContent() {
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -489,7 +488,7 @@ export default function PHPDevelopmentContent() {
                                     onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                                     className="w-full flex items-center justify-between p-6 text-left"
                                 >
-                                    <span className="font-bold text-slate-900 dark:text-white pr-8">{faq.q}</span>
+                                    <span className="font-medium md:font-bold text-slate-900 dark:text-white pr-8">{faq.q}</span>
                                     <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${activeFaq === idx ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400'}`}>
                                         {activeFaq === idx ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                                     </div>
@@ -512,7 +511,7 @@ export default function PHPDevelopmentContent() {
                         ))}
                     </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid13': !prev['grid13']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid13': !prev['grid13']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid13'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -532,7 +531,7 @@ export default function PHPDevelopmentContent() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-white mb-6 leading-tight">
                             Ready to Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">PHP Web?</span>
                         </h2>
                         <p className="text-xl text-blue-100 mb-4 md:mb-10 leading-relaxed max-w-2xl mx-auto">
@@ -540,10 +539,10 @@ export default function PHPDevelopmentContent() {
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center gap-4">
-                            <Link href="/contact" className="px-8 py-4 rounded-full bg-white text-blue-900 font-bold hover:bg-blue-50 shadow-xl transition-all hover:scale-105 hover:-translate-y-1">
+                            <Link href="/contact" className="px-8 py-4 rounded-full bg-white text-blue-900 font-medium md:font-bold hover:bg-blue-50 shadow-xl transition-all hover:scale-105 hover:-translate-y-1">
                                 Start Your Project
                             </Link>
-                            <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-800/50 text-white font-bold border border-blue-400/50 hover:bg-blue-700/50 backdrop-blur-sm transition-all hover:-translate-y-1">
+                            <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-800/50 text-white font-medium md:font-bold border border-blue-400/50 hover:bg-blue-700/50 backdrop-blur-sm transition-all hover:-translate-y-1">
                                 Talk to PHP Experts
                             </Link>
                         </div>

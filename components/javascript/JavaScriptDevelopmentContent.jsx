@@ -29,7 +29,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                             transition={{ duration: 0.8 }}
                             className="max-w-2xl"
                         >
-                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
                                 JavaScript Development <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                                     Services
@@ -39,10 +39,10 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                 Build fast, interactive, and scalable web applications using modern JavaScript technologies. From responsive business websites to enterprise dashboards and real-time web platforms, we develop digital solutions that deliver exceptional user experiences across every device.
                             </p>
                             <div className="flex flex-wrap items-center gap-4">
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
+                                <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
                                     Hire JavaScript Developers
                                 </Link>
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
+                                <Link href="/contact" className="px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
                                     Start Your Project
                                 </Link>
                             </div>
@@ -52,11 +52,11 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, delay: 0.2 }}
-                            className="relative lg:h-[200px] md:h-[450px] lg:h-[600px] flex items-center justify-center"
+                            className="relative h-[200px] md:h-[450px] lg:h-[600px] mt-8 lg:mt-12 flex items-center justify-center"
                         >
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-3xl rounded-full"></div>
                             <Image
-                                src="/images/ai-development/hero_ai_consulting.webp"
+                                src="/images/javascript-development/hero_javascript.webp"
                                 alt="JavaScript Workspace"
                                 width={600}
                                 height={600}
@@ -72,7 +72,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
             <section className="py-4 md:py-8 bg-white dark:bg-[#0b1120]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                        <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">
                             Why JavaScript Drives Modern Web Innovation
                         </h2>
                         <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto"></div>
@@ -97,13 +97,13 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                 <div className="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
                                     <feature.icon className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{feature.title}</h3>
+                                <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{feature.title}</h3>
                                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{feature.desc}</p>
                             </motion.div>
                         ))}
                     </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid1'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -116,7 +116,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-12 items-center mb-6 md:mb-16">
                         <div>
-                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                            <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">
                                 Comprehensive JavaScript Solutions
                             </h2>
                             <div className="w-16 h-1 bg-blue-600 rounded-full mb-4 md:mb-8"></div>
@@ -139,12 +139,12 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                     <div className="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600">
                                         <service.icon className="w-5 h-5" />
                                     </div>
-                                    <span className="font-semibold text-slate-900 dark:text-white">{service.title}</span>
+                                    <span className="font-medium md:font-semibold text-slate-900 dark:text-white">{service.title}</span>
                                 </div>
                             ))}
                         </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid2': !prev['grid2']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid2': !prev['grid2']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid2'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -156,7 +156,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
             {/* 4. JAVASCRIPT EXPERTISE (Tech Stack) */}
             <section className="py-4 md:py-8 bg-white dark:bg-[#0b1120]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                    <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">
                         Technologies We Work With
                     </h2>
                     <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mb-6 md:mb-12"></div>
@@ -167,12 +167,12 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                 <div className="w-12 h-12 rounded-full bg-white dark:bg-slate-700 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                                     <Terminal className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                                 </div>
-                                <span className="font-semibold text-slate-900 dark:text-white text-sm">{tech}</span>
+                                <span className="font-medium md:font-semibold text-slate-900 dark:text-white text-sm">{tech}</span>
                             </div>
                         ))}
                     </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid3': !prev['grid3']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid3': !prev['grid3']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid3'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -188,12 +188,12 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-5"
                         >
-                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                            <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">
                                 Powerful Features We Deliver
                             </h2>
                             <div className="w-16 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
                             
-                            <div className={`space-y-3 ${expandedGrids['grid20'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:block'}`}>
+                            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${expandedGrids['grid20'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
                                 {[
                                     'Responsive Design',
                                     'Interactive UI Components',
@@ -208,12 +208,12 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                         <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 flex-shrink-0">
                                             <CheckCircle2 className="w-5 h-5" />
                                         </div>
-                                        <span className="font-semibold text-slate-900 dark:text-white">{item}</span>
+                                        <span className="font-medium md:font-semibold text-slate-900 dark:text-white">{item}</span>
                                     </div>
                                 ))}
                             </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid20'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -224,7 +224,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-7 relative h-[200px] md:h-[200px] lg:h-[540px] lg:mt-32 rounded-[32px] overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/rag-development/hero_rag.webp" alt="JavaScript Features" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src="/images/javascript-development/about_javascript.webp" alt="JavaScript Features" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
             <section className="py-4 md:py-8 bg-white dark:bg-[#0b1120]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                        <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">
                             Our Development Process
                         </h2>
                         <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto"></div>
@@ -251,9 +251,9 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                         ].map((process, idx) => (
                             <div key={idx} className="relative text-center">
                                 <div className="w-24 h-24 mx-auto bg-white dark:bg-slate-900 rounded-full border-4 border-blue-100 dark:border-blue-900/30 flex items-center justify-center shadow-lg mb-6 group-hover:border-blue-500 transition-colors">
-                                    <span className="text-2xl font-bold text-blue-600">0{idx + 1}</span>
+                                    <span className="text-2xl font-medium md:font-bold text-blue-600">0{idx + 1}</span>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{process.step}</h3>
+                                <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-2">{process.step}</h3>
                                 <p className="text-sm text-slate-600 dark:text-slate-400">{process.desc}</p>
                             </div>
                         ))}
@@ -265,7 +265,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-6 md:mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">Business Solutions Powered by JavaScript</h2>
+                        <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Business Solutions Powered by JavaScript</h2>
                         <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto"></div>
                     </div>
                     
@@ -276,7 +276,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                             'Collaboration Tools', 'Automation Platforms'
                         ].map((industry, idx) => (
                             <div key={idx} className="p-4 rounded-xl text-center bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 hover:border-blue-500 hover:shadow-md transition-all cursor-pointer">
-                                <span className="font-semibold text-slate-700 dark:text-slate-300">{industry}</span>
+                                <span className="font-medium md:font-semibold text-slate-700 dark:text-slate-300">{industry}</span>
                             </div>
                         ))}
                     </div>
@@ -301,12 +301,12 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                     <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-4">
                                         <ShieldCheck className="w-6 h-6" />
                                     </div>
-                                    <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-white">{reason}</h3>
+                                    <h3 className="text-base md:text-lg font-medium md:font-bold text-slate-900 dark:text-white">{reason}</h3>
                                 </motion.div>
                             ))}
                         </div>
                         <div className="order-1 lg:order-2">
-                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                            <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">
                                 Why Choose RecentureSoft?
                             </h2>
                             <div className="w-16 h-1 bg-blue-600 rounded-full mb-4 md:mb-8"></div>
@@ -322,7 +322,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-6 md:mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+                        <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
                         <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto"></div>
                     </div>
                     
@@ -342,7 +342,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                                     className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                                     onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                                 >
-                                    <span className="font-bold text-slate-900 dark:text-white text-base md:text-lg pr-4">{faq.question}</span>
+                                    <span className="font-medium md:font-bold text-slate-900 dark:text-white text-base md:text-lg pr-4">{faq.question}</span>
                                     {activeFaq === idx ? <Minus className="w-5 h-5 text-blue-600 flex-shrink-0" /> : <Plus className="w-5 h-5 text-slate-400 flex-shrink-0" />}
                                 </button>
                                 <AnimatePresence>
@@ -361,7 +361,7 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
                         ))}
                     </div>
 <div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
         {expandedGrids['grid10'] ? 'Show Less' : 'Show More'}
     </button>
 </div>
@@ -373,15 +373,15 @@ export default function JavaScriptDevelopmentContent({ faqs = [] }) {
             <section className="py-4 md:py-8 bg-blue-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                    <h2 className="text-2xl md:text-5xl font-extrabold text-white mb-6">Transform Your Ideas into Powerful JavaScript Applications</h2>
+                    <h2 className="text-2xl md:text-5xl font-medium md:font-extrabold text-white mb-6">Transform Your Ideas into Powerful JavaScript Applications</h2>
                     <p className="text-xl text-blue-100 mb-4 md:mb-10 max-w-3xl mx-auto">
                         Partner with RecentureSoft to build interactive, scalable, and future-ready web applications using the latest JavaScript technologies.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4">
-                        <Link href="/contact" className="px-8 py-4 rounded-full bg-white text-blue-600 font-bold hover:bg-slate-50 shadow-lg transition-all hover:scale-105 hover:-translate-y-1">
+                        <Link href="/contact" className="px-8 py-4 rounded-full bg-white text-blue-600 font-medium md:font-bold hover:bg-slate-50 shadow-lg transition-all hover:scale-105 hover:-translate-y-1">
                             Start Your Project
                         </Link>
-                        <Link href="/contact" className="px-8 py-4 rounded-full bg-transparent text-white font-bold border-2 border-white/30 hover:border-white transition-all hover:-translate-y-1">
+                        <Link href="/contact" className="px-8 py-4 rounded-full bg-transparent text-white font-medium md:font-bold border-2 border-white/30 hover:border-white transition-all hover:-translate-y-1">
                             Talk to JavaScript Experts
                         </Link>
                     </div>

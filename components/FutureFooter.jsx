@@ -52,10 +52,10 @@ import WebPage from "@/models/WebPage";
 function GlassCard({ children, hoverColorClass = "from-primary to-accent", className = "" }) {
     return (
         <div
-            className={`group relative rounded-2xl cursor-pointer hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_60px_rgba(99,102,241,0.15)] transition-all duration-500 ${className}`}
+            className={`group relative rounded-2xl cursor-pointer hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_60px_rgba(99,102,241,0.15)] transition-all duration-500 h-full flex flex-col ${className}`}
         >
             <div
-                className={`relative p-2 md:p-4 rounded-2xl min-h-[55px] h-full overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
+                className={`relative p-4 rounded-2xl min-h-[55px] flex-grow overflow-hidden flex flex-col justify-center z-10 bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-premium`}
             >
                 {/* Border trace animation on hover */}
                 <div
@@ -188,10 +188,10 @@ export default async function FutureFooter() {
             <div className="relative z-10 max-w-7xl mx-auto px-6">
 
                 {/* ════ PREMIUM GRID (Navigation & Brand) ════ */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-8 mb-8 md:mb-10 lg:mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 mb-10 md:mb-12 lg:mb-16">
 
-                    {/* LEFT COLUMN: Logo & Socials */}
-                    <div className="order-2 lg:order-1 lg:col-span-5 flex flex-col pr-0 lg:pr-10">
+                    {/* LEFT SECTION: Logo & Socials */}
+                    <div className="order-2 lg:order-1 lg:col-span-4 xl:col-span-4 flex flex-col pr-0 lg:pr-4">
                         <div
                             className="flex items-center gap-4 mb-4 md:mb-8"
                         >
@@ -231,12 +231,15 @@ export default async function FutureFooter() {
                         </div>
                     </div>
 
-                    {/* CENTER COLUMNS: Navigation Links */}
-                    <div className="order-1 lg:order-2 lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-                        {Object.entries(activeFooterLinks).map(([category, links]) => (
-                            <div
-                                key={category}
-                            >
+                    {/* RIGHT SECTION: Links & Newsletter */}
+                    <div className="order-1 lg:order-2 lg:col-span-8 xl:col-span-8 flex flex-col gap-10">
+                        
+                        {/* Navigation Links */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+                            {Object.entries(activeFooterLinks).map(([category, links]) => (
+                                <div
+                                    key={category}
+                                >
                                 <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide text-sm">{category}</h4>
                                 <ul className="space-y-4">
                                     {links.map((link, linkIdx) => (
@@ -255,6 +258,31 @@ export default async function FutureFooter() {
                                 </ul>
                             </div>
                         ))}
+                        </div>
+
+                        {/* Newsletter (Horizontal Layout) */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 pt-4">
+                            <div className="flex flex-col justify-center">
+                                <h4 className="text-slate-900 dark:text-white font-semibold mb-3 tracking-wide text-sm uppercase">Newsletter</h4>
+                                <p className="text-slate-600 dark:text-gray-400 text-[15px] leading-relaxed">
+                                    Get the latest tech news, updates, and special offers delivered directly to your inbox.
+                                </p>
+                            </div>
+                            <form className="flex flex-col gap-3">
+                                <input 
+                                    type="email" 
+                                    placeholder="Your email address" 
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all shadow-sm"
+                                    required 
+                                />
+                                <button 
+                                    type="button" 
+                                    className="w-full bg-primary hover:bg-blue-600 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all shadow-md shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5"
+                                >
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
@@ -319,7 +347,7 @@ export default async function FutureFooter() {
                                         Email Us
                                     </span>
                                 </div>
-                                <span className="text-slate-800 dark:text-white font-medium text-lg pl-12">
+                                <span className="text-slate-800 dark:text-white font-medium text-sm lg:text-base xl:text-lg pl-12 break-all pr-2">
                                     {email}
                                 </span>
                             </div>
