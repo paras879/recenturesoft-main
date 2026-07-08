@@ -174,7 +174,7 @@ export default function Hero({ cmsData = {} }) {
     const displayBg = cmsSlide?.bg || slide.bg;
 
     return (
-        <section ref={heroRef} className="relative min-h-screen min-h-[650px] md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
+        <section ref={heroRef} className="relative md:min-h-screen md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
             {/* ── Background image slideshow ── */}
             <div
@@ -257,7 +257,7 @@ export default function Hero({ cmsData = {} }) {
                         background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
                     }}
                 />
-                <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-background to-transparent" />
+                <div className="absolute bottom-0 inset-x-0 h-24 md:h-52 bg-gradient-to-t from-background to-transparent" />
             </div>
 
             {/* ── Ambient glow blob (accent coloured) — plain CSS, no framer-motion ── */}
@@ -288,7 +288,7 @@ export default function Hero({ cmsData = {} }) {
             {/* ── Text content ── */}
             <div
                 style={{ y: contentY }}
-                className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-24 md:pb-12 lg:pt-28 lg:pb-16 gap-0 2xl:gap-16"
+                className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-16 xl:px-24 2xl:px-28 flex flex-col 2xl:flex-row 2xl:items-center pt-24 pb-12 sm:pt-24 sm:pb-12 md:pt-24 md:pb-12 lg:pt-28 lg:pb-16 gap-0 2xl:gap-16"
             >
                 <div className="w-full max-w-[92%] lg:w-[70%] xl:w-[60%] 2xl:w-[55%] flex flex-col flex-1 mt-0">
                     <div key={slide.id + "-content"}>

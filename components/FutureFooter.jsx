@@ -188,25 +188,43 @@ export default async function FutureFooter() {
             <div className="relative z-10 max-w-7xl mx-auto px-6">
 
                 {/* ════ PREMIUM GRID (Navigation & Brand) ════ */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 mb-10 md:mb-12 lg:mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-8 lg:gap-12 mb-10 md:mb-12 lg:mb-16">
 
-                    {/* LEFT SECTION: Logo & Socials */}
-                    <div className="order-2 lg:order-1 lg:col-span-4 xl:col-span-4 flex flex-col pr-0 lg:pr-4">
-                        <div
-                            className="flex items-center gap-4 mb-4 md:mb-8"
-                        >
+                    {/* LINKS SECTION (Full width on Tablet, Right side on Desktop) */}
+                    <div className="order-2 md:order-1 lg:order-2 md:col-span-2 lg:col-span-8">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+                            {Object.entries(activeFooterLinks).map(([category, links]) => (
+                                <div key={category}>
+                                    <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide text-sm">{category}</h4>
+                                    <ul className="space-y-4">
+                                        {links.map((link, linkIdx) => (
+                                            <li key={linkIdx}>
+                                                <Link
+                                                    href={link.href}
+                                                    className="text-slate-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-white transition-colors relative group block w-fit"
+                                                >
+                                                    <span className="relative z-10 group-hover:translate-x-2 inline-block transition-transform duration-300">
+                                                        {link.name}
+                                                    </span>
+                                                    <span className="absolute left-0 -bottom-1 w-0 h-[1px] transition-all duration-300 group-hover:w-full bg-primary" />
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* LOGO & SOCIALS (Left side on Tablet and Desktop) */}
+                    <div className="order-1 md:order-2 lg:order-1 md:col-span-1 lg:col-span-4 lg:row-span-2 flex flex-col pr-0 lg:pr-4">
+                        <div className="flex items-center gap-4 mb-4 md:mb-8">
                             <img src={logoUrl} alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm" />
                         </div>
-
-                        <p
-                            className="text-slate-600 dark:text-gray-400 text-base leading-relaxed mb-6 md:mb-10 max-w-sm"
-                        >
+                        <p className="text-slate-600 dark:text-gray-400 text-base leading-relaxed mb-6 md:mb-10 max-w-sm">
                             Engineering Tomorrow&apos;s Digital Future. We build resilient, globally distributed systems and award-winning enterprise user experiences.
                         </p>
-
-                        <div
-                            className="flex justify-center sm:justify-start gap-2 overflow-x-auto"
-                        >
+                        <div className="flex justify-center sm:justify-start gap-2 overflow-x-auto">
                             {[
                                 { name: "Facebook", icon: FaFacebookF, bg: "bg-[#4267B2]", url: socialLinks.facebook },
                                 { name: "Twitter", icon: FaTwitter, bg: "bg-[#1DA1F2]", url: socialLinks.twitter },
@@ -231,37 +249,9 @@ export default async function FutureFooter() {
                         </div>
                     </div>
 
-                    {/* RIGHT SECTION: Links & Newsletter */}
-                    <div className="order-1 lg:order-2 lg:col-span-8 xl:col-span-8 flex flex-col gap-10">
-                        
-                        {/* Navigation Links */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-                            {Object.entries(activeFooterLinks).map(([category, links]) => (
-                                <div
-                                    key={category}
-                                >
-                                <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide text-sm">{category}</h4>
-                                <ul className="space-y-4">
-                                    {links.map((link, linkIdx) => (
-                                        <li key={linkIdx}>
-                                            <Link
-                                                href={link.href}
-                                                className="text-slate-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-white transition-colors relative group block w-fit"
-                                            >
-                                                <span className="relative z-10 group-hover:translate-x-2 inline-block transition-transform duration-300">
-                                                    {link.name}
-                                                </span>
-                                                <span className="absolute left-0 -bottom-1 w-0 h-[1px] transition-all duration-300 group-hover:w-full bg-primary" />
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                        </div>
-
-                        {/* Newsletter (Horizontal Layout) */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 pt-4">
+                    {/* NEWSLETTER (Right side on Tablet, Bottom Right on Desktop) */}
+                    <div className="order-3 lg:order-3 md:col-span-1 lg:col-span-8 lg:col-start-5">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 pt-0 md:pt-6 lg:pt-4 border-t-0 lg:border-t border-slate-200 dark:border-white/10">
                             <div className="flex flex-col justify-center">
                                 <h4 className="text-slate-900 dark:text-white font-semibold mb-3 tracking-wide text-sm uppercase">Newsletter</h4>
                                 <p className="text-slate-600 dark:text-gray-400 text-[15px] leading-relaxed">
@@ -284,6 +274,7 @@ export default async function FutureFooter() {
                             </form>
                         </div>
                     </div>
+
                 </div>
 
                 {/* ════ CONTACT & CERTIFICATIONS CARDS ════ */}
