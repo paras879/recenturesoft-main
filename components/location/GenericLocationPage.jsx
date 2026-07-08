@@ -52,7 +52,6 @@ export default function GenericLocationPage({ page }) {
                                     alt={`${title} Banner`}
                                     fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center"
                                     priority
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                 />
                                 {/* Inner glow/shadow for premium feel */}
                                 <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-[3rem]" />
