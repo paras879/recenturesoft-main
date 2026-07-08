@@ -174,7 +174,7 @@ export default function Hero({ cmsData = {} }) {
     const displayBg = cmsSlide?.bg || slide.bg;
 
     return (
-        <section ref={heroRef} className="relative md:min-h-screen md:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
+        <section ref={heroRef} className="relative lg:min-h-screen lg:min-h-[700px] overflow-hidden bg-background transition-colors duration-300">
 
             {/* ── Background image slideshow ── */}
             <div
@@ -257,7 +257,7 @@ export default function Hero({ cmsData = {} }) {
                         background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
                     }}
                 />
-                <div className="absolute bottom-0 inset-x-0 h-24 md:h-52 bg-gradient-to-t from-background to-transparent" />
+                <div className="absolute bottom-0 inset-x-0 h-24 lg:h-52 bg-gradient-to-t from-background to-transparent" />
             </div>
 
             {/* ── Ambient glow blob (accent coloured) — plain CSS, no framer-motion ── */}
