@@ -20,9 +20,9 @@ const Logos = [
   {
     name: "Supertech",
     svg: (
-      <svg viewBox="0 0 120 30" className="h-7 w-auto fill-current">
+      <svg viewBox="0 0 150 30" className="h-7 w-auto fill-current overflow-visible">
         <path d="M15 5 L25 5 L20 15 L30 15 L15 28 L18 18 L8 18 Z" fill="url(#grad1)" />
-        <text x="35" y="22" className="text-xl font-bold tracking-tight" fill="currentColor">Supertech</text>
+        <text x="35" y="22" className="text-lg font-bold tracking-tight" fill="currentColor">Supertech</text>
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={C.primary} />
@@ -35,10 +35,10 @@ const Logos = [
   {
     name: "Aurobindo",
     svg: (
-      <svg viewBox="0 0 120 30" className="h-7 w-auto fill-current">
+      <svg viewBox="0 0 150 30" className="h-7 w-auto fill-current overflow-visible">
         <circle cx="15" cy="15" r="10" fill="none" stroke="url(#grad2)" strokeWidth="3" />
         <circle cx="20" cy="15" r="10" fill="none" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5" />
-        <text x="38" y="22" className="text-xl font-bold tracking-wide" fill="currentColor">Aurobindo</text>
+        <text x="38" y="22" className="text-lg font-bold tracking-wide" fill="currentColor">Aurobindo</text>
         <defs>
           <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={C.secondary} />
@@ -51,10 +51,10 @@ const Logos = [
   {
     name: "Flaxley Tyres",
     svg: (
-      <svg viewBox="0 0 140 30" className="h-7 w-auto fill-current">
+      <svg viewBox="0 0 170 30" className="h-7 w-auto fill-current overflow-visible">
         <path d="M10 5 Q 25 5 25 15 T 10 25 Z" fill="url(#grad3)" />
         <path d="M15 5 Q 30 5 30 15 T 15 25 Z" fill="none" stroke="currentColor" strokeWidth="2" strokeOpacity="0.5" />
-        <text x="38" y="22" className="text-xl font-bold italic tracking-tighter" fill="currentColor">Flaxley Tyres</text>
+        <text x="38" y="22" className="text-lg font-bold italic tracking-tighter" fill="currentColor">Flaxley Tyres</text>
         <defs>
           <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={C.accent} />
@@ -67,10 +67,10 @@ const Logos = [
   {
     name: "ExxonMobil",
     svg: (
-      <svg viewBox="0 0 140 30" className="h-7 w-auto fill-current">
+      <svg viewBox="0 0 160 30" className="h-7 w-auto fill-current overflow-visible">
         <rect x="5" y="5" width="20" height="20" rx="4" fill="url(#grad4)" />
         <path d="M10 10 L20 20 M20 10 L10 20" stroke="#020617" strokeWidth="3" strokeLinecap="round" />
-        <text x="35" y="22" className="text-xl font-bold tracking-normal" fill="currentColor">ExxonMobil</text>
+        <text x="35" y="22" className="text-lg font-bold tracking-normal" fill="currentColor">ExxonMobil</text>
         <defs>
           <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={C.primary} />
@@ -83,10 +83,10 @@ const Logos = [
   {
     name: "GoGuardian",
     svg: (
-      <svg viewBox="0 0 140 30" className="h-7 w-auto fill-current">
+      <svg viewBox="0 0 160 30" className="h-7 w-auto fill-current overflow-visible">
         <path d="M15 2 L28 8 L28 20 Q15 28 15 28 Q2 20 2 8 Z" fill="url(#grad5)" />
         <circle cx="15" cy="13" r="4" fill="#020617" />
-        <text x="36" y="22" className="text-xl font-bold tracking-tight" fill="currentColor">GoGuardian</text>
+        <text x="36" y="22" className="text-lg font-bold tracking-tight" fill="currentColor">GoGuardian</text>
         <defs>
           <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={C.secondary} />
@@ -99,10 +99,10 @@ const Logos = [
   {
     name: "Vertex",
     svg: (
-      <svg viewBox="0 0 110 30" className="h-7 w-auto fill-current">
+      <svg viewBox="0 0 130 30" className="h-7 w-auto fill-current overflow-visible">
         <path d="M5 25 L15 5 L25 25" fill="none" stroke="url(#grad6)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M15 15 L25 5 L35 25" fill="none" stroke="currentColor" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" strokeLinejoin="round" />
-        <text x="40" y="22" className="text-xl font-bold uppercase tracking-widest" fill="currentColor">Vertex</text>
+        <text x="40" y="22" className="text-lg font-bold uppercase tracking-widest" fill="currentColor">Vertex</text>
         <defs>
           <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={C.primary} />
@@ -162,16 +162,16 @@ function Counter({ prefix = "", value, suffix, label, icon, showExitIcon = false
 
           {/* Metric value */}
           <div className="flex items-baseline gap-0.5 z-10">
-            {prefix && <span className="text-xl sm:text-2xl font-extrabold text-cyan-600 dark:text-cyan-400 mr-0.5 tracking-tight">{prefix}</span>}
-            <span className="text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">
+            {prefix && <span className="text-lg sm:text-xl font-extrabold text-cyan-600 dark:text-cyan-400 mr-0.5 tracking-tight">{prefix}</span>}
+            <span className="text-xl sm:text-2xl font-extrabold text-cyan-600 dark:text-cyan-400">
               {displayValue}
             </span>
-            {suffix && <span className="text-xl sm:text-2xl font-extrabold text-cyan-600 dark:text-cyan-400 ml-0.5 tracking-tight">{suffix}</span>}
+            {suffix && <span className="text-lg sm:text-xl font-extrabold text-cyan-600 dark:text-cyan-400 ml-0.5 tracking-tight">{suffix}</span>}
           </div>
         </div>
 
         {/* Label */}
-        <span className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5 uppercase tracking-wider font-bold text-center z-10 transition-colors group-hover:text-slate-900 dark:group-hover:text-white">
+        <span className="text-[9px] sm:text-[10px] text-slate-500 dark:text-gray-400 mt-0.5 uppercase tracking-wider font-bold text-center z-10 transition-colors group-hover:text-slate-900 dark:group-hover:text-white line-clamp-1 break-all">
           {label}
         </span>
       </div>
@@ -536,9 +536,9 @@ export default function TrustedClients() {
                 {/* Node 1: Top Center */}
                 <div className="absolute top-[3px] left-[50%] -translate-x-1/2 w-[170px]">
                   <Counter
-                    value="99.9"
+                    value="99.99"
                     suffix="%"
-                    label="Production Uptime"
+                    label="SLA Guaranteed"
                     variant="clean"
                     icon={
                       <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
