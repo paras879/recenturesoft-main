@@ -282,31 +282,33 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                             )}
 
                             {/* Submit Button */}
-                            <button
-                                type="submit"
-                                disabled={status === "loading"}
-                                className="group relative w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-[0.98] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100 overflow-hidden"
-                            >
-                                <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-indigo-600 transition-transform duration-300 group-hover:scale-105" />
-                                <span className="relative z-10 flex items-center justify-center gap-2">
-                                    {status === "loading" ? (
-                                        <>
-                                            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                                            </svg>
-                                            Sending...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Send Inquiry
-                                            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </>
-                                    )}
-                                </span>
-                            </button>
+                            <div className="flex sm:justify-end">
+                                <button
+                                    type="submit"
+                                    disabled={status === "loading"}
+                                    className="group relative w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-[0.98] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100 overflow-hidden"
+                                >
+                                    <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-indigo-600 transition-transform duration-300 group-hover:scale-105" />
+                                    <span className="relative z-10 flex items-center justify-center gap-2">
+                                        {status === "loading" ? (
+                                            <>
+                                                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                                </svg>
+                                                Sending...
+                                            </>
+                                        ) : (
+                                            <>
+                                                Send Inquiry
+                                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </>
+                                        )}
+                                    </span>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

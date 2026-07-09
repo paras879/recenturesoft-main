@@ -226,7 +226,7 @@ export default function PHPDevelopmentContent() {
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
-                            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
+                            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex lg:[&>*:nth-child(n+4)]:flex'}`}>
                                 {[
                                     'E-Commerce Apps',
                                     'Healthcare Apps',

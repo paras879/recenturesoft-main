@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useProjectModal } from "@/components/providers/ProjectModalProvider";
+import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 import {
     Brain, Cpu, Code, Database, Globe, Layers, Server, Shield,
     Smartphone, Zap, ChevronDown, CheckCircle2, ArrowRight,
@@ -13,12 +15,22 @@ import {
 } from 'lucide-react';
 
 const AIChatbotContent = ({ faqs = [] }) => {
+    const { openModal } = useProjectModal();
+    const { openMeetingModal } = useMeetingModal();
     const [openFaq, setOpenFaq] = useState(0);
+    const [expandedGrids, setExpandedGrids] = useState({});
+
+    const toggleGrid = (gridId) => {
+        setExpandedGrids(prev => ({
+            ...prev,
+            [gridId]: !prev[gridId]
+        }));
+    };
 
     return (
         <div className="w-full bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 overflow-hidden">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-24 pb-8 lg:pt-32 lg:pb-8 overflow-hidden bg-white dark:bg-[#020617]">
+            <section className="relative pt-16 pb-8 lg:pt-32 lg:pb-8 overflow-hidden bg-white dark:bg-[#020617]">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
                 <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
@@ -27,6 +39,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
+                            className="order-2 lg:order-1"
                         >
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
                                 Enterprise AI <br className="hidden md:block" />
@@ -38,9 +51,9 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                 Enhance customer experience and automate support with intelligent, conversational AI chatbots powered by cutting-edge NLP and machine learning.
                             </p>
                             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto">
-                                <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
+                                <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
                                     Get Free Consultation
-                                </a>
+                                </button>
                                 <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
                                     Talk to AI Experts
                                 </a>
@@ -49,9 +62,9 @@ const AIChatbotContent = ({ faqs = [] }) => {
 
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative"
+                            className="relative order-1 lg:order-2 mt-6 md:mt-12 lg:mt-0"
                         >
-                            <div className="aspect-[4/3] relative rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
+                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
                                 <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
                                 <Image src="/images/ai-chatbot/hero_ai_chatbot.webp" alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
                             </div>
@@ -134,7 +147,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                         <p className="text-lg text-slate-600 dark:text-slate-400">Advanced conversational AI to engage your customers 24/7.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {[
                             { title: 'AI Strategy Consulting', icon: Target, desc: 'Align AI capabilities with your business goals to create a winning strategy.' },
                             { title: 'AI Readiness Assessment', icon: Search, desc: 'Evaluate your data, infrastructure, and team readiness for AI adoption.' },
@@ -153,7 +166,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="group relative p-6 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col h-full"
+                                    className={`group relative p-6 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col h-full ${idx >= 3 && !expandedGrids['services'] ? 'hidden md:flex' : ''}`}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     <div className="flex items-center gap-4 mb-4">
@@ -166,6 +179,14 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                 </motion.div>
                             )
                         })}
+                    </div>
+                    <div className="mt-8 flex justify-center md:hidden">
+                        <button 
+                            onClick={() => toggleGrid('services')} 
+                            className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
+                        >
+                            {expandedGrids['services'] ? 'Show Less' : 'Show More'}
+                        </button>
                     </div>
                 </div>
             </section>
@@ -183,7 +204,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-10"></div>
                             
-                            <div className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
                                 {[
                                     { title: 'Business Process Automation', icon: Zap },
                                     { title: 'Predictive Analytics', icon: BarChart3 },
@@ -198,7 +219,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                         <motion.div
                                             key={idx}
                                             whileHover={{ scale: 1.02, x: 10 }}
-                                            className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-blue-500/30 transition-all cursor-pointer group"
+                                            className={`p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-blue-500/30 transition-all cursor-pointer group ${idx >= 3 && !expandedGrids['challenges'] ? 'hidden md:flex' : ''}`}
                                         >
                                             <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                                                 <Icon className="w-5 h-5" />
@@ -208,11 +229,19 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                     )
                                 })}
                             </div>
+                            <div className="mt-6 flex justify-start md:hidden">
+                                <button 
+                                    onClick={() => toggleGrid('challenges')} 
+                                    className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
+                                >
+                                    {expandedGrids['challenges'] ? 'Show Less' : 'Show More'}
+                                </button>
+                            </div>
                         </motion.div>
                         
                         <motion.div 
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                            className="lg:col-span-7 relative h-[640px] lg:mt-[100px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl"
+                            className="lg:col-span-7 relative h-[250px] md:h-[400px] lg:h-[640px] lg:mt-[100px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl"
                         >
                             <Image src="/images/ai-chatbot/features_chatbot_dashboard.webp" alt="AI Analytics Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" />
                         </motion.div>
@@ -247,7 +276,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                 ].map((reason, idx) => {
                                     const Icon = reason.icon;
                                     return (
-                                        <div key={idx} className="flex items-start gap-4">
+                                        <div key={idx} className={`flex items-start gap-4 ${idx >= 3 && !expandedGrids['why_choose'] ? 'hidden md:flex' : ''}`}>
                                             <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center flex-shrink-0">
                                                 <Icon className="w-6 h-6" />
                                             </div>
@@ -259,11 +288,19 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                     )
                                 })}
                             </div>
+                            <div className="mt-6 flex justify-start md:hidden">
+                                <button 
+                                    onClick={() => toggleGrid('why_choose')} 
+                                    className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
+                                >
+                                    {expandedGrids['why_choose'] ? 'Show Less' : 'Show More'}
+                                </button>
+                            </div>
                         </motion.div>
 
                         <motion.div 
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                            className="relative h-[650px] rounded-[32px] overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl group"
+                            className="relative h-[250px] md:h-[400px] lg:h-[650px] rounded-[32px] overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl group"
                         >
                             <Image src="/images/ai-chatbot/use_cases_business_dashboard.webp" alt="Consultant Handshake" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         </motion.div>
@@ -279,7 +316,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {[
                             { title: 'Healthcare AI Transformation', problem: 'Inefficient patient data processing.', solution: 'Designed an enterprise NLP strategy for medical records.', result: 'Data processing speed increased by 400%.', image: '/images/ai-chatbot/hero_ai_chatbot.webp' },
                             { title: 'Manufacturing Automation', problem: 'High defect rates on assembly lines.', solution: 'Consulted on computer vision model integration.', result: 'Reduced quality control errors by 85%.', image: '/images/ai-chatbot/about_ai_chatbot.webp' },
@@ -369,11 +406,11 @@ const AIChatbotContent = ({ faqs = [] }) => {
                     <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
                         Contact our experts and deploy intelligent conversational AI today.
                     </p>
-                    <div className="flex flex-wrap justify-center items-center gap-6">
-                        <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-medium md:font-bold text-lg transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
+                    <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6">
+                        <button onClick={openMeetingModal} className="w-full sm:w-auto justify-center text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-medium md:font-bold transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
                             Book Free Consultation <ArrowRight className="w-5 h-5" />
-                        </a>
-                        <a href="/contact" className="px-8 py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-lg transition-all hover:-translate-y-1">
+                        </button>
+                        <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-base md:text-lg transition-all hover:-translate-y-1 flex justify-center items-center">
                             Contact Experts
                         </a>
                     </div>
