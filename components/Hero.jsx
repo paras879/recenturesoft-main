@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
+import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
 const HeroScene = dynamic(() => import('./HeroGraphic'), { ssr: false });
 
@@ -23,7 +24,7 @@ const SLIDES = [
         heading1: "Transforming",
         headingAccent: "Digital Experiences",
         heading2: "Modern Enterprises",
-        desc: "Empowering businesses through innovative web development, cloud solutions, AI integration, and digital transformation services that drive measurable growth.",
+        desc: "Empowering businesses through innovative web development, cloud solutions, AI integration, and digital transformation services.",
         cta: "Start Your Project",
         cta2: "Explore Services",
     },
@@ -70,6 +71,7 @@ export default function Hero({ cmsData = {} }) {
     const [current, setCurrent] = useState(0);
     const heroRef = useRef(null);
     const { openModal } = useProjectModal();
+    const { openMeetingModal } = useMeetingModal();
     const INTERVAL = 6000;
 
     // ── Scroll parallax (Static/CSS optimized) ──────────────────────
@@ -229,7 +231,7 @@ export default function Hero({ cmsData = {} }) {
                 })}
 
                 <div className="absolute inset-0 bg-white/20 md:bg-white/0 dark:bg-[#030712]/60 md:dark:bg-[#030712]/50" />
-                
+
                 {/* Mobile-optimized gradient (more solid to ensure readability) */}
                 <div
                     className="absolute inset-0 md:hidden"
@@ -238,12 +240,18 @@ export default function Hero({ cmsData = {} }) {
                     }}
                 />
                 <div
-                    className="absolute inset-0 hidden md:block dark:hidden"
+                    className="absolute inset-0 hidden md:block lg:hidden dark:hidden"
+                    style={{
+                        background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.8) 75%, rgba(255,255,255,0) 100%)"
+                    }}
+                />
+                <div
+                    className="absolute inset-0 hidden lg:block dark:hidden"
                     style={{
                         background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.88) 28%, rgba(255,255,255,0.55) 48%, rgba(255,255,255,0.15) 68%, rgba(255,255,255,0) 85%)"
                     }}
                 />
-                
+
                 {/* Dark mode gradients */}
                 <div
                     className="absolute inset-0 hidden dark:block md:dark:hidden"
@@ -252,7 +260,13 @@ export default function Hero({ cmsData = {} }) {
                     }}
                 />
                 <div
-                    className="absolute inset-0 hidden md:dark:block"
+                    className="absolute inset-0 hidden md:dark:block lg:dark:hidden"
+                    style={{
+                        background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.95) 40%, rgba(3,7,18,0.8) 75%, rgba(3,7,18,0) 100%)"
+                    }}
+                />
+                <div
+                    className="absolute inset-0 hidden lg:dark:block"
                     style={{
                         background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.88) 28%, rgba(3,7,18,0.55) 48%, rgba(3,7,18,0.15) 68%, rgba(3,7,18,0) 85%)"
                     }}
@@ -306,7 +320,8 @@ export default function Hero({ cmsData = {} }) {
 
                         {/* Description */}
                         <p
-                            className="mt-6 text-[15px] md:text-[18px] xl:text-[20px] 2xl:text-[22px] text-slate-900 md:text-slate-800 dark:text-slate-200 md:dark:text-slate-400 max-w-xl 2xl:max-w-2xl leading-relaxed md:leading-8 font-[500] md:font-[400] drop-shadow-sm md:drop-shadow-none animate-fade-in-up delay-200"
+                            className="mt-6 text-[15px] md:text-[18px] lg:text-[19px] xl:text-[20px] 2xl:text-[22px] text-black dark:text-white max-w-xl md:max-w-2xl lg:max-w-3xl leading-relaxed md:leading-8 font-[500] md:font-[600] lg:font-[500] drop-shadow-sm md:drop-shadow-md lg:drop-shadow-none animate-fade-in-up delay-200"
+                            style={{ textWrap: "pretty" }}
                         >
                             {displayDesc}
                         </p>
@@ -325,7 +340,7 @@ export default function Hero({ cmsData = {} }) {
                             >
                                 <span className="relative z-10">{displayCta1}</span>
                             </button>
-                            <button className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
+                            <button onClick={openMeetingModal} className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
                                 {displayCta2}
                             </button>
                         </div>

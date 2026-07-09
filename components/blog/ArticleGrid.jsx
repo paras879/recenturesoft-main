@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,19 @@ export default function ArticleGrid({ articles = [], categories = [] }) {
     const displayCategories = ["All", ...(categories.length > 0 ? categories : ["Design", "Backend", "Mobile", "Frontend", "Marketing"])];
     const [activeFilter, setActiveFilter] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
+    const [showAll, setShowAll] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    useEffect(() => {
+        setShowAll(false);
+    }, [activeFilter, searchQuery]);
 
     const formatDate = (dateString) => {
         if (!dateString) return "";
@@ -24,6 +37,9 @@ export default function ArticleGrid({ articles = [], categories = [] }) {
         const matchesSearch = a.title.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
+
+    const initialLimit = isMobile ? 3 : 6;
+    const displayedArticles = showAll ? filteredArticles : filteredArticles.slice(0, initialLimit);
 
     return (
         <section className="pt-[clamp(1rem,2vw,2rem)] pb-[clamp(1.5rem,5vw,5rem)] bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
@@ -59,7 +75,7 @@ export default function ArticleGrid({ articles = [], categories = [] }) {
                 {/* Grid */}
                 <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <AnimatePresence>
-                        {filteredArticles.map((article) => (
+                        {displayedArticles.map((article) => (
                             <Link key={article._id || article.id}
                                 href={`/blog/${article.slug}`}
                                 prefetch={true}
@@ -109,6 +125,17 @@ export default function ArticleGrid({ articles = [], categories = [] }) {
                         ))}
                     </AnimatePresence>
                 </motion.div>
+
+                {filteredArticles.length > initialLimit && (
+                    <div className="mt-12 flex justify-center">
+                        <button
+                            onClick={() => setShowAll(!showAll)}
+                            className="px-8 py-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white rounded-full font-semibold hover:bg-slate-50 dark:hover:bg-white/10 transition-colors shadow-sm hover:shadow-md"
+                        >
+                            {showAll ? "Show Less" : "Show More"}
+                        </button>
+                    </div>
+                )}
 
                 {filteredArticles.length === 0 && (
                     <div className="text-center py-20 text-slate-500 dark:text-gray-500">

@@ -375,15 +375,15 @@ function EmployeeTestimonials({ teamMembers = [] }) {
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {teamMembers.map((member) => (
                         <div
                             key={member._id}
-                            className="p-4 md:p-6 lg:p-8 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm hover:-translate-y-2 hover:border-cyan-500/30 transition-all duration-300 shadow-sm dark:shadow-none flex flex-col justify-between"
+                            className="p-5 md:p-6 lg:p-8 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm hover:-translate-y-2 hover:border-cyan-500/30 transition-all duration-300 shadow-sm dark:shadow-none flex flex-col justify-between"
                         >
                             <div>
-                                <div className="text-cyan-500 dark:text-cyan-400 mb-6 text-4xl text-left">&ldquo;</div>
-                                <p className="text-slate-600 dark:text-slate-300 text-lg mb-8 line-clamp-4 text-left">
+                                <div className="text-cyan-500 dark:text-cyan-400 mb-4 md:mb-6 text-4xl text-left">&ldquo;</div>
+                                <p className="text-slate-600 dark:text-slate-300 text-[15px] md:text-base lg:text-lg mb-6 md:mb-8 line-clamp-4 text-left">
                                     &ldquo;{member.quote}&rdquo;
                                 </p>
                             </div>

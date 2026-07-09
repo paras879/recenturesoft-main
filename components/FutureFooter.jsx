@@ -191,7 +191,7 @@ export default async function FutureFooter() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-8 lg:gap-12 mb-10 md:mb-12 lg:mb-16">
 
                     {/* LINKS SECTION (Full width on Tablet, Right side on Desktop) */}
-                    <div className="order-2 md:order-1 lg:order-2 md:col-span-2 lg:col-span-8">
+                    <div className="order-2 md:order-3 lg:order-2 md:col-span-2 lg:col-span-8">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
                             {Object.entries(activeFooterLinks).map(([category, links]) => (
                                 <div key={category}>
@@ -217,11 +217,11 @@ export default async function FutureFooter() {
                     </div>
 
                     {/* LOGO & SOCIALS (Left side on Tablet and Desktop) */}
-                    <div className="order-1 md:order-2 lg:order-1 md:col-span-1 lg:col-span-4 lg:row-span-2 flex flex-col pr-0 lg:pr-4">
-                        <div className="flex items-center gap-4 mb-4 md:mb-8">
+                    <div className="order-1 md:order-1 lg:order-1 md:col-span-1 lg:col-span-4 lg:row-span-2 flex flex-col pr-0 lg:pr-4 md:-mt-4 lg:mt-0">
+                        <div className="flex items-center gap-4 mb-4 lg:mb-8">
                             <img src={logoUrl} alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm" />
                         </div>
-                        <p className="text-slate-600 dark:text-gray-400 text-base leading-relaxed mb-6 md:mb-10 max-w-sm">
+                        <p className="text-slate-600 dark:text-gray-400 text-base leading-relaxed mb-6 lg:mb-10 max-w-sm">
                             Engineering Tomorrow&apos;s Digital Future. We build resilient, globally distributed systems and award-winning enterprise user experiences.
                         </p>
                         <div className="flex justify-center sm:justify-start gap-2 overflow-x-auto">
@@ -250,8 +250,8 @@ export default async function FutureFooter() {
                     </div>
 
                     {/* NEWSLETTER (Right side on Tablet, Bottom Right on Desktop) */}
-                    <div className="order-3 lg:order-3 md:col-span-1 lg:col-span-8 lg:col-start-5">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 pt-0 md:pt-6 lg:pt-4 border-t-0 lg:border-t border-slate-200 dark:border-white/10">
+                    <div className="order-3 md:order-2 lg:order-3 md:col-span-1 lg:col-span-8 lg:col-start-5">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 pt-0 lg:pt-4">
                             <div className="flex flex-col justify-center">
                                 <h4 className="text-slate-900 dark:text-white font-semibold mb-3 tracking-wide text-sm uppercase">Newsletter</h4>
                                 <p className="text-slate-600 dark:text-gray-400 text-[15px] leading-relaxed">
@@ -259,14 +259,14 @@ export default async function FutureFooter() {
                                 </p>
                             </div>
                             <form className="flex flex-col gap-3">
-                                <input 
-                                    type="email" 
-                                    placeholder="Your email address" 
+                                <input
+                                    type="email"
+                                    placeholder="Your email address"
                                     className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all shadow-sm"
-                                    required 
+                                    required
                                 />
-                                <button 
-                                    type="button" 
+                                <button
+                                    type="button"
                                     className="w-full bg-primary hover:bg-blue-600 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all shadow-md shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5"
                                 >
                                     Subscribe
@@ -296,7 +296,7 @@ export default async function FutureFooter() {
                                     </span>
                                 </div>
 
-                                <span className="text-slate-800 dark:text-white font-medium text-sm leading-relaxed pl-12">
+                                <span className="text-slate-900 dark:text-white font-semibold text-sm leading-relaxed pl-12 md:pl-2 lg:pl-12 block md:mt-2 lg:mt-0">
                                     {address}
                                 </span>
                             </div>
@@ -318,7 +318,7 @@ export default async function FutureFooter() {
                                         Call Us
                                     </span>
                                 </div>
-                                <span className="text-slate-800 dark:text-white font-medium text-lg pl-12">
+                                <span className="text-slate-900 dark:text-white font-semibold text-lg pl-12 md:pl-2 lg:pl-12 block md:mt-2 lg:mt-0">
                                     {phone}
                                 </span>
                             </div>
@@ -338,7 +338,7 @@ export default async function FutureFooter() {
                                         Email Us
                                     </span>
                                 </div>
-                                <span className="text-slate-800 dark:text-white font-medium text-sm lg:text-base xl:text-lg pl-12 break-all pr-2">
+                                <span className="text-slate-900 dark:text-white font-semibold text-base md:text-[15px] lg:text-[17px] xl:text-lg pl-12 md:pl-2 lg:pl-12 break-all md:break-words pr-2 block md:mt-2 lg:mt-0">
                                     {email}
                                 </span>
                             </div>
@@ -349,9 +349,9 @@ export default async function FutureFooter() {
                 {/* ════ PREMIUM BOTTOM BAR ════ */}
                 <div className="relative pt-2 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-600 dark:text-gray-400">
 
-                    <p className="order-2 md:order-1 font-medium tracking-wide">© 2026 Recenturesoft. All rights reserved.</p>
+                    <p className="order-2 font-medium tracking-wide">© 2026 Recenturesoft. All rights reserved.</p>
 
-                    <div className="flex justify-center gap-4 md:gap-8 whitespace-nowrap order-1 md:order-2">
+                    <div className="flex justify-center gap-4 md:gap-8 whitespace-nowrap order-1">
                         {isPathActive("/privacy-policy") && <Link href="/privacy-policy" className="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</Link>}
                         {isPathActive("/terms") && <Link href="/terms" className="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</Link>}
                         {isPathActive("/cookies") && <Link href="/cookies" className="hover:text-primary dark:hover:text-white transition-colors">Cookies</Link>}

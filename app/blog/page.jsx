@@ -5,7 +5,6 @@ import PageHero from "@/components/PageHero";
 import FutureFooter from "@/components/FutureFooter";
 import FeaturedArticle from "@/components/blog/FeaturedArticle";
 import ArticleGrid from "@/components/blog/ArticleGrid";
-import CTASection from "@/components/CTASection";
 import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import BlogCategory from "@/models/BlogCategory";
@@ -56,13 +55,6 @@ export default async function BlogPage() {
 
             <FeaturedArticle article={serializedFeatured} />
             <ArticleGrid articles={serializedGrid} categories={catNames} />
-
-            <CTASection
-                title="Never Miss an Update"
-                description="Subscribe to our engineering newsletter to get the latest architectural breakdowns and case studies delivered to your inbox."
-                primaryBtnText="Subscribe Now"
-                secondaryBtnText="Follow on Twitter"
-            />
             <PageFAQSection pageName="blog" />
 
             <FutureFooter />

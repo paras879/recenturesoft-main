@@ -248,6 +248,7 @@ export default function Review() {
 
     const handleTouchEnd = () => {
         isDownRef.current = false;
+        isPausedRef.current = false;
     };
 
     const handleTouchMove = (e) => {
@@ -331,7 +332,11 @@ export default function Review() {
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchMove}
-                onMouseEnter={() => { isPausedRef.current = true; }}
+                onPointerEnter={(e) => {
+                    if (e.pointerType === 'mouse') {
+                        isPausedRef.current = true;
+                    }
+                }}
             >
                 {/* Side gradient blur masks removed as per user request */}
 

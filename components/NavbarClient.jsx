@@ -112,6 +112,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
     const [hoveredLink, setHoveredLink] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [mobileExpanded, setMobileExpanded] = useState("");
+    const [expandedCategory, setExpandedCategory] = useState(0);
     const pathname = usePathname();
 
     // Filter dynamic navigation based on active DB status
@@ -342,19 +343,32 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                 <div
                                                     className="overflow-hidden"
                                                 >
-                                                    <div className="pl-6 py-2 flex flex-col gap-4">
+                                                    <div className="pl-6 py-2 flex flex-col gap-1">
                                                         {activeSolutionsMenu.map((cat, idx) => (
-                                                            <div key={idx}>
-                                                                <h4 className="text-xs font-extrabold text-slate-800 dark:text-slate-400 uppercase mb-2">{cat.title}</h4>
-                                                                <ul className="flex flex-col gap-2">
-                                                                    {cat.items.map((item, itemIdx) => (
-                                                                        <li key={itemIdx}>
-                                                                            <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-slate-600 dark:text-gray-300 hover:text-cyan-500 transition-colors">
-                                                                                {item.name}
-                                                                            </Link>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
+                                                            <div key={idx} className="border-b border-slate-100 dark:border-white/5 last:border-0">
+                                                                <button 
+                                                                    onClick={() => setExpandedCategory(expandedCategory === idx ? null : idx)}
+                                                                    className="w-full flex items-center justify-between py-3 group"
+                                                                >
+                                                                    <h4 className="text-[11px] sm:text-xs font-extrabold text-slate-800 dark:text-slate-400 uppercase flex items-center gap-2 transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                                                                        <span className={`w-1.5 h-1.5 rounded-full transition-colors ${expandedCategory === idx ? 'bg-cyan-500' : 'bg-slate-300 dark:bg-slate-600'}`}></span>
+                                                                        {cat.title}
+                                                                    </h4>
+                                                                    <svg className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${expandedCategory === idx ? "rotate-180 text-cyan-500" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                                    </svg>
+                                                                </button>
+                                                                {expandedCategory === idx && (
+                                                                    <ul className="flex flex-col gap-2 pl-4 pb-3 pt-1 animate-in slide-in-from-top-1 fade-in duration-200">
+                                                                        {cat.items.map((item, itemIdx) => (
+                                                                            <li key={itemIdx}>
+                                                                                <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-[13px] sm:text-sm text-slate-600 dark:text-gray-300 hover:text-cyan-500 transition-colors py-1 block">
+                                                                                    {item.name}
+                                                                                </Link>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                )}
                                                             </div>
                                                         ))}
                                                     </div>
