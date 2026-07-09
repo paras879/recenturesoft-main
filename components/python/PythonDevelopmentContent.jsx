@@ -51,7 +51,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, delay: 0.2 }}
-                            className="relative h-[200px] md:h-[450px] lg:h-[600px] mt-8 lg:mt-12 flex items-center justify-center"
+                            className="relative lg:col-span-1 h-[250px] md:h-[300px] lg:h-[600px] mt-6 md:mt-12 lg:mt-36 flex items-center justify-center order-1 lg:order-2"
                         >
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-3xl rounded-full"></div>
                             <Image
@@ -59,7 +59,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                                 alt="Python Enterprise Backend"
                                 width={600}
                                 height={600}
-                                className="relative z-10 drop-shadow-2xl rounded-3xl object-cover h-[180px] md:h-[400px] lg:h-[500px] w-full"
+                                className="relative z-10 drop-shadow-2xl rounded-3xl object-cover h-[250px] md:h-[300px] lg:h-[600px] w-auto" style={{ width: "auto", height: "auto" }}
                                 priority
                             />
                         </motion.div>

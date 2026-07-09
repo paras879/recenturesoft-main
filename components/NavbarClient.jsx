@@ -166,7 +166,8 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                         className="flex items-center gap-2 group"
                     >
                         <span className="text-[clamp(1rem,4vw,1.25rem)] font-bold tracking-wider text-slate-800 dark:text-white transition-colors duration-300 group-hover:text-primary dark:group-hover:text-cyan-400 flex-shrink-0">
-                            <img src={logoUrl} alt="RecentureSoft Logo" width="140" height="56" className="h-12 md:h-14 w-auto object-contain drop-shadow-sm" />
+                            <img src={logoUrl} alt="RecentureSoft Logo" width="140" height="56" className="h-12 md:h-14 w-auto object-contain drop-shadow-sm dark:hidden" />
+                            <img src="/logo_white.PNG" alt="RecentureSoft Logo" width="140" height="56" className="h-12 md:h-14 w-auto object-contain drop-shadow-sm hidden dark:block" />
                         </span>
                     </Link>
 

@@ -50,7 +50,7 @@ const AIDevelopmentContent = ({ faqs = [] }) => {
                             <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
                                 Build intelligent AI-powered software solutions that automate processes, improve decision-making, and accelerate business growth with custom AI development tailored to your enterprise needs.
                             </p>
-                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto">
+                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto" style={{ width: "auto", height: "auto" }}>
                                 <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
                                     Get Free Consultation
                                 </button>

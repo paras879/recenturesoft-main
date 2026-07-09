@@ -219,7 +219,8 @@ export default async function FutureFooter() {
                     {/* LOGO & SOCIALS (Left side on Tablet and Desktop) */}
                     <div className="order-1 md:order-1 lg:order-1 md:col-span-1 lg:col-span-4 lg:row-span-2 flex flex-col pr-0 lg:pr-4 md:-mt-4 lg:mt-0">
                         <div className="flex items-center gap-4 mb-4 lg:mb-8">
-                            <img src={logoUrl} alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm" />
+                            <img src={logoUrl} alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm dark:hidden" />
+                            <img src="/logo_white.PNG" alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm hidden dark:block" />
                         </div>
                         <p className="text-slate-600 dark:text-gray-400 text-base leading-relaxed mb-6 lg:mb-10 max-w-sm">
                             Engineering Tomorrow&apos;s Digital Future. We build resilient, globally distributed systems and award-winning enterprise user experiences.
