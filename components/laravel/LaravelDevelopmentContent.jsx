@@ -17,7 +17,7 @@ export default function LaravelDevelopmentContent() {
         <div className="font-sans selection:bg-blue-500/30">
 
             {/* 1. HERO SECTION */}
-            <section className="relative pt-4 md:pt-24 pb-8 lg:pt-4 md:pt-32 lg:pb-8 overflow-hidden">
+            <section className="relative pt-24 lg:pt-32 pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-white dark:from-blue-900/20 dark:via-[#020617] dark:to-[#020617] -z-10"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -25,7 +25,7 @@ export default function LaravelDevelopmentContent() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="max-w-2xl"
+                            className="max-w-2xl order-2 lg:order-1 flex flex-col"
                         >
                             <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
                                 Laravel Web <br />
@@ -36,11 +36,11 @@ export default function LaravelDevelopmentContent() {
                             <p className="text-base md:text-lg md:text-base md:text-xl text-slate-600 dark:text-slate-300 mb-4 md:mb-8 leading-relaxed">
                                 Build stunning, high-performance enterprise-grade web applications with Laravel. Our developers create scalable secure backends apps from a single codebase, helping businesses launch faster while reducing development costs.
                             </p>
-                            <div className="flex flex-wrap items-center gap-4">
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
+                            <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
                                     Start Your Laravel Project
                                 </Link>
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
+                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
                                     Book Free Consultation
                                 </Link>
                             </div>
@@ -50,17 +50,20 @@ export default function LaravelDevelopmentContent() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, delay: 0.2 }}
-                            className="relative lg:col-span-1 h-[250px] md:h-[300px] lg:h-[600px] mt-6 md:mt-12 lg:mt-36 flex items-center justify-center order-1 lg:order-2"
+                            className="relative order-1 lg:order-2 mt-0 md:mt-4 lg:mt-0"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-3xl rounded-full"></div>
-                            <Image
-                                src="/images/laravel-development/hero_laravel.webp"
-                                alt="Laravel Workspace"
-                                width={600}
-                                height={600}
-                                className="relative z-10 drop-shadow-2xl rounded-3xl object-cover h-[250px] md:h-[300px] lg:h-[600px] w-auto" style={{ width: "auto", height: "auto" }}
-                                priority
-                            />
+                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
+                                <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
+                                <Image
+                                    src="/images/laravel-development/hero_laravel.webp"
+                                    alt="Laravel Workspace"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-cover z-10 transition-transform duration-700 group-hover:scale-105"
+                                    priority
+                                    loading="eager"
+                                />
+                            </div>
                         </motion.div>
                     </div>
                 </div>
@@ -226,7 +229,7 @@ export default function LaravelDevelopmentContent() {
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
-                            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
+                            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex lg:[&>*:nth-child(n+4)]:flex'}`}>
                                 {[
                                     'E-Commerce Apps',
                                     'Healthcare Apps',
@@ -323,7 +326,7 @@ export default function LaravelDevelopmentContent() {
                             <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Powerful Features We Integrate</h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
-                            <div className={`grid sm:grid-cols-2 gap-4 ${expandedGrids['grid1'] ? '' : '[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex'}`}>
+                            <div className={`grid sm:grid-cols-2 lg:grid-cols-1 gap-4 ${expandedGrids['grid1'] ? '' : '[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex'}`}>
                                 {[
                                     { title: 'Push Notifications', icon: Zap },
                                     { title: 'Google Maps Integration', icon: Globe },

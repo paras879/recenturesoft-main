@@ -32,7 +32,9 @@ const SITEMAP_CATEGORIES = [
             { name: "Next.js Development", href: "/next-js" },
             { name: "React.js Development", href: "/react" },
             { name: "Node.js Backend", href: "/node-js" },
-            { name: "Web Design", href: "/web-design" }
+            { name: "Web Design", href: "/web-design" },
+            { name: "PHP Development", href: "/php-development" },
+            { name: "Laravel Development", href: "/laravel-development" }
         ]
     },
     {

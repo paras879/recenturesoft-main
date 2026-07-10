@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-    Terminal, Server, Database, Code2, Cloud, ShieldCheck, 
+    Terminal, Server, Database, Code2, Cloud, ShieldCheck,
     Workflow, Cpu, Network, Zap, CheckCircle2, ChevronRight, Plus, Minus, ArrowRight, Activity, Settings, LayoutGrid, Layers, Hexagon,
     Globe, Smartphone, Target, Search, FileCode, Users, MessageSquare, MonitorSmartphone
 } from 'lucide-react'
@@ -18,7 +18,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
         <div className="font-sans selection:bg-blue-500/30">
 
             {/* 1. HERO SECTION */}
-            <section className="relative pt-4 md:pt-24 pb-8 lg:pt-4 md:pt-32 lg:pb-8 overflow-hidden">
+            <section className="relative pt-24 lg:pt-32 pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-white dark:from-blue-900/20 dark:via-[#020617] dark:to-[#020617] -z-10"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -26,7 +26,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="max-w-2xl"
+                            className="max-w-2xl order-2 lg:order-1 flex flex-col"
                         >
                             <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
                                 Python Development <br />
@@ -37,11 +37,11 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                             <p className="text-base md:text-lg md:text-base md:text-xl text-slate-600 dark:text-slate-300 mb-4 md:mb-8 leading-relaxed">
                                 Develop secure, scalable, and high-performance software with Python. From enterprise web applications and APIs to automation tools and AI-powered solutions, we build intelligent systems that help businesses grow faster.
                             </p>
-                            <div className="flex flex-wrap items-center gap-4">
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
+                            <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
                                     Hire Python Developers
                                 </Link>
-                                <Link href="/contact" className="px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
+                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
                                     Schedule Free Consultation
                                 </Link>
                             </div>
@@ -51,17 +51,20 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, delay: 0.2 }}
-                            className="relative lg:col-span-1 h-[250px] md:h-[300px] lg:h-[600px] mt-6 md:mt-12 lg:mt-36 flex items-center justify-center order-1 lg:order-2"
+                            className="relative order-1 lg:order-2 mt-0 md:mt-4 lg:mt-0"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-3xl rounded-full"></div>
-                            <Image
-                                src="/images/python-development/hero_python.webp"
-                                alt="Python Enterprise Backend"
-                                width={600}
-                                height={600}
-                                className="relative z-10 drop-shadow-2xl rounded-3xl object-cover h-[250px] md:h-[300px] lg:h-[600px] w-auto" style={{ width: "auto", height: "auto" }}
-                                priority
-                            />
+                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
+                                <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
+                                <Image
+                                    src="/images/python-development/hero_python.webp"
+                                    alt="Python Enterprise Backend"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-cover z-10 transition-transform duration-700 group-hover:scale-105"
+                                    priority
+                                    loading="eager"
+                                />
+                            </div>
                         </motion.div>
                     </div>
                 </div>
@@ -101,11 +104,11 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                             </motion.div>
                         ))}
                     </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid1'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                    <div className="mt-6 flex justify-center md:hidden w-full">
+                        <button onClick={() => setExpandedGrids(prev => ({ ...prev, 'grid1': !prev['grid1'] }))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                            {expandedGrids['grid1'] ? 'Show Less' : 'Show More'}
+                        </button>
+                    </div>
 
                 </div>
             </section>
@@ -142,11 +145,11 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                                 </div>
                             ))}
                         </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid2': !prev['grid2']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid2'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                        <div className="mt-6 flex justify-center md:hidden w-full">
+                            <button onClick={() => setExpandedGrids(prev => ({ ...prev, 'grid2': !prev['grid2'] }))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                                {expandedGrids['grid2'] ? 'Show Less' : 'Show More'}
+                            </button>
+                        </div>
 
                     </div>
                 </div>
@@ -159,7 +162,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                         Python Technologies We Master
                     </h2>
                     <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mb-6 md:mb-12"></div>
-                    
+
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                         {['Django', 'FastAPI', 'Flask', 'Celery', 'Pandas', 'NumPy', 'TensorFlow', 'PyTorch', 'OpenCV', 'SQLAlchemy', 'Redis', 'RabbitMQ'].map((tech, idx) => (
                             <div key={idx} className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:border-blue-500 hover:shadow-lg transition-all flex flex-col items-center justify-center gap-4 group">
@@ -185,8 +188,8 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                                 How Python Accelerates Business Growth
                             </h2>
                             <div className="w-16 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
-                            
-                            <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${expandedGrids['grid20'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
+
+                            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3 ${expandedGrids['grid20'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
                                 {[
                                     'Reduce Development Time',
                                     'Improve System Performance',
@@ -203,17 +206,17 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                                     </div>
                                 ))}
                             </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid20'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                            <div className="mt-6 flex justify-center md:hidden w-full">
+                                <button onClick={() => setExpandedGrids(prev => ({ ...prev, 'grid20': !prev['grid20'] }))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                                    {expandedGrids['grid20'] ? 'Show Less' : 'Show More'}
+                                </button>
+                            </div>
 
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                            className="lg:col-span-7 relative h-[200px] md:h-[200px] lg:h-[540px] lg:mt-32 rounded-[32px] overflow-hidden shadow-2xl"
+                            className="lg:col-span-7 relative h-[200px] md:h-[200px] lg:h-[540px] lg:mt-12 rounded-[32px] overflow-hidden shadow-2xl"
                         >
                             <Image src="/images/python-development/about_python.webp" alt="Business Benefits" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
@@ -252,7 +255,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                         <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Industries We Serve</h2>
                         <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto"></div>
                     </div>
-                    
+
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                         {['Healthcare', 'Finance', 'Education', 'Manufacturing', 'Retail', 'Travel', 'Logistics', 'Insurance', 'Government', 'Real Estate', 'Media', 'Technology'].map((industry, idx) => (
                             <div key={idx} className="p-4 rounded-xl text-center bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 hover:border-blue-500 hover:shadow-md transition-all cursor-pointer">
@@ -269,11 +272,11 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div className="order-2 lg:order-1 grid sm:grid-cols-2 gap-6">
                             {[
-                                'Experienced Python Engineers', 'Scalable Architecture', 
-                                'Secure Development', 'Cloud-Native Solutions', 
+                                'Experienced Python Engineers', 'Scalable Architecture',
+                                'Secure Development', 'Cloud-Native Solutions',
                                 'Agile Delivery', 'Long-Term Support'
                             ].map((reason, idx) => (
-                                <motion.div 
+                                <motion.div
                                     key={idx}
                                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }}
                                     className="p-6 rounded-2xl bg-slate-50 dark:bg-[#020617] border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all"
@@ -320,7 +323,7 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                         <h2 className="text-3xl lg:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
                         <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto"></div>
                     </div>
-                    
+
                     <div className={`space-y-4  md: ${expandedGrids['grid10'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:block'}`}>
                         {(faqs && faqs.length > 0 ? faqs : [
                             { question: "Why should I choose Python for software development?", answer: "Python offers fast development, massive library support, and scalability, making it ideal for backend and AI." },
@@ -355,11 +358,11 @@ export default function PythonDevelopmentContent({ faqs = [] }) {
                             </div>
                         ))}
                     </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid10'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                    <div className="mt-6 flex justify-center md:hidden w-full">
+                        <button onClick={() => setExpandedGrids(prev => ({ ...prev, 'grid10': !prev['grid10'] }))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                            {expandedGrids['grid10'] ? 'Show Less' : 'Show More'}
+                        </button>
+                    </div>
 
                 </div>
             </section>

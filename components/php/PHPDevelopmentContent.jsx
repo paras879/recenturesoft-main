@@ -17,7 +17,7 @@ export default function PHPDevelopmentContent() {
         <div className="font-sans selection:bg-blue-500/30">
 
             {/* 1. HERO SECTION */}
-            <section className="relative pt-24 md:pt-32 pb-8 overflow-hidden">
+            <section className="relative pt-24 lg:pt-32 pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-white dark:from-blue-900/20 dark:via-[#020617] dark:to-[#020617] -z-10"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -326,7 +326,7 @@ export default function PHPDevelopmentContent() {
                             <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Powerful Features We Integrate</h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
-                            <div className={`grid sm:grid-cols-2 gap-4 ${expandedGrids['grid1'] ? '' : '[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex'}`}>
+                            <div className={`grid sm:grid-cols-2 lg:grid-cols-1 gap-4 ${expandedGrids['grid1'] ? '' : '[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex'}`}>
                                 {[
                                     { title: 'Push Notifications', icon: Zap },
                                     { title: 'Google Maps Integration', icon: Globe },

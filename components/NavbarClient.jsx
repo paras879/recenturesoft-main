@@ -40,7 +40,7 @@ const solutionsMenu = [
             { name: "React", href: "/react" },
             { name: "Web Design", href: "/web-design" },
             { name: "PHP Development", href: "/php-development" },
-
+            { name: "Laravel", href: "/laravel-development" },
         ]
     },
     {
