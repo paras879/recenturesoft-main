@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
@@ -56,9 +57,9 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                 <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
                                     Get Free Consultation
                                 </button>
-                                <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
+                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
                                     Talk to Experts
-                                </a>
+                                </Link>
                             </div>
                         </motion.div>
 
@@ -398,7 +399,7 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                                             exit={{ height: 0, opacity: 0 }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 text-lg leading-relaxed border-t border-slate-100 dark:border-slate-700 mt-2">
+                                            <div className="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
                                                 {faq.answer}
                                             </div>
                                         </motion.div>
@@ -437,9 +438,9 @@ const GenerativeAIContent = ({ faqs = [] }) => {
                         <button onClick={openMeetingModal} className="w-full sm:w-auto justify-center text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-medium md:font-bold transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
                             Schedule Consultation <ArrowRight className="w-5 h-5" />
                         </button>
-                        <a href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-base md:text-lg transition-all hover:-translate-y-1 flex justify-center items-center">
+                        <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-base md:text-lg transition-all hover:-translate-y-1 flex justify-center items-center">
                             Contact Us
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>

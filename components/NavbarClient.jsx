@@ -100,7 +100,7 @@ const solutionsMenu = [
         bg: "bg-indigo-500/10",
         items: [
             { name: "Generative AI", href: "/generative-ai" },
-            { name: "AI Services", href: "/ai-services" },
+            { name: "AI Consulting Services", href: "/ai-consulting-services" },
             { name: "AI Agent Development", href: "/ai-agent-development" },
             { name: "AI Chatbot Development", href: "/ai-chatbot-development" },
             { name: "RAG Development", href: "/rag-development" },
@@ -130,7 +130,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
             if (dp.category === "Solutions" && dp.subcategory) {
                 const cat = combinedSolutionsMenu.find(c => c.title === dp.subcategory);
                 if (cat) {
-                    if (!cat.items.some(item => item.href === dp.path)) {
+                    if (dp.path !== "/ai-services" && !cat.items.some(item => item.href === dp.path)) {
                         cat.items.push({ name: dp.name, href: dp.path });
                     }
                 }

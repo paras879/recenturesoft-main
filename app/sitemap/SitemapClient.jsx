@@ -73,7 +73,7 @@ const SITEMAP_CATEGORIES = [
         icon: <Brain className="w-5 h-5" />,
         links: [
             { name: "Generative AI", href: "/generative-ai" },
-            { name: "AI Services", href: "/ai-services" },
+            { name: "AI Consulting Services", href: "/ai-consulting-services" },
             { name: "AI Agent Development", href: "/ai-agent-development" },
             { name: "AI Chatbot Development", href: "/ai-chatbot-development" },
             { name: "RAG Development", href: "/rag-development" }

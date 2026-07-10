@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/web-design',
     '/wordpress-development-customization',
     '/generative-ai',
-    '/ai-services',
+    '/ai-consulting-services',
     '/ai-agent-development',
     '/ai-chatbot-development',
     '/rag-development'

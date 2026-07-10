@@ -28,7 +28,7 @@ export const metadata = {
     openGraph: {
         title: "AI Consulting Services | Enterprise Artificial Intelligence | RecentureSoft",
         description: "Identify the right AI opportunities, create intelligent strategies, and implement scalable AI solutions with RecentureSoft.",
-        url: "https://recenturesoft.com/ai-services",
+        url: "https://recenturesoft.com/ai-consulting-services",
         siteName: "RecentureSoft",
         type: "website",
     },
@@ -37,11 +37,11 @@ export const metadata = {
         title: "AI Consulting Services | Enterprise Artificial Intelligence | RecentureSoft",
         description: "Expert AI consulting services to transform your business with scalable, enterprise-grade AI strategies and implementations.",
     },
-    alternates: { canonical: "/ai-services" }
+    alternates: { canonical: "/ai-consulting-services" }
 };
 
 export default async function AIServicesPage() {
-    const isActive = await checkPageStatus("/ai-services").catch(() => true);
+    const isActive = await checkPageStatus("/ai-consulting-services").catch(() => true);
     if (!isActive) return notFound();
 
     const faqs = await getFaqs("ai-services");
