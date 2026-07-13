@@ -3,14 +3,14 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-export default function ProjectGallery({ initialProjects = [] }) {
+export default function ProjectGallery({ initialProjects = [], data = {} }) {
     return (
         <section className="py-6 md:py-8 lg:py-10 bg-slate-50 dark:bg-[#020617] relative transition-colors duration-300">
             <div className="container mx-auto px-5 sm:px-8 lg:px-12 max-w-[1200px] xl:max-w-[1400px]">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                     {/* Top Heading: Adapts beautifully to light/dark mode and brand theme */}
                     <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[2.6rem] lg:text-[3rem] font-extrabold tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
-                        Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Works</span>
+                        {data?.heading1 || "Selected"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.headingAccent || "Works"}</span>
                     </h2>
                 </div>
 
@@ -20,8 +20,8 @@ export default function ProjectGallery({ initialProjects = [] }) {
                         <div className="p-8 rounded-[2rem] bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 max-w-md shadow-sm dark:shadow-none backdrop-blur-md">
                             <span className="text-5xl mb-4 block">🚀</span>
                             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Projects in Progress</h2>
-                            <p className="text-slate-600 dark:text-slate-400">
-                                We are currently updating our showcase. Check back soon for our latest engineering masterpieces.
+                            <p className="text-slate-600 dark:text-slate-400 whitespace-pre-wrap">
+                                {data?.emptyStateText || "We are currently updating our showcase. Check back soon for our latest engineering masterpieces."}
                             </p>
                         </div>
                     </div>

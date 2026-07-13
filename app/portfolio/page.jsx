@@ -8,6 +8,7 @@ import Transformations from "@/components/portfolio/Transformations";
 import CTASection from "@/components/CTASection";
 import { connectDB } from "@/lib/mongodb";
 import Portfolio from "@/models/Portfolio";
+import WebPage from "@/models/WebPage";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default async function PortfolioPage() {
     if (!isActive) return notFound();
 
     let projects = [];
+    let content = {};
     
     try {
         await connectDB();
@@ -37,8 +39,11 @@ export default async function PortfolioPage() {
             image: doc.image || doc.images || "",
             technologies: doc.technologies || []
         }));
+
+        const pageData = await WebPage.findOne({ path: "/portfolio" }).lean();
+        content = pageData?.content || {};
     } catch (error) {
-        console.error("Error fetching portfolios from MongoDB:", error);
+        console.error("Error fetching data from MongoDB:", error);
     }
 
     return (
@@ -50,21 +55,26 @@ export default async function PortfolioPage() {
             </div>
             <Navbar />
             <PageHero hideContactButton={true}
-                badge="Our Work"
-                title="Engineering"
-                highlight="Success"
-                description="Discover award-worthy digital products, enterprise platforms, AI-powered solutions, and transformative experiences engineered to accelerate business growth."
+                badge={content.hero?.badge || "Our Work"}
+                title={content.hero?.title || "Engineering"}
+                highlight={content.hero?.highlight || "Success"}
+                description={content.hero?.desc || "Discover award-worthy digital products, enterprise platforms, AI-powered solutions, and transformative experiences engineered to accelerate business growth."}
             />
 
-            <ProjectGallery initialProjects={projects} />
-            <Transformations />
+            <ProjectGallery initialProjects={projects} data={content.gallery} />
+            
+            {content.transformations?.isVisible !== false && (
+                <Transformations data={content.transformations} />
+            )}
 
-            <CTASection
-                title="Ready to engineer your success?"
-                description="Let's create something extraordinary together. Partner with RecentureSoft to build intelligent, scalable, and award-worthy digital products."
-                primaryBtnText="Start Your Project"
-                secondaryBtnText="Explore Case Studies"
-            />
+            {content.cta?.isVisible !== false && (
+                <CTASection
+                    title={content.cta?.title || "Ready to engineer your success?"}
+                    description={content.cta?.desc || "Let's create something extraordinary together. Partner with RecentureSoft to build intelligent, scalable, and award-worthy digital products."}
+                    primaryBtnText={content.cta?.primaryBtn || "Start Your Project"}
+                    secondaryBtnText={content.cta?.secondaryBtn || "Explore Case Studies"}
+                />
+            )}
             <PageFAQSection pageName="portfolio" />
 
             <FutureFooter />

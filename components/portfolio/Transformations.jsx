@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 
-export default function Transformations() {
+export default function Transformations({ data = {} }) {
     const [sliderPos, setSliderPos] = useState(55);
     const containerRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -25,12 +25,18 @@ export default function Transformations() {
         handleMove(e.touches[0].clientX);
     };
 
+    const DEFAULT_BEFORE = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
+    const DEFAULT_AFTER = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
+
+    const beforeImg = data?.beforeImage || DEFAULT_BEFORE;
+    const afterImg = data?.afterImage || DEFAULT_AFTER;
+
     return (
         <section className="pt-2 pb-4 md:pt-4 md:pb-6 lg:pt-6 lg:pb-8 bg-background transition-colors duration-300">
             <div className="container mx-auto px-5 sm:px-8 lg:px-12 max-w-[1100px] xl:max-w-[1200px]">
                 <div className="text-center mb-4 md:mb-6">
-                    <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[2.8rem] lg:text-[3rem] font-[600] text-foreground leading-[1.05] tracking-[-0.04em] mb-4">Digital Transformations</h2>
-                    <p className="text-slate-600 dark:text-slate-300 text-[0.95rem] md:text-[1rem] lg:text-lg leading-7 md:leading-8 max-w-xl md:max-w-2xl mx-auto ">Compare legacy systems with modern digital experiences and discover how strategic engineering transforms performance, scalability, and user engagement.</p>
+                    <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[2.8rem] lg:text-[3rem] font-[600] text-foreground leading-[1.05] tracking-[-0.04em] mb-4">{data?.title || "Digital Transformations"}</h2>
+                    <p className="text-slate-600 dark:text-slate-300 text-[0.95rem] md:text-[1rem] lg:text-lg leading-7 md:leading-8 max-w-xl md:max-w-2xl mx-auto whitespace-pre-wrap">{data?.desc || "Compare legacy systems with modern digital experiences and discover how strategic engineering transforms performance, scalability, and user engagement."}</p>
                 </div>
 
                 <div
@@ -46,15 +52,15 @@ export default function Transformations() {
                     onTouchMove={onTouchMove}
                 >
                     {/* Before Image (Background) */}
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center grayscale opacity-50" />
+                    <div className="absolute inset-0 bg-cover bg-center grayscale opacity-50" style={{ backgroundImage: `url('${beforeImg}')` }} />
                     <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 rounded-full border border-white/10">
                         <span className="text-white text-xs md:text-sm font-semibold tracking-wider uppercase">Legacy</span>
                     </div>
 
                     {/* After Image (Clipped) */}
                     <div
-                        className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center"
-                        style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url('${afterImg}')`, clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
                     />
                     <div className="absolute top-4 left-4 bg-gradient-to-r from-cyan-500 to-blue-500 backdrop-blur-md px-3 py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 rounded-full border border-cyan-400/50 z-20">
                         <span className="text-white text-xs md:text-sm font-semibold tracking-wider uppercase">Modernized</span>
