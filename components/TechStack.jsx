@@ -2,111 +2,31 @@
 
 import { useState } from "react";
 
+import {
+    SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiAngular,
+    SiLaravel, SiBootstrap, SiTypescript, SiTailwindcss,
+    SiMysql, SiPostgresql, SiDocker, SiGit, SiFirebase
+} from "react-icons/si";
+import { FaJava, FaAws, FaLaravel } from "react-icons/fa";
+
 // ── Scalable Vector Graphics for Core Technology Branding ──
 export const TECH_ICONS = {
-    react: (
-        <svg className="w-full h-full" viewBox="-11.5 -10.23174 23 20.46348" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="0" cy="0" r="2.05" fill="#06b6d4" />
-            <g stroke="#06b6d4" strokeWidth="1" fill="none">
-                <ellipse rx="11" ry="4.2" />
-                <ellipse rx="11" ry="4.2" transform="rotate(60)" />
-                <ellipse rx="11" ry="4.2" transform="rotate(120)" />
-            </g>
-        </svg>
-    ),
-    nextjs: (
-        <svg className="w-full h-full" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="90" cy="90" r="90" fill="black" stroke="white" strokeWidth="4" />
-            <path d="M149.508 154.914L77.0674 62.0003H62.0003V118.001H75.0003V78.0003L138.508 158.914C142.508 157.914 146.508 156.414 149.508 154.914Z" fill="white" />
-            <rect x="115" y="62" width="13" height="56" fill="white" />
-        </svg>
-    ),
-    nodejs: (
-        <svg className="w-full h-full" viewBox="0 0 256 293" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M128 0L24.5 59.8v119.5L128 239l103.5-59.8V59.8L128 0zm79 164.5l-79 45.6-79-45.6V73.3l79-45.6 79 45.6v91.2z" fill="#22c55e" />
-            <path d="M128 58.7l-52 30v60l52 30 52-30v-60l-52-30z" fill="#15803d" />
-        </svg>
-    ),
-    java: (
-        <svg className="w-full h-full" viewBox="0 0 256 352" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M96.7 301.8c23.5 12.3 54.3 12.3 77.8 0 8.3-4.4 17-6.2 26-6.2 3.6 0 7.2.4 10.8 1 20 4.1 36.4 19.3 43 38.6 1 3-3.6 5-5.1 2.2-6.5-12-19.3-19.4-33-19.4-4 0-8.1.7-12 2-23.5 8-51 9-75.3 2.5-27-7-51.7-25-63-51.2-1.3-3.1 2.8-5 4.8-1.5 6.2 12.2 14.5 24 26 32z" fill="#e28743" />
-            <path d="M228.6 156c-13-14.8-31.5-25.5-52.6-28 6.4-11.2 13-23.8 17.6-37.4 6 5.8 12.5 10 19.5 11 12.7 1.8 24.3-5 30-15.6 2.3-4.3-.8-9-5.1-7.8-16.7 4.7-31.4-4.8-40.4-16.8 1-4.7 1.7-9.5 2.2-14.4.5-4.4-4.5-6.6-7.3-3.2-14.2 17.5-31 43.6-39.7 75.3-25.7-1.3-51.8.8-76 7.6-23 6.4-44.5 18.2-56 40-7.3 13.7-8 30.5-2 44.5 8.7 20 28 32 48.7 39.8 48 18 102 14.5 151.7.5 19.8-5.6 42.5-15 54.8-32.8 11.5-16.7 11.5-42-.8-56.3-.2-.1-.4-.3-.6-.5zm-66.2 34.3c-23.8 8.6-50.5 11-75.2 6.5-14.3-2.6-29-7.8-37.2-20-4.4-6.6-4.4-16.2.7-22 9.6-11 25.8-17.7 39-21.7 22.3-6.6 46.5-9.3 69.5-6.4 1 .1 1.7 1 1.5 2-.4 4.5-1 9-1.8 13.4-.2 1.3 1.2 2.3 2.2 1.5 8.4-6.8 17.4-13.8 27-19.4 6.7 5.6 12 12.8 15.6 20.8-11.3 11-26.6 22-41.3 25.3z" fill="#f89820" />
-        </svg>
-    ),
-    laravel: (
-        <svg className="w-full h-full" viewBox="0 0 256 270" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M128 32.7L42.5 82v98.6L128 230l85.5-49.3V82L128 32.7zm0-32.7l128 73.8v147.7L128 270 0 196.5V61.2L128 0z" fill="#ff2d20" />
-            <path d="M128 82l53.5 31v61.6L128 205.7l-53.5-31.1V113L128 82z" fill="#b91c1c" />
-        </svg>
-    ),
-    mongodb: (
-        <svg className="w-full h-full" viewBox="0 0 128 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M64 0C54.4 34.6 32 64.6 32 99.2c0 38.4 22.4 67.2 32 105.6 9.6-38.4 32-67.2 32-105.6C96 64.6 73.6 34.6 64 0z" fill="#13aa52" />
-            <path d="M64 32c-6.4 25.6-21.3 48-21.3 73.6 0 28.8 14.9 50.7 21.3 79.5 6.4-28.8 21.3-50.7 21.3-79.5 0-25.6-14.9-48-21.3-73.6z" fill="#118843" />
-            <path d="M64 214.4c-6.4 12.8-12.8 25.6-12.8 41.6h25.6c0-16-6.4-28.8-12.8-41.6z" fill="#13aa52" />
-        </svg>
-    ),
-    bootstrap: (
-        <svg className="w-full h-full" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="256" height="256" rx="50" fill="#7952b3" />
-            <path d="M75 60h55c25 0 38 10 38 28 0 13-9 22-22 25 16 3 26 13 26 29 0 21-16 32-42 32H75V60zm30 24v28h22c10 0 16-4 16-14 0-9-6-14-16-14h-22zm0 52v32h26c11 0 18-5 18-16s-7-16-18-16h-26z" fill="white" />
-        </svg>
-    ),
-    angular: (
-        <svg className="w-full h-full" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M128 15l112 40-17 140-95 50-95-50L16 55 128 15z" fill="#dd0031" />
-            <path d="M128 15v215l78-41 14-119L128 15z" fill="#c3002f" />
-            <path d="M128 52l53 117h-21l-11-28H99l-11 28H67l61-117zm0 29l-21 52h42l-21-52z" fill="white" />
-        </svg>
-    ),
-    typescript: (
-        <svg className="w-full h-full" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="256" height="256" fill="#3178c6" rx="40" />
-            <path d="M125 180c0 9-4 15-13 18-9 2-21 2-30-2-9-4-13-11-13-22h14c0 6 3 9 7 11 4 1 11 1 15-1 4-1 6-4 6-9v-61h14v76zm52-47c0-6-4-10-12-12l-14-4c-12-3-18-9-18-19s8-16 22-16c13 0 20 5 22 15h-13c-1-5-4-8-9-8s-8 2-8 6 3 5 9 7l15 4c14 4 19 10 19 21s-7 19-23 19c-15 0-23-7-25-18h13c1 6 5 9 11 9s11-3 11-9z" fill="white" />
-        </svg>
-    ),
-    tailwindcss: (
-        <svg className="w-full h-full" viewBox="0 0 256 153" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M128 0C90 0 68 19 62 57c15-22 33-28 54-18 12 6 21 15 30 25 15 16 33 34 74 34 38 0 60-19 66-57-15 22-33 28-54 18-12-6-21-15-30-25C187 18 169 0 128 0zM62 57C24 57 2 76 0 114c15-22 33-28 54-18 12 6 21 15 30 25 15 16 33 34 74 34 38 0 60-19 66-57-15 22-33 28-54 18-12-6-21-15-30-25C121 75 103 57 62 57z" fill="#06b6d4" />
-        </svg>
-    ),
-    mysql: (
-        <svg className="w-full h-full" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M128 20c-59.6 0-108 30.4-108 68v9c11.5-12.8 29-23.7 49-30.8 17-6 37-9.2 59-9.2s42 3.2 59 9.2c20 7.1 37.5 18 49 30.8v-9c0-37.6-48.4-68-108-68z" fill="#00758f" />
-            <path d="M20 97v28c0 37.6 48.4 68 108 68s108-30.4 108-68V97c-11.5 12.8-29 23.7-49 30.8-17 6-37 9.2-59 9.2s-42-3.2-59-9.2c-20-7.1-37.5-18-49-30.8z" fill="#f29111" />
-            <path d="M20 153v28c0 37.6 48.4 68 108 68s108-30.4 108-68v-28c-11.5 12.8-29 23.7-49 30.8-17 6-37 9.2-59 9.2s-42-3.2-59-9.2c-20-7.1-37.5-18-49-30.8z" fill="#00758f" />
-        </svg>
-    ),
-    postgresql: (
-        <svg className="w-full h-full" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M168 20c-15-5-31-5-46 0-33 11-57 39-62 73-4 28 5 56 23 76l-13 41c-2 5 2 10 7 8l40-20c22 10 47 11 70 3 32-11 54-39 59-73 5-37-14-76-50-93c-9-4-19-6-28-5z" fill="#336791" />
-            <path d="M125 78c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9z" fill="#ffffff" />
-        </svg>
-    ),
-    aws: (
-        <svg className="w-full h-full" viewBox="0 0 256 154" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M117 80c-4-4-10-6-17-6-13 0-22 9-22 22s9 22 22 22c7 0 13-2 17-6V80zm18 36c0 14-8 23-23 23-10 0-18-4-21-9l-1 8h-15V50h17v29c4-6 11-9 20-9 15 0 23 9 23 23v23zm103-61h18l-30 83h-17l-19-54-19 54h-17l-30-83h18l19 59 21-59h16l21 59 19-59zm-136 67c-1 4-5 7-10 7-7 0-11-5-11-13v-2c0-7 4-12 11-12 5 0 9 3 10 7v13zm42 5c-8 6-18 10-29 10-21 0-34-13-34-33s13-34 34-34c11 0 21 4 29 10v-3c0-14-9-21-25-21-12 0-24 4-33 12l-8-11c12-10 29-16 48-16 28 0 45 13 45 39v57h-16l-1-10z" fill="white" />
-            <path d="M22 135c42 16 93 25 147 25 29 0 57-3 85-8 4-1 6-5 2-8l-8-7c-3-2-7-2-10 1-23 5-47 7-71 7-49 0-94-8-132-22-4-2-8 1-9 4l-6 8c-2 3 0 7 2 8zm224-21c-4-2-8 0-9 3-2 5-6 10-10 13-2 2-2 6 1 8l7 7c3 2 7 1 9-2 6-6 10-14 12-22 1-3-2-6-5-7z" fill="#ff9900" />
-        </svg>
-    ),
-    docker: (
-        <svg className="w-full h-full" viewBox="0 0 256 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M96 79h22v22H96V79zm28 0h22v22h-22V79zm28 0h22v22h-22V79zm28 0h22v22h-22V79zm-84-28h22v22H96V51zm28 0h22v22h-22V51zm28 0h22v22h-22V51zm-56-28h22v22H96V23zm28 0h22v22h-22V23z" fill="#0db7ed" />
-            <path d="M251 108c-3-11-13-19-24-19-4 0-8 1-12 3-5-22-24-38-47-38-3 0-5 0-8 1-6-16-21-27-39-27v19c11 0 20 8 23 18l1 5h6c15 0 27 10 30 24l1 6h6c9 0 16 7 17 16l-37 1c-45 0-84 21-109 54-20-4-39-2-56 6v15c18-9 37-11 57-7 2 8 8 16 16 20 22 13 49 19 82 19 82 0 142-49 144-111h-1z" fill="#0db7ed" />
-        </svg>
-    ),
-    git: (
-        <svg className="w-full h-full" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M245 117L139 11c-6-6-16-6-22 0L11 117c-6 6-6 16 0 22l106 106c6 6 16 6 22 0l106-106c6-6 6-16 0-22z" fill="#f05032" />
-            <path d="M164 126a26 26 0 00-20-25V84a26 26 0 10-16 0v18a26 26 0 107 43l17 17a26 26 0 1012-36z" fill="white" />
-        </svg>
-    ),
-    firebase: (
-        <svg className="w-full h-full" viewBox="0 0 256 351" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M43 277l85-161 31-59c2-5-2-10-7-8l-23 9L43 277z" fill="#ffca28" />
-            <path d="M128 348l118-65L163 78c-3-5-10-4-11 2L128 348z" fill="#fca112" />
-        </svg>
-    )
+    react: <SiReact className="w-full h-full text-[#61DAFB]" />,
+    nextjs: <SiNextdotjs className="w-full h-full text-black dark:text-white" />,
+    nodejs: <SiNodedotjs className="w-full h-full text-[#339939]" />,
+    java: <FaJava className="w-full h-full text-[#007396]" />,
+    laravel: <FaLaravel className="w-full h-full text-[#FF2D20]" />,
+    mongodb: <SiMongodb className="w-full h-full text-[#47A248]" />,
+    bootstrap: <SiBootstrap className="w-full h-full text-[#7952B3]" />,
+    angular: <SiAngular className="w-full h-full text-[#DD0031]" />,
+    typescript: <SiTypescript className="w-full h-full text-[#3178C6]" />,
+    tailwindcss: <SiTailwindcss className="w-full h-full text-[#06B6D4]" />,
+    mysql: <SiMysql className="w-full h-full text-[#4479A1]" />,
+    postgresql: <SiPostgresql className="w-full h-full text-[#4169E1]" />,
+    aws: <FaAws className="w-full h-full text-[#232F3E] dark:text-white" />,
+    docker: <SiDocker className="w-full h-full text-[#2496ED]" />,
+    git: <SiGit className="w-full h-full text-[#F05032]" />,
+    firebase: <SiFirebase className="w-full h-full text-[#FFCA28]" />
 };
 
 // ── Clean & Structured Tech Ecosystem Graph Data (2D Coordinates) ──
@@ -117,7 +37,7 @@ const NODES_DATA = {
     mongodb: { name: "MongoDB", x: 26, y: 60, color: "#13aa52", connections: ["nodejs", "nextjs", "laravel", "java"] },
     angular: { name: "Angular", x: 80, y: 30, color: "#dd0031", connections: ["react", "bootstrap"] },
     java: { name: "Java", x: 80, y: 45, color: "#f89820", connections: ["mongodb", "laravel"] },
-    laravel: { name: "Laravel", x: 50, y: 60, color: "#ff2d20", connections: ["mongodb", "nodejs", "java"] },
+    laravel: { name: "Laravel", x: 70, y: 60, color: "#ff2d20", connections: ["mongodb", "nodejs", "java"] },
     bootstrap: { name: "Bootstrap", x: 72, y: 10, color: "#7952b3", connections: ["react", "angular"] }
 };
 
@@ -202,7 +122,7 @@ function EcosystemMap({ activeTech, setActiveTech }) {
                         <div
                             onMouseEnter={() => setActiveTech(key)}
                             onMouseLeave={() => setActiveTech(null)}
-                            className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md
+                            className={`flex items-center gap-2.5 px-4 py-2 md:px-5 md:py-2.5 rounded-full border transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md
                                 ${isHighlighted
                                     ? "bg-white dark:bg-slate-900 border-cyan-500 scale-105 shadow-[0_0_20px_rgba(6,182,212,0.4)] z-20"
                                     : isConnected
@@ -212,10 +132,10 @@ function EcosystemMap({ activeTech, setActiveTech }) {
                                             : "bg-white/90 dark:bg-slate-950/60 border-slate-200 dark:border-white/10 scale-95 hover:border-cyan-500/50 z-10"
                                 }`}
                         >
-                            <div className={`w-4.5 h-4.5 flex items-center justify-center transition-transform duration-300 ${isHighlighted ? "rotate-12 scale-105" : ""}`}>
+                            <div className={`w-6 h-6 md:w-7 md:h-7 flex items-center justify-center transition-transform duration-300 ${isHighlighted ? "rotate-12 scale-105" : ""}`}>
                                 {TECH_ICONS[key]}
                             </div>
-                            <span className={`text-[9px] font-bold tracking-wide font-sans transition-colors duration-300
+                            <span className={`text-[11px] md:text-sm font-bold tracking-wide font-sans transition-colors duration-300
                                 ${isHighlighted ? "text-cyan-600 dark:text-cyan-400" : isConnected ? "text-indigo-600 dark:text-indigo-300" : "text-slate-600 dark:text-gray-300"}`}>
                                 {node.name}
                             </span>
