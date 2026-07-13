@@ -137,6 +137,12 @@ export default function Hero({ cmsData = {} }) {
     }, []);
 
     // ── Auto-slide timer ─────
+    const [loadedSlides, setLoadedSlides] = useState([0]);
+    
+    useEffect(() => {
+        setLoadedSlides(prev => prev.includes(current) ? prev : [...prev, current]);
+    }, [current]);
+
     useEffect(() => {
         let timer;
         const startCarousel = () => {
@@ -202,7 +208,7 @@ export default function Hero({ cmsData = {} }) {
                       at a time on first load.
                     */}
                 {SLIDES.map((s, i) => {
-                    if (i !== current && i !== 0) return null;
+                    if (!loadedSlides.includes(i)) return null;
                     return (
                         <div
                             key={s.id}
