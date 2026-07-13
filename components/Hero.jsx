@@ -217,14 +217,7 @@ export default function Hero({ cmsData = {} }) {
                                 fetchPriority={i === 0 ? "high" : "auto"}
                                 sizes="100vw"
                                 className="object-cover"
-                                // FIX #3: quality 90 on a full-viewport background
-                                // image is overkill and inflates transfer size
-                                // significantly for almost no visible gain.
-                                // 75 for the priority/LCP slide keeps it sharp
-                                // while cutting file size; non-priority slides
-                                // (loaded later, after interaction) can go a
-                                // little leaner still at 65.
-                                quality={i === 0 ? 75 : 65}
+                                unoptimized={true}
                             />
                         </div>
                     );
