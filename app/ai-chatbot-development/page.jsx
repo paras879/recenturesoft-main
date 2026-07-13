@@ -5,6 +5,7 @@ import FutureFooter from "@/components/FutureFooter";
 import AIChatbotContent from "@/components/ai-chatbot/AIChatbotContent";
 import FAQModel from "@/models/FAQ";
 import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 
 async function getFaqs(pageName) {
     try {
@@ -45,10 +46,21 @@ export default async function AIChatbotPage() {
 
     const faqs = await getFaqs("ai-chatbot-development");
 
+    let pageContent = {};
+    try {
+        await connectDB();
+        const pageData = await WebPage.findOne({ path: "/ai-chatbot-development" }).lean();
+        if (pageData && pageData.content) {
+            pageContent = pageData.content;
+        }
+    } catch (err) {
+        console.error("Failed to fetch page content:", err);
+    }
+
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
             <Navbar />
-            <AIChatbotContent faqs={faqs} />
+            <AIChatbotContent faqs={faqs} content={pageContent} />
             <FutureFooter />
         </main>
     );

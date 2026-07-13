@@ -15,7 +15,7 @@ import {
     Star, Quote, CpuIcon, Target, Search, Compass, Workflow, PlayCircle, Settings
 } from 'lucide-react';
 
-const AIServicesContent = ({ faqs = [] }) => {
+const AIServicesContent = ({ faqs = [], content = {} }) => {
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
     const [openFaq, setOpenFaq] = useState(0);
@@ -43,20 +43,20 @@ const AIServicesContent = ({ faqs = [] }) => {
                             className="order-2 lg:order-1"
                         >
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
-                                AI Consulting <br className="hidden md:block" />
+                                {content?.aiConsultingHero?.title || "AI Consulting"} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-                                    Services
+                                    {content?.aiConsultingHero?.titleHighlight || "Services"}
                                 </span>
                             </h1>
                             <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
-                                Empower your business with expert AI consulting services. We help organizations identify the right AI opportunities, create intelligent strategies, select the best technologies, and successfully implement AI solutions that drive measurable business growth.
+                                {content?.aiConsultingHero?.description || "Empower your business with expert AI consulting services. We help organizations identify the right AI opportunities, create intelligent strategies, select the best technologies, and successfully implement AI solutions that drive measurable business growth."}
                             </p>
                             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto">
                                 <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
-                                    Get Free Consultation
+                                    {content?.aiConsultingHero?.primaryBtnText || "Get Free Consultation"}
                                 </button>
                                 <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
-                                    Talk to Experts
+                                    {content?.aiConsultingHero?.secondaryBtnText || "Talk to Experts"}
                                 </Link>
                             </div>
                         </motion.div>
@@ -67,7 +67,7 @@ const AIServicesContent = ({ faqs = [] }) => {
                         >
                             <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
                                 <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
-                                <Image src="/images/ai-services/hero_ai_consulting.webp" alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
+                                <Image src={content?.aiConsultingHero?.image || "/images/ai-services/hero_ai_consulting.webp"} alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
                             </div>
                         </motion.div>
                     </div>
@@ -78,12 +78,12 @@ const AIServicesContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">AI Technologies We Specialize In</h2>
+                        <h2 className="text-3xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiConsultingTechLogos?.title || "AI Technologies We Specialize In"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-3 md:gap-6">
-                        {['OpenAI', 'Gemini', 'Claude', 'Microsoft Azure AI', 'AWS AI', 'Google Cloud AI', 'LangChain', 'LlamaIndex', 'Python', 'FastAPI', 'TensorFlow', 'PyTorch', 'Node.js', 'React', 'Next.js', 'Docker'].map((tech, idx) => (
+                        {(content?.aiConsultingTechLogos?.tags?.length > 0 ? content.aiConsultingTechLogos.tags : ['OpenAI', 'Gemini', 'Claude', 'Microsoft Azure AI', 'AWS AI', 'Google Cloud AI', 'LangChain', 'LlamaIndex', 'Python', 'FastAPI', 'TensorFlow', 'PyTorch', 'Node.js', 'React', 'Next.js', 'Docker']).map((tech, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0, y: 20 }}
@@ -104,30 +104,35 @@ const AIServicesContent = ({ faqs = [] }) => {
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="relative h-[250px] md:h-[400px] lg:h-[600px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-center group shadow-xl"
                         >
-                            <Image src="/images/ai-services/about_ai_consulting.webp" alt="AI Strategy Consulting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <Image src={content?.aiConsultingAbout?.image || "/images/ai-services/about_ai_consulting.webp"} alt="AI Strategy Consulting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         </motion.div>
 
                         <motion.div
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                         >
                             <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                                Why AI Consulting Matters
+                                {content?.aiConsultingAbout?.heading || "Why AI Consulting Matters"}
                             </h2>
                             <p className="text-lg text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
-                                RecentureSoft helps businesses discover the right AI opportunities by analyzing existing workflows, identifying automation possibilities, selecting suitable AI models, and creating scalable implementation roadmaps.
+                                {content?.aiConsultingAbout?.desc1 || "RecentureSoft helps businesses discover the right AI opportunities by analyzing existing workflows, identifying automation possibilities, selecting suitable AI models, and creating scalable implementation roadmaps."}
                             </p>
+                            {content?.aiConsultingAbout?.desc2 && (
+                                <p className="text-lg text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
+                                    {content.aiConsultingAbout.desc2}
+                                </p>
+                            )}
 
                             <div className="grid grid-cols-2 gap-6">
-                                {[
+                                {(content?.aiConsultingAbout?.stats?.length > 0 ? content.aiConsultingAbout.stats : [
                                     { stat: '200+', label: 'Projects Consulted' },
                                     { stat: '95%', label: 'Client Satisfaction' },
                                     { stat: '30%', label: 'Cost Reduction' },
                                     { stat: '24/7', label: 'Expert Support' }
-                                ].map((item, idx) => (
+                                ]).map((item, idx) => (
                                     <div key={idx} className="p-6 bg-blue-50 dark:bg-slate-800/50 rounded-2xl border border-blue-100 dark:border-slate-700/50 transition-all hover:bg-blue-100 dark:hover:bg-slate-800">
                                         <h3 className="text-3xl font-medium md:font-extrabold text-blue-600 mb-2">{item.stat}</h3>
                                         <p className="text-sm font-medium md:font-semibold text-slate-700 dark:text-slate-300">{item.label}</p>
@@ -143,13 +148,12 @@ const AIServicesContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our AI Consulting Services</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiConsultingServices?.title || "Our AI Consulting Services"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                        
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {[
+                        {(content?.aiConsultingServices?.cards?.length > 0 ? content.aiConsultingServices.cards : [
                             { title: 'AI Strategy Consulting', icon: Target, desc: 'Align AI capabilities with your business goals to create a winning strategy.' },
                             { title: 'AI Readiness Assessment', icon: Search, desc: 'Evaluate your data, infrastructure, and team readiness for AI adoption.' },
                             { title: 'Digital Transformation', icon: Globe, desc: 'Modernize legacy systems and integrate intelligent AI solutions.' },
@@ -158,7 +162,7 @@ const AIServicesContent = ({ faqs = [] }) => {
                             { title: 'LLM Consulting', icon: MessageSquare, desc: 'Select and fine-tune the right Large Language Models for your data.' },
                             { title: 'Data Strategy', icon: Database, desc: 'Architect data pipelines and governance strategies for effective AI training.' },
                             { title: 'Implementation Roadmap', icon: Compass, desc: 'Step-by-step phased execution plans to ensure smooth AI deployment.' },
-                        ].map((service, idx) => {
+                        ]).map((service, idx) => {
                             const Icon = service.icon;
                             return (
                                 <motion.div
@@ -172,7 +176,11 @@ const AIServicesContent = ({ faqs = [] }) => {
                                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     <div className="flex items-center gap-4 mb-4">
                                         <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
-                                            <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
+                                            {service.image ? (
+                                                <Image src={service.image} alt={service.title} width={24} height={24} className="w-6 h-6 object-contain" />
+                                            ) : (
+                                                Icon && <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
+                                            )}
                                         </div>
                                         <h3 className="text-lg font-medium md:font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
                                     </div>
@@ -182,8 +190,8 @@ const AIServicesContent = ({ faqs = [] }) => {
                         })}
                     </div>
                     <div className="mt-8 flex justify-center md:hidden">
-                        <button 
-                            onClick={() => toggleGrid('services')} 
+                        <button
+                            onClick={() => toggleGrid('services')}
                             className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
                         >
                             {expandedGrids['services'] ? 'Show Less' : 'Show More'}
@@ -201,12 +209,12 @@ const AIServicesContent = ({ faqs = [] }) => {
                             className="lg:col-span-5"
                         >
                             <h2 className="text-3xl lg:text-3xl xl:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight lg:whitespace-nowrap">
-                                Business Challenges We Solve
+                                {content?.aiConsultingSolutions?.title || "Business Challenges We Solve"}
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-10"></div>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
-                                {[
+                                {(content?.aiConsultingSolutions?.cards?.length > 0 ? content.aiConsultingSolutions.cards : [
                                     { title: 'Business Process Automation', icon: Zap },
                                     { title: 'Predictive Analytics', icon: BarChart3 },
                                     { title: 'Customer Experience Optimization', icon: HeartPulse },
@@ -214,7 +222,7 @@ const AIServicesContent = ({ faqs = [] }) => {
                                     { title: 'Data Intelligence', icon: Network },
                                     { title: 'Enterprise AI Adoption', icon: Building2 },
                                     { title: 'Decision Support Systems', icon: Target },
-                                ].map((solution, idx) => {
+                                ]).map((solution, idx) => {
                                     const Icon = solution.icon;
                                     return (
                                         <motion.div
@@ -223,7 +231,11 @@ const AIServicesContent = ({ faqs = [] }) => {
                                             className={`p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-blue-500/30 transition-all cursor-pointer group ${idx >= 3 && !expandedGrids['challenges'] ? 'hidden md:flex' : ''}`}
                                         >
                                             <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                                                <Icon className="w-5 h-5" />
+                                                {solution.image ? (
+                                                    <Image src={solution.image} alt={solution.title} width={20} height={20} className="w-5 h-5 object-contain" />
+                                                ) : (
+                                                    Icon && <Icon className="w-5 h-5" />
+                                                )}
                                             </div>
                                             <h3 className="text-lg font-medium md:font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{solution.title}</h3>
                                         </motion.div>
@@ -231,16 +243,16 @@ const AIServicesContent = ({ faqs = [] }) => {
                                 })}
                             </div>
                             <div className="mt-6 flex justify-start md:hidden">
-                                <button 
-                                    onClick={() => toggleGrid('challenges')} 
+                                <button
+                                    onClick={() => toggleGrid('challenges')}
                                     className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
                                 >
                                     {expandedGrids['challenges'] ? 'Show Less' : 'Show More'}
                                 </button>
                             </div>
                         </motion.div>
-                        
-                        <motion.div 
+
+                        <motion.div
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-7 relative h-[250px] md:h-[400px] lg:h-[640px] lg:mt-[100px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl"
                         >
@@ -250,19 +262,16 @@ const AIServicesContent = ({ faqs = [] }) => {
                 </div>
             </section>
 
-            
-            
-
-            
+            {/* 7. INDUSTRIES WE CONSULT */}
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Industries We Consult</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiConsultingIndustries?.title || "Industries We Consult"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {[
+                        {(content?.aiConsultingIndustries?.cards?.length > 0 ? content.aiConsultingIndustries.cards : [
                             { name: 'Healthcare', icon: Stethoscope },
                             { name: 'Finance', icon: Landmark },
                             { name: 'Retail', icon: ShoppingBag },
@@ -275,7 +284,7 @@ const AIServicesContent = ({ faqs = [] }) => {
                             { name: 'Legal', icon: Scale },
                             { name: 'Media', icon: Globe },
                             { name: 'Automotive', icon: Network },
-                        ].map((industry, idx) => {
+                        ]).map((industry, idx) => {
                             const Icon = industry.icon;
                             return (
                                 <motion.div
@@ -284,16 +293,20 @@ const AIServicesContent = ({ faqs = [] }) => {
                                     className={`p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center justify-center gap-4 hover:shadow-xl hover:bg-white dark:hover:bg-slate-800 hover:border-blue-500/30 transition-all cursor-pointer group ${idx >= 3 && !expandedGrids['industries'] ? 'hidden md:flex' : ''}`}
                                 >
                                     <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-slate-700 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                                        <Icon className="w-8 h-8" />
+                                        {industry.image ? (
+                                            <Image src={industry.image} alt={industry.name || industry.title} width={32} height={32} className="w-8 h-8 object-contain" />
+                                        ) : (
+                                            Icon && <Icon className="w-8 h-8" />
+                                        )}
                                     </div>
-                                    <h3 className="font-medium md:font-bold text-slate-900 dark:text-white">{industry.name}</h3>
+                                    <h3 className="font-medium md:font-bold text-slate-900 dark:text-white">{industry.name || industry.title}</h3>
                                 </motion.div>
                             )
                         })}
                     </div>
                     <div className="mt-8 flex justify-center md:hidden">
-                        <button 
-                            onClick={() => toggleGrid('industries')} 
+                        <button
+                            onClick={() => toggleGrid('industries')}
                             className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
                         >
                             {expandedGrids['industries'] ? 'Show Less' : 'Show More'}
@@ -309,35 +322,39 @@ const AIServicesContent = ({ faqs = [] }) => {
                         <motion.div
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
+                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiConsultingWhyChoose?.title || "Why Choose RecentureSoft"}</h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-10"></div>
 
                             <div className="space-y-6">
-                                {[
-                                    { title: 'Experienced AI Consultants', icon: Brain },
-                                    { title: 'Business-Focused Approach', icon: Target },
-                                    { title: 'Custom AI Strategy', icon: Settings },
-                                    { title: 'Transparent Communication', icon: MessageSquare },
-                                    { title: 'Enterprise Security', icon: Shield },
-                                    { title: 'Long-Term Partnership', icon: HeartPulse },
-                                ].map((reason, idx) => {
+                                {(content?.aiConsultingWhyChoose?.cards?.length > 0 ? content.aiConsultingWhyChoose.cards : [
+                                    { title: 'Experienced AI Consultants', icon: Brain, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Business-Focused Approach', icon: Target, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Custom AI Strategy', icon: Settings, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Transparent Communication', icon: MessageSquare, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Enterprise Security', icon: Shield, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Long-Term Partnership', icon: HeartPulse, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                ]).map((reason, idx) => {
                                     const Icon = reason.icon;
                                     return (
                                         <div key={idx} className={`flex items-start gap-4 ${idx >= 3 && !expandedGrids['why_choose'] ? 'hidden md:flex' : ''}`}>
                                             <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center flex-shrink-0">
-                                                <Icon className="w-6 h-6" />
+                                                {reason.image ? (
+                                                    <Image src={reason.image} alt={reason.title} width={24} height={24} className="w-6 h-6 object-contain" />
+                                                ) : (
+                                                    Icon && <Icon className="w-6 h-6" />
+                                                )}
                                             </div>
                                             <div>
                                                 <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-1">{reason.title}</h3>
-                                                <p className="text-slate-600 dark:text-slate-400">Delivering exceptional value and strategic guidance at every step of your AI journey.</p>
+                                                <p className="text-slate-600 dark:text-slate-400">{reason.desc}</p>
                                             </div>
                                         </div>
                                     )
                                 })}
                             </div>
                             <div className="mt-6 flex justify-start md:hidden">
-                                <button 
-                                    onClick={() => toggleGrid('why_choose')} 
+                                <button
+                                    onClick={() => toggleGrid('why_choose')}
                                     className="px-6 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-medium rounded-full border border-blue-100 dark:border-slate-700 hover:bg-blue-100 transition-colors"
                                 >
                                     {expandedGrids['why_choose'] ? 'Show Less' : 'Show More'}
@@ -345,7 +362,7 @@ const AIServicesContent = ({ faqs = [] }) => {
                             </div>
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="relative h-[250px] md:h-[400px] lg:h-[650px] rounded-[32px] overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl group"
                         >
@@ -359,16 +376,16 @@ const AIServicesContent = ({ faqs = [] }) => {
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Consulting Case Studies</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiConsultingCaseStudies?.title || "Consulting Case Studies"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 [&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex">
-                        {[
+                        {(content?.aiConsultingCaseStudies?.cards?.length > 0 ? content.aiConsultingCaseStudies.cards : [
                             { title: 'Healthcare AI Transformation', problem: 'Inefficient patient data processing.', solution: 'Designed an enterprise NLP strategy for medical records.', result: 'Data processing speed increased by 400%.', image: '/images/ai-services/case_study_healthcare.webp' },
                             { title: 'Manufacturing Automation', problem: 'High defect rates on assembly lines.', solution: 'Consulted on computer vision model integration.', result: 'Reduced quality control errors by 85%.', image: '/images/ai-services/case_study_enterprise.webp' },
                             { title: 'Retail AI Strategy', problem: 'Poor customer retention.', solution: 'Formulated an AI recommendation engine roadmap.', result: 'Sales increased by 30% in two quarters.', image: '/images/ai-services/case_study_support.webp' },
-                        ].map((caseStudy, idx) => (
+                        ]).map((caseStudy, idx) => (
                             <div key={idx} className="bg-slate-50 dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-2xl transition-all group">
                                 <div className="h-56 bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
                                     <Image src={caseStudy.image} alt={caseStudy.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -394,9 +411,6 @@ const AIServicesContent = ({ faqs = [] }) => {
                     </div>
                 </div>
             </section>
-
-            
-            
 
             {/* 11. FAQ */}
             <section className="py-8 bg-white dark:bg-[#020617]">
@@ -449,16 +463,16 @@ const AIServicesContent = ({ faqs = [] }) => {
                 </div>
 
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
-                    <h2 className="text-4xl md:text-5xl font-medium md:font-extrabold text-white mb-6 leading-tight">Let's Build Your AI Strategy Together</h2>
+                    <h2 className="text-4xl md:text-5xl font-medium md:font-extrabold text-white mb-6 leading-tight">{content?.aiConsultingCTA?.title || "Let's Build Your AI Strategy Together"}</h2>
                     <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
-                        Speak with our AI consultants and discover how artificial intelligence can transform your business.
+                        {content?.aiConsultingCTA?.desc || "Speak with our AI consultants and discover how artificial intelligence can transform your business."}
                     </p>
                     <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6">
                         <button onClick={openMeetingModal} className="w-full sm:w-auto justify-center text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-medium md:font-bold transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
-                            Book Free Consultation <ArrowRight className="w-5 h-5" />
+                            {content?.aiConsultingCTA?.primaryBtnText || "Book Free Consultation"} <ArrowRight className="w-5 h-5" />
                         </button>
                         <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-base md:text-lg transition-all hover:-translate-y-1 flex justify-center items-center">
-                            Contact Us
+                            {content?.aiConsultingCTA?.secondaryBtnText || "Contact Us"}
                         </Link>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ import {
     Star, Quote, CpuIcon, Target, Search, Compass, Workflow, PlayCircle, Settings
 } from 'lucide-react';
 
-const AIChatbotContent = ({ faqs = [] }) => {
+const AIChatbotContent = ({ faqs = [], content = {} }) => {
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
     const [openFaq, setOpenFaq] = useState(0);
@@ -43,20 +43,20 @@ const AIChatbotContent = ({ faqs = [] }) => {
                             className="order-2 lg:order-1"
                         >
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
-                                Enterprise AI <br className="hidden md:block" />
+                                {content?.aiChatbotHero?.title || "Enterprise AI"} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-                                    Chatbot Development
+                                    {content?.aiChatbotHero?.titleHighlight || "Chatbot Development"}
                                 </span>
                             </h1>
                             <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
-                                Enhance customer experience and automate support with intelligent, conversational AI chatbots powered by cutting-edge NLP and machine learning.
+                                {content?.aiChatbotHero?.description || "Enhance customer experience and automate support with intelligent, conversational AI chatbots powered by cutting-edge NLP and machine learning."}
                             </p>
                             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto">
                                 <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
-                                    Get Free Consultation
+                                    {content?.aiChatbotHero?.primaryBtnText || "Get Free Consultation"}
                                 </button>
                                 <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
-                                    Talk to AI Experts
+                                    {content?.aiChatbotHero?.secondaryBtnText || "Talk to AI Experts"}
                                 </Link>
                             </div>
                         </motion.div>
@@ -67,7 +67,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                         >
                             <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
                                 <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
-                                <Image src="/images/ai-chatbot/hero_ai_chatbot.webp" alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
+                                <Image src={content?.aiChatbotHero?.image || "/images/ai-chatbot/hero_ai_chatbot.webp"} alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
                             </div>
                         </motion.div>
                     </div>
@@ -78,12 +78,12 @@ const AIChatbotContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">AI Technologies We Specialize In</h2>
+                        <h2 className="text-3xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiChatbotTechLogos?.title || "AI Technologies We Specialize In"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-3 md:gap-6">
-                        {['OpenAI', 'Gemini', 'Claude', 'Microsoft Azure AI', 'AWS AI', 'Google Cloud AI', 'LangChain', 'LlamaIndex', 'Python', 'FastAPI', 'TensorFlow', 'PyTorch', 'Node.js', 'React', 'Next.js', 'Docker'].map((tech, idx) => (
+                        {(content?.aiChatbotTechLogos?.tags?.length > 0 ? content.aiChatbotTechLogos.tags : ['OpenAI', 'Gemini', 'Claude', 'Microsoft Azure AI', 'AWS AI', 'Google Cloud AI', 'LangChain', 'LlamaIndex', 'Python', 'FastAPI', 'TensorFlow', 'PyTorch', 'Node.js', 'React', 'Next.js', 'Docker']).map((tech, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0, y: 20 }}
@@ -108,26 +108,26 @@ const AIChatbotContent = ({ faqs = [] }) => {
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="relative h-[250px] md:h-[400px] lg:h-[600px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-center justify-center group shadow-xl"
                         >
-                            <Image src="/images/ai-chatbot/about_ai_chatbot.webp" alt="AI Strategy Consulting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <Image src={content?.aiChatbotAbout?.image || "/images/ai-chatbot/about_ai_chatbot.webp"} alt="AI Strategy Consulting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         </motion.div>
 
                         <motion.div
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                         >
                             <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                                Next-Generation Conversational AI
+                                {content?.aiChatbotAbout?.heading || "Next-Generation Conversational AI"}
                             </h2>
                             <p className="text-lg text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
-                                Our AI chatbots aren't just simple rule-based responders. We build advanced conversational agents capable of understanding context, sentiment, and user intent, providing highly personalized interactions across all your digital platforms.
+                                {content?.aiChatbotAbout?.desc1 || "Our AI chatbots aren't just simple rule-based responders. We build advanced conversational agents capable of understanding context, sentiment, and user intent, providing highly personalized interactions across all your digital platforms."}
                             </p>
 
                             <div className="grid grid-cols-2 gap-6">
-                                {[
+                                {(content?.aiChatbotAbout?.stats?.length > 0 ? content.aiChatbotAbout.stats : [
                                     { stat: '200+', label: 'Projects Consulted' },
                                     { stat: '95%', label: 'Client Satisfaction' },
                                     { stat: '30%', label: 'Cost Reduction' },
                                     { stat: '24/7', label: 'Expert Support' }
-                                ].map((item, idx) => (
+                                ]).map((item, idx) => (
                                     <div key={idx} className="p-6 bg-blue-50 dark:bg-slate-800/50 rounded-2xl border border-blue-100 dark:border-slate-700/50 transition-all hover:bg-blue-100 dark:hover:bg-slate-800">
                                         <h3 className="text-3xl font-medium md:font-extrabold text-blue-600 mb-2">{item.stat}</h3>
                                         <p className="text-sm font-medium md:font-semibold text-slate-700 dark:text-slate-300">{item.label}</p>
@@ -143,13 +143,13 @@ const AIChatbotContent = ({ faqs = [] }) => {
             <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our Chatbot Services</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiChatbotServices?.title || "Our Chatbot Services"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                        <p className="text-lg text-slate-600 dark:text-slate-400">Advanced conversational AI to engage your customers 24/7.</p>
+                        <p className="text-lg text-slate-600 dark:text-slate-400">{content?.aiChatbotServices?.desc || "Advanced conversational AI to engage your customers 24/7."}</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {[
+                        {(content?.aiChatbotServices?.cards?.length > 0 ? content.aiChatbotServices.cards : [
                             { title: 'AI Strategy Consulting', icon: Target, desc: 'Align AI capabilities with your business goals to create a winning strategy.' },
                             { title: 'AI Readiness Assessment', icon: Search, desc: 'Evaluate your data, infrastructure, and team readiness for AI adoption.' },
                             { title: 'Digital Transformation', icon: Globe, desc: 'Modernize legacy systems and integrate intelligent AI solutions.' },
@@ -158,8 +158,8 @@ const AIChatbotContent = ({ faqs = [] }) => {
                             { title: 'LLM Consulting', icon: MessageSquare, desc: 'Select and fine-tune the right Large Language Models for your data.' },
                             { title: 'Data Strategy', icon: Database, desc: 'Architect data pipelines and governance strategies for effective AI training.' },
                             { title: 'Implementation Roadmap', icon: Compass, desc: 'Step-by-step phased execution plans to ensure smooth AI deployment.' },
-                        ].map((service, idx) => {
-                            const Icon = service.icon;
+                        ]).map((service, idx) => {
+                            const Icon = service.icon || Target;
                             return (
                                 <motion.div
                                     key={idx}
@@ -201,12 +201,12 @@ const AIChatbotContent = ({ faqs = [] }) => {
                             className="lg:col-span-5"
                         >
                             <h2 className="text-3xl lg:text-3xl xl:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight lg:whitespace-nowrap">
-                                Business Challenges We Solve
+                                {content?.aiChatbotSolutions?.title || "Business Challenges We Solve"}
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-10"></div>
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
-                                {[
+                                {(content?.aiChatbotSolutions?.cards?.length > 0 ? content.aiChatbotSolutions.cards : [
                                     { title: 'Business Process Automation', icon: Zap },
                                     { title: 'Predictive Analytics', icon: BarChart3 },
                                     { title: 'Customer Experience Optimization', icon: HeartPulse },
@@ -214,8 +214,8 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                     { title: 'Data Intelligence', icon: Network },
                                     { title: 'Enterprise AI Adoption', icon: Building2 },
                                     { title: 'Decision Support Systems', icon: Target },
-                                ].map((solution, idx) => {
-                                    const Icon = solution.icon;
+                                ]).map((solution, idx) => {
+                                    const Icon = solution.icon || Target;
                                     return (
                                         <motion.div
                                             key={idx}
@@ -263,19 +263,19 @@ const AIChatbotContent = ({ faqs = [] }) => {
                         <motion.div
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
+                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiChatbotWhyChoose?.title || "Why Choose RecentureSoft"}</h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-10"></div>
 
                             <div className="space-y-6">
-                                {[
-                                    { title: 'Experienced AI Consultants', icon: Brain },
-                                    { title: 'Business-Focused Approach', icon: Target },
-                                    { title: 'Custom AI Strategy', icon: Settings },
-                                    { title: 'Transparent Communication', icon: MessageSquare },
-                                    { title: 'Enterprise Security', icon: Shield },
-                                    { title: 'Long-Term Partnership', icon: HeartPulse },
-                                ].map((reason, idx) => {
-                                    const Icon = reason.icon;
+                                {(content?.aiChatbotWhyChoose?.cards?.length > 0 ? content.aiChatbotWhyChoose.cards : [
+                                    { title: 'Experienced AI Consultants', icon: Brain, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Business-Focused Approach', icon: Target, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Custom AI Strategy', icon: Settings, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Transparent Communication', icon: MessageSquare, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Enterprise Security', icon: Shield, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                    { title: 'Long-Term Partnership', icon: HeartPulse, desc: 'Delivering exceptional value and strategic guidance at every step of your AI journey.' },
+                                ]).map((reason, idx) => {
+                                    const Icon = reason.icon || Brain;
                                     return (
                                         <div key={idx} className={`flex items-start gap-4 ${idx >= 3 && !expandedGrids['why_choose'] ? 'hidden md:flex' : ''}`}>
                                             <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center flex-shrink-0">
@@ -283,7 +283,7 @@ const AIChatbotContent = ({ faqs = [] }) => {
                                             </div>
                                             <div>
                                                 <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-1">{reason.title}</h3>
-                                                <p className="text-slate-600 dark:text-slate-400">Delivering exceptional value and strategic guidance at every step of your AI journey.</p>
+                                                <p className="text-slate-600 dark:text-slate-400">{reason.desc || "Delivering exceptional value and strategic guidance at every step of your AI journey."}</p>
                                             </div>
                                         </div>
                                     )
@@ -313,19 +313,19 @@ const AIChatbotContent = ({ faqs = [] }) => {
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Chatbot Case Studies</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{content?.aiChatbotCaseStudies?.title || "Chatbot Case Studies"}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                        {[
+                        {(content?.aiChatbotCaseStudies?.cards?.length > 0 ? content.aiChatbotCaseStudies.cards : [
                             { title: 'Healthcare AI Transformation', problem: 'Inefficient patient data processing.', solution: 'Designed an enterprise NLP strategy for medical records.', result: 'Data processing speed increased by 400%.', image: '/images/ai-chatbot/hero_ai_chatbot.webp' },
                             { title: 'Manufacturing Automation', problem: 'High defect rates on assembly lines.', solution: 'Consulted on computer vision model integration.', result: 'Reduced quality control errors by 85%.', image: '/images/ai-chatbot/about_ai_chatbot.webp' },
                             { title: 'Retail AI Strategy', problem: 'Poor customer retention.', solution: 'Formulated an AI recommendation engine roadmap.', result: 'Sales increased by 30% in two quarters.', image: '/images/ai-chatbot/features_chatbot_dashboard.webp' },
-                        ].map((caseStudy, idx) => (
+                        ]).map((caseStudy, idx) => (
                             <div key={idx} className="bg-slate-50 dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-2xl transition-all group">
                                 <div className="h-56 bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
-                                    <Image src={caseStudy.image} alt={caseStudy.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                                    <Image src={caseStudy.image || '/images/ai-chatbot/hero_ai_chatbot.webp'} alt={caseStudy.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                                 <div className="p-8 space-y-4">
@@ -403,16 +403,16 @@ const AIChatbotContent = ({ faqs = [] }) => {
                 </div>
 
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
-                    <h2 className="text-4xl md:text-5xl font-medium md:font-extrabold text-white mb-6 leading-tight">Ready to Build Your AI Chatbot?</h2>
+                    <h2 className="text-4xl md:text-5xl font-medium md:font-extrabold text-white mb-6 leading-tight">{content?.aiChatbotCTA?.title || "Ready to Build Your AI Chatbot?"}</h2>
                     <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
-                        Contact our experts and deploy intelligent conversational AI today.
+                        {content?.aiChatbotCTA?.desc || "Contact our experts and deploy intelligent conversational AI today."}
                     </p>
                     <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6">
                         <button onClick={openMeetingModal} className="w-full sm:w-auto justify-center text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white text-blue-700 hover:bg-blue-50 rounded-full font-medium md:font-bold transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:-translate-y-1 flex items-center gap-2">
-                            Book Free Consultation <ArrowRight className="w-5 h-5" />
+                            {content?.aiChatbotCTA?.primaryBtnText || "Book Free Consultation"} <ArrowRight className="w-5 h-5" />
                         </button>
                         <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 bg-transparent text-white border-2 border-white/30 hover:border-white rounded-full font-medium md:font-bold text-base md:text-lg transition-all hover:-translate-y-1 flex justify-center items-center">
-                            Contact Us
+                            {content?.aiChatbotCTA?.secondaryBtnText || "Contact Us"}
                         </Link>
                     </div>
                 </div>

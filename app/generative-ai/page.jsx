@@ -44,12 +44,15 @@ export default async function GenerativeAIPage() {
     const isActive = await checkPageStatus("/generative-ai").catch(() => true);
     if (!isActive) return notFound();
 
+    await connectDB();
     const faqs = await getFaqs("generative-ai");
+    const pageData = await WebPage.findOne({ path: "/generative-ai" }).lean();
+    const dynamicData = pageData?.content || {};
 
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
             <Navbar />
-            <GenerativeAIContent faqs={faqs} />
+            <GenerativeAIContent faqs={faqs} dynamicData={dynamicData} />
             <FutureFooter />
         </main>
     );

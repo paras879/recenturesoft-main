@@ -6,6 +6,8 @@ import AIDevelopmentContent from "@/components/ai-development/AIDevelopmentConte
 import FAQModel from "@/models/FAQ";
 import { connectDB } from "@/lib/mongodb";
 
+import WebPage from "@/models/WebPage";
+
 async function getFaqs(pageName) {
     try {
         await connectDB();
@@ -18,6 +20,17 @@ async function getFaqs(pageName) {
     } catch (err) {
         console.error("Failed to fetch FAQs:", err);
         return [];
+    }
+}
+
+async function getPageContent(path) {
+    try {
+        await connectDB();
+        const page = await WebPage.findOne({ path }).lean();
+        return page ? JSON.parse(JSON.stringify(page)) : null;
+    } catch (err) {
+        console.error(`Failed to fetch page content for ${path}:`, err);
+        return null;
     }
 }
 
@@ -44,11 +57,13 @@ export default async function AIDevelopmentPage() {
     if (!isActive) return notFound();
 
     const faqs = await getFaqs("ai-agent-development");
+    const pageData = await getPageContent("/ai-agent-development");
+    const content = pageData?.content || {};
 
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
             <Navbar />
-            <AIDevelopmentContent faqs={faqs} />
+            <AIDevelopmentContent faqs={faqs} content={content} />
             <FutureFooter />
         </main>
     );
