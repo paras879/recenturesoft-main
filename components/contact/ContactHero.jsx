@@ -255,9 +255,32 @@ function CSSGlobe() {
     );
 }
 
-export default function ContactHero() {
+// ... CITY_DOTS and ARC_LINES stay same
+export default function ContactHero({ data = {} }) {
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
+
+    const heading1 = data.heading1 || "Delivering Enterprise Technology";
+    const headingAccent = data.headingAccent || "Worldwide";
+    const desc = data.desc || "RecentureSoft helps businesses build AI products, enterprise software, cloud infrastructure, and digital experiences across multiple countries and industries.";
+    const primaryBtn = data.primaryBtn || "Start a Project";
+    const secondaryBtn = data.secondaryBtn || "Schedule Consultation";
+
+    const trustIndicators = (data.trustIndicators && data.trustIndicators.length > 0) ? data.trustIndicators.filter(Boolean) : [
+        "500+ Projects Delivered",
+        "120+ Global Clients",
+        "15+ Countries Served",
+        "98% Client Satisfaction"
+    ];
+
+    const stats = (data.stats && data.stats.length > 0) ? data.stats.filter(s => s && (s.label || s.value)) : [
+        { value: "500+", label: "Projects Delivered" },
+        { value: "120+", label: "Global Clients" },
+        { value: "15+", label: "Countries Served" },
+        { value: "98%", label: "Client Satisfaction" },
+        { value: "24/7", label: "Enterprise Support" },
+    ];
+
     return (
         <section className="relative w-full pt-20 md:pt-24 lg:pt-28 pb-10 md:pb-14 lg:pb-20">
             {/* Ambient Bounded Background Glows */}
@@ -275,14 +298,14 @@ export default function ContactHero() {
                             className="text-[clamp(2rem,8vw,4rem)] lg:text-[3.25rem] font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight animate-fade-in-up"
                             style={{ animationDelay: "100ms" }}
                         >
-                            Delivering Enterprise Technology <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500 dark:from-cyan-400 dark:to-blue-500">Worldwide</span>
+                            {heading1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500 dark:from-cyan-400 dark:to-blue-500">{headingAccent}</span>
                         </h1>
 
                         <p
                             className="text-[clamp(1rem,1.5vw,1.25rem)] text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed animate-fade-in-up"
                             style={{ animationDelay: "200ms" }}
                         >
-                            RecentureSoft helps businesses build AI products, enterprise software, cloud infrastructure, and digital experiences across multiple countries and industries.
+                            {desc}
                         </p>
 
                         <div
@@ -293,13 +316,13 @@ export default function ContactHero() {
                                 onClick={openModal}
                                 className="px-7 py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-lg transition-colors"
                             >
-                                Start a Project
+                                {primaryBtn}
                             </button>
                             <button 
                                 onClick={openMeetingModal}
                                 className="px-7 py-3.5 bg-slate-200/50 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-semibold rounded-lg transition-colors backdrop-blur-sm"
                             >
-                                Schedule Consultation
+                                {secondaryBtn}
                             </button>
                         </div>
 
@@ -308,7 +331,7 @@ export default function ContactHero() {
                             className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 pt-2 w-full max-w-lg border-t border-slate-200 dark:border-white/10 mt-2 animate-fade-in-up"
                             style={{ animationDelay: "400ms" }}
                         >
-                            {TRUST_INDICATORS.map((indicator, i) => (
+                            {trustIndicators.map((indicator, i) => (
                                 <div key={i} className="flex items-center gap-2">
                                     <div className="w-4 h-4 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
                                         <svg className="w-2.5 h-2.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -337,7 +360,7 @@ export default function ContactHero() {
                     className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-5 pt-2 animate-fade-in-up-large"
                     style={{ animationDelay: "500ms" }}
                 >
-                    {STATS.map((stat, i) => (
+                    {stats.map((stat, i) => (
                         <div
                             key={i}
                             className={`flex flex-col items-start p-2.5 md:p-5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-colors ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}

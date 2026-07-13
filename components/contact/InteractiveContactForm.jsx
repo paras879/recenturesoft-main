@@ -3,9 +3,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function InteractiveContactForm() {
+export default function InteractiveContactForm({ data = {} }) {
     const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
     const [error, setError] = useState(null);
+
+    const heading1 = data.heading1 || "Let's build something";
+    const headingAccent = data.headingAccent || "extraordinary.";
+    const desc = data.desc || "Whether you need a full-scale enterprise transformation or a cutting-edge web application, our team is ready to architect your success.";
+    const phone = data.phone || "+91 777 000 3288";
+    const email = data.email || "info@recenturesoft.com";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,8 +21,8 @@ export default function InteractiveContactForm() {
         const formData = new FormData(e.currentTarget);
         const firstName = formData.get("firstName") || "";
         const lastName = formData.get("lastName") || "";
-        const email = formData.get("email") || "";
-        const phone = formData.get("phone") || "";
+        const userEmail = formData.get("email") || "";
+        const userPhone = formData.get("phone") || "";
         const companySize = formData.get("companySize") || "";
         const message = formData.get("message") || "";
 
@@ -29,19 +35,19 @@ export default function InteractiveContactForm() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email, phone, subject, message }),
+                body: JSON.stringify({ name, email: userEmail, phone: userPhone, subject, message }),
             });
 
-            const data = await res.json();
+            const resData = await res.json();
 
-            if (res.ok && data.success) {
+            if (res.ok && resData.success) {
                 setFormStatus("success");
                 e.target.reset();
                 setTimeout(() => {
                     setFormStatus("idle");
                 }, 3000);
             } else {
-                setError(data.message || "Failed to send message. Please try again.");
+                setError(resData.message || "Failed to send message. Please try again.");
                 setFormStatus("idle");
             }
         } catch (err) {
@@ -59,10 +65,10 @@ export default function InteractiveContactForm() {
                     {/* Contact Info */}
                     <div>
                         <h2 className="text-[clamp(2rem,8vw,3.5rem)] font-extrabold text-slate-900 dark:text-white leading-tight mb-6">
-                            Let's build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">extraordinary.</span>
+                            {heading1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{headingAccent}</span>
                         </h2>
                         <p className="text-slate-600 dark:text-gray-400 text-base md:text-lg mb-8 md:mb-12 max-w-md font-light">
-                            Whether you need a full-scale enterprise transformation or a cutting-edge web application, our team is ready to architect your success.
+                            {desc}
                         </p>
 
                         <div className="space-y-5 md:space-y-8">
@@ -74,7 +80,7 @@ export default function InteractiveContactForm() {
                                 </div>
                                 <div>
                                     <h4 className="text-slate-900 dark:text-white font-semibold mb-1">Call Us</h4>
-                                    <p className="text-slate-600 dark:text-gray-400 font-light">+91 777 000 3288</p>
+                                    <p className="text-slate-600 dark:text-gray-400 font-light">{phone}</p>
                                 </div>
                             </div>
 
@@ -86,7 +92,7 @@ export default function InteractiveContactForm() {
                                 </div>
                                 <div>
                                     <h4 className="text-slate-900 dark:text-white font-semibold mb-1">Email Us</h4>
-                                    <p className="text-slate-600 dark:text-gray-400 font-light">info@recenturesoft.com</p>
+                                    <p className="text-slate-600 dark:text-gray-400 font-light">{email}</p>
                                 </div>
                             </div>
 

@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { 
     ShoppingCart, ShieldCheck, Zap, Layers, AppWindow, 
     Smartphone, Search, Cpu, Globe, Rocket, CheckCircle2, 
     Users, Code2, PenTool, TrendingUp, Key, Image as ImageIcon
 } from "lucide-react";
 
-export default function MagentoContent() {
+export default function MagentoContent({ dynamicData = {} }) {
+    const { magentoIntro = {}, magentoReasons = {}, magentoBenefits = {}, magentoServices = {}, magentoProcess = {}, magentoCTA = {} } = dynamicData;
     const reasons = [
         { icon: TrendingUp, title: "Promising Results", desc: "Create a powerful platform tailored to your needs. Increase leads, generate more traffic, and boost customer retention and conversions." },
         { icon: Rocket, title: "Fast Delivery", desc: "Our well-equipped crew uses the latest tools and tech to create a smooth, user-friendly interface in the fastest possible time." },
@@ -45,10 +47,10 @@ export default function MagentoContent() {
             {/* Intro Section */}
             <div className="prose prose-slate dark:prose-invert max-w-none mb-16 text-center px-4">
                 <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-slate-900 dark:text-white tracking-tight">
-                    Smooth Operating Applications using <span className="text-blue-500">Magento</span>
+                    {magentoIntro.heading || <>Smooth Operating Applications using <span className="text-blue-500">Magento</span></>}
                 </h3>
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">
-                    Magento ranks as one of the best choices for eCommerce developers and dealers. We transform any platform into a visually rich and fully-functional e-commerce hub, providing custom shopping carts, product catalogs, and flawless checkout experiences.
+                    {magentoIntro.desc || "Magento ranks as one of the best choices for eCommerce developers and dealers. We transform any platform into a visually rich and fully-functional e-commerce hub, providing custom shopping carts, product catalogs, and flawless checkout experiences."}
                 </p>
             </div>
 
@@ -56,19 +58,26 @@ export default function MagentoContent() {
             <div className="bg-slate-50 dark:bg-slate-900/50 rounded-3xl p-8 md:p-10 border border-slate-200 dark:border-slate-800 mb-20 relative overflow-hidden">
                 <div className="absolute -left-[10%] top-[20%] w-[40%] h-[60%] bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-[80px] pointer-events-none" />
                 <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center relative z-10">
-                    Looking For Magento Developers? You Are At The Right Place!
+                    {magentoReasons.title || "Looking For Magento Developers? You Are At The Right Place!"}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                    {reasons.map((reason, i) => {
-                        const Icon = reason.icon;
+                    {(magentoReasons.cards?.length > 0 ? magentoReasons.cards : reasons).map((card, i) => {
+                        const isCustom = magentoReasons.cards?.length > 0;
+                        const Icon = !isCustom ? card.icon : null;
                         return (
                             <div key={i} className="flex gap-4 items-start">
-                                <div className="mt-1 bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm text-blue-500 shrink-0 border border-slate-100 dark:border-slate-700">
-                                    <Icon className="w-6 h-6" />
-                                </div>
+                                {card.image ? (
+                                    <div className="mt-1 w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-sm shrink-0 border border-slate-100 dark:border-slate-700 relative overflow-hidden">
+                                        <Image src={card.image} alt={card.title || ""} fill className="object-cover" />
+                                    </div>
+                                ) : (
+                                    <div className="mt-1 bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm text-blue-500 shrink-0 border border-slate-100 dark:border-slate-700">
+                                        {Icon ? <Icon className="w-6 h-6" /> : <TrendingUp className="w-6 h-6" />}
+                                    </div>
+                                )}
                                 <div>
-                                    <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{reason.title}</h4>
-                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">{reason.desc}</p>
+                                    <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{card.title}</h4>
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">{card.desc}</p>
                                 </div>
                             </div>
                         );
@@ -78,10 +87,10 @@ export default function MagentoContent() {
 
             {/* Development Cycle Timeline */}
             <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                Magento Development Life Cycle
+                {magentoProcess.title || "Magento Development Life Cycle"}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                {process.map((step, index) => (
+                {(magentoProcess.cards?.length > 0 ? magentoProcess.cards : process).map((step, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
@@ -90,9 +99,15 @@ export default function MagentoContent() {
                         transition={{ delay: index * 0.1 }}
                         className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm relative group"
                     >
-                        <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-100 dark:bg-blue-900/50 text-blue-600 font-bold rounded-full flex items-center justify-center border-4 border-white dark:border-[#020617] group-hover:scale-110 transition-transform">
-                            {index + 1}
-                        </div>
+                        {step.image ? (
+                            <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full overflow-hidden border-4 border-white dark:border-[#020617] group-hover:scale-110 transition-transform relative">
+                                <Image src={step.image} alt={step.title || ""} fill className="object-cover" />
+                            </div>
+                        ) : (
+                            <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-100 dark:bg-blue-900/50 text-blue-600 font-bold rounded-full flex items-center justify-center border-4 border-white dark:border-[#020617] group-hover:scale-110 transition-transform">
+                                {index + 1}
+                            </div>
+                        )}
                         <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3 pr-6">{step.title}</h4>
                         <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{step.desc}</p>
                     </motion.div>
@@ -101,18 +116,25 @@ export default function MagentoContent() {
 
             {/* Benefits Grid */}
             <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                Benefits Of Magento Integration
+                {magentoBenefits.title || "Benefits Of Magento Integration"}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                {benefits.map((benefit, i) => {
-                    const Icon = benefit.icon;
+                {(magentoBenefits.cards?.length > 0 ? magentoBenefits.cards : benefits).map((card, i) => {
+                    const isCustom = magentoBenefits.cards?.length > 0;
+                    const Icon = !isCustom ? card.icon : null;
                     return (
                         <div key={i} className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-colors">
-                            <div className="bg-white dark:bg-slate-800 p-4 rounded-full shadow-sm text-blue-500 mb-4">
-                                <Icon className="w-7 h-7" />
-                            </div>
-                            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{benefit.title}</h4>
-                            <p className="text-slate-600 dark:text-slate-400 text-sm">{benefit.desc}</p>
+                            {card.image ? (
+                                <div className="bg-white dark:bg-slate-800 w-16 h-16 rounded-full shadow-sm mb-4 relative overflow-hidden border-2 border-blue-500/20">
+                                    <Image src={card.image} alt={card.title || ""} fill className="object-cover" />
+                                </div>
+                            ) : (
+                                <div className="bg-white dark:bg-slate-800 p-4 rounded-full shadow-sm text-blue-500 mb-4">
+                                    {Icon ? <Icon className="w-7 h-7" /> : <Layers className="w-7 h-7" />}
+                                </div>
+                            )}
+                            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{card.title}</h4>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm">{card.desc}</p>
                         </div>
                     );
                 })}
@@ -121,19 +143,26 @@ export default function MagentoContent() {
             {/* Services List */}
             <div className="mb-20">
                 <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                    Our Magento Development Services
+                    {magentoServices.title || "Our Magento Development Services"}
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {services.map((service, i) => {
-                        const Icon = service.icon;
+                    {(magentoServices.cards?.length > 0 ? magentoServices.cards : services).map((card, i) => {
+                        const isCustom = magentoServices.cards?.length > 0;
+                        const Icon = !isCustom ? card.icon : null;
                         return (
                             <div key={i} className="flex gap-5 items-start p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300">
-                                <div className="mt-1 bg-blue-50 dark:bg-blue-900/30 p-3 rounded-xl text-blue-500 shrink-0">
-                                    <Icon className="w-6 h-6" />
-                                </div>
+                                {card.image ? (
+                                    <div className="mt-1 w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-xl shrink-0 relative overflow-hidden">
+                                        <Image src={card.image} alt={card.title || ""} fill className="object-cover" />
+                                    </div>
+                                ) : (
+                                    <div className="mt-1 bg-blue-50 dark:bg-blue-900/30 p-3 rounded-xl text-blue-500 shrink-0">
+                                        {Icon ? <Icon className="w-6 h-6" /> : <Smartphone className="w-6 h-6" />}
+                                    </div>
+                                )}
                                 <div>
-                                    <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{service.title}</h4>
-                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{service.desc}</p>
+                                    <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{card.title}</h4>
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{card.desc}</p>
                                 </div>
                             </div>
                         );
@@ -144,13 +173,13 @@ export default function MagentoContent() {
             {/* Call to Action */}
             <div className="text-center mt-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-10 md:p-16 shadow-xl">
                 <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Ready to scale your eCommerce store?
+                    {magentoCTA.title || "Ready to scale your eCommerce store?"}
                 </h4>
                 <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg">
-                    Whether migrating from Shopify, WooCommerce, or building from scratch, our end-to-end Magento solutions guarantee a hassle-free transition without impacting your SEO.
+                    {magentoCTA.desc || "Whether migrating from Shopify, WooCommerce, or building from scratch, our end-to-end Magento solutions guarantee a hassle-free transition without impacting your SEO."}
                 </p>
                 <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
-                    Hire Magento Experts
+                    {magentoCTA.btnText || "Hire Magento Experts"}
                 </button>
             </div>
         </div>

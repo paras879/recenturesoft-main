@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { 
     Store, ShoppingCart, TrendingUp, Tags, Globe, Eye,
     BarChart3, Settings, PenTool, LayoutTemplate, 
     Search, Image as ImageIcon, Box, FileText, Gavel, ShieldCheck
 } from "lucide-react";
 
-export default function EbayStoreContent() {
+export default function EbayStoreContent({ dynamicData = {} }) {
+    const { ebayIntro = {}, ebayValue = {}, ebayServices = {}, ebayOfferings = {}, ebayCTA = {} } = dynamicData;
     const primaryServices = [
         { icon: LayoutTemplate, title: "Attractive Store Design", desc: "Design visually appealing eBay store layouts that grab attention." },
         { icon: Box, title: "Product Management", desc: "Creation of new listings and complete management of your product catalog." },
@@ -33,10 +35,10 @@ export default function EbayStoreContent() {
             {/* Intro Section */}
             <div className="prose prose-slate dark:prose-invert max-w-none mb-16 text-center px-4">
                 <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-slate-900 dark:text-white tracking-tight">
-                    Create Your Market Using <span className="text-blue-500">eBay Store Management</span>
+                    {ebayIntro.heading || <>Create Your Market Using <span className="text-blue-500">eBay Store Management</span></>}
                 </h3>
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">
-                    As the digital market gets more competitive, the need to establish a presence in every online marketplace is imperative. Recenturesoft helps with expert eBay store management services to build sustainable relationships between you and your customers on eBay.
+                    {ebayIntro.desc || "As the digital market gets more competitive, the need to establish a presence in every online marketplace is imperative. Recenturesoft helps with expert eBay store management services to build sustainable relationships between you and your customers on eBay."}
                 </p>
             </div>
 
@@ -46,22 +48,22 @@ export default function EbayStoreContent() {
                 
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                     <div>
-                        <h4 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Simplify Your Workload</h4>
+                        <h4 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">{ebayValue.heading || "Simplify Your Workload"}</h4>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                            eBay store management requires time and third-party interference. Recenturesoft simplifies your work so you can focus only on internal resources—pick, pack, and despatch the orders daily.
+                            {ebayValue.desc1 || "eBay store management requires time and third-party interference. Recenturesoft simplifies your work so you can focus only on internal resources—pick, pack, and despatch the orders daily."}
                         </p>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            We put an emphasis on managing and growing your business online and provide a wide range of customisable services to suit your needs.
+                            {ebayValue.desc2 || "We put an emphasis on managing and growing your business online and provide a wide range of customisable services to suit your needs."}
                         </p>
                     </div>
                     
                     <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
                         <h5 className="text-lg font-bold text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
                             <ShieldCheck className="w-5 h-5" />
-                            Complete Privacy & Security
+                            {ebayValue.boxTitle || "Complete Privacy & Security"}
                         </h5>
                         <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
-                            At Recenturesoft, we take the full responsibility of managing and promoting your eBay store. <strong>What’s even better is that we do not take access to your personal eBay account.</strong> We guide and suggest proven methods of promotion required to create an online store or update the existing one.
+                            {ebayValue.boxDesc ? <span dangerouslySetInnerHTML={{ __html: ebayValue.boxDesc }} /> : <>At Recenturesoft, we take the full responsibility of managing and promoting your eBay store. <strong>What’s even better is that we do not take access to your personal eBay account.</strong> We guide and suggest proven methods of promotion required to create an online store or update the existing one.</>}
                         </p>
                     </div>
                 </div>
@@ -69,11 +71,12 @@ export default function EbayStoreContent() {
 
             {/* Primary Services Grid */}
             <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                Our eBay Store Management Solutions
+                {ebayServices.title || "Our eBay Store Management Solutions"}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-                {primaryServices.map((service, index) => {
-                    const Icon = service.icon;
+                {(ebayServices.cards?.length > 0 ? ebayServices.cards : primaryServices).map((service, index) => {
+                    const isCustom = ebayServices.cards?.length > 0;
+                    const Icon = !isCustom ? service.icon : null;
                     return (
                         <motion.div
                             key={index}
@@ -83,9 +86,15 @@ export default function EbayStoreContent() {
                             transition={{ delay: (index % 4) * 0.1 }}
                             className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm hover:shadow-xl hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 group"
                         >
-                            <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                                <Icon className="w-6 h-6" />
-                            </div>
+                            {service.image ? (
+                                <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+                                    <Image src={service.image} alt={service.title || ""} fill className="object-cover" />
+                                </div>
+                            ) : (
+                                <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    {Icon ? <Icon className="w-6 h-6" /> : <LayoutTemplate className="w-6 h-6" />}
+                                </div>
+                            )}
                             <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{service.title}</h4>
                             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{service.desc}</p>
                         </motion.div>
@@ -96,16 +105,23 @@ export default function EbayStoreContent() {
             {/* Additional Offerings List */}
             <div className="mb-20">
                 <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                    Complete eBay Development & Management Needs
+                    {ebayOfferings.title || "Complete eBay Development & Management Needs"}
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {additionalOfferings.map((offering, i) => {
-                        const Icon = offering.icon;
+                    {(ebayOfferings.cards?.length > 0 ? ebayOfferings.cards : additionalOfferings).map((offering, i) => {
+                        const isCustom = ebayOfferings.cards?.length > 0;
+                        const Icon = !isCustom ? offering.icon : null;
                         return (
                             <div key={i} className="flex gap-5 items-start p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-colors">
-                                <div className="mt-1 bg-white dark:bg-slate-800 p-3 rounded-full shadow-sm text-blue-500 shrink-0">
-                                    <Icon className="w-6 h-6" />
-                                </div>
+                                {offering.image ? (
+                                    <div className="mt-1 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-sm shrink-0 relative overflow-hidden">
+                                        <Image src={offering.image} alt={offering.title || ""} fill className="object-cover" />
+                                    </div>
+                                ) : (
+                                    <div className="mt-1 bg-white dark:bg-slate-800 p-3 rounded-full shadow-sm text-blue-500 shrink-0">
+                                        {Icon ? <Icon className="w-6 h-6" /> : <FileText className="w-6 h-6" />}
+                                    </div>
+                                )}
                                 <div>
                                     <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{offering.title}</h4>
                                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{offering.desc}</p>
@@ -119,13 +135,13 @@ export default function EbayStoreContent() {
             {/* Call to Action */}
             <div className="text-center mt-12 bg-blue-600 dark:bg-blue-900/40 rounded-3xl p-10 md:p-16 border border-transparent dark:border-blue-800">
                 <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Ready to scale your eBay store?
+                    {ebayCTA.title || "Ready to scale your eBay store?"}
                 </h4>
                 <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg">
-                    Focus on fulfillment while we handle the digital storefront. Get organic ranking optimization, targeted traffic, and boosted sales today.
+                    {ebayCTA.desc || "Focus on fulfillment while we handle the digital storefront. Get organic ranking optimization, targeted traffic, and boosted sales today."}
                 </p>
                 <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
-                    Get Started With Us
+                    {ebayCTA.btnText || "Get Started With Us"}
                 </button>
             </div>
         </div>
