@@ -128,8 +128,8 @@ export default function AboutSection({ cmsData = {} }) {
                             <Link href="/contact" className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:scale-105 transition duration-300 text-center">
                                 Get Started
                             </Link>
-                            <Link href="/portfolio" className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:border-cyan-400/40 transition duration-300 text-center">
-                                Learn More
+                            <Link href="/portfolio" aria-label="Explore our portfolio of enterprise projects" className="w-full sm:w-auto px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/5 hover:border-cyan-400/40 transition duration-300 text-center">
+                                Explore Portfolio
                             </Link>
                         </div>
                     </div>

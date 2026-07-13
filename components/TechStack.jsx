@@ -11,22 +11,22 @@ import { FaJava, FaAws, FaLaravel } from "react-icons/fa";
 
 // ── Scalable Vector Graphics for Core Technology Branding ──
 export const TECH_ICONS = {
-    react: <SiReact className="w-full h-full text-[#61DAFB]" />,
-    nextjs: <SiNextdotjs className="w-full h-full text-black dark:text-white" />,
-    nodejs: <SiNodedotjs className="w-full h-full text-[#339939]" />,
-    java: <FaJava className="w-full h-full text-[#007396]" />,
-    laravel: <FaLaravel className="w-full h-full text-[#FF2D20]" />,
-    mongodb: <SiMongodb className="w-full h-full text-[#47A248]" />,
-    bootstrap: <SiBootstrap className="w-full h-full text-[#7952B3]" />,
-    angular: <SiAngular className="w-full h-full text-[#DD0031]" />,
-    typescript: <SiTypescript className="w-full h-full text-[#3178C6]" />,
-    tailwindcss: <SiTailwindcss className="w-full h-full text-[#06B6D4]" />,
-    mysql: <SiMysql className="w-full h-full text-[#4479A1]" />,
-    postgresql: <SiPostgresql className="w-full h-full text-[#4169E1]" />,
-    aws: <FaAws className="w-full h-full text-[#232F3E] dark:text-white" />,
-    docker: <SiDocker className="w-full h-full text-[#2496ED]" />,
-    git: <SiGit className="w-full h-full text-[#F05032]" />,
-    firebase: <SiFirebase className="w-full h-full text-[#FFCA28]" />
+    react: <SiReact title="React" className="w-full h-full text-[#61DAFB]" />,
+    nextjs: <SiNextdotjs title="Next.js" className="w-full h-full text-black dark:text-white" />,
+    nodejs: <SiNodedotjs title="Node.js" className="w-full h-full text-[#339939]" />,
+    java: <FaJava title="Java" className="w-full h-full text-[#007396]" />,
+    laravel: <FaLaravel title="Laravel" className="w-full h-full text-[#FF2D20]" />,
+    mongodb: <SiMongodb title="MongoDB" className="w-full h-full text-[#47A248]" />,
+    bootstrap: <SiBootstrap title="Bootstrap" className="w-full h-full text-[#7952B3]" />,
+    angular: <SiAngular title="Angular" className="w-full h-full text-[#DD0031]" />,
+    typescript: <SiTypescript title="TypeScript" className="w-full h-full text-[#3178C6]" />,
+    tailwindcss: <SiTailwindcss title="Tailwind CSS" className="w-full h-full text-[#06B6D4]" />,
+    mysql: <SiMysql title="MySQL" className="w-full h-full text-[#4479A1]" />,
+    postgresql: <SiPostgresql title="PostgreSQL" className="w-full h-full text-[#4169E1]" />,
+    aws: <FaAws title="AWS" className="w-full h-full text-[#232F3E] dark:text-white" />,
+    docker: <SiDocker title="Docker" className="w-full h-full text-[#2496ED]" />,
+    git: <SiGit title="Git" className="w-full h-full text-[#F05032]" />,
+    firebase: <SiFirebase title="Firebase" className="w-full h-full text-[#FFCA28]" />
 };
 
 // ── Clean & Structured Tech Ecosystem Graph Data (2D Coordinates) ──
