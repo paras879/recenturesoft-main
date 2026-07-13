@@ -149,7 +149,7 @@ function MiniDashboard({ data, isPeak, hovered, isLast }) {
                 }`}
         >
             <div
-                className="relative rounded-2xl bg-white/95 dark:bg-[#0a1225]/95 backdrop-blur-2xl p-4"
+                className="relative rounded-2xl bg-white/95 dark:bg-[#0a1225]/95 md:backdrop-blur-2xl p-4"
                 style={{
                     border: `1px solid ${C.primary}18`,
                     boxShadow: `0 8px 32px ${C.primary}12`,
@@ -519,7 +519,7 @@ export default function StatsDashboard({ cmsData = {} }) {
 
                 {/* Dashboard container */}
                 <div
-                    className="relative mt-5 rounded-3xl backdrop-blur-sm md:backdrop-blur-2xl overflow-hidden bg-slate-50 dark:bg-[#0a1225]/80 border border-slate-200 dark:border-white/[0.04] shadow-none md:shadow-[0_0_80px_rgba(6,230,255,0.06)]"
+                    className="relative mt-5 rounded-3xl md:backdrop-blur-2xl overflow-hidden bg-slate-50 dark:bg-[#0a1225]/80 border border-slate-200 dark:border-white/[0.04] shadow-none md:shadow-[0_0_80px_rgba(6,230,255,0.06)]"
                 >
                     {/* Holographic background */}
                     <HolographicCore />

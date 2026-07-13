@@ -335,9 +335,6 @@ export default function TrustedClients() {
                   <stop offset="50%" stopColor="#06E6FF" />
                   <stop offset="100%" stopColor="#06E6FF" />
                 </linearGradient>
-                <filter id="glowPipeline" x1="-20%" y1="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#06E6FF" floodOpacity="0.5" />
-                </filter>
               </defs>
 
               {/* S-shaped pipeline path from left card bottom (Client Satisfaction) to top card in the right panel */}
@@ -357,24 +354,23 @@ export default function TrustedClients() {
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray="12 24"
-                filter="url(#glowPipeline)"
                 style={{ animation: "pipelineFlow 3s linear infinite" }}
               />
 
               {/* Flowing animated data packet document icons */}
-              <g filter="url(#glowPipeline)">
+              <g>
                 <animateMotion dur="6s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#06E6FF" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#06E6FF" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#06E6FF" strokeWidth="1" strokeLinecap="round" />
               </g>
-              <g filter="url(#glowPipeline)">
+              <g>
                 <animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#3B82F6" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#3B82F6" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#3B82F6" strokeWidth="1" strokeLinecap="round" />
               </g>
-              <g filter="url(#glowPipeline)">
+              <g>
                 <animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#8B5CF6" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#8B5CF6" strokeWidth="1" strokeLinecap="round" />
@@ -384,7 +380,7 @@ export default function TrustedClients() {
           </div>
 
           {/* Business Scale Bento Card (5 Columns) */}
-          <div className="lg:col-span-5 h-full relative rounded-3xl p-6 md:p-8 bg-white dark:bg-[#0B1220] border border-blue-200/50 dark:border-blue-900/30 backdrop-blur-xl shadow-lg flex flex-col justify-between overflow-hidden lg:overflow-visible group z-10 transition-all duration-300 hover:border-blue-400/40">
+          <div className="lg:col-span-5 h-full relative rounded-3xl p-6 md:p-8 bg-white/95 dark:bg-[#0B1220]/95 border border-blue-200/50 dark:border-blue-900/30 md:backdrop-blur-xl shadow-lg flex flex-col justify-between overflow-hidden lg:overflow-visible group z-10 transition-all duration-300 hover:border-blue-400/40">
             {/* Ambient Background Glow */}
             <div className="absolute top-0 left-0 w-60 h-60 rounded-full opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style={{ background: `radial-gradient(circle, ${C.secondary}, transparent 70%)`, filter: "blur(40px)" }} />
 
@@ -449,7 +445,7 @@ export default function TrustedClients() {
           </div>
 
           {/* Infrastructure Stats Bento Card (7 Columns) */}
-          <div className="lg:col-span-7 h-full relative rounded-3xl p-6 md:p-8 bg-cyan-50/40 dark:bg-[#041a1c]/30 border border-cyan-200/50 dark:border-cyan-900/30 backdrop-blur-xl shadow-lg flex flex-col justify-between overflow-hidden lg:overflow-visible group z-10 transition-all duration-300 hover:border-cyan-400/40">
+          <div className="lg:col-span-7 h-full relative rounded-3xl p-6 md:p-8 bg-cyan-50/95 dark:bg-[#041a1c]/95 border border-cyan-200/50 dark:border-cyan-900/30 md:backdrop-blur-xl shadow-lg flex flex-col justify-between overflow-hidden lg:overflow-visible group z-10 transition-all duration-300 hover:border-cyan-400/40">
             {/* Ambient Background Glow */}
             <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style={{ background: `radial-gradient(circle, ${C.primary}, transparent 70%)`, filter: "blur(60px)" }} />
 
