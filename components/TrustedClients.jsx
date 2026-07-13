@@ -341,15 +341,8 @@ export default function TrustedClients() {
               </defs>
 
               {/* S-shaped pipeline path from left card bottom (Client Satisfaction) to top card in the right panel */}
-              {/* S-shaped pipeline path from left card bottom (Client Satisfaction) to top card in the right panel */}
               <path
-                d="M 242 650
-     L 460 650
-     C 485 650, 496 640, 496 610
-     L 496 520
-     L 496 253
-     C 496 208, 540 208, 580 208
-     L 770 208"
+                d="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172"
                 stroke="url(#pipelineGrad)"
                 strokeWidth="4"
                 strokeLinecap="round"
@@ -359,13 +352,7 @@ export default function TrustedClients() {
 
               {/* Animated flowing dash overlay */}
               <path
-                d="M 242 650
-     L 460 650
-     C 485 650, 496 640, 496 610
-     L 496 520
-     L 496 253
-     C 496 208, 540 208, 580 208
-     L 770 208"
+                d="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172"
                 stroke="url(#pipelineGrad)"
                 strokeWidth="4"
                 strokeLinecap="round"
@@ -376,37 +363,19 @@ export default function TrustedClients() {
 
               {/* Flowing animated data packet document icons */}
               <g filter="url(#glowPipeline)">
-                <animateMotion dur="6s" repeatCount="indefinite" path="M 242 650
-     L 460 650
-     C 485 650, 496 640, 496 610
-     L 496 520
-     L 496 253
-     C 496 208, 540 208, 580 208
-     L 770 208" />
+                <animateMotion dur="6s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#06E6FF" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#06E6FF" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#06E6FF" strokeWidth="1" strokeLinecap="round" />
               </g>
               <g filter="url(#glowPipeline)">
-                <animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M 242 650
-     L 460 650
-     C 485 650, 496 640, 496 610
-     L 496 520
-     L 496 253
-     C 496 208, 540 208, 580 208
-     L 770 208" />
+                <animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#3B82F6" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#3B82F6" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#3B82F6" strokeWidth="1" strokeLinecap="round" />
               </g>
               <g filter="url(#glowPipeline)">
-                <animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M 242 650
-     L 460 650
-     C 485 650, 496 640, 496 610
-     L 496 520
-     L 496 253
-     C 496 208, 540 208, 580 208
-     L 770 208" />
+                <animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#8B5CF6" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#8B5CF6" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#8B5CF6" strokeWidth="1" strokeLinecap="round" />
@@ -422,9 +391,7 @@ export default function TrustedClients() {
             <div className="relative z-10 flex flex-col h-full justify-between">
               {/* Card Header */}
               <div className="mb-8 text-left">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/10 text-blue-600 dark:text-blue-400 font-bold text-[10px] tracking-wider uppercase mb-3">
-                  📁 Scale & Impact
-                </span>
+
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2">
                   Company Scale
                 </h3>
@@ -489,9 +456,6 @@ export default function TrustedClients() {
             <div className="relative z-10 flex flex-col h-full justify-between">
               {/* Card Header */}
               <div className="mb-8 text-left">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100/50 dark:bg-cyan-950/20 border border-cyan-200 dark:border-cyan-900/10 text-cyan-600 dark:text-cyan-400 font-bold text-[10px] tracking-wider uppercase mb-3  ">
-                  ⚡ Performance & Speed
-                </span>
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2">
                   System Architecture Metrics
                 </h3>
