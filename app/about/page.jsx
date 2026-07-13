@@ -1,5 +1,7 @@
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import CinematicAbout from "@/components/about/CinematicAbout";
@@ -16,6 +18,10 @@ export default async function AboutPage() {
     const isActive = await checkPageStatus("/about");
     if (!isActive) return notFound();
 
+    await connectDB();
+    const pageData = await WebPage.findOne({ path: "/about" }).lean();
+    const content = pageData?.content || {};
+
     return (
         <main className="relative bg-slate-50 dark:bg-[#020617] min-h-screen overflow-x-hidden">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"About RecentureSoft | Digital Innovation & Enterprise Technology","description":"Discover RecentureSoft","url":"https://recenturesoft.com/about"}) }} />
@@ -24,7 +30,7 @@ export default async function AboutPage() {
                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] rounded-full" />
             </div>
             <Navbar />
-            <CinematicAbout />
+            <CinematicAbout dynamicData={content} />
             <PageFAQSection pageName="about" />
 
             <FutureFooter />

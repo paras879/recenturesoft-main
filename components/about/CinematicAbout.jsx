@@ -7,7 +7,7 @@ import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 // ==========================================
 // SECTION 1: HERO
 // ==========================================
-function AboutHero() {
+function AboutHero({ data = {} }) {
     return (
         <section className="relative min-h-auto w-full flex items-center justify-center pt-28 md:pt-32 lg:pt-36 pb-0 overflow-hidden bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             {/* Background Atmosphere */}
@@ -32,15 +32,15 @@ function AboutHero() {
                         style={{ animationDelay: "0.1s" }}
                     >
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-500 dark:to-indigo-500 animate-gradient-x">
-                            Engineering The Future Digital Innovation
+                            {data?.heading1 || "Engineering The Future"} {data?.headingAccent || "Digital Innovation"}
                         </span>
                     </h1>
 
                     <p
-                        className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-xl leading-8 animate-fade-up"
+                        className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-xl leading-8 animate-fade-up whitespace-pre-wrap"
                         style={{ animationDelay: "0.2s" }}
                     >
-                        We help global businesses build scalable software, AI solutions, cloud platforms, and enterprise digital products.
+                        {data?.desc || "We help global businesses build scalable software, AI solutions, cloud platforms, and enterprise digital products."}
                     </p>
                 </div>
             </div>
@@ -51,7 +51,7 @@ function AboutHero() {
 // ==========================================
 // SECTION 2: COMPANY STORY
 // ==========================================
-const STORY_TIMELINE = [
+const DEFAULT_STORY_TIMELINE = [
     { year: "2018", title: "Started", desc: "A small collective of engineers with a vision for enterprise scale." },
     { year: "2020", title: "Growth Phase", desc: "Expanding our technological stack and delivering our first Fortune 500 product." },
     { year: "2022", title: "Global Expansion", desc: "Opening global development hubs to support 24/7 enterprise delivery." },
@@ -59,7 +59,8 @@ const STORY_TIMELINE = [
     { year: "2026", title: "Enterprise Scale", desc: "Recognized as a leading global technology partner for digital transformation." }
 ];
 
-function CompanyStory() {
+function CompanyStory({ data = [] }) {
+    const timeline = data && data.length > 0 ? data : DEFAULT_STORY_TIMELINE;
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-5 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-16 items-start">
@@ -90,7 +91,7 @@ function CompanyStory() {
                     <div className="absolute left-[3px] md:left-[27px] -top-0 bottom-24 w-[2px] bg-gradient-to-b from-cyan-500 to-purple-600 opacity-60" />
 
                     <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
-                        {STORY_TIMELINE.map((item, idx) => (
+                        {timeline.map((item, idx) => (
                             <div
                                 key={idx}
                                 className={`relative pl-10 md:pl-16 p-3 md:p-4 rounded-2xl bg-white/60 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 ${idx === 0 ? "-mt-12" : ""
@@ -128,14 +129,44 @@ const BENTO_FEATURES = [
     { title: "Global Delivery", col: "md:col-span-1", row: "md:row-span-1", icon: "🌍", image: "/WhyChoose/global.jpg" },
     { title: "AI First Approach", col: "md:col-span-2", row: "row-span-1", icon: "🧠", image: "/WhyChoose/AI.jpg" }
 ];
+const DEFAULT_GALLERY = [
+    aboutImages.culture[0],
+    aboutImages.culture[1],
+    aboutImages.culture[2],
+    aboutImages.culture[3]
+];
 
-function WhyChooseUs() {
+function CultureGallery({ data = {} }) {
+    const images = data?.images && data.images.length > 0 ? data.images : DEFAULT_GALLERY;
+
+    return (
+        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
+            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-10">
+                <div className="flex flex-col gap-2 max-w-2xl">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">{data?.heading || "Our Culture"}</h2>
+                    <p className="text-sm md:text-base lg:text-lg text-slate-600 dark:text-slate-400 whitespace-pre-wrap">{data?.desc || "Life at RecentureSoft is fueled by curiosity, collaboration, and coffee. Lots of coffee."}</p>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                    {images.map((src, i) => (
+                        <div key={i} className="relative rounded-3xl overflow-hidden group aspect-[4/5]">
+                            <Image src={src || DEFAULT_GALLERY[i]} alt={`Culture ${i + 1}`} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function WhyChooseUs({ data = {} }) {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-3 md:gap-4 lg:gap-5">
                 <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-2 leading-tight">Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Choose Us</span></h2>
-                    <p className="text-[13px] md:text-sm lg:text-base lg:text-lg text-slate-600 dark:text-slate-400">We don't just write code. We build scalable digital businesses with a mindset engineered for success.</p>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-2 leading-tight">{data?.heading1 || "Why"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">{data?.headingAccent || "Choose Us"}</span></h2>
+                    <p className="text-[13px] md:text-sm lg:text-base lg:text-lg text-slate-600 dark:text-slate-400 whitespace-pre-wrap">{data?.desc || "We don't just write code. We build scalable digital businesses with a mindset engineered for success."}</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 auto-rows-[180px] md:auto-rows-[220px]">
@@ -145,10 +176,9 @@ function WhyChooseUs() {
                             className={`relative p-5 md:p-6 lg:p-8 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none backdrop-blur-md overflow-hidden group flex flex-col justify-end transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.02] animate-fade-up ${feat.col} ${feat.row}`}
                             style={{ animationDelay: `${idx * 0.1}s` }}
                         >
-                            {/* Full Background Image */}
                             <div className="absolute inset-0">
                                 <Image
-                                    src={feat.image}
+                                    src={data?.bentoImages?.[idx] || feat.image}
                                     alt={feat.title}
                                     fill
                                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 40vw"
@@ -180,14 +210,15 @@ function WhyChooseUs() {
 // ==========================================
 // SECTION 4: COMPANY STATS
 // ==========================================
-function CompanyStats() {
-    const stats = [
+function CompanyStats({ data = [] }) {
+    const DEFAULT_STATS = [
         { num: "500+", label: "Projects Delivered" },
         { num: "120+", label: "Global Clients" },
         { num: "15+", label: "Countries Served" },
         { num: "98%", label: "Client Satisfaction" },
         { num: "24/7", label: "Enterprise Support" }
     ];
+    const stats = data && data.length > 0 ? data : DEFAULT_STATS;
 
     return (
         <section className="relative w-full pt-2 pb-6 bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
@@ -198,7 +229,7 @@ function CompanyStats() {
                         className={`flex flex-col items-center justify-center p-5 md:p-6 lg:p-8 rounded-3xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-sm dark:shadow-none hover:bg-slate-50 dark:hover:bg-white/[0.05] hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-2 animate-fade-up ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}
                         style={{ animationDelay: `${i * 0.1}s` }}
                     >
-                        <span className="text-3xl md:text-4xl lg:text-5xl font-[600] text-slate-900 dark:text-white mb-2">{stat.num}</span>
+                        <span className="text-3xl md:text-4xl lg:text-5xl font-[600] text-slate-900 dark:text-white mb-2">{stat.value || stat.num}</span>
                         <span className="text-sm text-slate-600 dark:text-slate-400 font-medium tracking-wide text-center uppercase">{stat.label}</span>
                     </div>
                 ))}
@@ -207,51 +238,18 @@ function CompanyStats() {
     );
 }
 
-// ==========================================
-// SECTION 5: CULTURE GALLERY
-// ==========================================
-function CultureGallery() {
-    return (
-        <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
-            <div className="mmax-w-[1400px] mx-auto flex flex-col gap-4 md:gap-6 lg:gap-8">
-                <div className="text-center max-w-3xl mx-auto">
-                    <div>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-4 leading-tight">Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-500">Culture</span></h2>
-                        <p className="text-[13px] md:text-sm lg:text-base lg:text-lg text-slate-600 dark:text-slate-400 max-w-xl">A glimpse into our collaborative workspaces, team synergy, and global ecosystem.</p>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]">
-                    {/* Bento Images */}
-                    <div className="md:col-span-2 md:row-span-2 relative h-[240px] md:h-auto rounded-3xl overflow-hidden group border border-white/10" style={{ position: "relative" }}>
-                        <Image src={aboutImages.culture[0]} alt="Culture" fill sizes="(max-width: 768px) 100vw, 66vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                        <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/0 transition-colors duration-500" />
-                    </div>
-                    <div className="md:col-span-1 md:row-span-1 relative h-[180px] md:h-auto rounded-3xl overflow-hidden group border border-white/10" style={{ position: "relative" }}>
-                        <Image src={aboutImages.culture[1]} alt="Culture" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                        <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/0 transition-colors duration-500" />
-                    </div>
-                    <div className="md:col-span-1 md:row-span-1 relative h-[180px] md:h-auto rounded-3xl overflow-hidden group border border-white/10" style={{ position: "relative" }}>
-                        <Image src={aboutImages.culture[2]} alt="Culture" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                        <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/0 transition-colors duration-500" />
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
 
 // ==========================================
 // SECTION 6: OUR PROCESS
 // ==========================================
 const PROCESS_STEPS = ["Discover", "Plan", "Design", "Develop", "Deploy", "Scale"];
 
-function OurProcess() {
+function OurProcess({ data = {} }) {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20">
                 <div className="text-center">
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-6 leading-tight">The Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Process</span></h2>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-6 leading-tight">{data?.heading1 || "The Engineering"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.headingAccent || "Process"}</span></h2>
                 </div>
 
                 <div className="relative w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4">
@@ -336,14 +334,14 @@ const TECHNOLOGIES = [
     { name: "AI & ML", dot: "bg-purple-500" }
 ];
 
-function TechnologyEcosystem() {
+function TechnologyEcosystem({ data = {} }) {
     return (
         <section className="relative w-full flex items-center justify-center pt-4 md:pt-6 lg:pt-8 pb-8">
             {/* Ambient Background Blur */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] pointer-events-none rounded-full" />
 
             <div className="max-w-[1400px] mx-auto flex flex-col gap-4 md:gap-6 lg:gap-8 items-center text-center relative z-10">
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">Technology <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Ecosystem</span></h2>
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">{data?.heading1 || "Technology"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">{data?.headingAccent || "Ecosystem"}</span></h2>
 
                 <div className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-5xl">
                     {TECHNOLOGIES.map((tech, idx) => (
@@ -370,7 +368,7 @@ function TechnologyEcosystem() {
 // ==========================================
 // SECTION 8: LEADERSHIP MESSAGE
 // ==========================================
-function LeadershipMessage() {
+function LeadershipMessage({ data = {} }) {
     return (
         <section className="relative w-full pt-[clamp(1rem,2vw,2rem)] pb-[clamp(1rem,2vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
@@ -378,16 +376,16 @@ function LeadershipMessage() {
                 style={{ animationDelay: "0.2s" }}
             >
                 <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-full overflow-hidden relative flex-shrink-0 border-4 border-white/10" style={{ position: "relative" }}>
-                    <Image src="/manager.png" alt="Shivanand" fill sizes="(max-width: 768px) 100vw, 200px" className="object-cover" />
+                    <Image src={data?.avatarUrl || "/manager.png"} alt="Leader" fill sizes="(max-width: 768px) 100vw, 200px" className="object-cover" />
                 </div>
                 <div className="flex flex-col gap-6  text-center md:text-left ">
                     <div className="text-cyan-600 dark:text-cyan-400 text-6xl leading-none">"</div>
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-[500] text-slate-900 dark:text-white leading-tight">
-                        Our goal is simple: We engineer technology that gives our clients an unfair advantage in the global market.
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-[500] text-slate-900 dark:text-white leading-tight whitespace-pre-wrap">
+                        {data?.message || "Our goal is simple: We engineer technology that gives our clients an unfair advantage in the global market."}
                     </h3>
                     <div>
-                        <h4 className="text-base md:text-xl font-[500] text-slate-900 dark:text-white">Shivanand</h4>
-                        <p className="text-slate-600 dark:text-slate-400">Founder & CEO, RecentureSoft</p>
+                        <h4 className="text-base md:text-xl font-[500] text-slate-900 dark:text-white">{data?.name || "Shivanand"}</h4>
+                        <p className="text-slate-600 dark:text-slate-400">{data?.role || "Founder & CEO, RecentureSoft"}</p>
                     </div>
                 </div>
             </div>
@@ -398,7 +396,7 @@ function LeadershipMessage() {
 // ==========================================
 // SECTION 9: OUR CTA
 // ==========================================
-function AboutCTA() {
+function AboutCTA({ data = {} }) {
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
     return (
@@ -409,7 +407,7 @@ function AboutCTA() {
                 style={{ animationDelay: "0.2s" }}
             >
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-[600] tracking-[-0.04em] text-slate-900 dark:text-white tracking-tight leading-tight">
-                    Let's Build The <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Future</span> Together
+                    {data?.heading1 || "Let's Build The"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.headingAccent || "Future"}</span> Together
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full mt-4 md:mt-8">
                     <button
@@ -433,7 +431,7 @@ function AboutCTA() {
 // ==========================================
 // MAIN EXPORT ASSEMBLY
 // ==========================================
-export default function CinematicAbout() {
+export default function CinematicAbout({ dynamicData = {} }) {
     return (
         <div className="font-manrope w-full flex flex-col bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
             {/* CSS entry animations */}
@@ -483,15 +481,19 @@ export default function CinematicAbout() {
                 }
             `}} />
 
-            <AboutHero />
-            <CompanyStory />
-            <WhyChooseUs />
-            <CompanyStats />
-            <CultureGallery />
-            <OurProcess />
-            <TechnologyEcosystem />
-            <LeadershipMessage />
-            <AboutCTA />
+            {dynamicData?.aboutHero?.isVisible !== false && <AboutHero data={dynamicData?.aboutHero} />}
+            {dynamicData?.storyTimeline?.isVisible !== false && <CompanyStory data={dynamicData?.storyTimeline} />}
+            {dynamicData?.whyChoose?.isVisible !== false && <WhyChooseUs data={dynamicData?.whyChoose} />}
+            {dynamicData?.companyStatsVisible !== false && <CompanyStats data={dynamicData?.companyStats} />}
+            {dynamicData?.culture?.isVisible !== false && <CultureGallery data={dynamicData?.culture} />}
+            {dynamicData?.processVisible !== false && (
+                <>
+                    <OurProcess data={dynamicData?.process} />
+                    <TechnologyEcosystem data={dynamicData?.techEcosystem} />
+                </>
+            )}
+            {dynamicData?.leadership?.isVisible !== false && <LeadershipMessage data={dynamicData?.leadership} />}
+            {dynamicData?.cta?.isVisible !== false && <AboutCTA data={dynamicData?.cta} />}
         </div>
     );
 }
