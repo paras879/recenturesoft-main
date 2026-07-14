@@ -1,9 +1,10 @@
+import { connectDB } from "@/lib/mongodb";
+
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import CinematicEvents from "@/components/events/CinematicEvents";
-import { connectDB } from "@/lib/mongodb";
 import Event from "@/models/Event";
 import EventGallery from "@/models/EventGallery";
 import TeamMember from "@/models/TeamMember";
@@ -11,15 +12,30 @@ import WebPage from "@/models/WebPage";
 import { resolveImagePath } from "@/lib/imageHelper";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+const defaultMetadata = {
     title: "Events & Culture | RecentureSoft",
   description: "Experience the passion, innovation, and global collaboration that drives our engineering teams.",
     alternates: { canonical: "/events" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/events" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export const dynamic = "force-dynamic";
 
 export default async function EventsPage() {
+    await connectDB();
+    const pageData = await WebPage.findOne({ path: "/events" }).lean();
+
     const isActive = await checkPageStatus("/events");
     if (!isActive) return notFound();
 
@@ -59,9 +75,9 @@ export default async function EventsPage() {
         }));
 
         // Fetch dynamic page content
-        const pageData = await WebPage.findOne({ path: "/events" }).lean();
-        if (pageData && pageData.content) {
-            pageContent = pageData.content;
+        const dynamicPageData = await WebPage.findOne({ path: "/events" }).lean();
+        if (dynamicPageData && dynamicPageData.content) {
+            pageContent = dynamicPageData.content;
         }
 
     } catch (error) {
@@ -79,4 +95,3 @@ export default async function EventsPage() {
         </main>
     );
 }
-
