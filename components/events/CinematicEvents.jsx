@@ -28,24 +28,40 @@ const IMAGES = {
 // ==========================================
 // SECTION 1: HERO
 // ==========================================
-function EventsHero() {
+function EventsHero({ data }) {
+    const opacityValue = data?.bannerOpacity !== undefined ? (parseInt(data.bannerOpacity) / 100) : 0.7;
     return (
-        <section className="relative min-h-[auto] lg:min-h-[50vh] w-full flex flex-col items-center justify-center pt-20 md:pt-24 lg:pt-28 pb-2 md:pb-3 overflow-hidden bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
+        <section className={`relative min-h-[auto] lg:min-h-[50vh] w-full flex flex-col items-center justify-center pt-20 md:pt-24 lg:pt-28 pb-2 md:pb-3 overflow-hidden px-6 lg:px-12 transition-colors duration-300 ${data?.bannerImage ? 'bg-[#020617]' : 'bg-slate-50 dark:bg-[#020617]'}`}>
+            {/* Background Image Passed as bannerImage */}
+            {data?.bannerImage && (
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                    <Image
+                        src={data.bannerImage.includes('res.cloudinary.com') ? data.bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : data.bannerImage}
+                        alt="Events Hero Background"
+                        fill
+                        sizes="100vw"
+                        priority
+                        className="object-cover"
+                    />
+                    <div className="absolute inset-0 z-0 bg-[#020617]" style={{ opacity: opacityValue }} />
+                </div>
+            )}
+
             {/* Gradient Background */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className={`absolute inset-0 pointer-events-none ${data?.bannerImage ? 'opacity-50' : 'opacity-100'}`}>
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/20 rounded-full blur-[120px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px]" />
             </div>
 
             <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl">
-                <h1 className="text-[clamp(2rem,6vw,5rem)] font-extrabold text-slate-900 dark:text-white tracking-tight mb-4 md:mb-6 leading-none">
-                    Life At <br />
+                <h1 className={`text-[clamp(2rem,6vw,5rem)] font-extrabold tracking-tight mb-4 md:mb-6 leading-none ${data?.bannerImage ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-slate-900 dark:text-white'}`}>
+                    {data?.titlePart1 || "Life At"} <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">
-                        RecentureSoft
+                        {data?.titleHighlight || "RecentureSoft"}
                     </span>
                 </h1>
-                <p className="text-[clamp(0.9rem,1.5vw,1.1rem)] text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-6 md:mb-8">
-                    Experience the passion, innovation, and global collaboration that drives our engineering teams to build the future.
+                <p className={`text-[clamp(0.9rem,1.5vw,1.1rem)] max-w-2xl leading-relaxed mb-6 md:mb-8 ${data?.bannerImage ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-slate-600 dark:text-slate-400'}`}>
+                    {data?.description || "Experience the passion, innovation, and global collaboration that drives our engineering teams to build the future."}
                 </p>
             </div>
         </section>
@@ -167,7 +183,7 @@ function BentoCard({ src, colSpan, rowSpan, title, date, photoCount, onClick }) 
     );
 }
 
-function EventBentoGallery({ events, onSelectEvent }) {
+function EventBentoGallery({ events, onSelectEvent, data }) {
     if (!events || events.length === 0) return null;
 
     const bentoLayouts = [
@@ -183,10 +199,10 @@ function EventBentoGallery({ events, onSelectEvent }) {
             <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
                 <div className="flex flex-col gap-3 text-center items-center">
                     <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-900 dark:text-white">
-                        Moments <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Captured</span>
+                        {data?.titlePart1 || "Moments"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.titleHighlight || "Captured"}</span>
                     </h2>
                     <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-[clamp(0.9rem,1.5vw,1.1rem)]">
-                        A glimpse into our collaborative workspaces, team celebrations, and global initiatives.
+                        {data?.description || "A glimpse into our collaborative workspaces, team celebrations, and global initiatives."}
                     </p>
                 </div>
 
@@ -223,7 +239,7 @@ const TIMELINE_EVENTS = [
     { year: "2023", title: "First Office Inauguration", desc: "The foundation of RecentureSoft's core engineering hub.", icon: Building, color: "from-emerald-500 to-teal-400", shadow: "shadow-emerald-500/20" },
 ];
 
-function EventTimeline() {
+function EventTimeline({ data }) {
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300 overflow-hidden">
             {/* Background Decor to fix "empty" feeling */}
@@ -233,10 +249,10 @@ function EventTimeline() {
             <div className="max-w-7xl mx-auto flex flex-col gap-5 md:gap-6 relative z-10">
                 <div className="text-center max-w-2xl mx-auto">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1.5 tracking-tight">
-                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500">Journey</span>
+                        {data?.titlePart1 || "Our"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500">{data?.titleHighlight || "Journey"}</span>
                     </h2>
                     <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base">
-                        From our humble beginnings to a global engineering force. Here are the key milestones that define who we are today.
+                        {data?.description || "From our humble beginnings to a global engineering force. Here are the key milestones that define who we are today."}
                     </p>
                 </div>
 
@@ -363,7 +379,7 @@ function InfiniteEventMarquee() {
 // ==========================================
 // SECTION 8: TESTIMONIALS
 // ==========================================
-function EmployeeTestimonials({ teamMembers = [] }) {
+function EmployeeTestimonials({ teamMembers = [], data }) {
     if (!teamMembers || teamMembers.length === 0) return null;
 
     return (
@@ -371,7 +387,7 @@ function EmployeeTestimonials({ teamMembers = [] }) {
             <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
                 <div className="text-center">
                     <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-900 dark:text-white mb-3 md:mb-4">
-                        Hear From Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-600 dark:from-purple-400 dark:to-cyan-500">Team</span>
+                        {data?.titlePart1 || "Hear From Our"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-600 dark:from-purple-400 dark:to-cyan-500">{data?.titleHighlight || "Team"}</span>
                     </h2>
                 </div>
 
@@ -407,7 +423,7 @@ function EmployeeTestimonials({ teamMembers = [] }) {
 // ==========================================
 // SECTION 9: CTA
 // ==========================================
-function EventsCTA() {
+function EventsCTA({ data }) {
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 overflow-hidden flex justify-center transition-colors duration-300">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-50 dark:to-cyan-950/20 pointer-events-none" />
@@ -415,17 +431,17 @@ function EventsCTA() {
                 className="relative z-10 max-w-4xl w-full p-5 md:p-10 lg:p-16 rounded-[3rem] bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-xl text-center flex flex-col items-center gap-6 md:gap-8 shadow-sm dark:shadow-none"
             >
                 <h2 className="text-[clamp(1.8rem,4.5vw,3.5rem)] font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
-                    Want To Build The <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Future</span> With Us?
+                    {data?.titlePart1 || "Want To Build The"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.titleHighlight || "Future"}</span> {data?.titlePart2 || "With Us?"}
                 </h2>
                 <p className="text-[clamp(0.9rem,1.5vw,1.1rem)] text-slate-600 dark:text-slate-400 max-w-xl">
-                    Whether you&apos;re looking to join our engineering teams or partner with us for your next digital transformation, we&apos;re ready.
+                    {data?.description || "Whether you're looking to join our engineering teams or partner with us for your next digital transformation, we're ready."}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
                     <button 
-                        onClick={() => window.location.href = '/contact'}
+                        onClick={() => window.location.href = data?.btnLink || '/contact'}
                         className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1"
                     >
-                        Join Our Team
+                        {data?.btnText || "Join Our Team"}
                     </button>
                 </div>
             </div>
@@ -436,7 +452,7 @@ function EventsCTA() {
 // ==========================================
 // MAIN EXPORT ASSEMBLY
 // ==========================================
-export default function CinematicEvents({ events = [], teamMembers = [] }) {
+export default function CinematicEvents({ events = [], teamMembers = [], content = {} }) {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -448,7 +464,7 @@ export default function CinematicEvents({ events = [], teamMembers = [] }) {
     if (events.length === 0) {
         return (
             <div className="w-full flex flex-col bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
-                <EventsHero />
+                <EventsHero data={content?.hero} />
                 <div className="w-full flex flex-col items-center justify-center py-20 px-6 bg-slate-50 dark:bg-[#020617] text-center min-h-[40vh]">
                     <div className="p-8 rounded-[2rem] bg-white/80 dark:bg-[#080d19]/80 border border-slate-200 dark:border-white/10 max-w-md shadow-premium backdrop-blur-md">
                         <span className="text-5xl mb-4 block">🎉</span>
@@ -458,12 +474,12 @@ export default function CinematicEvents({ events = [], teamMembers = [] }) {
                         </p>
                     </div>
                 </div>
-                <EventTimeline />
+                <EventTimeline data={content?.timeline} />
                 <CultureStats />
                 <VideoReelPreview />
                 <InfiniteEventMarquee />
-                <EmployeeTestimonials teamMembers={teamMembers} />
-                <EventsCTA />
+                <EmployeeTestimonials teamMembers={teamMembers} data={content?.testimonials} />
+                <EventsCTA data={content?.cta} />
             </div>
         );
     }
@@ -473,7 +489,7 @@ export default function CinematicEvents({ events = [], teamMembers = [] }) {
 
     return (
         <div className="w-full flex flex-col bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
-            <EventsHero />
+            <EventsHero data={content?.hero} />
             
             {featuredEvent && (
                 <FeaturedEvent 
@@ -486,15 +502,16 @@ export default function CinematicEvents({ events = [], teamMembers = [] }) {
                 <EventBentoGallery 
                     events={otherEvents} 
                     onSelectEvent={handleOpenGallery} 
+                    data={content?.gallery}
                 />
             )}
             
-            <EventTimeline />
+            <EventTimeline data={content?.timeline} />
             <CultureStats />
             <VideoReelPreview />
             <InfiniteEventMarquee />
-            <EmployeeTestimonials teamMembers={teamMembers} />
-            <EventsCTA />
+            <EmployeeTestimonials teamMembers={teamMembers} data={content?.testimonials} />
+            <EventsCTA data={content?.cta} />
 
             <EventGalleryModal 
                 isOpen={isModalOpen} 

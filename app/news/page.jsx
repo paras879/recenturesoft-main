@@ -57,6 +57,8 @@ export default async function NewsPage() {
                     badge={newsHero.badge || "Live Updates"}
                     title={newsHero.title || "Tech News"}
                     description={newsHero.description || "Discover real-time global technology news, breaking industry insights, and digital innovations."}
+                    bannerImage={newsHero.bannerImage}
+                    bannerOpacity={newsHero.bannerOpacity}
                 />
             )}
 

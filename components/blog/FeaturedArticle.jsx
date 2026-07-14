@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function FeaturedArticle({ article }) {
+export default function FeaturedArticle({ article, title = "Featured Insight" }) {
     if (!article) return null;
 
     const formatDate = (dateString) => {
@@ -17,7 +17,7 @@ export default function FeaturedArticle({ article }) {
         <section className="pt-8 pb-8 lg:pt-12 lg:pb-12 bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
             <div className="container mx-auto px-4 max-w-[1200px]">
                 <div className="flex justify-between items-end mb-12">
-                    <h2 className="text-[clamp(2rem,3vw,3rem)] font-extrabold text-slate-900 dark:text-white">Featured Insight</h2>
+                    <h2 className="text-[clamp(2rem,3vw,3rem)] font-extrabold text-slate-900 dark:text-white">{title}</h2>
                 </div>
 
                 <style dangerouslySetInnerHTML={{__html: `

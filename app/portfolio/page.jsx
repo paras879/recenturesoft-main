@@ -59,6 +59,8 @@ export default async function PortfolioPage() {
                 title={content.hero?.title || "Engineering"}
                 highlight={content.hero?.highlight || "Success"}
                 description={content.hero?.desc || "Discover award-worthy digital products, enterprise platforms, AI-powered solutions, and transformative experiences engineered to accelerate business growth."}
+                bannerImage={content.hero?.bannerImage}
+                bannerOpacity={content.hero?.bannerOpacity}
             />
 
             <ProjectGallery initialProjects={projects} data={content.gallery} />

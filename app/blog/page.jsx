@@ -8,6 +8,7 @@ import ArticleGrid from "@/components/blog/ArticleGrid";
 import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import BlogCategory from "@/models/BlogCategory";
+import WebPage from "@/models/WebPage";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const metadata = {
@@ -33,6 +34,17 @@ export default async function BlogPage() {
     const categories = await BlogCategory.find().sort({ createdAt: 1 }).lean();
     const catNames = categories.map(c => c.name);
 
+    // Fetch dynamic page content
+    let pageContent = {};
+    try {
+        const pageData = await WebPage.findOne({ path: "/blog" }).lean();
+        if (pageData && pageData.content) {
+            pageContent = pageData.content;
+        }
+    } catch (err) {
+        console.error("Failed to fetch page content:", err);
+    }
+
     // Serialize database documents safely to pass as props
     const serializedFeatured = featuredArticle ? JSON.parse(JSON.stringify(featuredArticle)) : null;
     const serializedGrid = JSON.parse(JSON.stringify(gridArticles));
@@ -47,13 +59,15 @@ export default async function BlogPage() {
 
             <Navbar />
             <PageHero hideContactButton={true}
-                badge="Editorial"
-                title="Insights &"
-                highlight="Perspectives"
-                description="Explore deep technical deep-dives, industry trends, and thoughts on the future of enterprise software and design."
+                badge={pageContent?.hero?.badge || "Editorial"}
+                title={pageContent?.hero?.title || "Insights &"}
+                highlight={pageContent?.hero?.highlight || "Perspectives"}
+                description={pageContent?.hero?.description || "Explore deep technical deep-dives, industry trends, and thoughts on the future of enterprise software and design."}
+                bannerImage={pageContent?.hero?.bannerImage}
+                bannerOpacity={pageContent?.hero?.bannerOpacity}
             />
 
-            <FeaturedArticle article={serializedFeatured} />
+            <FeaturedArticle article={serializedFeatured} title={pageContent?.featured?.title || "Featured Insight"} />
             <ArticleGrid articles={serializedGrid} categories={catNames} />
             <PageFAQSection pageName="blog" />
 

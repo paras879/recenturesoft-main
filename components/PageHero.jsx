@@ -1,8 +1,10 @@
 "use client";
+import Image from "next/image";
 
-export default function PageHero({ title, highlight, description, banner, highlightClass, hideContactButton, children }) {
+export default function PageHero({ title, highlight, description, banner, highlightClass, hideContactButton, children, bannerImage, bannerOpacity }) {
+    const opacityValue = bannerOpacity !== undefined ? (parseInt(bannerOpacity) / 100) : 0.7;
     return (
-        <section className={`relative pt-24 md:pt-28 lg:pt-32 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${children ? 'bg-[#020617]' : 'bg-background'}`}>
+        <section className={`relative pt-24 md:pt-28 lg:pt-32 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${(children || bannerImage) ? 'bg-[#020617]' : 'bg-background'}`}>
             {/* CSS entry animations */}
             <style dangerouslySetInnerHTML={{
                 __html: `
@@ -43,10 +45,20 @@ export default function PageHero({ title, highlight, description, banner, highli
                 <div className="absolute -right-[10%] top-[20%] w-[40%] h-[40%] bg-blue-300/10 dark:bg-blue-600/10 rounded-full blur-[100px]" />
             </div>
 
-            {/* Background Image Passed as Children */}
-            {children && (
+            {/* Background Image Passed as Children or bannerImage */}
+            {(children || bannerImage) && (
                 <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 z-0 opacity-70">
+                    {bannerImage && (
+                        <Image
+                            src={bannerImage.includes('res.cloudinary.com') ? bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : bannerImage}
+                            alt="Background Banner"
+                            fill
+                            sizes="100vw"
+                            priority
+                            className="object-cover"
+                        />
+                    )}
+                    <div className="absolute inset-0 z-0 bg-[#020617]" style={{ opacity: opacityValue }}>
                         {children}
                     </div>
                 </div>
@@ -54,17 +66,17 @@ export default function PageHero({ title, highlight, description, banner, highli
 
             <div className="container mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 relative z-20 max-w-[1500px] h-full">
                 {/* Left aligned if image is present, centered otherwise */}
-                <div className={`flex flex-col ${children ? 'justify-end md:justify-center items-start text-left min-h-[55vh] md:min-h-[50vh] pb-0 md:pb-0 md:pt-20' : 'justify-center items-center text-center'}`}>
+                <div className={`flex flex-col ${(children || bannerImage) ? 'justify-end md:justify-center items-start text-left min-h-[55vh] md:min-h-[50vh] pb-0 md:pb-0 md:pt-20' : 'justify-center items-center text-center'}`}>
 
                     <h1
-                        className={`font-light md:font-medium tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${children ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
+                        className={`font-light md:font-medium tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${(children || bannerImage) ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
                     >
                         {title} <br className="hidden md:block" />
                         <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
                     </h1>
 
                     <p
-                        className={`text-base md:text-lg lg:text-xl leading-relaxed md:leading-8 animate-fade-up-2 ${children ? 'text-white md:text-slate-200 font-[500] md:font-normal max-w-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:drop-shadow-md' : 'text-slate-900 md:text-slate-600 dark:text-slate-200 md:dark:text-slate-300 font-[500] md:font-normal drop-shadow-sm md:drop-shadow-none max-w-3xl mx-auto'}`}
+                        className={`text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.6] max-w-3xl font-light mb-8 md:mb-12 animate-fade-up-2 ${(children || bannerImage) ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-muted-foreground'}`}
                     >
                         {description}
                     </p>

@@ -8,10 +8,26 @@ import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 // SECTION 1: HERO
 // ==========================================
 function AboutHero({ data = {} }) {
+    const opacityValue = data?.bannerOpacity !== undefined ? (parseInt(data.bannerOpacity) / 100) : 0.7;
     return (
-        <section className="relative min-h-auto w-full flex items-center justify-center pt-28 md:pt-32 lg:pt-36 pb-0 overflow-hidden bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
+        <section className={`relative min-h-auto w-full flex items-center justify-center pt-28 md:pt-32 lg:pt-36 pb-0 overflow-hidden px-4 sm:px-6 lg:px-12 transition-colors duration-300 ${data?.bannerImage ? 'bg-[#020617]' : 'bg-slate-50 dark:bg-[#020617]'}`}>
+            {/* Background Image Passed as bannerImage */}
+            {data?.bannerImage && (
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                    <Image
+                        src={data.bannerImage.includes('res.cloudinary.com') ? data.bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : data.bannerImage}
+                        alt="About Hero Background"
+                        fill
+                        sizes="100vw"
+                        priority
+                        className="object-cover"
+                    />
+                    <div className="absolute inset-0 z-0 bg-[#020617]" style={{ opacity: opacityValue }} />
+                </div>
+            )}
+
             {/* Background Atmosphere */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className={`absolute inset-0 pointer-events-none ${data?.bannerImage ? 'opacity-50' : 'opacity-100'}`}>
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
                 <div className="absolute inset-0 opacity-5 mix-blend-screen">
@@ -28,16 +44,17 @@ function AboutHero({ data = {} }) {
                 {/* Left Content */}
                 <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
                     <h1
-                        className="text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4rem] font-[600] text-slate-900 dark:text-white tracking-[-0.04em] leading-[1.05] tracking-tight animate-fade-up"
+                        className={`text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4rem] font-[600] tracking-[-0.04em] leading-[1.05] tracking-tight animate-fade-up ${data?.bannerImage ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-slate-900 dark:text-white'}`}
                         style={{ animationDelay: "0.1s" }}
                     >
+                        {data?.heading1 || "Engineering The Future"} <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-500 dark:to-indigo-500 animate-gradient-x">
-                            {data?.heading1 || "Engineering The Future"} {data?.headingAccent || "Digital Innovation"}
+                            {data?.headingAccent || "Digital Innovation"}
                         </span>
                     </h1>
 
                     <p
-                        className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-xl leading-8 animate-fade-up whitespace-pre-wrap"
+                        className={`text-base sm:text-lg md:text-xl max-w-xl leading-8 animate-fade-up whitespace-pre-wrap ${data?.bannerImage ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-slate-600 dark:text-slate-300'}`}
                         style={{ animationDelay: "0.2s" }}
                     >
                         {data?.desc || "We help global businesses build scalable software, AI solutions, cloud platforms, and enterprise digital products."}

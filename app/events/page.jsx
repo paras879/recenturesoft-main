@@ -7,6 +7,7 @@ import { connectDB } from "@/lib/mongodb";
 import Event from "@/models/Event";
 import EventGallery from "@/models/EventGallery";
 import TeamMember from "@/models/TeamMember";
+import WebPage from "@/models/WebPage";
 import { resolveImagePath } from "@/lib/imageHelper";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
@@ -24,6 +25,7 @@ export default async function EventsPage() {
 
     let serializedEvents = [];
     let serializedTeam = [];
+    let pageContent = {};
     
     try {
         await connectDB();
@@ -56,6 +58,12 @@ export default async function EventsPage() {
             image: resolveImagePath(member.image || ""),
         }));
 
+        // Fetch dynamic page content
+        const pageData = await WebPage.findOne({ path: "/events" }).lean();
+        if (pageData && pageData.content) {
+            pageContent = pageData.content;
+        }
+
     } catch (error) {
         console.error("Error fetching data from MongoDB:", error);
     }
@@ -64,7 +72,7 @@ export default async function EventsPage() {
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Events & Culture | RecentureSoft","description":"Experience the passion, innovation, and global collaboration that drives our engineering teams.","url":"https://recenturesoft.com/events"}) }} />
             <Navbar />
-            <CinematicEvents events={serializedEvents} teamMembers={serializedTeam} />
+            <CinematicEvents events={serializedEvents} teamMembers={serializedTeam} content={pageContent} />
             <PageFAQSection pageName="events" />
 
             <FutureFooter />
