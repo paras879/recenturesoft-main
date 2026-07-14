@@ -7,21 +7,21 @@ const CheckIcon = () => (
     <Check className="w-5 h-5 text-red-500 mx-auto" strokeWidth={3} />
 );
 
-export default function SeoPackageContent() {
-    const plans = [
+export default function SeoPackageContent({ dynamicData }) {
+    const plans = dynamicData?.content?.plans || [
         { name: "Bronze", keywords: "20 keywords to be optimized" },
         { name: "Silver", keywords: "40 keywords to be optimized" },
         { name: "Gold", keywords: "60 keywords to be optimized" },
         { name: "Platinum", keywords: "80 keywords to be optimized" }
     ];
 
-    const websiteAudit = [
+    const websiteAudit = dynamicData?.content?.websiteAudit || [
         "Initial Review & Analysis", "In-Depth Site Analysis", "Content Duplicacy Check", 
         "Initial Backlinks Analysis", "Google Penalty Check", "Competition Analysis", 
         "Initial Rank Report", "Keyword Research"
     ];
 
-    const onPageOptimization = [
+    const onPageOptimization = dynamicData?.content?.onPageOptimization || [
         "Canonicalization", "Website Page Load Optimization", "Header Tags Optimization", 
         "Html Code Cleanup & Optimization", "Internal Link Structuring & Optimization", 
         "Image & Hyperlink Optimization", "IRobots.Txt Creation/Analysis", "Html & Xml Sitemap", 
@@ -29,7 +29,7 @@ export default function SeoPackageContent() {
         "Page Speed Optimization Analysis", "Sitemap Creation"
     ];
 
-    const contentMarketing = [
+    const contentMarketing = dynamicData?.content?.contentMarketing || [
         { name: "Blog Writing", values: ["1", "1", "2", "2"] },
         { name: "Informational Article Writing & Submission", values: ["4", "5", "6", "7"] },
         { name: "Press Release Writing & Submission", values: ["2", "1", "2", "5"] },
@@ -38,21 +38,21 @@ export default function SeoPackageContent() {
         { name: "Press Release Social Bookmarking", values: ["5", "10", "20", "30"] }
     ];
 
-    const smo = [
+    const smo = dynamicData?.content?.smo || [
         { name: "Social Bookmarking", values: ["40", "60", "80", "100"] }
     ];
     
-    const smoChecks = [
+    const smoChecks = dynamicData?.content?.smoChecks || [
         "Google Plus Business Page Setup", "Facebook & Twitter Account Setup", 
         "Profile Content Writing", "Facebook Wall Updates", "Twitter Updates", 
         "Google + Update", "Custom Twitter Background", "Facebook Timeline Design"
     ];
 
-    const reporting = [
+    const reporting = dynamicData?.content?.reporting || [
         "Search Engine Rank Report", "Seo Reports", "Google Analytics Report", "Activity Report"
     ];
 
-    const customerSupport = [
+    const customerSupport = dynamicData?.content?.customerSupport || [
         "Email/Chat/Online", "24/7 Live Project Tracking"
     ];
 

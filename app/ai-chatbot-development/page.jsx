@@ -49,7 +49,8 @@ export default async function AIChatbotPage() {
     let pageContent = {};
     try {
         await connectDB();
-        const pageData = await WebPage.findOne({ path: "/ai-chatbot-development" }).lean();
+        const pageDataRaw = await WebPage.findOne({ path: "/ai-chatbot-development" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
         if (pageData && pageData.content) {
             pageContent = pageData.content;
         }

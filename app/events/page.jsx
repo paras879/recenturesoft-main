@@ -34,7 +34,8 @@ export const dynamic = "force-dynamic";
 
 export default async function EventsPage() {
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/events" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/events" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
 
     const isActive = await checkPageStatus("/events");
     if (!isActive) return notFound();

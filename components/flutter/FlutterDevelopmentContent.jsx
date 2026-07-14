@@ -9,7 +9,7 @@ import {
     ChevronRight, ArrowRight, Star, Plus, Minus, Search, Globe, Terminal, Users, Database, FileCode, MonitorSmartphone, MessageSquare, Target
 } from 'lucide-react'
 
-export default function FlutterDevelopmentContent() {
+export default function FlutterDevelopmentContent({ dynamicData }) {
     const [activeFaq, setActiveFaq] = useState(null)
     const [expandedGrids, setExpandedGrids] = useState({})
 

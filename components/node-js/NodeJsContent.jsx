@@ -3,8 +3,8 @@
 import CinematicServiceTemplate from "@/components/shared/CinematicServiceTemplate";
 import { ServerCog, Zap, Network, Lock, Database, Code2 } from "lucide-react";
 
-export default function NodeJsContent() {
-    const features = [
+export default function NodeJsContent({ dynamicData }) {
+    const features = dynamicData?.content?.features || [
         {
             icon: Zap,
             title: "Event-Driven Architecture",

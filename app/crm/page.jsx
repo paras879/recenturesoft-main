@@ -20,7 +20,8 @@ export default async function CrmPage() {
     const isActive = await checkPageStatus("/crm");
     if (!isActive) return notFound();
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/crm" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/crm" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.crmHero || {};
 

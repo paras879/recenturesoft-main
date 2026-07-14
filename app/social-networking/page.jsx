@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -8,13 +10,29 @@ import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+const defaultMetadata = {
     title: "SMO Company In India | RecentureSoft",
     description: "Get popular with the best SMO company in India. We execute quality SMM and SEO services to strengthen your brand online and maximize your ROI.",
     alternates: { canonical: "/social-networking" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/social-networking" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function SmoPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/social-networking" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/social-networking");
     if (!isActive) return notFound();
 
@@ -34,7 +52,7 @@ export default async function SmoPage() {
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <SmoContent />
+                    <SmoContent dynamicData={pageData} />
                 </div>
             </section>
 

@@ -20,7 +20,8 @@ export default async function AmazonStorePage() {
     const isActive = await checkPageStatus("/amazon-store-management");
     if (!isActive) return notFound();
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/amazon-store-management" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/amazon-store-management" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.amazonHero || {};
 

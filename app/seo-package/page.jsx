@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -8,13 +10,29 @@ import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+const defaultMetadata = {
     title: "SEO Packages In India | RecentureSoft",
     description: "Explore our comprehensive SEO packages including Bronze, Silver, Gold, and Platinum. Get custom Website Audit, On-Page Optimization, and Content Marketing.",
     alternates: { canonical: "/seo-package" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/seo-package" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function SeoPackagePage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/seo-package" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/seo-package");
     if (!isActive) return notFound();
 
@@ -34,7 +52,7 @@ export default async function SeoPackagePage() {
 
             <section className="py-10 md:py-16 px-4 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto">
-                    <SeoPackageContent />
+                    <SeoPackageContent dynamicData={pageData} />
                 </div>
             </section>
 

@@ -46,7 +46,8 @@ export default async function GenerativeAIPage() {
 
     await connectDB();
     const faqs = await getFaqs("generative-ai");
-    const pageData = await WebPage.findOne({ path: "/generative-ai" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/generative-ai" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
 
     return (

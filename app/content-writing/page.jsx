@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -8,13 +10,29 @@ import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+const defaultMetadata = {
     title: "Content Writing Company In India | RecentureSoft",
     description: "Partner with the best content writing company in India. We provide high-quality webpage content, technical writing, blogs, and academic writing services.",
     alternates: { canonical: "/content-writing" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/content-writing" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function ContentWritingPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/content-writing" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/content-writing");
     if (!isActive) return notFound();
 
@@ -23,18 +41,19 @@ export default async function ContentWritingPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Content Writing Company In India | RecentureSoft","description":"Partner with the best content writing company in India. We provide high-quality webpage content, technical writing, blogs, and academic writing services.","url":"https://recenturesoft.com/content-writing"}) }} />
             <Navbar />
             <PageHero
-                badge="Content Marketing"
-                title="Content Writing Company in India"
+                badge={pageData?.content?.heroBadge || "Content Marketing"}
+                title={pageData?.content?.heroTitle || "Content Writing Company in India"}
                 highlight=""
                 description=""
                 highlightClass="text-blue-500 dark:text-blue-400"
+                banner={pageData?.content?.heroBanner || "/Banner/content_writting.webp"}
             >
-                <Image src="/Banner/content_writting.webp" alt="content-writing Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={pageData?.content?.heroBanner || "/Banner/content_writting.webp"} alt="content-writing Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </PageHero>
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <ContentWritingContent />
+                    <ContentWritingContent dynamicData={pageData} />
                 </div>
             </section>
 

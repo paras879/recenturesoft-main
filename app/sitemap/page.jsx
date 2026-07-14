@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import React from 'react';
@@ -7,7 +9,7 @@ import SitemapClient from "./SitemapClient";
 import mongoose from "mongoose";
 import { connectDB } from "@/lib/mongodb";
 
-export const metadata = {
+const defaultMetadata = {
     title: "Sitemap | RecentureSoft",
     description: "Navigate through all pages, services, and resources available on the RecentureSoft platform. Find the information you need quickly and easily.",
     openGraph: {
@@ -20,7 +22,23 @@ export const metadata = {
     alternates: { canonical: "/sitemap" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/sitemap" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function SitemapPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/sitemap" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/sitemap");
     if (!isActive) return notFound();
 

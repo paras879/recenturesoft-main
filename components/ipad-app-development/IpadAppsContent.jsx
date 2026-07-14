@@ -7,8 +7,8 @@ import {
     Lock, CheckCircle2, HeartHandshake, Lightbulb
 } from "lucide-react";
 
-export default function IpadAppsContent() {
-    const services = [
+export default function IpadAppsContent({ dynamicData }) {
+    const services = dynamicData?.content?.services || [
         { icon: MonitorPlay, title: "End-to-End Development", desc: "Complete iPad app development lifecycle from generating the initial idea to establishing a strategy and monetization." },
         { icon: CheckCircle2, title: "Certified Methodologies", desc: "Agile methodologies tailored to build scalable products that your users will genuinely love and enjoy." },
         { icon: Palette, title: "Committed UI/UX Experts", desc: "Our dedicated designers leverage rich functionality and appealing layouts to achieve exceptional user experiences." },
@@ -17,7 +17,7 @@ export default function IpadAppsContent() {
         { icon: Search, title: "15-Day Analysis Audit", desc: "In-depth auditing and analysis to detect missed opportunities and build apps that captivate your audience." }
     ];
 
-    const whyChooseUs = [
+    const whyChooseUs = dynamicData?.content?.whyChooseUs || [
         { icon: Lock, title: "100% Confidentiality", desc: "We ensure your app code stands tall on expectations with absolute confidentiality. It is never reused or shared." },
         { icon: HeartHandshake, title: "Post-Launch Support", desc: "Full proactive support, active data analytics, user monitoring, and hotfixes even after the app launch." },
         { icon: Clock, title: "On-Time App Delivery", desc: "Timely delivery is our forte. We ensure your iPad application is launched exactly as planned." },

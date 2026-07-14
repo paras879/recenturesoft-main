@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -8,13 +10,29 @@ import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+const defaultMetadata = {
     title: "iPad App Development Company In India | RecentureSoft",
     description: "Scale your business with the best iPad app development company in India. We build reliable, fast, and elegant iPad applications tailored to your goals.",
     alternates: { canonical: "/ipad-app-development" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/ipad-app-development" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function IpadAppsPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/ipad-app-development" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/ipad-app-development");
     if (!isActive) return notFound();
 
@@ -34,7 +52,7 @@ export default async function IpadAppsPage() {
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <IpadAppsContent />
+                    <IpadAppsContent dynamicData={pageData} />
                 </div>
             </section>
 

@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -11,13 +13,29 @@ import { connectDB } from "@/lib/mongodb";
 import Service from "@/models/Service";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+const defaultMetadata = {
     title: "Enterprise Solutions | RecentureSoft",
     description: "Explore our premium enterprise solutions, digital intelligence, and modern technology architecture.",
     alternates: { canonical: "/solutions" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/solutions" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function SolutionsPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/solutions" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/solutions");
     if (!isActive) return notFound();
 
@@ -46,7 +64,7 @@ export default async function SolutionsPage() {
 
             <EnterpriseServices services={servicesData} />
 
-            <TechArchitecture />
+            <TechArchitecture dynamicData={pageData} />
 
             <SolutionsProcess />
 

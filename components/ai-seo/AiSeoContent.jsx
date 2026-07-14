@@ -6,8 +6,8 @@ import {
     Bot, BarChart3, Rocket, Sparkles, Globe
 } from "lucide-react";
 
-export default function AiSeoContent() {
-    const features = [
+export default function AiSeoContent({ dynamicData }) {
+    const features = dynamicData?.content?.features || [
         { icon: Bot, title: "AI-Powered Keyword Research", desc: "We use advanced artificial intelligence tools to find low-competition, high-conversion keywords that traditional methods miss." },
         { icon: Zap, title: "Automated Content Optimization", desc: "Our AI systems analyze top-ranking pages and provide actionable recommendations to optimize your content for maximum relevance." },
         { icon: Target, title: "Predictive SEO Analysis", desc: "Anticipate search engine algorithm changes and user behavior trends using machine learning models for proactive SEO strategies." },

@@ -40,7 +40,8 @@ export default async function PortfolioPage() {
             technologies: doc.technologies || []
         }));
 
-        const pageData = await WebPage.findOne({ path: "/portfolio" }).lean();
+        const pageDataRaw = await WebPage.findOne({ path: "/portfolio" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
         content = pageData?.content || {};
     } catch (error) {
         console.error("Error fetching data from MongoDB:", error);

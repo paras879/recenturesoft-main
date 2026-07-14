@@ -3,8 +3,8 @@
 import CinematicServiceTemplate from "@/components/shared/CinematicServiceTemplate";
 import { Zap, Server, Globe, Search, ArrowUpRight, Blocks } from "lucide-react";
 
-export default function NextJsContent() {
-    const features = [
+export default function NextJsContent({ dynamicData }) {
+    const features = dynamicData?.content?.features || [
         {
             icon: Server,
             title: "Server-Side Rendering (SSR)",

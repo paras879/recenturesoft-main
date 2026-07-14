@@ -19,7 +19,8 @@ export default async function AboutPage() {
     if (!isActive) return notFound();
 
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/about" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/about" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const content = pageData?.content || {};
 
     return (

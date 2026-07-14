@@ -9,8 +9,8 @@ import {
     Plane, Gamepad2, GraduationCap, Car, Truck, Code2, CheckSquare
 } from "lucide-react";
 
-export default function IphoneAppsContent() {
-    const solutions = [
+export default function IphoneAppsContent({ dynamicData }) {
+    const solutions = dynamicData?.content?.solutions || [
         { icon: PenTool, title: "iOS UI/UX Design", desc: "Immersive and memorable UI/UX designs perfectly aligned with what your customers expect from the Apple ecosystem." },
         { icon: Globe, title: "iOS App Consultation", desc: "Expert guidance in deciding whether iOS is an appropriate fit and selecting the right technology stack for your company." },
         { icon: Layers, title: "Native & Custom iOS Dev", desc: "High-performance native apps enabling better access to default Apple functionalities and tailored custom solutions." },
@@ -19,14 +19,14 @@ export default function IphoneAppsContent() {
         { icon: Settings, title: "Testing, Maintenance & Migration", desc: "End-to-end QA testing, real-time maintenance, and hassle-free migration to newer versions of the iOS platform." }
     ];
 
-    const whyIos = [
+    const whyIos = dynamicData?.content?.whyIos || [
         { icon: HeartPulse, title: "Excellent User Experience", desc: "iPhone applications make customers happy with their brilliant, smooth user experiences." },
         { icon: TrendingUpIcon, title: "Revenue Generation", desc: "iPhone applications generally have a much higher return on investment compared to other platforms." },
         { icon: Lock, title: "Top-Class Security", desc: "The iOS ecosystem provides top-tier data security assurance for your organization and users." },
         { icon: Rocket, title: "Quicker Development", desc: "iOS applications tend to take lesser time to develop than alternatives with similar specifications." }
     ];
 
-    const whyPartner = [
+    const whyPartner = dynamicData?.content?.whyPartner || [
         "Agile Scrum Methodology",
         "Dedicated Expert Teams",
         "Competitive & Lowest Pricing",
@@ -35,7 +35,7 @@ export default function IphoneAppsContent() {
         "Strict Quality Assurance"
     ];
 
-    const process = [
+    const process = dynamicData?.content?.process || [
         { title: "Requirement Understanding", desc: "Analyzing features and building a vision." },
         { title: "Creating Wireframes", desc: "Designing visual guides and application prototypes." },
         { title: "Project Kickoff", desc: "Discussing technologies, tools, teams, and frameworks." },
@@ -44,14 +44,14 @@ export default function IphoneAppsContent() {
         { title: "Launch & Maintenance", desc: "Deploying the app and providing 24/7 ongoing support." }
     ];
 
-    const devices = [
+    const devices = dynamicData?.content?.devices || [
         { icon: Smartphone, label: "iPhone" },
         { icon: MonitorPlay, label: "iPad" },
         { icon: Globe, label: "Apple TV" },
         { icon: Watch, label: "Apple Watch" }
     ];
 
-    const industries = [
+    const industries = dynamicData?.content?.industries || [
         { icon: ShoppingCart, label: "Retail & eCommerce" },
         { icon: Gamepad2, label: "Media & Entertainment" },
         { icon: Briefcase, label: "Banking & Finance" },
@@ -63,7 +63,7 @@ export default function IphoneAppsContent() {
         { icon: Truck, label: "Logistics" }
     ];
 
-    const faqs = [
+    const faqs = dynamicData?.content?.faqs || [
         {
             question: "How much does iOS app development cost?",
             answer: "Various factors determine the cost of iOS application development, including project complexity, the total number of features, the platform required, and project size. Contact us with your business requirements to receive a personalized estimate."

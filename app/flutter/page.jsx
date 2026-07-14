@@ -1,3 +1,5 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import FlutterDevelopmentContent from '@/components/flutter/FlutterDevelopmentContent'
@@ -29,11 +31,15 @@ export const metadata = {
   },
 }
 
-export default function FlutterDevelopmentPage() {
+export default async function FlutterDevelopmentPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/flutter" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
   return (
     <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
       <Navbar />
-      <FlutterDevelopmentContent />
+      <FlutterDevelopmentContent dynamicData={pageData} />
       <FutureFooter />
     </main>
   );

@@ -7,8 +7,8 @@ import {
     CheckCircle2, Rocket, Zap, Users
 } from "lucide-react";
 
-export default function SeoContent() {
-    const services = [
+export default function SeoContent({ dynamicData }) {
+    const services = dynamicData?.content?.services || [
         { icon: Crosshair, title: "Competitor Analysis", desc: "Turn competition into opportunities. We gauge competitors by the clicks they get and emulate winning content and keywords." },
         { icon: Search, title: "On-Page Optimisation", desc: "Optimize over 15 on-page factors like meta tags, website speed, and UX to ensure thrilling load times and seamless navigation." },
         { icon: Share2, title: "Off-Page Optimisation", desc: "Bring your website the best organic exposure possible, increase visitors, and activate high-quality connections across the web." },
@@ -17,14 +17,14 @@ export default function SeoContent() {
         { icon: LinkIcon, title: "Link Building", desc: "Powerful, non-cookie-cutter link building. We place your brand in high-quality directories, PR sites, and blogs to stimulate engagement." }
     ];
 
-    const approaches = [
+    const approaches = dynamicData?.content?.approaches || [
         { title: "Deep Dive Analysis", desc: "A 200+ point on-site SEO analysis of your organization, server, competitors, and products." },
         { title: "UX & IA Rework", desc: "Refining usability, site architecture, and crafting attention-grabbing title and meta descriptions." },
         { title: "Targeted Keyword Research", desc: "Industry-specific keyword analysis, mapping updates, and number crunching to measure conversions." },
         { title: "ROI Tracking", desc: "Regular tests for continual improvements via Conversion Path Analysis and Calls-to-action tweaks." }
     ];
 
-    const locations = [
+    const locations = dynamicData?.content?.locations || [
         "Ahmedabad", "Ambala", "Amritsar", "Bhopal", 
         "Bhubaneswar", "Coimbatore", "Delhi", "Kolkata", 
         "Meerut", "Nagpur", "Noida", "Panchkula", 

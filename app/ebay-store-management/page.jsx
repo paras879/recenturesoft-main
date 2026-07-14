@@ -20,7 +20,8 @@ export default async function EbayStorePage() {
     const isActive = await checkPageStatus("/ebay-store-management");
     if (!isActive) return notFound();
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/ebay-store-management" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/ebay-store-management" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.ebayHero || {};
 

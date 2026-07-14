@@ -1,16 +1,34 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PrivacyPolicyContent from "@/components/privacy/PrivacyPolicyContent";
 import FutureFooter from "@/components/FutureFooter";
 
-export const metadata = {
+const defaultMetadata = {
     title: "Privacy Policy | Software Dev Company",
     description: "Our privacy policy and how we handle your data securely.",
     alternates: { canonical: "/privacy-policy" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/privacy-policy" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
+
 export default async function PrivacyPolicyPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/privacy-policy" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/privacy-policy");
     if (!isActive) return notFound();
 
@@ -23,7 +41,7 @@ export default async function PrivacyPolicyPage() {
                 <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-950/20 dark:to-transparent pointer-events-none -z-10" />
 
                 <div className="pt-32 pb-16">
-                    <PrivacyPolicyContent />
+                    <PrivacyPolicyContent dynamicData={pageData} />
                 </div>
             </main>
             <FutureFooter />

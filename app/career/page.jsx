@@ -1,22 +1,38 @@
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import CareerContent from "@/components/career/CareerContent";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import PageHero from "@/components/PageHero";
-import { connectDB } from "@/lib/mongodb";
 import JobOpening from "@/models/JobOpening";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
+const defaultMetadata = {
     title: "Careers | RecentureSoft",
     description: "Join the RecentureSoft team. Check out our current job openings and apply to build the future of tech with us.",
     alternates: { canonical: "/career" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const page = await WebPage.findOne({ path: "/career" }).lean();
+    if (!page) return defaultMetadata;
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
 export default async function CareerPage() {
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/career" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+
     const isActive = await checkPageStatus("/career");
     if (!isActive) return notFound();
 
@@ -42,10 +58,11 @@ export default async function CareerPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Careers | RecentureSoft","description":"Join the RecentureSoft team. Check out our current job openings and apply to build the future of tech with us.","url":"https://recenturesoft.com/career"}) }} />
             <Navbar />
             <PageHero 
-                title="Join Our Team" 
-                subtitle="Build the future of digital engineering with RecentureSoft. We are always looking for passionate minds."
+                title={pageData?.content?.heroTitle || "Join Our Team"} 
+                subtitle={pageData?.content?.heroSubtitle || "Build the future of digital engineering with RecentureSoft. We are always looking for passionate minds."}
+                banner={pageData?.content?.heroBanner}
             />
-            <CareerContent jobs={jobs} />
+            <CareerContent jobs={jobs} dynamicData={pageData} />
             <PageFAQSection pageName="career" />
 
             <FutureFooter />

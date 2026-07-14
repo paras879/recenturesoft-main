@@ -40,7 +40,8 @@ export default async function NewsPage() {
     const initialData = await getInitialNews();
 
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/news" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/news" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
 
     const newsHero = dynamicData.newsHero || {};

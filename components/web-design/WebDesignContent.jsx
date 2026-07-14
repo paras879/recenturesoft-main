@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { MonitorPlay, Layers, Cpu, Code2, Sparkles, TrendingUp, ShieldCheck, Zap } from "lucide-react";
 
-export default function WebDesignContent() {
-    const services = [
+export default function WebDesignContent({ dynamicData }) {
+    const services = dynamicData?.content?.services || [
         {
             icon: MonitorPlay,
             title: "Immersive UI/UX",
@@ -27,7 +27,7 @@ export default function WebDesignContent() {
         }
     ];
 
-    const techStack = [
+    const techStack = dynamicData?.content?.techStack || [
         {
             icon: Code2,
             title: "Modern Frontend",

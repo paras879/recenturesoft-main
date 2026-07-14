@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Globe, Cloud, Brain, Shield, Cpu, Server, Zap } from "lucide-react";
 
 // Upgraded node data representing system architecture layers
-const architectureNodes = [
+const architectureNodes = dynamicData?.content?.architectureNodes || [
     {
         id: "frontend",
         label: "User Experience Layer",
@@ -167,7 +167,7 @@ function DesktopOrbitingNode({ node, radius, index }) {
 
 // SVG Flow line animation placeholder
 
-export default function TechArchitecture() {
+export default function TechArchitecture({ dynamicData }) {
     const [radius, setRadius] = useState(180);
     const [isCenterHovered, setIsCenterHovered] = useState(false);
 

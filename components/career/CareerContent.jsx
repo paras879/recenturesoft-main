@@ -5,7 +5,7 @@ import { Briefcase, MapPin, Clock, Upload, CheckCircle, AlertCircle } from "luci
 import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function CareerContent({ jobs }) {
+export default function CareerContent({ jobs, dynamicData }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState({ type: "", message: "" });
     const [fileName, setFileName] = useState("No file chosen");
@@ -92,8 +92,8 @@ export default function CareerContent({ jobs }) {
                     {/* Left Side: Current Openings */}
                     <div className="lg:col-span-6 xl:col-span-7 flex flex-col gap-8">
                         <div>
-                            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Current Openings</h2>
-                            <p className="text-slate-600 dark:text-slate-400">Join our team of exceptional engineers, designers, and strategists.</p>
+                            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">{dynamicData?.content?.openingsTitle || "Current Openings"}</h2>
+                            <p className="text-slate-600 dark:text-slate-400">{dynamicData?.content?.openingsSubtitle || "Join our team of exceptional engineers, designers, and strategists."}</p>
                         </div>
 
                         {jobs.length === 0 ? (
@@ -140,7 +140,7 @@ export default function CareerContent({ jobs }) {
                     {/* Right Side: Apply Form */}
                     <div className="lg:col-span-6 xl:col-span-5 relative">
                         <div className="sticky top-28 bg-white dark:bg-[#0b1120] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-8 shadow-xl shadow-cyan-900/5">
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Applicant Apply Here</h3>
+                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">{dynamicData?.content?.formTitle || "Applicant Apply Here"}</h3>
                             
                             {status.message && (
                                 <motion.div 

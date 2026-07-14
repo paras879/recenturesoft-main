@@ -8,17 +8,30 @@ import {
     Layers, Layout, Cpu, Lock, Settings, ChevronDown, CheckSquare
 } from "lucide-react";
 
-export default function AndroidAppsContent() {
-    const services = [
-        { icon: Code2, title: "Native App Development", desc: "Built specifically for Android using Java, Kotlin, and Android Studio for maximum hardware compatibility and a seamless experience." },
-        { icon: Globe, title: "Hybrid App Development", desc: "Cross-platform solutions utilizing HTML5, JavaScript, CSS, and React Native to reach a wider audience across multiple devices." },
-        { icon: Layout, title: "Customised Android Apps", desc: "Highly scalable, packed with relevant features, and intuitive UI/UX to ensure your customers can navigate easily without any hassle." },
-        { icon: ShieldCheck, title: "Enterprise-Grade Apps", desc: "Robust and highly secured applications designed to streamline organizational processes, decrease downtime, and boost productivity." },
-        { icon: Navigation, title: "GPS & GIS Capabilities", desc: "Integrate powerful mapping, routing, and product tracking features seamlessly into your Android mobile application." },
-        { icon: Camera, title: "Camera & Video Integration", desc: "Increase coverage and security with advanced media integrations like face verification, QR scanning, and media sharing." }
+const iconMap = {
+    Smartphone, Code2, Globe, CheckCircle2, ShieldCheck, 
+    Zap, Rocket, Navigation, Camera, MapPin, Search, 
+    Layers, Layout, Cpu, Lock, Settings, ChevronDown, CheckSquare
+};
+
+const getIcon = (iconIdentifier) => {
+    if (typeof iconIdentifier === "string") {
+        return iconMap[iconIdentifier] || Code2;
+    }
+    return iconIdentifier || Code2;
+};
+
+export default function AndroidAppsContent({ dynamicData }) {
+    const services = dynamicData?.content?.services || [
+        { icon: "Code2", title: "Native App Development", desc: "Built specifically for Android using Java, Kotlin, and Android Studio for maximum hardware compatibility and a seamless experience." },
+        { icon: "Globe", title: "Hybrid App Development", desc: "Cross-platform solutions utilizing HTML5, JavaScript, CSS, and React Native to reach a wider audience across multiple devices." },
+        { icon: "Layout", title: "Customised Android Apps", desc: "Highly scalable, packed with relevant features, and intuitive UI/UX to ensure your customers can navigate easily without any hassle." },
+        { icon: "ShieldCheck", title: "Enterprise-Grade Apps", desc: "Robust and highly secured applications designed to streamline organizational processes, decrease downtime, and boost productivity." },
+        { icon: "Navigation", title: "GPS & GIS Capabilities", desc: "Integrate powerful mapping, routing, and product tracking features seamlessly into your Android mobile application." },
+        { icon: "Camera", title: "Camera & Video Integration", desc: "Increase coverage and security with advanced media integrations like face verification, QR scanning, and media sharing." }
     ];
 
-    const steps = [
+    const steps = dynamicData?.content?.steps || [
         { title: "Requirement Gathering", desc: "Understanding your business model, roadmap creation, and setting milestones." },
         { title: "UI/UX Design", desc: "Designing an uncompromised, engaging, appealing, and user-friendly interface." },
         { title: "Prototyping", desc: "Listing features and building an initial blueprint to eliminate early bugs." },
@@ -27,16 +40,16 @@ export default function AndroidAppsContent() {
         { title: "Deployment & Support", desc: "Launching on the Google Play Store followed by proactive maintenance." }
     ];
 
-    const benefits = [
-        { icon: Zap, title: "High ROI & Lower Costs", desc: "Interactive applications that boost customer acquisition and retention with minimal maintenance overhead." },
-        { icon: Rocket, title: "Quicker Deployment", desc: "Reduced time-to-market using an expansive array of advanced tools, giving you a strong competitive edge." },
-        { icon: Layers, title: "Numerous Platforms", desc: "Java compatibility ensures seamless integration with a multitude of diverse operating systems." },
-        { icon: Cpu, title: "Versatility & Scalability", desc: "Compatible with smartphones, smartwatches, Android TV, IoT, AR, and VR for maximum future-proofing." },
-        { icon: Lock, title: "Improved Security", desc: "Tackling safety concerns natively with the latest built-in security features and strict encryption tools." },
-        { icon: Settings, title: "Custom Options", desc: "As an open-source platform, it enables businesses to make versatile and highly tailor-made adaptations." }
+    const benefits = dynamicData?.content?.benefits || [
+        { icon: "Zap", title: "High ROI & Lower Costs", desc: "Interactive applications that boost customer acquisition and retention with minimal maintenance overhead." },
+        { icon: "Rocket", title: "Quicker Deployment", desc: "Reduced time-to-market using an expansive array of advanced tools, giving you a strong competitive edge." },
+        { icon: "Layers", title: "Numerous Platforms", desc: "Java compatibility ensures seamless integration with a multitude of diverse operating systems." },
+        { icon: "Cpu", title: "Versatility & Scalability", desc: "Compatible with smartphones, smartwatches, Android TV, IoT, AR, and VR for maximum future-proofing." },
+        { icon: "Lock", title: "Improved Security", desc: "Tackling safety concerns natively with the latest built-in security features and strict encryption tools." },
+        { icon: "Settings", title: "Custom Options", desc: "As an open-source platform, it enables businesses to make versatile and highly tailor-made adaptations." }
     ];
 
-    const whyChooseUs = [
+    const whyChooseUs = dynamicData?.content?.whyChooseUs || [
         "Comprehensive Requirement Analysis",
         "Eye-Catchy & Premium UI/UX",
         "Complete Cross-Device Functionality",
@@ -45,7 +58,7 @@ export default function AndroidAppsContent() {
         "Secure Admin Dashboards"
     ];
 
-    const faqs = [
+    const faqs = dynamicData?.content?.faqs || [
         {
             question: "Which are the most suitable tools for Android app development?",
             answer: "Currently, Android Studio is ranked among the most famous Android app development tools. Made by Google in 2013, it has now become the standard software for Android app development."
@@ -107,7 +120,7 @@ export default function AndroidAppsContent() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
                 {services.map((service, index) => {
-                    const Icon = service.icon;
+                    const Icon = getIcon(service.icon);
                     return (
                         <motion.div
                             key={index}
@@ -151,7 +164,7 @@ export default function AndroidAppsContent() {
                     <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Benefits of Android Apps</h3>
                     <div className="space-y-6">
                         {benefits.map((benefit, i) => {
-                            const Icon = benefit.icon;
+                            const Icon = getIcon(benefit.icon);
                             return (
                                 <div key={i} className="flex items-start gap-4">
                                     <div className="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg text-blue-500 shrink-0">

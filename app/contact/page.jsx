@@ -19,7 +19,8 @@ export default async function ContactPage() {
     if (!isActive) return notFound();
 
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/contact" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/contact" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
 
     return (

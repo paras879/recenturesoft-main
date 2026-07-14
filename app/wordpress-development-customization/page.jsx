@@ -20,7 +20,8 @@ export default async function WordPressPage() {
     const isActive = await checkPageStatus("/wordpress-development-customization");
     if (!isActive) return notFound();
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/wordpress-development-customization" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/wordpress-development-customization" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.wordpressHero || {};
 

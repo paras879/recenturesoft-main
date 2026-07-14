@@ -37,7 +37,8 @@ export default async function BlogPage() {
     // Fetch dynamic page content
     let pageContent = {};
     try {
-        const pageData = await WebPage.findOne({ path: "/blog" }).lean();
+        const pageDataRaw = await WebPage.findOne({ path: "/blog" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
         if (pageData && pageData.content) {
             pageContent = pageData.content;
         }

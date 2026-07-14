@@ -3,8 +3,8 @@
 import CinematicServiceTemplate from "@/components/shared/CinematicServiceTemplate";
 import { Smartphone, Combine, Gauge, PenTool, CheckCircle, SmartphoneNfc } from "lucide-react";
 
-export default function ReactNativeContent() {
-    const features = [
+export default function ReactNativeContent({ dynamicData }) {
+    const features = dynamicData?.content?.features || [
         {
             icon: Combine,
             title: "Cross-Platform Codebase",

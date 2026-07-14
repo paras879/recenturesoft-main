@@ -20,7 +20,8 @@ export default async function MagentoPage() {
     const isActive = await checkPageStatus("/magento-development");
     if (!isActive) return notFound();
     await connectDB();
-    const pageData = await WebPage.findOne({ path: "/magento-development" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/magento-development" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.magentoHero || {};
 

@@ -10,7 +10,7 @@ import {
 import TableOfContents from '../privacy/TableOfContents';
 import PrivacySection from '../privacy/PrivacySection';
 
-const SECTIONS = [
+const SECTIONS = dynamicData?.content?.SECTIONS || [
   { id: 'introduction', title: '1. Introduction', icon: Info },
   { id: 'user-obligations', title: '2. User Obligations', icon: UserCheck },
   { id: 'services', title: '3. Our Services', icon: FileText },
@@ -21,7 +21,7 @@ const SECTIONS = [
   { id: 'contact', title: '8. Contact Information', icon: Phone },
 ];
 
-export default function TermsContent() {
+export default function TermsContent({ dynamicData }) {
   const [activeSection, setActiveSection] = useState(SECTIONS[0].id);
   const [searchQuery, setSearchQuery] = useState('');
   const [showBackToTop, setShowBackToTop] = useState(false);

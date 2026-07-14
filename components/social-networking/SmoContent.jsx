@@ -6,8 +6,8 @@ import {
     Smile, Zap, MapPin, Users, Crosshair, Sparkles
 } from "lucide-react";
 
-export default function SmoContent() {
-    const features = [
+export default function SmoContent({ dynamicData }) {
+    const features = dynamicData?.content?.features || [
         { icon: Share2, title: "Social Media Management", desc: "It's next to impossible to manage all platforms at the same time. We execute quality SMO services to strengthen your brand online." },
         { icon: Crosshair, title: "Targeted Automatons", desc: "Use the best technology to improve your brand presence and deliver your brand’s true message and value correctly." },
         { icon: TrendingUp, title: "Maximum ROI", desc: "Aimed at enhancing the sales of our clients' business by creating highly customized strategies for their brand." },

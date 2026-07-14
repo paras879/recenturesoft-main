@@ -3,8 +3,8 @@
 import CinematicServiceTemplate from "@/components/shared/CinematicServiceTemplate";
 import { AppWindow, Layers, RefreshCw, Smartphone, Code2, Users } from "lucide-react";
 
-export default function ReactContent() {
-    const features = [
+export default function ReactContent({ dynamicData }) {
+    const features = dynamicData?.content?.features || [
         {
             icon: AppWindow,
             title: "Single Page Applications",
