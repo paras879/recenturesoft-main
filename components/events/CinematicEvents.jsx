@@ -297,8 +297,8 @@ function EventTimeline({ data }) {
 // ==========================================
 // SECTION 5: CULTURE STATS
 // ==========================================
-function CultureStats() {
-    const stats = [
+function CultureStats({ data }) {
+    const stats = data?.items || [
         { num: "500+", label: "Projects Delivered" },
         { num: "120+", label: "Global Clients" },
         { num: "98%", label: "Client Satisfaction" },
@@ -326,13 +326,13 @@ function CultureStats() {
 // ==========================================
 // SECTION 6: VIDEO REEL PREVIEW
 // ==========================================
-function VideoReelPreview() {
+function VideoReelPreview({ data }) {
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
                 className="relative w-full max-w-6xl h-[50vh] md:h-[70vh] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none"
             >
-                <Image src={IMAGES.videoThumb} alt="Culture Reel" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" quality={50} className="object-cover transition-transform duration-1000 group-hover:scale-105" />
+                <Image src={data?.thumbnail || IMAGES.videoThumb} alt="Culture Reel" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" quality={50} className="object-cover transition-transform duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors duration-500" />
 
                 {/* Play Button */}
@@ -475,8 +475,8 @@ export default function CinematicEvents({ events = [], teamMembers = [], content
                     </div>
                 </div>
                 <EventTimeline data={content?.timeline} />
-                <CultureStats />
-                <VideoReelPreview />
+                <CultureStats data={content?.stats} />
+                <VideoReelPreview data={content?.videoReel} />
                 <InfiniteEventMarquee />
                 <EmployeeTestimonials teamMembers={teamMembers} data={content?.testimonials} />
                 <EventsCTA data={content?.cta} />
@@ -507,8 +507,8 @@ export default function CinematicEvents({ events = [], teamMembers = [], content
             )}
             
             <EventTimeline data={content?.timeline} />
-            <CultureStats />
-            <VideoReelPreview />
+            <CultureStats data={content?.stats} />
+            <VideoReelPreview data={content?.videoReel} />
             <InfiniteEventMarquee />
             <EmployeeTestimonials teamMembers={teamMembers} data={content?.testimonials} />
             <EventsCTA data={content?.cta} />
