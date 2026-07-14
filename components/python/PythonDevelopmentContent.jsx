@@ -24,7 +24,8 @@ export default function PythonDevelopmentContent({ dynamicData }) {
 
     const content = dynamicData?.content || {};
 
-    const heroTitle = content.heroTitle || 'Python Development Services';
+    const heroTitlePlain = content.heroTitlePlain || 'Python';
+    const heroTitleColored = content.heroTitleColored || 'Development Services';
     const heroDesc = content.heroDesc || 'Develop secure, scalable, and high-performance software with Python. From enterprise web applications and APIs to automation tools and AI-powered solutions, we build intelligent systems that help businesses grow faster.';
     const heroImage = content.heroImage || '/images/python-development/hero_python.webp';
     const heroBtn1Text = content.heroBtn1Text || 'Hire Python Developers';
@@ -118,7 +119,10 @@ export default function PythonDevelopmentContent({ dynamicData }) {
                             transition={{ duration: 0.8 }}
                             className="max-w-2xl order-2 lg:order-1 flex flex-col"
                         >
-                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight" dangerouslySetInnerHTML={{ __html: heroTitle.replace('Services', '<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Services</span>') }}>
+                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                                {heroTitlePlain}
+                                <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">{heroTitleColored}</span>
                             </h1>
                             <p className="text-base md:text-lg md:text-base md:text-xl text-slate-600 dark:text-slate-300 mb-4 md:mb-8 leading-relaxed">
                                 {heroDesc}

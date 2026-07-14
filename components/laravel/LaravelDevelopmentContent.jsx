@@ -6,12 +6,133 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
     Smartphone, Server, Layers, Cpu, Code, Activity, Shield, Zap, CheckCircle2,
-    ChevronRight, ArrowRight, Star, Plus, Minus, Search, Globe, Terminal, Users, Database, FileCode, MonitorSmartphone, MessageSquare, Target
+    ChevronRight, ArrowRight, Star, Plus, Minus, Search, Globe, Terminal, Users, Database, FileCode, MonitorSmartphone, MessageSquare, Target, FileText
 } from 'lucide-react'
 
-export default function LaravelDevelopmentContent() {
+const iconMap = {
+    Smartphone, Server, Layers, Cpu, Code, Activity, Shield, Zap, CheckCircle2,
+    ChevronRight, ArrowRight, Star, Plus, Minus, Search, Globe, Terminal, Users, Database, FileCode, MonitorSmartphone, MessageSquare, Target, FileText
+};
+
+export default function LaravelDevelopmentContent({ dynamicData }) {
     const [activeFaq, setActiveFaq] = useState(null)
     const [expandedGrids, setExpandedGrids] = useState({})
+
+    const getIcon = (iconName, FallbackIcon) => {
+        if (typeof iconName === 'string' && iconMap[iconName]) {
+            return iconMap[iconName];
+        }
+        return iconName || FallbackIcon || FileText;
+    };
+
+    // Data Mapping
+    const content = dynamicData?.content || {};
+    
+    // 1. Hero Section
+    const heroTitlePlain = content.heroTitlePlain || 'Laravel Web';
+    const heroTitleColored = content.heroTitleColored || 'Development Services';
+    const heroDesc = content.heroDesc || 'Build stunning, high-performance enterprise-grade web applications with Laravel. Our developers create scalable secure backends apps from a single codebase, helping businesses launch faster while reducing development costs.';
+    const heroBtn1 = content.heroBtn1 || 'Start Your Laravel Project';
+    const heroBtn1Link = content.heroBtn1Link || '/contact';
+    const heroBtn2 = content.heroBtn2 || 'Book Free Consultation';
+    const heroBtn2Link = content.heroBtn2Link || '/contact';
+    const heroImage = content.heroImage || '/images/laravel-development/hero_laravel.webp';
+
+    // 2. Why Laravel
+    const whyLaravelTitle = content.whyLaravelTitle || 'Why Businesses Choose Laravel';
+    const whyLaravelList = content.whyLaravelList || [
+        { title: 'Single Codebase', desc: 'Develop one application for secure backends simultaneously.', icon: 'Layers' },
+        { title: 'Native Performance', desc: 'Deliver smooth animations and near-native speed.', icon: 'Activity' },
+        { title: 'Beautiful User Interface', desc: 'Create visually attractive and responsive mobile apps.', icon: 'Smartphone' },
+        { title: 'Rapid Development', desc: 'Hot Reload speeds up development and testing.', icon: 'Zap' },
+        { title: 'Lower Development Cost', desc: 'Save time and budget by maintaining one codebase.', icon: 'Server' },
+        { title: 'Easy Maintenance', desc: 'Quick updates, bug fixes, and long-term scalability.', icon: 'Shield' },
+    ];
+    const whyLaravelImage = content.whyLaravelImage || '/images/laravel-development/about_laravel.webp';
+
+    // 3. About Development
+    const aboutTitle = content.aboutTitle || 'Create Powerful enterprise-grade Mobile Experiences';
+    const aboutDesc = content.aboutDesc || 'At RecentureSoft, we build feature-rich Laravel applications that deliver exceptional user experiences across secure backends. Our team focuses on performance, intuitive interfaces, scalability, and secure architecture to help businesses launch reliable web applications quickly.';
+    const aboutStatsList = content.aboutStatsList || [
+        { value: '100+', label: 'Successful Web Apps' },
+        { value: '95%', label: 'Client Satisfaction' },
+        { value: '2x', label: 'Faster Time to Market' },
+        { value: '50%', label: 'Lower Development Cost' },
+    ];
+    const aboutImage = content.aboutImage || '/images/common/generic_platform.webp';
+
+    // 4. Our Services
+    const servicesTitle = content.servicesTitle || 'Our Laravel Development Services';
+    const servicesList = content.servicesList || [
+        { title: 'Custom Laravel Web Development', icon: 'Code', desc: 'Tailored web applications designed to meet your specific business requirements and goals.' },
+        { title: 'Android & iOS App Development', icon: 'Smartphone', desc: 'Seamless, high-performance applications that run natively on both major mobile platforms.' },
+        { title: 'Laravel UI/UX Design', icon: 'Layers', desc: 'Engaging, user-centric interfaces created specifically for the Laravel framework.' },
+        { title: 'Enterprise Web Apps', icon: 'Server', desc: 'Scalable and secure mobile solutions designed for large-scale corporate operations.' },
+        { title: 'Laravel Web Migration', icon: 'Activity', desc: 'Smoothly transition your existing native apps to the modern Laravel enterprise-grade architecture.' },
+        { title: 'API Integration', icon: 'Globe', desc: 'Connect your Laravel app with powerful third-party services and custom backend APIs.' },
+        { title: 'Firebase Integration', icon: 'Database', desc: 'Implement real-time databases, authentication, and cloud functions seamlessly.' },
+        { title: 'Maintenance & Support', icon: 'Shield', desc: 'Continuous updates, bug fixes, and performance optimization for your live applications.' },
+    ];
+
+    // 5. Solutions for Industry
+    const industriesTitle = content.industriesTitle || 'Laravel Solutions for Every Industry';
+    const industriesList = content.industriesList || [
+        'E-Commerce Apps', 'Healthcare Apps', 'Food Delivery Apps', 'Taxi Booking Apps',
+        'Education Apps', 'Finance Apps', 'Travel Apps', 'Fitness Apps'
+    ];
+    const industriesImage = content.industriesImage || '/images/common/generic_process.webp';
+
+    // 6. Development Process
+    const processTitle = content.processTitle || 'Our Development Process';
+    const processList = content.processList || [
+        { step: '01', title: 'Discovery & Planning', desc: 'Understand business goals, audience, and project requirements.' },
+        { step: '02', title: 'UI/UX Design', desc: 'Design intuitive, modern, and engaging mobile interfaces.' },
+        { step: '03', title: 'Laravel Web Development', desc: 'Develop scalable, secure, and high-performance applications.' },
+        { step: '04', title: 'Testing & Quality Assurance', desc: 'Ensure flawless performance across secure backends devices.' },
+        { step: '05', title: 'Deployment & Support', desc: 'Publish apps, monitor performance, and provide continuous updates.' }
+    ];
+
+    // 7. Powerful Features
+    const featuresTitle = content.featuresTitle || 'Powerful Features We Integrate';
+    const featuresList = content.featuresList || [
+        { title: 'Push Notifications', icon: 'Zap' },
+        { title: 'Google Maps Integration', icon: 'Globe' },
+        { title: 'Payment Gateway', icon: 'Server' },
+        { title: 'Cloud Sync', icon: 'Database' },
+        { title: 'Offline Mode', icon: 'Activity' },
+        { title: 'Real-Time Chat', icon: 'MessageSquare' },
+        { title: 'Social Login', icon: 'Users' },
+        { title: 'Analytics Dashboard', icon: 'Target' },
+    ];
+    const featuresImage = content.featuresImage || '/images/common/generic_team.webp';
+
+    // 8. Technology Stack
+    const techStackTitle = content.techStackTitle || 'Our Technology Stack';
+    const techStackList = content.techStackList || [
+        'Laravel', 'PHP', 'Firebase', 'REST API', 'GraphQL', 'Node.js',
+        'MongoDB', 'PostgreSQL', 'AWS', 'Google Cloud', 'Docker', 'GitHub', 'Figma'
+    ];
+
+    // 9. Why Choose Us
+    const whyUsTitle = content.whyUsTitle || 'Why Choose RecentureSoft';
+    const whyUsList = content.whyUsList || [
+        { title: 'Certified Laravel Developers', desc: 'Expert team with deep knowledge of PHP and Laravel architecture.', icon: 'Star' },
+        { title: 'Business-Oriented Solutions', desc: 'Apps designed to increase revenue and improve operational efficiency.', icon: 'Target' },
+        { title: 'Agile Development Process', desc: 'Flexible methodology ensuring timely delivery and continuous improvement.', icon: 'Activity' },
+        { title: 'Clean & Scalable Code', desc: 'Maintainable codebases that grow effortlessly with your business.', icon: 'Code' },
+        { title: 'Transparent Communication', desc: 'Regular updates and complete visibility throughout the project lifecycle.', icon: 'MessageSquare' },
+        { title: 'Long-Term Technical Support', desc: 'Dedicated post-launch maintenance and optimization services.', icon: 'Shield' },
+    ];
+    const whyUsImage = content.whyUsImage || '/images/common/generic_cta.webp';
+
+    // 10. Final CTA
+    const ctaTitle = content.ctaTitle || 'Ready to Build Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">Laravel Web?</span>';
+    const ctaDesc = content.ctaDesc || 'Turn your app idea into a high-performance mobile application with Laravel experts at RecentureSoft.';
+    const ctaBtn1 = content.ctaBtn1 || 'Start Your Project';
+    const ctaBtn1Link = content.ctaBtn1Link || '/contact';
+    const ctaBtn2 = content.ctaBtn2 || 'Talk to Laravel Experts';
+    const ctaBtn2Link = content.ctaBtn2Link || '/contact';
+
 
     return (
         <div className="font-sans selection:bg-blue-500/30">
@@ -28,20 +149,19 @@ export default function LaravelDevelopmentContent() {
                             className="max-w-2xl order-2 lg:order-1 flex flex-col"
                         >
                             <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
-                                Laravel Web <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-                                    Development Services
-                                </span>
+                                {heroTitlePlain}
+                                <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">{heroTitleColored}</span>
                             </h1>
                             <p className="text-base md:text-lg md:text-base md:text-xl text-slate-600 dark:text-slate-300 mb-4 md:mb-8 leading-relaxed">
-                                Build stunning, high-performance enterprise-grade web applications with Laravel. Our developers create scalable secure backends apps from a single codebase, helping businesses launch faster while reducing development costs.
+                                {heroDesc}
                             </p>
                             <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
-                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
-                                    Start Your Laravel Project
+                                <Link href={heroBtn1Link} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
+                                    {heroBtn1}
                                 </Link>
-                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
-                                    Book Free Consultation
+                                <Link href={heroBtn2Link} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium md:font-bold border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800/80 transition-all hover:-translate-y-1">
+                                    {heroBtn2}
                                 </Link>
                             </div>
                         </motion.div>
@@ -55,8 +175,8 @@ export default function LaravelDevelopmentContent() {
                             <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
                                 <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
                                 <Image
-                                    src="/images/laravel-development/hero_laravel.webp"
-                                    alt="Laravel Workspace"
+                                    src={heroImage}
+                                    alt="Laravel Hero"
                                     fill
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                     className="object-cover z-10 transition-transform duration-700 group-hover:scale-105"
@@ -69,25 +189,18 @@ export default function LaravelDevelopmentContent() {
                 </div>
             </section>
 
-            {/* 2. WHY FLUTTER */}
+            {/* 2. WHY LARAVEL */}
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Businesses Choose Laravel</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{whyLaravelTitle}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
                     <div className="grid lg:grid-cols-12 gap-12 items-center">
                         <div className={`lg:col-span-7 grid md:grid-cols-2 gap-6 ${expandedGrids['grid20'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:block'}`}>
-                            {[
-                                { title: 'Single Codebase', desc: 'Develop one application for secure backends simultaneously.', icon: Layers },
-                                { title: 'Native Performance', desc: 'Deliver smooth animations and near-native speed.', icon: Activity },
-                                { title: 'Beautiful User Interface', desc: 'Create visually attractive and responsive mobile apps.', icon: Smartphone },
-                                { title: 'Rapid Development', desc: 'Hot Reload speeds up development and testing.', icon: Zap },
-                                { title: 'Lower Development Cost', desc: 'Save time and budget by maintaining one codebase.', icon: Server },
-                                { title: 'Easy Maintenance', desc: 'Quick updates, bug fixes, and long-term scalability.', icon: Shield },
-                            ].map((item, idx) => {
-                                const Icon = item.icon
+                            {whyLaravelList.map((item, idx) => {
+                                const Icon = getIcon(item.icon, Layers)
                                 return (
                                     <motion.div
                                         key={idx}
@@ -106,11 +219,11 @@ export default function LaravelDevelopmentContent() {
                                 )
                             })}
                         </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid20'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                        <div className="mt-6 flex justify-center md:hidden w-full">
+                            <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid20': !prev['grid20']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                                {expandedGrids['grid20'] ? 'Show Less' : 'Show More'}
+                            </button>
+                        </div>
 
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
@@ -118,13 +231,13 @@ export default function LaravelDevelopmentContent() {
                             viewport={{ once: true }}
                             className="lg:col-span-5 relative h-[180px] md:h-[400px] lg:h-[500px] mt-8 lg:mt-12"
                         >
-                            <Image src="/images/laravel-development/about_laravel.webp" alt="Laravel Cross Platform" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-3xl shadow-xl" />
+                            <Image src={whyLaravelImage} alt="Why Laravel" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-3xl shadow-xl" />
                         </motion.div>
                     </div>
                 </div>
             </section>
 
-            {/* 3. ABOUT FLUTTER DEVELOPMENT */}
+            {/* 3. ABOUT LARAVEL DEVELOPMENT */}
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -134,7 +247,7 @@ export default function LaravelDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px]"
                         >
-                            <Image src="/images/common/generic_platform.webp" alt="About Laravel Development" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-[2rem] shadow-2xl" />
+                            <Image src={aboutImage} alt="About Laravel Development" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover rounded-[2rem] shadow-2xl" />
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
@@ -142,20 +255,15 @@ export default function LaravelDevelopmentContent() {
                             viewport={{ once: true }}
                         >
                             <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                                Create Powerful enterprise-grade Mobile Experiences
+                                {aboutTitle}
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-8"></div>
                             <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-4 md:mb-10 leading-relaxed">
-                                At RecentureSoft, we build feature-rich Laravel applications that deliver exceptional user experiences across secure backends. Our team focuses on performance, intuitive interfaces, scalability, and secure architecture to help businesses launch reliable web applications quickly.
+                                {aboutDesc}
                             </p>
 
                             <div className="grid grid-cols-2 gap-8">
-                                {[
-                                    { value: '100+', label: 'Successful Web Apps' },
-                                    { value: '95%', label: 'Client Satisfaction' },
-                                    { value: '2x', label: 'Faster Time to Market' },
-                                    { value: '50%', label: 'Lower Development Cost' },
-                                ].map((stat, idx) => (
+                                {aboutStatsList.map((stat, idx) => (
                                     <div key={idx} className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
                                         <div className="text-4xl font-medium md:font-extrabold text-blue-600 mb-2">{stat.value}</div>
                                         <div className="text-sm font-medium text-slate-600 dark:text-slate-400">{stat.label}</div>
@@ -167,26 +275,17 @@ export default function LaravelDevelopmentContent() {
                 </div>
             </section>
 
-            {/* 4. OUR FLUTTER DEVELOPMENT SERVICES */}
+            {/* 4. OUR LARAVEL DEVELOPMENT SERVICES */}
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our Laravel Development Services</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{servicesTitle}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                     </div>
 
                     <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 ${expandedGrids['grid10'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
-                        {[
-                            { title: 'Custom Laravel Web Development', icon: Code, desc: 'Tailored web applications designed to meet your specific business requirements and goals.' },
-                            { title: 'Android & iOS App Development', icon: Smartphone, desc: 'Seamless, high-performance applications that run natively on both major mobile platforms.' },
-                            { title: 'Laravel UI/UX Design', icon: Layers, desc: 'Engaging, user-centric interfaces created specifically for the Laravel framework.' },
-                            { title: 'Enterprise Web Apps', icon: Server, desc: 'Scalable and secure mobile solutions designed for large-scale corporate operations.' },
-                            { title: 'Laravel Web Migration', icon: Activity, desc: 'Smoothly transition your existing native apps to the modern Laravel enterprise-grade architecture.' },
-                            { title: 'API Integration', icon: Globe, desc: 'Connect your Laravel app with powerful third-party services and custom backend APIs.' },
-                            { title: 'Firebase Integration', icon: Database, desc: 'Implement real-time databases, authentication, and cloud functions seamlessly.' },
-                            { title: 'Maintenance & Support', icon: Shield, desc: 'Continuous updates, bug fixes, and performance optimization for your live applications.' },
-                        ].map((service, idx) => {
-                            const Icon = service.icon;
+                        {servicesList.map((service, idx) => {
+                            const Icon = getIcon(service.icon, Code);
                             return (
                                 <motion.div
                                     key={idx}
@@ -207,16 +306,16 @@ export default function LaravelDevelopmentContent() {
                             )
                         })}
                     </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid10'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                    <div className="mt-6 flex justify-center md:hidden w-full">
+                        <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid10': !prev['grid10']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                            {expandedGrids['grid10'] ? 'Show Less' : 'Show More'}
+                        </button>
+                    </div>
 
                 </div>
             </section>
 
-            {/* 5. MOBILE APPS WE BUILD */}
+            {/* 5. SOLUTIONS FOR INDUSTRY */}
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -225,20 +324,12 @@ export default function LaravelDevelopmentContent() {
                             className="lg:col-span-5"
                         >
                             <h2 className="text-3xl lg:text-3xl xl:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight lg:whitespace-nowrap">
-                                Laravel Solutions for Every Industry
+                                {industriesTitle}
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
                             <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3 ${expandedGrids['grid21'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex lg:[&>*:nth-child(n+4)]:flex'}`}>
-                                {[
-                                    'E-Commerce Apps',
-                                    'Healthcare Apps',
-                                    'Food Delivery Apps',
-                                    'Taxi Booking Apps',
-                                    'Education Apps',
-                                    'Finance Apps',
-                                    'Travel Apps',
-                                    'Fitness Apps'].map((app, idx) => (
+                                {industriesList.map((app, idx) => (
                                     <motion.div
                                         key={idx}
                                         whileHover={{ scale: 1.02, x: 10 }}
@@ -251,11 +342,11 @@ export default function LaravelDevelopmentContent() {
                                     </motion.div>
                                 ))}
                             </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid21': !prev['grid21']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid21'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                            <div className="mt-6 flex justify-center md:hidden w-full">
+                                <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid21': !prev['grid21']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                                    {expandedGrids['grid21'] ? 'Show Less' : 'Show More'}
+                                </button>
+                            </div>
 
                         </motion.div>
 
@@ -263,7 +354,7 @@ export default function LaravelDevelopmentContent() {
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-7 relative h-[200px] md:h-[200px] lg:h-[540px] lg:mt-32 rounded-[32px] overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/common/generic_process.webp" alt="Industry Apps" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src={industriesImage} alt="Industry Apps" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                     </div>
                 </div>
@@ -273,7 +364,7 @@ export default function LaravelDevelopmentContent() {
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Our Development Process</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{processTitle}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -287,13 +378,7 @@ export default function LaravelDevelopmentContent() {
                             <Image src="/images/common/generic_dashboard.webp" alt="Process" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                         <div className="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 dark:before:via-slate-700 before:to-transparent">
-                            {[
-                                { step: '01', title: 'Discovery & Planning', desc: 'Understand business goals, audience, and project requirements.' },
-                                { step: '02', title: 'UI/UX Design', desc: 'Design intuitive, modern, and engaging mobile interfaces.' },
-                                { step: '03', title: 'Laravel Web Development', desc: 'Develop scalable, secure, and high-performance applications.' },
-                                { step: '04', title: 'Testing & Quality Assurance', desc: 'Ensure flawless performance across secure backends devices.' },
-                                { step: '05', title: 'Deployment & Support', desc: 'Publish apps, monitor performance, and provide continuous updates.' }
-                            ].map((item, idx) => (
+                            {processList.map((item, idx) => (
                                 <motion.div
                                     key={idx}
                                     initial={{ opacity: 0, x: 30 }}
@@ -318,26 +403,17 @@ export default function LaravelDevelopmentContent() {
                 </div>
             </section>
 
-            {/* 7. FLUTTER FEATURES */}
+            {/* 7. FEATURES */}
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Powerful Features We Integrate</h2>
+                            <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">{featuresTitle}</h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-10"></div>
 
                             <div className={`grid sm:grid-cols-2 lg:grid-cols-1 gap-4 ${expandedGrids['grid1'] ? '' : '[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex'}`}>
-                                {[
-                                    { title: 'Push Notifications', icon: Zap },
-                                    { title: 'Google Maps Integration', icon: Globe },
-                                    { title: 'Payment Gateway', icon: Server },
-                                    { title: 'Cloud Sync', icon: Database },
-                                    { title: 'Offline Mode', icon: Activity },
-                                    { title: 'Real-Time Chat', icon: MessageSquare },
-                                    { title: 'Social Login', icon: Users },
-                                    { title: 'Analytics Dashboard', icon: Target },
-                                ].map((feature, idx) => {
-                                    const Icon = feature.icon;
+                                {featuresList.map((feature, idx) => {
+                                    const Icon = getIcon(feature.icon, Zap);
                                     return (
                                         <motion.div
                                             key={idx}
@@ -355,11 +431,11 @@ export default function LaravelDevelopmentContent() {
                                     )
                                 })}
                             </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid1'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                            <div className="mt-6 flex justify-center md:hidden w-full">
+                                <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid1': !prev['grid1']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                                    {expandedGrids['grid1'] ? 'Show Less' : 'Show More'}
+                                </button>
+                            </div>
 
                         </div>
                         <motion.div
@@ -368,7 +444,7 @@ export default function LaravelDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/common/generic_team.webp" alt="Features Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src={featuresImage} alt="Features Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
                     </div>
                 </div>
@@ -377,14 +453,11 @@ export default function LaravelDevelopmentContent() {
             {/* 8. TECHNOLOGY STACK */}
             <section className="py-4 md:py-8 bg-white dark:bg-slate-900/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">Our Technology Stack</h2>
+                    <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6">{techStackTitle}</h2>
                     <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6 md:mb-12"></div>
 
                     <div className={`flex flex-wrap justify-center gap-4 ${expandedGrids['grid11'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
-                        {[
-                            'Laravel', 'PHP', 'Firebase', 'REST API', 'GraphQL', 'Node.js',
-                            'Laravel', 'MongoDB', 'PostgreSQL', 'AWS', 'Google Cloud', 'Docker', 'GitHub', 'Figma'
-                        ].map((tech, idx) => (
+                        {techStackList.map((tech, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0, scale: 0.8 }}
@@ -397,11 +470,11 @@ export default function LaravelDevelopmentContent() {
                             </motion.div>
                         ))}
                     </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid11': !prev['grid11']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid11'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                    <div className="mt-6 flex justify-center md:hidden w-full">
+                        <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid11': !prev['grid11']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                            {expandedGrids['grid11'] ? 'Show Less' : 'Show More'}
+                        </button>
+                    </div>
 
                 </div>
             </section>
@@ -410,7 +483,7 @@ export default function LaravelDevelopmentContent() {
             <section className="py-4 md:py-8 bg-slate-50 dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-6 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">Why Choose RecentureSoft</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-4">{whyUsTitle}</h2>
                         <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -421,19 +494,12 @@ export default function LaravelDevelopmentContent() {
                             viewport={{ once: true }}
                             className="relative h-[200px] md:h-[450px] lg:h-[600px] rounded-[2rem] overflow-hidden shadow-2xl"
                         >
-                            <Image src="/images/common/generic_cta.webp" alt="Why Choose Us" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                            <Image src={whyUsImage} alt="Why Choose Us" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                         </motion.div>
 
                         <div className={`grid gap-6 ${expandedGrids['grid12'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:flex'}`}>
-                            {[
-                                { title: 'Certified Laravel Developers', desc: 'Expert team with deep knowledge of PHP and Laravel architecture.', icon: Star },
-                                { title: 'Business-Oriented Solutions', desc: 'Apps designed to increase revenue and improve operational efficiency.', icon: Target },
-                                { title: 'Agile Development Process', desc: 'Flexible methodology ensuring timely delivery and continuous improvement.', icon: Activity },
-                                { title: 'Clean & Scalable Code', desc: 'Maintainable codebases that grow effortlessly with your business.', icon: Code },
-                                { title: 'Transparent Communication', desc: 'Regular updates and complete visibility throughout the project lifecycle.', icon: MessageSquare },
-                                { title: 'Long-Term Technical Support', desc: 'Dedicated post-launch maintenance and optimization services.', icon: Shield },
-                            ].map((item, idx) => {
-                                const Icon = item.icon
+                            {whyUsList.map((item, idx) => {
+                                const Icon = getIcon(item.icon, Star)
                                 return (
                                     <motion.div
                                         key={idx}
@@ -454,11 +520,11 @@ export default function LaravelDevelopmentContent() {
                                 )
                             })}
                         </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid12': !prev['grid12']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid12'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                        <div className="mt-6 flex justify-center md:hidden w-full">
+                            <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid12': !prev['grid12']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                                {expandedGrids['grid12'] ? 'Show Less' : 'Show More'}
+                            </button>
+                        </div>
 
                     </div>
                 </div>
@@ -474,7 +540,7 @@ export default function LaravelDevelopmentContent() {
 
                     <div className={`space-y-4  md: ${expandedGrids['grid13'] ? '' : '[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:block'}`}>
                         {[
-                            { q: "Why should I choose Laravel for mobile app development?", a: "Laravel allows you to build visually stunning, natively compiled applications for both mobile, web, and desktop from a single codebase. It significantly reduces development time and costs while providing exceptional performance." },
+                            { q: "Why should I choose Laravel for web development?", a: "Laravel allows you to build visually stunning, natively compiled applications for both mobile, web, and desktop from a single codebase. It significantly reduces development time and costs while providing exceptional performance." },
                             { q: "Can Laravel build secure backends apps together?", a: "Yes, that is the primary advantage of Laravel. By writing the code once using the PHP programming language, you can compile and deploy the exact same application to both secure backends devices." },
                             { q: "Is Laravel suitable for enterprise applications?", a: "Absolutely. Many global enterprises rely on Laravel for their complex applications. It offers secure architecture, scalable state management, and high-performance rendering ideal for large-scale business operations." },
                             { q: "How long does Laravel app development take?", a: "The timeline depends on the complexity of your app. However, because it uses a single codebase, Laravel development is typically 30% to 50% faster than developing separate native apps for iOS and Android." },
@@ -513,11 +579,11 @@ export default function LaravelDevelopmentContent() {
                             </div>
                         ))}
                     </div>
-<div className="mt-6 flex justify-center md:hidden w-full">
-    <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid13': !prev['grid13']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
-        {expandedGrids['grid13'] ? 'Show Less' : 'Show More'}
-    </button>
-</div>
+                    <div className="mt-6 flex justify-center md:hidden w-full">
+                        <button onClick={() => setExpandedGrids(prev => ({...prev, 'grid13': !prev['grid13']}))} className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-medium md:font-bold text-sm shadow-sm active:bg-blue-50 transition-colors bg-transparent">
+                            {expandedGrids['grid13'] ? 'Show Less' : 'Show More'}
+                        </button>
+                    </div>
 
                 </div>
             </section>
@@ -534,19 +600,18 @@ export default function LaravelDevelopmentContent() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-white mb-6 leading-tight">
-                            Ready to Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">Laravel Web?</span>
+                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-white mb-6 leading-tight" dangerouslySetInnerHTML={{ __html: ctaTitle }}>
                         </h2>
                         <p className="text-xl text-blue-100 mb-4 md:mb-10 leading-relaxed max-w-2xl mx-auto">
-                            Turn your app idea into a high-performance mobile application with Laravel experts at RecentureSoft.
+                            {ctaDesc}
                         </p>
 
                         <div className="flex flex-wrap items-center justify-center gap-4">
-                            <Link href="/contact" className="px-8 py-4 rounded-full bg-white text-blue-900 font-medium md:font-bold hover:bg-blue-50 shadow-xl transition-all hover:scale-105 hover:-translate-y-1">
-                                Start Your Project
+                            <Link href={ctaBtn1Link} className="px-8 py-4 rounded-full bg-white text-blue-900 font-medium md:font-bold hover:bg-blue-50 shadow-xl transition-all hover:scale-105 hover:-translate-y-1">
+                                {ctaBtn1}
                             </Link>
-                            <Link href="/contact" className="px-8 py-4 rounded-full bg-blue-800/50 text-white font-medium md:font-bold border border-blue-400/50 hover:bg-blue-700/50 backdrop-blur-sm transition-all hover:-translate-y-1">
-                                Talk to Laravel Experts
+                            <Link href={ctaBtn2Link} className="px-8 py-4 rounded-full bg-blue-800/50 text-white font-medium md:font-bold border border-blue-400/50 hover:bg-blue-700/50 backdrop-blur-sm transition-all hover:-translate-y-1">
+                                {ctaBtn2}
                             </Link>
                         </div>
                     </motion.div>
