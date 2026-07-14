@@ -41,13 +41,13 @@ export default async function IphoneAppsPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"iPhone App Development Company In India | RecentureSoft","description":"RecentureSoft is a leading iOS and iPhone app development company in India offering robust, enterprise-grade, and engaging mobile applications.","url":"https://recenturesoft.com/iphone-apps-development"}) }} />
             <Navbar />
             <PageHero
-                badge="Mobile Development"
-                title="iPhone App Development Company"
-                highlight="In India"
+                badge={pageData?.content?.heroBadge || "Mobile Development"}
+                title={pageData?.content?.heroTitle || "iPhone App Development Company"}
+                highlight={pageData?.content?.heroHighlight || "In India"}
                 description=""
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src="/Banner/iphone.webp" alt="iphone-apps-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={pageData?.content?.heroImage || "/Banner/iphone.webp"} alt="iphone-apps-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </PageHero>
 
             <section className="py-6 md:py-8 px-4">
