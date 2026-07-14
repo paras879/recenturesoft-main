@@ -3,8 +3,8 @@
 import CinematicServiceTemplate from "@/components/shared/CinematicServiceTemplate";
 import { LayoutDashboard, BarChart3, LineChart, PieChart, Activity, ShieldCheck, Zap, Database } from "lucide-react";
 
-export default function DashboardContent() {
-    const features = [
+export default function DashboardContent({ dynamicData = {} }) {
+    const defaultFeatures = [
         {
             icon: LayoutDashboard,
             title: "Customizable Interfaces",
@@ -43,12 +43,23 @@ export default function DashboardContent() {
         }
     ];
 
+    const iconMap = {
+        LayoutDashboard, BarChart3, LineChart, PieChart, Activity, ShieldCheck, Zap, Database
+    };
+
+    const features = dynamicData.dashboardContent?.features?.length > 0 
+        ? dynamicData.dashboardContent.features.map(f => ({
+            ...f,
+            icon: iconMap[f.iconName] || LayoutDashboard
+        }))
+        : defaultFeatures;
+
     return (
         <CinematicServiceTemplate
-            title="Transform Raw Data into"
-            subtitle="Actionable Insights"
+            title={dynamicData.dashboardContent?.title || "Transform Raw Data into"}
+            subtitle={dynamicData.dashboardContent?.subtitle || "Actionable Insights"}
             themeColor="sky"
-            introParagraphs={[
+            introParagraphs={dynamicData.dashboardContent?.introParagraphs?.length > 0 ? dynamicData.dashboardContent.introParagraphs : [
                 "In today's fast-paced digital economy, data is your most valuable asset. However, raw data without proper visualization is just noise. At RecentureSoft, we specialize in developing custom, high-performance dashboard applications that consolidate complex datasets into intuitive, easy-to-understand visual interfaces.",
                 "Whether you need an internal admin panel, a client-facing analytics portal, or a complex financial trading dashboard, our engineering team uses cutting-edge technologies like React, Next.js, and advanced charting libraries to build solutions that empower decision-making."
             ]}

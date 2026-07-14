@@ -8,15 +8,39 @@ import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
-export const metadata = {
+import mongoose from "mongoose";
+import { connectDB } from "@/lib/mongodb";
+
+const defaultMetadata = {
     title: "Best Salesforce Integration Company In India | RecentureSoft",
     description: "RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.",
     alternates: { canonical: "/salesforce" }
 };
 
+export async function generateMetadata() {
+    await connectDB();
+    const db = mongoose.connection;
+    const page = await db.collection("webpages").findOne({ path: "/salesforce", status: "active" });
+
+    if (!page) {
+        return defaultMetadata;
+    }
+
+    return {
+        title: page.seoTitle || defaultMetadata.title,
+        description: page.seoDescription || defaultMetadata.description,
+        alternates: defaultMetadata.alternates
+    };
+}
+
 export default async function SalesforcePage() {
     const isActive = await checkPageStatus("/salesforce");
     if (!isActive) return notFound();
+
+    await connectDB();
+    const db = mongoose.connection;
+    const pageData = await db.collection("webpages").findOne({ path: "/salesforce", status: "active" });
+    const dynamicData = pageData?.content || {};
 
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
@@ -34,7 +58,7 @@ export default async function SalesforcePage() {
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <SalesforceContent />
+                    <SalesforceContent dynamicData={dynamicData} />
                 </div>
             </section>
 
