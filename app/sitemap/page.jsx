@@ -7,13 +7,8 @@ import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import SitemapClient from "./SitemapClient";
 import mongoose from "mongoose";
-import { connectDB } from "@/lib/mongodb";
 
 const defaultMetadata = {
-    title: "Sitemap | RecentureSoft",
-    description: "Navigate through all pages, services, and resources available on the RecentureSoft platform. Find the information you need quickly and easily.",
-    openGraph: {
-        title: "Sitemap | RecentureSoft",
         description: "Complete directory of RecentureSoft's website including services, resources, and company information.",
         url: "https://recenturesoft.com/sitemap",
         siteName: "RecentureSoft",
