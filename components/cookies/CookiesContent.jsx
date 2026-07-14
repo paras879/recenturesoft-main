@@ -111,7 +111,7 @@ export default function CookiesContent({ dynamicData }) {
   const handleDownloadPDF = async () => {
     try {
       const style = document.createElement('style');
-      style.innerHTML = \`
+      style.innerHTML = `
         #policy-content, #policy-content * {
           color: rgb(15, 23, 42) !important;
           background-color: rgb(255, 255, 255) !important;
@@ -124,7 +124,7 @@ export default function CookiesContent({ dynamicData }) {
           text-shadow: none !important;
           background-image: none !important;
         }
-      \`;
+      `;
       document.head.appendChild(style);
 
       const html2pdf = (await import('html2pdf.js')).default;
