@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
-import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight, Brain } from "lucide-react";
+import { Code, Globe, ShoppingCart, Smartphone, Cpu, TrendingUp, ChevronRight, Brain, Landmark, Car, Briefcase, Heart } from "lucide-react";
 
 const navLinks = [
     { name: "Home", href: "/" },
     { name: "Solutions", href: "/solutions" },
+    { name: "Industries", href: "/industries" },
     { name: "About Us", href: "/about" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Blog", href: "/blog" },
@@ -108,6 +109,74 @@ const solutionsMenu = [
     }
 ];
 
+const industriesMenu = [
+    {
+        title: "Finance & Health",
+        icon: Landmark,
+        color: "text-blue-500",
+        bg: "bg-blue-500/10",
+        items: [
+            { name: "Finance", href: "/industry/finance" },
+            { name: "Healthcare", href: "/industry/healthcare" },
+            { name: "Insurance", href: "/industry/insurance" },
+            { name: "Legal", href: "/industry/legal" },
+            { name: "Medical", href: "/industry/medical" },
+        ]
+    },
+    {
+        title: "Auto & Property",
+        icon: Car,
+        color: "text-cyan-500",
+        bg: "bg-cyan-500/10",
+        items: [
+            { name: "Payment", href: "/industry/payment" },
+            { name: "Automobile", href: "/industry/automobile" },
+            { name: "Real Estate", href: "/industry/real-estate" },
+            { name: "Sport", href: "/industry/sport" },
+            { name: "Manufacturing", href: "/industry/manufacturing" },
+        ]
+    },
+    {
+        title: "Travel & Gaming",
+        icon: Globe,
+        color: "text-purple-500",
+        bg: "bg-purple-500/10",
+        items: [
+            { name: "Supply Chain", href: "/industry/supply-chain" },
+            { name: "Gaming", href: "/industry/gaming" },
+            { name: "Construction", href: "/industry/construction" },
+            { name: "Travel", href: "/industry/travel" },
+            { name: "Aviation", href: "/industry/aviation" },
+        ]
+    },
+    {
+        title: "Tech & Education",
+        icon: Briefcase,
+        color: "text-emerald-500",
+        bg: "bg-emerald-500/10",
+        items: [
+            { name: "B2B", href: "/industry/b2b" },
+            { name: "Education", href: "/industry/education" },
+            { name: "Ecommerce", href: "/industry/ecommerce" },
+            { name: "SaaS", href: "/industry/saas" },
+            { name: "Hotel", href: "/industry/hotel" },
+        ]
+    },
+    {
+        title: "Lifestyle & IT",
+        icon: Heart,
+        color: "text-rose-500",
+        bg: "bg-rose-500/10",
+        items: [
+            { name: "Beauty and Cosmetics", href: "/industry/beauty-cosmetics" },
+            { name: "Fitness", href: "/industry/fitness" },
+            { name: "Interior Design & Decor", href: "/industry/interior-design" },
+            { name: "IT Industries", href: "/industry/it-industries" },
+            { name: "Logistics & Transport", href: "/industry/logistics" },
+        ]
+    }
+];
+
 export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = [], dynamicPages = [] }) {
     const [hoveredLink, setHoveredLink] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -180,13 +249,13 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                 onMouseEnter={() => setHoveredLink(link.name)}
                                 onMouseLeave={() => setHoveredLink(null)}
                             >
-                                {link.name === "Solutions" ? (
+                                {(link.name === "Solutions" || link.name === "Industries") ? (
                                     <span
                                         className="relative px-3 py-2 text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 z-10 flex items-center gap-1 cursor-default select-none"
                                     >
                                         {link.name}
                                         <svg
-                                            className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredLink === "Solutions" ? "-rotate-180" : ""}`}
+                                            className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredLink === link.name ? "-rotate-180" : ""}`}
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         >
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
@@ -201,19 +270,19 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                         {link.name}
                                     </Link>
                                 )}
-                                {hoveredLink === link.name && link.name !== "Solutions" && (
+                                {hoveredLink === link.name && link.name !== "Solutions" && link.name !== "Industries" && (
                                     <div
                                         className="absolute inset-0 bg-slate-100 dark:bg-white/10 rounded-full z-0"
                                     />
                                 )}
 
-                                {/* ════ SOLUTIONS MEGA MENU ════ */}
-                                {link.name === "Solutions" && hoveredLink === "Solutions" && (
+                                {/* ════ SOLUTIONS & INDUSTRIES MEGA MENU ════ */}
+                                {(link.name === "Solutions" || link.name === "Industries") && hoveredLink === link.name && (
                                     <div
-                                        className="absolute top-full left-1/2 -translate-x-[25%] pt-6 cursor-default"
-                                        style={{ width: "min(1100px, calc(100vw - 2rem))" }}
+                                        className={`absolute top-full pt-6 cursor-default ${link.name === "Industries" ? "left-1/2 -translate-x-[35%]" : "left-1/2 -translate-x-[25%]"}`}
+                                        style={{ width: "min(1150px, calc(100vw - 2rem))" }}
                                     >
-                                        <div className="bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-3xl border border-slate-200/60 dark:border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] rounded-[2rem] p-7 overflow-hidden relative group/menu">
+                                        <div className="bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-3xl border border-slate-200/60 dark:border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] rounded-[2rem] p-6 overflow-hidden relative group/menu">
 
                                             {/* Glowing ambient background inside menu */}
                                             <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none" />
@@ -222,28 +291,30 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                             {/* Top gradient border accent */}
                                             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
 
-                                            <div className="grid grid-cols-4 gap-x-12 gap-y-8 relative z-10">
-                                                {activeSolutionsMenu.map((category, idx) => {
+                                            <div className={`grid ${link.name === "Industries" ? "grid-cols-5" : "grid-cols-4"} gap-x-6 gap-y-8 relative z-10`}>
+                                                {(link.name === "Solutions" ? activeSolutionsMenu : industriesMenu).map((category, idx) => {
                                                     const Icon = category.icon;
                                                     return (
                                                         <div key={idx} className="flex flex-col group/cat">
-                                                            <div className="flex items-center gap-3 mb-3">
-                                                                <div className={`w-9 h-9 rounded-xl ${category.bg} flex items-center justify-center border border-black/5 dark:border-white/5 transition-transform duration-300 group-hover/cat:scale-110 shadow-sm`}>
-                                                                    <Icon className={`w-4 h-4 ${category.color}`} />
+                                                            {link.name === "Solutions" && (
+                                                                <div className="flex items-center gap-3 mb-3">
+                                                                    <div className={`w-9 h-9 rounded-xl ${category.bg} flex items-center justify-center border border-black/5 dark:border-white/5 transition-transform duration-300 group-hover/cat:scale-110 shadow-sm`}>
+                                                                        <Icon className={`w-4 h-4 ${category.color}`} />
+                                                                    </div>
+                                                                    <h3 className="text-slate-900 dark:text-white font-bold text-[14.5px] tracking-wide whitespace-nowrap">
+                                                                        {category.title}
+                                                                    </h3>
                                                                 </div>
-                                                                <h3 className="text-slate-900 dark:text-white font-bold text-[14.5px] tracking-wide whitespace-nowrap">
-                                                                    {category.title}
-                                                                </h3>
-                                                            </div>
-                                                            <ul className="space-y-1 pl-[3.25rem]">
+                                                            )}
+                                                            <ul className={`space-y-1 ${link.name === "Solutions" ? "pl-[3.25rem]" : ""}`}>
                                                                 {category.items.map((item, itemIdx) => (
                                                                     <li key={itemIdx}>
                                                                         <Link
                                                                             href={item.href}
-                                                                            className="group/item flex items-center gap-2 text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 text-sm font-medium transition-all duration-300 hover:translate-x-1 py-1 whitespace-nowrap"
+                                                                            className="group/item flex items-center justify-between gap-1 text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 text-[13.5px] font-medium transition-all duration-300 hover:translate-x-1 py-1"
                                                                         >
-                                                                            {item.name}
-                                                                            <ChevronRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300 text-cyan-500" />
+                                                                            <span className={link.name === "Solutions" ? "truncate" : "whitespace-normal break-words"}>{item.name}</span>
+                                                                            <ChevronRight className="w-3.5 h-3.5 flex-shrink-0 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300 text-cyan-500" />
                                                                         </Link>
                                                                     </li>
                                                                 ))}
@@ -328,39 +399,41 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                             {activeNavLinks.map((link, i) => {
                                 const isActive = pathname === link.href;
 
-                                if (link.name === "Solutions") {
+                                if (link.name === "Solutions" || link.name === "Industries") {
                                     return (
                                         <div key={link.name} className="flex flex-col">
                                             <button
                                                 className={`text-base font-medium transition-all duration-300 w-full flex items-center justify-between px-3 py-2.5 rounded-lg active:scale-[0.98] ${isActive ? "bg-primary/10 dark:bg-cyan-500/10 text-primary dark:text-cyan-400" : "text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white"}`}
-                                                onClick={() => setMobileExpanded(mobileExpanded === "Solutions" ? "" : "Solutions")}
+                                                onClick={() => setMobileExpanded(mobileExpanded === link.name ? "" : link.name)}
                                             >
                                                 {link.name}
-                                                <svg className={`w-4 h-4 transition-transform duration-300 ${mobileExpanded === "Solutions" ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg className={`w-4 h-4 transition-transform duration-300 ${mobileExpanded === link.name ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </button>
-                                            {mobileExpanded === "Solutions" && (
+                                            {mobileExpanded === link.name && (
                                                 <div
                                                     className="overflow-hidden"
                                                 >
                                                     <div className="pl-6 py-2 flex flex-col gap-1">
-                                                        {activeSolutionsMenu.map((cat, idx) => (
-                                                            <div key={idx} className="border-b border-slate-100 dark:border-white/5 last:border-0">
-                                                                <button 
-                                                                    onClick={() => setExpandedCategory(expandedCategory === idx ? null : idx)}
-                                                                    className="w-full flex items-center justify-between py-3 group"
-                                                                >
-                                                                    <h4 className="text-[11px] sm:text-xs font-extrabold text-slate-800 dark:text-slate-400 uppercase flex items-center gap-2 transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
-                                                                        <span className={`w-1.5 h-1.5 rounded-full transition-colors ${expandedCategory === idx ? 'bg-cyan-500' : 'bg-slate-300 dark:bg-slate-600'}`}></span>
-                                                                        {cat.title}
-                                                                    </h4>
-                                                                    <svg className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${expandedCategory === idx ? "rotate-180 text-cyan-500" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                                                    </svg>
-                                                                </button>
-                                                                {expandedCategory === idx && (
-                                                                    <ul className="flex flex-col gap-2 pl-4 pb-3 pt-1 animate-in slide-in-from-top-1 fade-in duration-200">
+                                                        {(link.name === "Solutions" ? activeSolutionsMenu : industriesMenu).map((cat, idx) => (
+                                                            <div key={idx} className={`${link.name === "Solutions" ? "border-b border-slate-100 dark:border-white/5 last:border-0" : ""}`}>
+                                                                {link.name === "Solutions" && (
+                                                                    <button 
+                                                                        onClick={() => setExpandedCategory(expandedCategory === `${link.name}-${idx}` ? null : `${link.name}-${idx}`)}
+                                                                        className="w-full flex items-center justify-between py-3 group"
+                                                                    >
+                                                                        <h4 className="text-[11px] sm:text-xs font-extrabold text-slate-800 dark:text-slate-400 uppercase flex items-center gap-2 transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+                                                                            <span className={`w-1.5 h-1.5 rounded-full transition-colors ${expandedCategory === `${link.name}-${idx}` ? 'bg-cyan-500' : 'bg-slate-300 dark:bg-slate-600'}`}></span>
+                                                                            {cat.title}
+                                                                        </h4>
+                                                                        <svg className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${expandedCategory === `${link.name}-${idx}` ? "rotate-180 text-cyan-500" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                                        </svg>
+                                                                    </button>
+                                                                )}
+                                                                {(link.name === "Industries" || expandedCategory === `${link.name}-${idx}`) && (
+                                                                    <ul className={`flex flex-col gap-2 ${link.name === "Solutions" ? "pl-4 pb-3 pt-1 animate-in slide-in-from-top-1 fade-in duration-200" : "pb-1"}`}>
                                                                         {cat.items.map((item, itemIdx) => (
                                                                             <li key={itemIdx}>
                                                                                 <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-[13px] sm:text-sm text-slate-600 dark:text-gray-300 hover:text-cyan-500 transition-colors py-1 block">
