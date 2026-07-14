@@ -9,7 +9,6 @@ import EnterpriseServices from "@/components/Service";
 import TechArchitecture from "@/components/solutions/TechArchitecture";
 import SolutionsProcess from "@/components/solutions/SolutionsProcess";
 import CTASection from "@/components/CTASection";
-import { connectDB } from "@/lib/mongodb";
 import Service from "@/models/Service";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 
