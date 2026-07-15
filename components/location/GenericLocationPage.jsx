@@ -3,7 +3,7 @@ import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
+import ClientCTAButton from "@/components/shared/ClientCTAButton";
 
 const headingColorMap = {
     default: "text-slate-900 dark:text-white",
@@ -74,24 +74,22 @@ const renderBlockButtons = (block) => {
     return (
         <div className={`flex flex-wrap gap-4 mt-8 ${alignClass} w-full relative z-10`}>
             {block.buttons.map((btn, idx) => (
-                <a
+                <ClientCTAButton
                     key={idx}
-                    href={btn.url || '#'}
+                    text={btn.text}
+                    url={btn.url || '#'}
                     style={{
                         backgroundColor: btn.bgColor || '#2563eb',
                         color: btn.textColor || '#ffffff'
                     }}
                     className="px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.02] shadow-sm active:scale-[0.98] inline-flex items-center gap-1.5"
-                >
-                    {btn.text}
-                </a>
+                />
             ))}
         </div>
     );
 };
 
 export default function GenericLocationPage({ page }) {
-    const { openMeetingModal } = useMeetingModal();
     const heroContent = page.content?.crmHero || {};
     const rawBlocks = page.content?.crmBlocks || [];
     const blocks = [...rawBlocks].sort((a, b) => {
@@ -126,12 +124,11 @@ export default function GenericLocationPage({ page }) {
                             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-10 max-w-xl">
                                 Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <button onClick={openMeetingModal} className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
-                                    Get Started Now
-                                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                            </div>
+                             <div className="flex flex-col sm:flex-row gap-4">
+                                 <ClientCTAButton text="Get Started Now" url="#schedule" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
+                                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                                 </ClientCTAButton>
+                             </div>
                         </div>
 
                         {/* Image Presentation */}

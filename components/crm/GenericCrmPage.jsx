@@ -3,7 +3,8 @@ import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
+import ClientCTAButton from "@/components/shared/ClientCTAButton";
+
 
 const headingColorMap = {
     default: "text-slate-900 dark:text-white",
@@ -68,30 +69,28 @@ const getSpacingStyle = (block) => {
 
 const renderBlockButtons = (block) => {
     if (!block.buttons || block.buttons.length === 0) return null;
-    
+
     const alignClass = block.buttonAlign === 'center' ? 'justify-center' : block.buttonAlign === 'right' ? 'justify-end' : 'justify-start';
-    
+
     return (
         <div className={`flex flex-wrap gap-4 mt-8 ${alignClass} w-full relative z-10`}>
             {block.buttons.map((btn, idx) => (
-                <a
+                <ClientCTAButton
                     key={idx}
-                    href={btn.url || '#'}
+                    text={btn.text}
+                    url={btn.url || '#'}
                     style={{
                         backgroundColor: btn.bgColor || '#2563eb',
                         color: btn.textColor || '#ffffff'
                     }}
                     className="px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.02] shadow-sm active:scale-[0.98] inline-flex items-center gap-1.5"
-                >
-                    {btn.text}
-                </a>
+                />
             ))}
         </div>
     );
 };
 
 export default function GenericCrmPage({ page }) {
-    const { openMeetingModal } = useMeetingModal();
     const heroContent = page.content?.crmHero || {};
     const rawBlocks = page.content?.crmBlocks || [];
     const blocks = [...rawBlocks].sort((a, b) => {
@@ -127,10 +126,9 @@ export default function GenericCrmPage({ page }) {
                                 Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <button onClick={openMeetingModal} className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
-                                    Get Started Now
+                                <ClientCTAButton text="Get Started Now" url="#schedule" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
                                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                </ClientCTAButton>
                             </div>
                         </div>
 
@@ -194,11 +192,11 @@ export default function GenericCrmPage({ page }) {
                                         return (
                                             <div key={key} className={`w-full flex ${img.align === 'left' ? 'justify-start' : img.align === 'right' ? 'justify-end' : 'justify-center'} my-4`}>
                                                 <div className={`relative overflow-hidden rounded-[2rem] border border-slate-200/50 dark:border-white/10 shadow-xl bg-white dark:bg-slate-900 ${sizeClass} w-full transition-all duration-300 hover:scale-[1.01]`}>
-                                                    <Image 
-                                                        src={img.url} 
-                                                        alt={img.alt || block.title || block.h2 || "Section Image"} 
-                                                        width={1200} 
-                                                        height={800} 
+                                                    <Image
+                                                        src={img.url}
+                                                        alt={img.alt || block.title || block.h2 || "Section Image"}
+                                                        width={1200}
+                                                        height={800}
                                                         className="w-full h-auto object-cover max-h-[60vh]"
                                                     />
                                                 </div>
@@ -246,7 +244,7 @@ export default function GenericCrmPage({ page }) {
                                 // 1. TEXT BLOCK
                                 if (block.type === 'text') {
                                     if (!block.h2 && !block.h3 && !block.desc && !block.list && !block.imageUrl) return null;
-                                    
+
                                     return (
                                         <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper isText={true}>
@@ -270,7 +268,7 @@ export default function GenericCrmPage({ page }) {
                                         </div>
                                     );
                                 }
-                                
+
                                 // 2. HIGHLIGHT BLOCK
                                 else if (block.type === 'highlight') {
                                     if (!block.title && !block.desc1 && !block.desc2) return null;
@@ -290,11 +288,11 @@ export default function GenericCrmPage({ page }) {
                                         </div>
                                     );
                                 }
-                                
+
                                 // 3. CARDS BLOCK
                                 else if (block.type === 'cards') {
                                     if (!block.title && (!block.items || block.items.length === 0)) return null;
-                                    
+
                                     const CardsContent = (
                                         <LayoutWrapper>
                                             <div>
@@ -340,7 +338,7 @@ export default function GenericCrmPage({ page }) {
 
                                     return <div key={index} style={getSpacingStyle(block)}>{CardsContent}</div>;
                                 }
-                                
+
                                 // 4. STEPS BLOCK (Vertical Timeline)
                                 else if (block.type === 'steps') {
                                     if (!block.title && (!block.steps || block.steps.length === 0)) return null;
@@ -374,7 +372,7 @@ export default function GenericCrmPage({ page }) {
                                         </div>
                                     );
                                 }
-                                
+
                                 // 5. IMAGE BLOCK (Support both multi-images and single legacy image)
                                 else if (block.type === 'image') {
                                     let imageList = [];
@@ -395,7 +393,7 @@ export default function GenericCrmPage({ page }) {
                                     if (hasOverlay && imageList[0]?.url) {
                                         const opacityVal = block.overlayOpacity !== undefined ? block.overlayOpacity : 40;
                                         const bgColor = block.overlayBgColor || '#000000';
-                                        
+
                                         const hexToRgba = (hex, opacity) => {
                                             let c = (hex || '#000000').substring(1);
                                             if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
@@ -412,18 +410,18 @@ export default function GenericCrmPage({ page }) {
                                         return (
                                             <div key={index} style={getSpacingStyle(block)} className="w-full relative overflow-hidden rounded-[2.5rem] min-h-[350px] md:min-h-[450px] flex items-center justify-center p-8 md:p-16 shadow-2xl border border-slate-200/50 dark:border-white/10 my-12">
                                                 <div className="absolute inset-0 z-0">
-                                                    <Image 
-                                                        src={imageList[0].url} 
-                                                        alt={imageList[0].alt || "Banner Background"} 
-                                                        fill 
+                                                    <Image
+                                                        src={imageList[0].url}
+                                                        alt={imageList[0].alt || "Banner Background"}
+                                                        fill
                                                         sizes="100vw"
-                                                        className="object-cover" 
-                                                        quality={90} 
+                                                        className="object-cover"
+                                                        quality={90}
                                                         priority
                                                     />
                                                 </div>
                                                 <div className="absolute inset-0 z-10" style={overlayStyle} />
-                                                
+
                                                 <div className="relative z-20 text-center max-w-4xl mx-auto flex flex-col items-center">
                                                     {block.bannerTitle && (
                                                         <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight ${(block.mainHeadingColor || block.mainHeadingColorType === 'custom' || block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>
@@ -446,18 +444,18 @@ export default function GenericCrmPage({ page }) {
                                             {imageList.map((img, i) => {
                                                 const alignClass = img.align === 'left' ? 'justify-start' : img.align === 'right' ? 'justify-end' : 'justify-center';
                                                 const sizeClass = img.size === 'small' ? 'max-w-md' : img.size === 'medium' ? 'max-w-3xl' : img.size === 'large' ? 'max-w-5xl' : 'max-w-full w-full';
-                                                
+
                                                 return (
                                                     <div key={i} className="w-full relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/40 dark:to-[#020617] rounded-[2rem] p-6 md:p-10 border border-slate-100 dark:border-white/5 shadow-sm">
                                                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl bg-blue-500/5 dark:bg-blue-500/10 blur-[100px] pointer-events-none rounded-full" />
                                                         <div className={`relative z-10 flex w-full ${alignClass}`}>
                                                             <div className={`overflow-hidden rounded-[1.5rem] border-4 border-white dark:border-slate-800 shadow-xl ${sizeClass} w-full transition-all duration-300 hover:scale-[1.01]`}>
-                                                                <Image 
-                                                                    src={img.url} 
-                                                                    alt={img.alt || "Page Content Image"} 
-                                                                    width={1600} 
-                                                                    height={900} 
-                                                                    className="w-full h-auto object-cover max-h-[75vh]" 
+                                                                <Image
+                                                                    src={img.url}
+                                                                    alt={img.alt || "Page Content Image"}
+                                                                    width={1600}
+                                                                    height={900}
+                                                                    className="w-full h-auto object-cover max-h-[75vh]"
                                                                 />
                                                             </div>
                                                         </div>
@@ -468,7 +466,7 @@ export default function GenericCrmPage({ page }) {
                                         </div>
                                     );
                                 }
-                                
+
                                 return null;
                             })}
                         </div>
