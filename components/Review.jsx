@@ -129,7 +129,7 @@ function ReviewCard({ review, index }) {
     );
 }
 
-export default function Review() {
+export default function Review({ initialReviews }) {
     const containerRef = useRef(null);
     const trackRef = useRef(null);
     const isDownRef = useRef(false);
@@ -137,30 +137,20 @@ export default function Review() {
     const scrollLeftRef = useRef(0);
     const requestRef = useRef(null);
     const isPausedRef = useRef(false);
-    const [reviewsData, setReviewsData] = useState([]);
+    
+    // Initialize state with server-fetched reviews immediately to avoid flicker/delay
+    const [reviewsData, setReviewsData] = useState(() => {
+        if (initialReviews && initialReviews.length > 0) {
+            return [...initialReviews, ...initialReviews];
+        }
+        return [...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS];
+    });
 
     useEffect(() => {
-        // Fetch reviews from API
-        const fetchReviews = async () => {
-            try {
-                const res = await fetch('/api/reviews');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.length > 0) {
-                        setReviewsData([...data, ...data]); // Duplicate for marquee
-                    } else {
-                        setReviewsData([...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS]);
-                    }
-                } else {
-                    setReviewsData([...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS]);
-                }
-            } catch (error) {
-                console.error("Error fetching reviews:", error);
-                setReviewsData([...FALLBACK_TESTIMONIALS, ...FALLBACK_TESTIMONIALS]);
-            }
-        };
-        fetchReviews();
-    }, []);
+        if (initialReviews && initialReviews.length > 0) {
+            setReviewsData([...initialReviews, ...initialReviews]);
+        }
+    }, [initialReviews]);
 
     useEffect(() => {
         const container = containerRef.current;

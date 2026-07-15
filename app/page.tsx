@@ -10,6 +10,7 @@ import { connectDB } from "@/lib/mongodb";
 import ServiceModel from "@/models/Service";
 import WebPageModel from "@/models/WebPage";
 import FAQModel from "@/models/FAQ";
+import ReviewModel from "@/models/Review";
 
 
 export const metadata = {
@@ -92,15 +93,35 @@ async function getFaqs() {
   }
 }
 
+async function getReviews() {
+  try {
+    await connectDB();
+    const raw = await ReviewModel.find({}).sort({ createdAt: -1 }).lean();
+    return raw.map((r: any) => ({
+      _id: r._id.toString(),
+      name: r.name || "",
+      role: r.role || "",
+      company: r.company || "",
+      rating: r.rating || 5,
+      avatar: r.avatar || "",
+      text: r.text || "",
+    }));
+  } catch (err) {
+    console.error("Failed to fetch reviews:", err);
+    return null;
+  }
+}
+
 export default async function Home() {
     const isActive = await checkPageStatus("/");
     if (!isActive) return notFound();
 
     // Parallelize data fetching to reduce TTFB (Document request latency)
-    const [services, cmsData, faqs] = await Promise.all([
+    const [services, cmsData, faqs, reviews] = await Promise.all([
         getServices(),
         getHomePageData(),
-        getFaqs()
+        getFaqs(),
+        getReviews()
     ]);
 
   return (
@@ -109,7 +130,7 @@ export default async function Home() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"RecentureSoft","description":"RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.","url":"https://recenturesoft.com"}) }} />
         <Navbar />
         <Hero cmsData={cmsData} />
-        <HomeSectionsContainer services={services} faqs={faqs} cmsData={cmsData} footer={<FutureFooter />} />
+        <HomeSectionsContainer services={services} faqs={faqs} reviews={reviews} cmsData={cmsData} footer={<FutureFooter />} />
       </main>
       <CookieConsentBanner />
     </>

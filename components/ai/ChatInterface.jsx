@@ -158,6 +158,38 @@ export default function ChatInterface({ onClose, isMinimized }) {
         }
     }, [messages, isLoaded]);
 
+    useEffect(() => {
+        if ("Notification" in window && Notification.permission === "default") {
+            Notification.requestPermission();
+        }
+    }, []);
+
+    const playNotificationSound = useCallback(() => {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, ctx.currentTime);
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.5);
+        } catch (e) {
+            console.error("Audio play failed", e);
+        }
+    }, []);
+
+    const notifyUser = useCallback((text) => {
+        playNotificationSound();
+        if (document.hidden && "Notification" in window && Notification.permission === "granted") {
+            new Notification("Recenture AI", { body: text });
+        }
+    }, [playNotificationSound]);
+
     const adjustTextareaHeight = useCallback(() => {
         if (textareaRef.current) {
             textareaRef.current.style.height = 'auto';
@@ -323,6 +355,8 @@ export default function ChatInterface({ onClose, isMinimized }) {
                 ];
                 return latest;
             });
+
+            notifyUser("The AI Assistant has replied to your message.");
 
         } catch (error) {
             console.error("Chat Error:", error);
