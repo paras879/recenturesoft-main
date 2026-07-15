@@ -65,6 +65,30 @@ const getSpacingStyle = (block) => {
     };
 };
 
+const renderBlockButtons = (block) => {
+    if (!block.buttons || block.buttons.length === 0) return null;
+    
+    const alignClass = block.buttonAlign === 'center' ? 'justify-center' : block.buttonAlign === 'right' ? 'justify-end' : 'justify-start';
+    
+    return (
+        <div className={`flex flex-wrap gap-4 mt-8 ${alignClass} w-full relative z-10`}>
+            {block.buttons.map((btn, idx) => (
+                <a
+                    key={idx}
+                    href={btn.url || '#'}
+                    style={{
+                        backgroundColor: btn.bgColor || '#2563eb',
+                        color: btn.textColor || '#ffffff'
+                    }}
+                    className="px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.02] shadow-sm active:scale-[0.98] inline-flex items-center gap-1.5"
+                >
+                    {btn.text}
+                </a>
+            ))}
+        </div>
+    );
+};
+
 export default function GenericCrmPage({ page }) {
     const heroContent = page.content?.crmHero || {};
     const blocks = page.content?.crmBlocks || [];
@@ -234,6 +258,7 @@ export default function GenericCrmPage({ page }) {
                                                         </ul>
                                                     )}
                                                 </div>
+                                                {renderBlockButtons(block)}
                                             </LayoutWrapper>
                                         </div>
                                     );
@@ -251,6 +276,7 @@ export default function GenericCrmPage({ page }) {
                                                         {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.mainHeadingColor || block.mainHeadingColorType === 'custom' || block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
                                                         {block.desc1 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`mb-6 leading-relaxed text-xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-50"}`}>{block.desc1}</p>}
                                                         {block.desc2 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`text-lg ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-100/80"}`}>{block.desc2}</p>}
+                                                        {renderBlockButtons({ ...block, buttonAlign: block.buttonAlign || 'center' })}
                                                     </div>
                                                 </div>
                                             </LayoutWrapper>
@@ -285,6 +311,7 @@ export default function GenericCrmPage({ page }) {
                                                         ))}
                                                     </div>
                                                 )}
+                                                {renderBlockButtons(block)}
                                             </div>
                                         </LayoutWrapper>
                                     );
@@ -335,6 +362,7 @@ export default function GenericCrmPage({ page }) {
                                                         </div>
                                                     )}
                                                 </div>
+                                                {renderBlockButtons(block)}
                                             </LayoutWrapper>
                                         </div>
                                     );
@@ -379,6 +407,7 @@ export default function GenericCrmPage({ page }) {
                                                     </div>
                                                 );
                                             })}
+                                            {renderBlockButtons(block)}
                                         </div>
                                     );
                                 }
