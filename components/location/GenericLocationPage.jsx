@@ -3,6 +3,7 @@ import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
 const headingColorMap = {
     default: "text-slate-900 dark:text-white",
@@ -90,8 +91,14 @@ const renderBlockButtons = (block) => {
 };
 
 export default function GenericLocationPage({ page }) {
+    const { openMeetingModal } = useMeetingModal();
     const heroContent = page.content?.crmHero || {};
-    const blocks = page.content?.crmBlocks || [];
+    const rawBlocks = page.content?.crmBlocks || [];
+    const blocks = [...rawBlocks].sort((a, b) => {
+        const aTop = a.isTopBanner ? 1 : 0;
+        const bTop = b.isTopBanner ? 1 : 0;
+        return bTop - aTop;
+    });
 
     const title = heroContent.title || "Customer Relationship";
     const highlight = heroContent.highlight || "Management";
@@ -120,10 +127,10 @@ export default function GenericLocationPage({ page }) {
                                 Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <a href="#contact-form-section" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group">
+                                <button onClick={openMeetingModal} className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
                                     Get Started Now
                                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -383,6 +390,58 @@ export default function GenericLocationPage({ page }) {
                                     }
 
                                     if (imageList.length === 0) return null;
+
+                                    const hasOverlay = block.bannerTitle || block.bannerDesc;
+                                    if (hasOverlay && imageList[0]?.url) {
+                                        const opacityVal = block.overlayOpacity !== undefined ? block.overlayOpacity : 40;
+                                        const bgColor = block.overlayBgColor || '#000000';
+                                        
+                                        // Helper to convert hex to rgba
+                                        const hexToRgba = (hex, opacity) => {
+                                            let c = (hex || '#000000').substring(1);
+                                            if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+                                            const r = parseInt(c.substring(0, 2), 16) || 0;
+                                            const g = parseInt(c.substring(2, 4), 16) || 0;
+                                            const b = parseInt(c.substring(4, 6), 16) || 0;
+                                            return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+                                        };
+
+                                        const overlayStyle = {
+                                            backgroundColor: hexToRgba(bgColor, opacityVal)
+                                        };
+
+                                        return (
+                                            <div key={index} style={getSpacingStyle(block)} className="w-full relative overflow-hidden rounded-[2.5rem] min-h-[350px] md:min-h-[450px] flex items-center justify-center p-8 md:p-16 shadow-2xl border border-slate-200/50 dark:border-white/10 my-12">
+                                                <div className="absolute inset-0 z-0">
+                                                    <Image 
+                                                        src={imageList[0].url} 
+                                                        alt={imageList[0].alt || "Banner Background"} 
+                                                        fill 
+                                                        sizes="100vw"
+                                                        className="object-cover" 
+                                                        quality={90} 
+                                                        priority
+                                                    />
+                                                </div>
+                                                {/* Custom color & opacity overlay */}
+                                                <div className="absolute inset-0 z-10" style={overlayStyle} />
+                                                
+                                                <div className="relative z-20 text-center max-w-4xl mx-auto flex flex-col items-center">
+                                                    {block.bannerTitle && (
+                                                        <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight ${(block.mainHeadingColor || block.mainHeadingColorType === 'custom' || block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>
+                                                            {block.bannerTitle}
+                                                        </h3>
+                                                    )}
+                                                    {block.bannerDesc && (
+                                                        <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`text-base md:text-xl leading-relaxed mb-8 max-w-2xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-slate-100/90"}`}>
+                                                            {block.bannerDesc}
+                                                        </p>
+                                                    )}
+                                                    {renderBlockButtons({ ...block, buttonAlign: block.buttonAlign || 'center' })}
+                                                </div>
+                                            </div>
+                                        );
+                                    }
 
                                     return (
                                         <div key={index} style={getSpacingStyle(block)} className="w-full space-y-8">
