@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-export default function PageHero({ title, highlight, description, banner, highlightClass, hideContactButton, children, bannerImage, bannerOpacity, ctaText }) {
+export default function PageHero({ title, highlight, description, banner, highlightClass, hideContactButton, children, bannerImage, bannerOpacity, ctaText, ctaLink }) {
     const opacityValue = bannerOpacity !== undefined ? (parseInt(bannerOpacity) / 100) : 0.7;
     return (
         <section className={`relative pt-24 md:pt-28 lg:pt-32 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${(children || bannerImage) ? 'bg-[#020617]' : 'bg-background'}`}>
@@ -83,15 +83,33 @@ export default function PageHero({ title, highlight, description, banner, highli
 
                     { !hideContactButton && (
                         <div className="mt-8 md:mt-12 animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
-                            <button
-                                onClick={() => document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-light text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
-                            >
-                                {ctaText || "Get in Touch"}
-                                <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                                </svg>
-                            </button>
+                            {ctaLink && (ctaLink.startsWith('/') || ctaLink.startsWith('http')) ? (
+                                <a
+                                    href={ctaLink}
+                                    className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-light text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                >
+                                    {ctaText || "Get in Touch"}
+                                    <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        if (ctaLink && ctaLink.startsWith('#')) {
+                                            document.getElementById(ctaLink.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+                                        } else {
+                                            document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
+                                        }
+                                    }}
+                                    className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-light text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                >
+                                    {ctaText || "Get in Touch"}
+                                    <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </button>
+                            )}
                         </div>
                     )}
 

@@ -8,6 +8,7 @@ import PageHero from "@/components/PageHero";
 import ReactNativeContent from "@/components/react-native/ReactNativeContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
+import Script from "next/script";
 
 const defaultMetadata = {
     title: "React Native App Development Company | RecentureSoft",
@@ -22,6 +23,12 @@ export async function generateMetadata() {
     return {
         title: page.seoTitle || defaultMetadata.title,
         description: page.seoDescription || defaultMetadata.description,
+        keywords: page.seoKeywords || "",
+        openGraph: {
+            title: page.seoTitle || defaultMetadata.title,
+            description: page.seoDescription || defaultMetadata.description,
+            images: page.seoOgImage ? [{ url: page.seoOgImage }] : []
+        },
         alternates: defaultMetadata.alternates
     };
 }
@@ -37,15 +44,19 @@ export default async function ReactNativePage() {
 
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-indigo-500/30">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React Native App Development Company | RecentureSoft","description":"Hire the best React Native app developers in India. We build high-performance, cross-platform mobile apps for iOS and Android.","url":"https://recenturesoft.com/react-native"}) }} />
+            <Script id="reactnative-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React Native App Development Company | RecentureSoft","description":"Hire the best React Native app developers in India. We build high-performance, cross-platform mobile apps for iOS and Android.","url":"https://recenturesoft.com/react-native"}) }} />
             <Navbar />
             
             <PageHero
-                badge="Mobile Development"
-                title="React Native App"
-                highlight="Development"
-                description="Launch faster and cut costs with our React Native engineering services. Build native iOS and Android applications from a single unified codebase."
+                badge={pageData?.content?.heroBadge || "Mobile Development"}
+                title={pageData?.content?.heroTitle || "React Native App"}
+                highlight={pageData?.content?.heroHighlight || "Development"}
+                description={pageData?.content?.heroDesc || "Launch faster and cut costs with our React Native engineering services. Build native iOS and Android applications from a single unified codebase."}
                 highlightClass="text-indigo-500 dark:text-indigo-400"
+                bannerImage={pageData?.content?.heroImage || ""}
+                bannerOpacity={pageData?.content?.bannerOpacity}
+                ctaText={pageData?.content?.heroCtaText || "Get in Touch"}
+                ctaLink={pageData?.content?.heroCtaLink || ""}
             />
 
             <section className="py-8 md:py-12 lg:py-16 px-4">
