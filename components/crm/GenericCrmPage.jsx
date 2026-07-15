@@ -194,15 +194,15 @@ export default function GenericCrmPage({ page }) {
                                         <div key={index}>
                                             <LayoutWrapper isText={true}>
                                                 <div className="prose prose-lg md:prose-xl prose-slate dark:prose-invert max-w-none">
-                                                    {block.h2 && <h2 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${getHeadingStyle(block).className}`}>{block.h2}</h2>}
-                                                    {block.h3 && <h3 style={getHeadingStyle(block).style} className={`text-2xl font-bold mb-4 ${getHeadingStyle(block).className}`}>{block.h3}</h3>}
-                                                    {block.desc && block.desc.split('\n').map((p, i) => p.trim() ? <p key={i} style={getTextStyle(block).style} className={`mb-6 leading-relaxed ${getTextStyle(block).className}`}>{p}</p> : null)}
+                                                    {block.h2 && <h2 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${getHeadingStyle(block).className}`}>{block.h2}</h2>}
+                                                    {block.h3 && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`text-2xl font-bold mb-4 ${getHeadingStyle(block).className}`}>{block.h3}</h3>}
+                                                    {block.desc && block.desc.split('\n').map((p, i) => p.trim() ? <p key={i} style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`mb-6 leading-relaxed ${getTextStyle(block).className}`}>{p}</p> : null)}
                                                     {block.list && (
                                                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 list-none pl-0">
                                                             {block.list.split('\n').map((l, i) => l.trim() ? (
                                                                 <li key={i} className="flex items-start gap-3 bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-white/5 shadow-sm">
                                                                     <CheckCircle2 className="w-6 h-6 text-blue-500 shrink-0" />
-                                                                    <span className="text-slate-700 dark:text-slate-300 font-medium leading-tight">{l}</span>
+                                                                    <span style={{ fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className="text-slate-700 dark:text-slate-300 font-medium leading-tight">{l}</span>
                                                                 </li>
                                                             ) : null)}
                                                         </ul>
@@ -222,9 +222,9 @@ export default function GenericCrmPage({ page }) {
                                                 <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-[2rem] p-10 md:p-14 text-white shadow-2xl shadow-blue-500/20 text-center">
                                                     <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
                                                     <div className="relative z-10 max-w-3xl mx-auto">
-                                                        {block.title && <h3 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
-                                                        {block.desc1 && <p style={getTextStyle(block).style} className={`mb-6 leading-relaxed text-xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-50"}`}>{block.desc1}</p>}
-                                                        {block.desc2 && <p style={getTextStyle(block).style} className={`text-lg ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-100/80"}`}>{block.desc2}</p>}
+                                                        {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
+                                                        {block.desc1 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`mb-6 leading-relaxed text-xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-50"}`}>{block.desc1}</p>}
+                                                        {block.desc2 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`text-lg ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-100/80"}`}>{block.desc2}</p>}
                                                     </div>
                                                 </div>
                                             </LayoutWrapper>
@@ -241,7 +241,7 @@ export default function GenericCrmPage({ page }) {
                                             <div>
                                                 {block.title && (
                                                     <div className="text-center mb-12">
-                                                        <h4 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
+                                                        <h4 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         <div className="w-20 h-1.5 bg-blue-500 mx-auto mt-6 rounded-full" />
                                                     </div>
                                                 )}
@@ -252,8 +252,8 @@ export default function GenericCrmPage({ page }) {
                                                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                                 <div className="relative z-10">
                                                                     {s.icon && <div className="text-4xl mb-6 bg-blue-50 dark:bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center border border-blue-100 dark:border-blue-500/20">{s.icon}</div>}
-                                                                    <h5 style={getHeadingStyle(block).style} className={`font-bold text-xl mb-4 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
-                                                                    <p style={getTextStyle(block).style} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{s.desc}</p>
+                                                                    <h5 style={{ ...getHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-xl mb-4 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
+                                                                    <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{s.desc}</p>
                                                                 </div>
                                                             </div>
                                                         ))}
@@ -290,7 +290,7 @@ export default function GenericCrmPage({ page }) {
                                                 <div>
                                                     {block.title && (
                                                         <div className="mb-12">
-                                                            <h4 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
+                                                            <h4 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         </div>
                                                     )}
                                                     {block.steps && block.steps.length > 0 && (
@@ -301,8 +301,8 @@ export default function GenericCrmPage({ page }) {
                                                                         {i + 1}
                                                                     </div>
                                                                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white dark:bg-slate-900/60 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500/30 transition-all duration-300">
-                                                                        <h5 style={getHeadingStyle(block).style} className={`font-bold text-xl mb-2 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{step.stage}</h5>
-                                                                        <p style={getTextStyle(block).style} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{step.desc}</p>
+                                                                        <h5 style={{ ...getHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-xl mb-2 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{step.stage}</h5>
+                                                                        <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{step.desc}</p>
                                                                     </div>
                                                                 </div>
                                                             ))}
