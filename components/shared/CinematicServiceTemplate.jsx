@@ -10,6 +10,10 @@ export default function CinematicServiceTemplate({
     introParagraphs = [],
     features = [],
     themeColor = "blue", // e.g., 'blue', 'cyan', 'emerald', 'sky', 'indigo'
+    ctaTitle,
+    ctaSubtitle,
+    ctaBtnText,
+    ctaBtnLink
 }) {
     // Dynamic color maps for the specific theme
     const themeMaps = {
@@ -168,14 +172,14 @@ export default function CinematicServiceTemplate({
                 
                 <div className="relative p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Ready to transform your vision?</h3>
-                        <p className="text-slate-300 text-lg">Partner with our elite engineering teams today.</p>
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{ctaTitle || "Ready to transform your vision?"}</h3>
+                        <p className="text-slate-300 text-lg">{ctaSubtitle || "Partner with our elite engineering teams today."}</p>
                     </div>
                     <Link 
-                        href="/contact"
+                        href={ctaBtnLink || "/contact"}
                         className="group flex items-center gap-2 px-8 py-4 bg-white text-slate-900 rounded-full font-bold text-lg hover:bg-slate-50 transition-colors"
                     >
-                        Get Started Now
+                        {ctaBtnText || "Get Started Now"}
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

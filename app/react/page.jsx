@@ -8,6 +8,7 @@ import PageHero from "@/components/PageHero";
 import ReactContent from "@/components/react/ReactContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
+import Script from "next/script";
 
 const defaultMetadata = {
     title: "React.js Development Services | RecentureSoft",
@@ -22,6 +23,12 @@ export async function generateMetadata() {
     return {
         title: page.seoTitle || defaultMetadata.title,
         description: page.seoDescription || defaultMetadata.description,
+        keywords: page.seoKeywords || "",
+        openGraph: {
+            title: page.seoTitle || defaultMetadata.title,
+            description: page.seoDescription || defaultMetadata.description,
+            images: page.seoOgImage ? [{ url: page.seoOgImage }] : []
+        },
         alternates: defaultMetadata.alternates
     };
 }
@@ -37,15 +44,18 @@ export default async function ReactPage() {
 
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-sky-500/30">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React.js Development Services | RecentureSoft","description":"Build fast, scalable, and highly interactive web applications with RecentureSoft","url":"https://recenturesoft.com/react"}) }} />
+            <Script id="react-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React.js Development Services | RecentureSoft","description":"Build fast, scalable, and highly interactive web applications with RecentureSoft","url":"https://recenturesoft.com/react"}) }} />
             <Navbar />
             
             <PageHero
-                badge="Frontend Development"
-                title="React.js"
-                highlight="Development"
-                description="Deliver unparalleled user experiences with high-performance, interactive, and scalable Single Page Applications powered by React."
+                badge={pageData?.content?.heroBadge || "Frontend Development"}
+                title={pageData?.content?.heroTitle || "React.js"}
+                highlight={pageData?.content?.heroHighlight || "Development"}
+                description={pageData?.content?.heroDesc || "Deliver unparalleled user experiences with high-performance, interactive, and scalable Single Page Applications powered by React."}
                 highlightClass="text-sky-500 dark:text-sky-400"
+                bannerImage={pageData?.content?.heroImage || ""}
+                bannerOpacity={pageData?.content?.bannerOpacity}
+                ctaText={pageData?.content?.heroCtaText || "Get in Touch"}
             />
 
             <section className="py-8 md:py-12 lg:py-16 px-4">
