@@ -109,73 +109,6 @@ const solutionsMenu = [
     }
 ];
 
-const industriesMenu = [
-    {
-        title: "Finance & Health",
-        icon: Landmark,
-        color: "text-blue-500",
-        bg: "bg-blue-500/10",
-        items: [
-            { name: "Finance", href: "/industry/finance" },
-            { name: "Healthcare", href: "/industry/healthcare" },
-            { name: "Insurance", href: "/industry/insurance" },
-            { name: "Legal", href: "/industry/legal" },
-            { name: "Medical", href: "/industry/medical" },
-        ]
-    },
-    {
-        title: "Auto & Property",
-        icon: Car,
-        color: "text-cyan-500",
-        bg: "bg-cyan-500/10",
-        items: [
-            { name: "Payment", href: "/industry/payment" },
-            { name: "Automobile", href: "/industry/automobile" },
-            { name: "Real Estate", href: "/industry/real-estate" },
-            { name: "Sport", href: "/industry/sport" },
-            { name: "Manufacturing", href: "/industry/manufacturing" },
-        ]
-    },
-    {
-        title: "Travel & Gaming",
-        icon: Globe,
-        color: "text-purple-500",
-        bg: "bg-purple-500/10",
-        items: [
-            { name: "Supply Chain", href: "/industry/supply-chain" },
-            { name: "Gaming", href: "/industry/gaming" },
-            { name: "Construction", href: "/industry/construction" },
-            { name: "Travel", href: "/industry/travel" },
-            { name: "Aviation", href: "/industry/aviation" },
-        ]
-    },
-    {
-        title: "Tech & Education",
-        icon: Briefcase,
-        color: "text-emerald-500",
-        bg: "bg-emerald-500/10",
-        items: [
-            { name: "B2B", href: "/industry/b2b" },
-            { name: "Education", href: "/industry/education" },
-            { name: "Ecommerce", href: "/industry/ecommerce" },
-            { name: "SaaS", href: "/industry/saas" },
-            { name: "Hotel", href: "/industry/hotel" },
-        ]
-    },
-    {
-        title: "Lifestyle & IT",
-        icon: Heart,
-        color: "text-rose-500",
-        bg: "bg-rose-500/10",
-        items: [
-            { name: "Beauty and Cosmetics", href: "/industry/beauty-cosmetics" },
-            { name: "Fitness", href: "/industry/fitness" },
-            { name: "Interior Design & Decor", href: "/industry/interior-design" },
-            { name: "IT Industries", href: "/industry/it-industries" },
-            { name: "Logistics & Transport", href: "/industry/logistics" },
-        ]
-    }
-];
 
 export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = [], dynamicPages = [] }) {
     const [hoveredLink, setHoveredLink] = useState(null);
@@ -188,6 +121,21 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
     const isPathActive = (path) => !inactivePaths.includes(path);
 
     const activeNavLinks = navLinks.filter(link => isPathActive(link.href));
+
+    // Compute dynamic industries menu columns (up to 5 items per column)
+    const activeIndustries = (dynamicPages || [])
+        .filter(dp => dp.category === "Industries" && isPathActive(dp.path))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+    const industriesMenu = [];
+    for (let i = 0; i < activeIndustries.length; i += 5) {
+        industriesMenu.push({
+            items: activeIndustries.slice(i, i + 5).map(item => ({
+                name: item.name,
+                href: item.path
+            }))
+        });
+    }
 
     // Merge dynamic pages into solutions menu
     const combinedSolutionsMenu = solutionsMenu.map(category => ({
@@ -291,7 +239,15 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                             {/* Top gradient border accent */}
                                             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
 
-                                            <div className={`grid ${link.name === "Industries" ? "grid-cols-5" : "grid-cols-4"} gap-x-6 gap-y-8 relative z-10`}>
+                                            <div className={`grid gap-x-6 gap-y-8 relative z-10 ${
+                                                link.name === "Solutions" 
+                                                    ? "grid-cols-4" 
+                                                    : (industriesMenu.length === 1 ? "grid-cols-1"
+                                                       : industriesMenu.length === 2 ? "grid-cols-2"
+                                                       : industriesMenu.length === 3 ? "grid-cols-3"
+                                                       : industriesMenu.length === 4 ? "grid-cols-4"
+                                                       : "grid-cols-5")
+                                            }`}>
                                                 {(link.name === "Solutions" ? activeSolutionsMenu : industriesMenu).map((category, idx) => {
                                                     const Icon = category.icon;
                                                     return (
