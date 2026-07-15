@@ -4,6 +4,41 @@ import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
+const headingColorMap = {
+    default: "text-slate-900 dark:text-white",
+    "blue-gradient": "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400",
+    "indigo-gradient": "text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-500 dark:from-indigo-400 dark:to-purple-400",
+    emerald: "text-emerald-600 dark:text-emerald-400",
+    "orange-gradient": "text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 dark:from-orange-400 dark:to-rose-400",
+    amber: "text-amber-600 dark:text-amber-400",
+    rose: "text-rose-600 dark:text-rose-400"
+};
+
+const textColorMap = {
+    default: "text-slate-600 dark:text-slate-400",
+    muted: "text-slate-400 dark:text-slate-500",
+    indigo: "text-indigo-600 dark:text-indigo-400",
+    emerald: "text-emerald-600/90 dark:text-emerald-400/90",
+    amber: "text-amber-700 dark:text-amber-400",
+    rose: "text-rose-600/90 dark:text-rose-400/90"
+};
+
+const getHeadingStyle = (block) => {
+    if (block.headingColorType === 'custom' && block.customHeadingColor) {
+        return { style: { color: block.customHeadingColor }, className: "" };
+    }
+    const colorClass = headingColorMap[block.headingColor] || headingColorMap.default;
+    return { className: colorClass, style: {} };
+};
+
+const getTextStyle = (block) => {
+    if (block.textColorType === 'custom' && block.customTextColor) {
+        return { style: { color: block.customTextColor }, className: "" };
+    }
+    const colorClass = textColorMap[block.textColor] || textColorMap.default;
+    return { className: colorClass, style: {} };
+};
+
 export default function GenericLocationPage({ page }) {
     const heroContent = page.content?.crmHero || {};
     const blocks = page.content?.crmBlocks || [];
@@ -69,25 +104,84 @@ export default function GenericLocationPage({ page }) {
                             {blocks.map((block, index) => {
                                 // Helper to wrap any block with a side image if provided
                                 const LayoutWrapper = ({ children, isText }) => {
-                                    if (!block.imageUrl) {
+                                    // 1. Gather all images (support both new array and legacy side image)
+                                    let imageList = [];
+                                    if (block.images && block.images.length > 0) {
+                                        imageList = block.images.filter(img => img.url);
+                                    } else if (block.imageUrl) {
+                                        imageList = [{
+                                            url: block.imageUrl,
+                                            align: block.imageAlign || 'right',
+                                            size: 'medium',
+                                            alt: block.title || block.h2 || block.h3 || "Section Image"
+                                        }];
+                                    }
+
+                                    if (imageList.length === 0) {
                                         return (
                                             <div className={isText ? "max-w-4xl mx-auto" : ""}>
                                                 {children}
                                             </div>
                                         );
                                     }
-                                    
-                                    return (
-                                        <div className={`flex flex-col ${block.imageAlign === 'left' ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-16 items-center`}>
-                                            <div className="w-full lg:w-1/2">
-                                                {children}
-                                            </div>
-                                            <div className="w-full lg:w-1/2 relative">
-                                                <div className="absolute inset-0 bg-blue-500/5 dark:bg-blue-500/10 rounded-[3rem] transform -rotate-3 scale-105" />
-                                                <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/50 dark:border-white/10 shadow-xl bg-white dark:bg-slate-900">
-                                                    <Image src={block.imageUrl} alt={block.title || block.h2 || block.h3 || "Section Image"} width={1000} height={800} className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-700 max-h-[600px]" />
+
+                                    // 2. Filter images by position
+                                    const leftImages = imageList.filter(img => img.align === 'left');
+                                    const rightImages = imageList.filter(img => img.align === 'right');
+                                    const topImages = imageList.filter(img => img.align === 'top');
+                                    const bottomImages = imageList.filter(img => img.align === 'bottom');
+
+                                    // Helper to render an image with its size classes
+                                    const renderImage = (img, key) => {
+                                        const sizeClass = img.size === 'small' ? 'max-w-md' : img.size === 'medium' ? 'max-w-2xl' : img.size === 'large' ? 'max-w-4xl' : 'max-w-full w-full';
+                                        return (
+                                            <div key={key} className={`w-full flex ${img.align === 'left' ? 'justify-start' : img.align === 'right' ? 'justify-end' : 'justify-center'} my-4`}>
+                                                <div className={`relative overflow-hidden rounded-[2rem] border border-slate-200/50 dark:border-white/10 shadow-xl bg-white dark:bg-slate-900 ${sizeClass} w-full transition-all duration-300 hover:scale-[1.01]`}>
+                                                    <Image 
+                                                        src={img.url} 
+                                                        alt={img.alt || block.title || block.h2 || "Section Image"} 
+                                                        width={1200} 
+                                                        height={800} 
+                                                        className="w-full h-auto object-cover max-h-[60vh]"
+                                                    />
                                                 </div>
                                             </div>
+                                        );
+                                    };
+
+                                    const contentBody = (
+                                        <div className="w-full space-y-6">
+                                            {topImages.map((img, i) => renderImage(img, `top-${i}`))}
+                                            {children}
+                                            {bottomImages.map((img, i) => renderImage(img, `bottom-${i}`))}
+                                        </div>
+                                    );
+
+                                    // If we have side images (left or right), we wrap the content body in a split layout
+                                    if (leftImages.length > 0 || rightImages.length > 0) {
+                                        return (
+                                            <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center w-full">
+                                                {leftImages.length > 0 && (
+                                                    <div className="w-full lg:w-1/2 flex flex-col gap-6">
+                                                        {leftImages.map((img, i) => renderImage(img, `left-${i}`))}
+                                                    </div>
+                                                )}
+                                                <div className={`w-full ${leftImages.length > 0 && rightImages.length > 0 ? 'lg:w-1/3' : 'lg:w-1/2'}`}>
+                                                    {contentBody}
+                                                </div>
+                                                {rightImages.length > 0 && (
+                                                    <div className="w-full lg:w-1/2 flex flex-col gap-6">
+                                                        {rightImages.map((img, i) => renderImage(img, `right-${i}`))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    }
+
+                                    // If no side images, just return the content body with top/bottom images
+                                    return (
+                                        <div className={isText ? "max-w-4xl mx-auto w-full" : "w-full"}>
+                                            {contentBody}
                                         </div>
                                     );
                                 };
@@ -100,9 +194,9 @@ export default function GenericLocationPage({ page }) {
                                         <div key={index}>
                                             <LayoutWrapper isText={true}>
                                                 <div className="prose prose-lg md:prose-xl prose-slate dark:prose-invert max-w-none">
-                                                    {block.h2 && <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-slate-900 dark:text-white tracking-tight">{block.h2}</h2>}
-                                                    {block.h3 && <h3 className="text-2xl font-bold mb-4 text-slate-800 dark:text-slate-200">{block.h3}</h3>}
-                                                    {block.desc && block.desc.split('\n').map((p, i) => p.trim() ? <p key={i} className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">{p}</p> : null)}
+                                                    {block.h2 && <h2 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${getHeadingStyle(block).className}`}>{block.h2}</h2>}
+                                                    {block.h3 && <h3 style={getHeadingStyle(block).style} className={`text-2xl font-bold mb-4 ${getHeadingStyle(block).className}`}>{block.h3}</h3>}
+                                                    {block.desc && block.desc.split('\n').map((p, i) => p.trim() ? <p key={i} style={getTextStyle(block).style} className={`mb-6 leading-relaxed ${getTextStyle(block).className}`}>{p}</p> : null)}
                                                     {block.list && (
                                                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 list-none pl-0">
                                                             {block.list.split('\n').map((l, i) => l.trim() ? (
@@ -128,9 +222,9 @@ export default function GenericLocationPage({ page }) {
                                                 <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-[2rem] p-10 md:p-14 text-white shadow-2xl shadow-blue-500/20 text-center">
                                                     <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
                                                     <div className="relative z-10 max-w-3xl mx-auto">
-                                                        {block.title && <h3 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight">{block.title}</h3>}
-                                                        {block.desc1 && <p className="text-blue-50 mb-6 leading-relaxed text-xl">{block.desc1}</p>}
-                                                        {block.desc2 && <p className="text-blue-100/80 text-lg">{block.desc2}</p>}
+                                                        {block.title && <h3 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
+                                                        {block.desc1 && <p style={getTextStyle(block).style} className={`mb-6 leading-relaxed text-xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-50"}`}>{block.desc1}</p>}
+                                                        {block.desc2 && <p style={getTextStyle(block).style} className={`text-lg ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-100/80"}`}>{block.desc2}</p>}
                                                     </div>
                                                 </div>
                                             </LayoutWrapper>
@@ -147,7 +241,7 @@ export default function GenericLocationPage({ page }) {
                                             <div>
                                                 {block.title && (
                                                     <div className="text-center mb-12">
-                                                        <h4 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">{block.title}</h4>
+                                                        <h4 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         <div className="w-20 h-1.5 bg-blue-500 mx-auto mt-6 rounded-full" />
                                                     </div>
                                                 )}
@@ -158,8 +252,8 @@ export default function GenericLocationPage({ page }) {
                                                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                                 <div className="relative z-10">
                                                                     {s.icon && <div className="text-4xl mb-6 bg-blue-50 dark:bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center border border-blue-100 dark:border-blue-500/20">{s.icon}</div>}
-                                                                    <h5 className="font-bold text-xl text-slate-900 dark:text-white mb-4">{s.title}</h5>
-                                                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">{s.desc}</p>
+                                                                    <h5 style={getHeadingStyle(block).style} className={`font-bold text-xl mb-4 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
+                                                                    <p style={getTextStyle(block).style} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{s.desc}</p>
                                                                 </div>
                                                             </div>
                                                         ))}
@@ -196,7 +290,7 @@ export default function GenericLocationPage({ page }) {
                                                 <div>
                                                     {block.title && (
                                                         <div className="mb-12">
-                                                            <h4 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">{block.title}</h4>
+                                                            <h4 style={getHeadingStyle(block).style} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         </div>
                                                     )}
                                                     {block.steps && block.steps.length > 0 && (
@@ -207,8 +301,8 @@ export default function GenericLocationPage({ page }) {
                                                                         {i + 1}
                                                                     </div>
                                                                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white dark:bg-slate-900/60 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500/30 transition-all duration-300">
-                                                                        <h5 className="font-bold text-xl text-slate-900 dark:text-white mb-2">{step.stage}</h5>
-                                                                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">{step.desc}</p>
+                                                                        <h5 style={getHeadingStyle(block).style} className={`font-bold text-xl mb-2 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{step.stage}</h5>
+                                                                        <p style={getTextStyle(block).style} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{step.desc}</p>
                                                                     </div>
                                                                 </div>
                                                             ))}
@@ -220,38 +314,47 @@ export default function GenericLocationPage({ page }) {
                                     );
                                 }
                                 
-                                // 5. IMAGE BLOCK
+                                // 5. IMAGE BLOCK (Support both multi-images and single legacy image)
                                 else if (block.type === 'image') {
-                                    if (!block.url) return null;
-                                    
-                                    // Full width image - no wrapper needed
-                                    if (block.size === 'full') {
-                                        return (
-                                            <div key={index} className="overflow-hidden rounded-[2rem] border-4 border-white dark:border-slate-800 shadow-2xl w-full">
-                                                <Image src={block.url} alt={block.alt || "Page Content Image"} width={1600} height={900} className="w-full h-auto object-cover hover:scale-[1.03] transition-transform duration-1000 max-h-[80vh]" />
-                                            </div>
-                                        );
-                                    } else {
-                                        // For small/medium/large images, wrap in a beautiful padding container
-                                        let alignClass = "justify-center";
-                                        if (block.align === 'left') alignClass = "justify-start";
-                                        if (block.align === 'right') alignClass = "justify-end";
-
-                                        const sizeClass = block.size === 'small' ? 'max-w-md' : block.size === 'medium' ? 'max-w-3xl' : 'max-w-5xl';
-                                        
-                                        return (
-                                            <div key={index} className="w-full relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/60 dark:to-[#020617] rounded-3xl p-6 md:p-12 lg:p-16 border border-slate-100 dark:border-white/5 shadow-sm">
-                                                {/* Decorative ambient background for the wrapper */}
-                                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl bg-blue-500/5 dark:bg-blue-500/10 blur-[100px] pointer-events-none rounded-full" />
-                                                
-                                                <div className={`relative z-10 flex w-full ${alignClass}`}>
-                                                    <div className={`overflow-hidden rounded-[2rem] border-4 border-white dark:border-slate-700 shadow-2xl ${sizeClass} w-full transition-all duration-500`}>
-                                                        <Image src={block.url} alt={block.alt || "Page Content Image"} width={1600} height={900} className="w-full h-auto object-cover hover:scale-[1.03] transition-transform duration-1000 max-h-[70vh]" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
+                                    let imageList = [];
+                                    if (block.images && block.images.length > 0) {
+                                        imageList = block.images.filter(img => img.url);
+                                    } else if (block.url) {
+                                        imageList = [{
+                                            url: block.url,
+                                            align: block.align || 'center',
+                                            size: block.size || 'large',
+                                            alt: block.alt || "Page Content Image"
+                                        }];
                                     }
+
+                                    if (imageList.length === 0) return null;
+
+                                    return (
+                                        <div key={index} className="w-full space-y-8">
+                                            {imageList.map((img, i) => {
+                                                const alignClass = img.align === 'left' ? 'justify-start' : img.align === 'right' ? 'justify-end' : 'justify-center';
+                                                const sizeClass = img.size === 'small' ? 'max-w-md' : img.size === 'medium' ? 'max-w-3xl' : img.size === 'large' ? 'max-w-5xl' : 'max-w-full w-full';
+                                                
+                                                return (
+                                                    <div key={i} className="w-full relative overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/40 dark:to-[#020617] rounded-[2rem] p-6 md:p-10 border border-slate-100 dark:border-white/5 shadow-sm">
+                                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl bg-blue-500/5 dark:bg-blue-500/10 blur-[100px] pointer-events-none rounded-full" />
+                                                        <div className={`relative z-10 flex w-full ${alignClass}`}>
+                                                            <div className={`overflow-hidden rounded-[1.5rem] border-4 border-white dark:border-slate-800 shadow-xl ${sizeClass} w-full transition-all duration-300 hover:scale-[1.01]`}>
+                                                                <Image 
+                                                                    src={img.url} 
+                                                                    alt={img.alt || "Page Content Image"} 
+                                                                    width={1600} 
+                                                                    height={900} 
+                                                                    className="w-full h-auto object-cover max-h-[75vh]" 
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    );
                                 }
                                 
                                 return null;

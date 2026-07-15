@@ -9,10 +9,10 @@ const CheckIcon = () => (
 
 export default function SeoPackageContent({ dynamicData }) {
     const plans = dynamicData?.content?.plans || [
-        { name: "Bronze", keywords: "20 keywords to be optimized" },
-        { name: "Silver", keywords: "40 keywords to be optimized" },
-        { name: "Gold", keywords: "60 keywords to be optimized" },
-        { name: "Platinum", keywords: "80 keywords to be optimized" }
+        { name: "Bronze", keywords: "20 keywords to be optimized", ctaText: "Contact Us", ctaLink: "/contact" },
+        { name: "Silver", keywords: "40 keywords to be optimized", ctaText: "Contact Us", ctaLink: "/contact" },
+        { name: "Gold", keywords: "60 keywords to be optimized", ctaText: "Contact Us", ctaLink: "/contact" },
+        { name: "Platinum", keywords: "80 keywords to be optimized", ctaText: "Contact Us", ctaLink: "/contact" }
     ];
 
     const websiteAudit = dynamicData?.content?.websiteAudit || [
@@ -56,6 +56,10 @@ export default function SeoPackageContent({ dynamicData }) {
         "Email/Chat/Online", "24/7 Live Project Tracking"
     ];
 
+    const minContractPeriodValues = dynamicData?.content?.minContractPeriodValues || [
+        "6 Months", "6 Months", "6 Months", "6 Months"
+    ];
+
     return (
         <div className="w-full my-8 bg-white dark:bg-slate-900 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
             <div className="overflow-x-auto">
@@ -71,7 +75,7 @@ export default function SeoPackageContent({ dynamicData }) {
                                         <h3 className="text-xl md:text-2xl font-black uppercase tracking-wide">{plan.name}</h3>
                                     </div>
                                     <div className="px-4 pb-6">
-                                        <p className="text-3xl font-black text-slate-900 dark:text-white mb-2">{plan.keywords.split(' ')[0]}</p>
+                                        <p className="text-3xl font-black text-slate-900 dark:text-white mb-2">{(plan.keywords || "").split(' ')[0]}</p>
                                         <p className="text-xs text-slate-500 font-medium">keywords to be optimized</p>
                                         <div className="mt-3 flex justify-center space-x-1">
                                             {[...Array(6)].map((_, i) => (
@@ -125,7 +129,7 @@ export default function SeoPackageContent({ dynamicData }) {
                         {contentMarketing.map((item, idx) => (
                             <tr key={`cm-${idx}`} className="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                                 <td className="p-3 font-medium text-slate-700 dark:text-slate-300 border-r border-slate-200 dark:border-slate-800 bg-blue-500/5 dark:bg-blue-900/10">{item.name}</td>
-                                {item.values.map((val, vIdx) => (
+                                {(item.values || []).map((val, vIdx) => (
                                     <td key={vIdx} className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">{val}</td>
                                 ))}
                             </tr>
@@ -140,7 +144,7 @@ export default function SeoPackageContent({ dynamicData }) {
                         {smo.map((item, idx) => (
                             <tr key={`smo-${idx}`} className="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                                 <td className="p-3 font-medium text-slate-700 dark:text-slate-300 border-r border-slate-200 dark:border-slate-800 bg-blue-500/5 dark:bg-blue-900/10">{item.name}</td>
-                                {item.values.map((val, vIdx) => (
+                                {(item.values || []).map((val, vIdx) => (
                                     <td key={vIdx} className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">{val}</td>
                                 ))}
                             </tr>
@@ -188,35 +192,21 @@ export default function SeoPackageContent({ dynamicData }) {
                         ))}
                         <tr className="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                             <td className="p-3 font-medium text-slate-700 dark:text-slate-300 border-r border-slate-200 dark:border-slate-800 bg-blue-500/5 dark:bg-blue-900/10">Minimum Contract Period</td>
-                            <td className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">6 Months</td>
-                            <td className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">6 Months</td>
-                            <td className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">6 Months</td>
-                            <td className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">6 Months</td>
+                            {minContractPeriodValues.map((val, idx) => (
+                                <td key={idx} className="p-3 text-center text-slate-600 dark:text-slate-400 font-semibold">{val}</td>
+                            ))}
                         </tr>
 
                         {/* Footer Row */}
                         <tr>
                             <td className="p-6 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900"></td>
-                            <td className="p-6 text-center bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-                                <Link href="/contact" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-md text-sm whitespace-nowrap">
-                                    Contact Us
-                                </Link>
-                            </td>
-                            <td className="p-6 text-center bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-                                <Link href="/contact" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-md text-sm whitespace-nowrap">
-                                    Contact Us
-                                </Link>
-                            </td>
-                            <td className="p-6 text-center bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-                                <Link href="/contact" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-md text-sm whitespace-nowrap">
-                                    Contact Us
-                                </Link>
-                            </td>
-                            <td className="p-6 text-center bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-                                <Link href="/contact" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-md text-sm whitespace-nowrap">
-                                    Contact Us
-                                </Link>
-                            </td>
+                            {plans.map((plan, idx) => (
+                                <td key={idx} className="p-6 text-center bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
+                                    <Link href={plan.ctaLink || "/contact"} className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-md text-sm whitespace-nowrap">
+                                        {plan.ctaText || "Contact Us"}
+                                    </Link>
+                                </td>
+                            ))}
                         </tr>
                     </tbody>
                 </table>

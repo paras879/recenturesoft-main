@@ -41,13 +41,20 @@ export default async function SeoPackagePage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"SEO Packages In India | RecentureSoft","description":"Explore our comprehensive SEO packages including Bronze, Silver, Gold, and Platinum. Get custom Website Audit, On-Page Optimization, and Content Marketing.","url":"https://recenturesoft.com/seo-package"}) }} />
             <Navbar />
             <PageHero
-                badge="Pricing & Plans"
-                title="SEO Package"
-                highlight=""
-                description="Choose the perfect SEO package for your business. We offer highly tailored, transparent, and result-driven strategies designed to maximize your digital growth."
+                badge={pageData?.content?.heroBadge || "Pricing & Plans"}
+                title={pageData?.content?.heroTitle || "SEO Package"}
+                highlight={pageData?.content?.heroHighlight || ""}
+                description={pageData?.content?.heroDescription || "Choose the perfect SEO package for your business. We offer highly tailored, transparent, and result-driven strategies designed to maximize your digital growth."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src="/Banner/seo_package.webp" alt="seo-package Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image
+                    src={pageData?.content?.heroImage || "/Banner/seo_package.webp"}
+                    alt={pageData?.content?.heroImageAlt || "seo-package Banner"}
+                    fill
+                    className="object-cover object-center"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                />
             </PageHero>
 
             <section className="py-10 md:py-16 px-4 bg-slate-50 dark:bg-[#020617]">
