@@ -24,10 +24,23 @@ const textColorMap = {
 };
 
 const getHeadingStyle = (block) => {
-    if (block.headingColorType === 'custom' && block.customHeadingColor) {
-        return { style: { color: block.customHeadingColor }, className: "" };
+    const isCustom = block.mainHeadingColorType === 'custom' || (!block.mainHeadingColorType && block.headingColorType === 'custom');
+    if (isCustom) {
+        const customColor = block.customMainHeadingColor || block.customHeadingColor;
+        if (customColor) return { style: { color: customColor }, className: "" };
     }
-    const colorClass = headingColorMap[block.headingColor] || headingColorMap.default;
+    const colorKey = block.mainHeadingColor || block.headingColor || 'default';
+    const colorClass = headingColorMap[colorKey] || headingColorMap.default;
+    return { className: colorClass, style: {} };
+};
+
+const getSubHeadingStyle = (block) => {
+    const isCustom = block.subHeadingColorType === 'custom';
+    if (isCustom && block.customSubHeadingColor) {
+        return { style: { color: block.customSubHeadingColor }, className: "" };
+    }
+    const colorKey = block.subHeadingColor || 'default';
+    const colorClass = headingColorMap[colorKey] || headingColorMap.default;
     return { className: colorClass, style: {} };
 };
 
@@ -37,6 +50,19 @@ const getTextStyle = (block) => {
     }
     const colorClass = textColorMap[block.textColor] || textColorMap.default;
     return { className: colorClass, style: {} };
+};
+
+const getSpacingStyle = (block) => {
+    return {
+        marginTop: block.marginTop || undefined,
+        marginBottom: block.marginBottom || undefined,
+        marginLeft: block.marginLeftRight || undefined,
+        marginRight: block.marginLeftRight || undefined,
+        paddingTop: block.paddingTop || undefined,
+        paddingBottom: block.paddingBottom || undefined,
+        paddingLeft: block.paddingLeftRight || undefined,
+        paddingRight: block.paddingLeftRight || undefined,
+    };
 };
 
 export default function GenericCrmPage({ page }) {
@@ -191,11 +217,11 @@ export default function GenericCrmPage({ page }) {
                                     if (!block.h2 && !block.h3 && !block.desc && !block.list && !block.imageUrl) return null;
                                     
                                     return (
-                                        <div key={index}>
+                                        <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper isText={true}>
                                                 <div className="prose prose-lg md:prose-xl prose-slate dark:prose-invert max-w-none">
                                                     {block.h2 && <h2 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${getHeadingStyle(block).className}`}>{block.h2}</h2>}
-                                                    {block.h3 && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`text-2xl font-bold mb-4 ${getHeadingStyle(block).className}`}>{block.h3}</h3>}
+                                                    {block.h3 && <h3 style={{ ...getSubHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`text-2xl font-bold mb-4 ${getSubHeadingStyle(block).className}`}>{block.h3}</h3>}
                                                     {block.desc && block.desc.split('\n').map((p, i) => p.trim() ? <p key={i} style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`mb-6 leading-relaxed ${getTextStyle(block).className}`}>{p}</p> : null)}
                                                     {block.list && (
                                                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 list-none pl-0">
@@ -217,12 +243,12 @@ export default function GenericCrmPage({ page }) {
                                 else if (block.type === 'highlight') {
                                     if (!block.title && !block.desc1 && !block.desc2) return null;
                                     return (
-                                        <div key={index}>
+                                        <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper>
                                                 <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-[2rem] p-10 md:p-14 text-white shadow-2xl shadow-blue-500/20 text-center">
                                                     <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
                                                     <div className="relative z-10 max-w-3xl mx-auto">
-                                                        {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
+                                                        {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.mainHeadingColor || block.mainHeadingColorType === 'custom' || block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
                                                         {block.desc1 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`mb-6 leading-relaxed text-xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-50"}`}>{block.desc1}</p>}
                                                         {block.desc2 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`text-lg ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-100/80"}`}>{block.desc2}</p>}
                                                     </div>
@@ -252,7 +278,7 @@ export default function GenericCrmPage({ page }) {
                                                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                                 <div className="relative z-10">
                                                                     {s.icon && <div className="text-4xl mb-6 bg-blue-50 dark:bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center border border-blue-100 dark:border-blue-500/20">{s.icon}</div>}
-                                                                    <h5 style={{ ...getHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-xl mb-4 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
+                                                                    <h5 style={{ ...getSubHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-xl mb-4 ${getSubHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
                                                                     <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{s.desc}</p>
                                                                 </div>
                                                             </div>
@@ -265,7 +291,7 @@ export default function GenericCrmPage({ page }) {
 
                                     if (block.bgImageUrl) {
                                         return (
-                                            <div key={index} className="relative rounded-[3rem] overflow-hidden px-6 py-12 md:px-12 md:py-20 lg:p-24 shadow-2xl border border-slate-200/50 dark:border-white/10 my-16">
+                                            <div key={index} style={getSpacingStyle(block)} className="relative rounded-[3rem] overflow-hidden px-6 py-12 md:px-12 md:py-20 lg:p-24 shadow-2xl border border-slate-200/50 dark:border-white/10 my-16">
                                                 <div className="absolute inset-0 z-0">
                                                     <Image src={block.bgImageUrl} alt="Background" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" quality={90} />
                                                 </div>
@@ -278,14 +304,14 @@ export default function GenericCrmPage({ page }) {
                                         );
                                     }
 
-                                    return <div key={index}>{CardsContent}</div>;
+                                    return <div key={index} style={getSpacingStyle(block)}>{CardsContent}</div>;
                                 }
                                 
                                 // 4. STEPS BLOCK (Vertical Timeline)
                                 else if (block.type === 'steps') {
                                     if (!block.title && (!block.steps || block.steps.length === 0)) return null;
                                     return (
-                                        <div key={index}>
+                                        <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper>
                                                 <div>
                                                     {block.title && (
@@ -301,7 +327,7 @@ export default function GenericCrmPage({ page }) {
                                                                         {i + 1}
                                                                     </div>
                                                                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white dark:bg-slate-900/60 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500/30 transition-all duration-300">
-                                                                        <h5 style={{ ...getHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-xl mb-2 ${getHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{step.stage}</h5>
+                                                                        <h5 style={{ ...getSubHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-xl mb-2 ${getSubHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{step.stage}</h5>
                                                                         <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{step.desc}</p>
                                                                     </div>
                                                                 </div>
@@ -331,7 +357,7 @@ export default function GenericCrmPage({ page }) {
                                     if (imageList.length === 0) return null;
 
                                     return (
-                                        <div key={index} className="w-full space-y-8">
+                                        <div key={index} style={getSpacingStyle(block)} className="w-full space-y-8">
                                             {imageList.map((img, i) => {
                                                 const alignClass = img.align === 'left' ? 'justify-start' : img.align === 'right' ? 'justify-end' : 'justify-center';
                                                 const sizeClass = img.size === 'small' ? 'max-w-md' : img.size === 'medium' ? 'max-w-3xl' : img.size === 'large' ? 'max-w-5xl' : 'max-w-full w-full';
