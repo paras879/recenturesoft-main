@@ -108,7 +108,7 @@ async function getReviews() {
     }));
   } catch (err) {
     console.error("Failed to fetch reviews:", err);
-    return null;
+    return [];
   }
 }
 
