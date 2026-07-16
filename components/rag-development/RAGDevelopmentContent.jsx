@@ -31,24 +31,24 @@ const RAGDevelopmentContent = ({ faqs = [], content = {} }) => {
     return (
         <div className="w-full bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 overflow-hidden">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-12 pb-6 lg:pt-20 lg:pb-8 overflow-hidden">
+            <section className="relative pt-12 md:pt-16 lg:pt-20 pb-4 md:pb-6 lg:pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
                 <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+                    <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-10 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
                             className="order-2 lg:order-1"
                         >
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-slate-900 dark:text-white leading-[1.2] mb-4 tracking-tight">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.25rem] font-bold md:font-extrabold text-slate-900 dark:text-white leading-[1.15] mb-3 md:mb-4 tracking-tight">
                                 {content?.ragHero?.title || "Enterprise RAG"} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                                     {content?.ragHero?.titleHighlight || "Development Services"}
                                 </span>
                             </h1>
-                            <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed max-w-2xl">
+                            <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 mb-4 md:mb-6 leading-relaxed max-w-2xl">
                                 {content?.ragHero?.description || "Build intelligent AI applications powered by Retrieval-Augmented Generation (RAG) that deliver accurate, context-aware, and secure responses using your organization's private knowledge base."}
                             </p>
                             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 w-full sm:w-auto" style={{ width: "auto", height: "auto" }}>

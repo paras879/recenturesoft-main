@@ -138,17 +138,17 @@ export default function JavaScriptDevelopmentContent({ dynamicData }) {
         <div className="font-sans selection:bg-blue-500/30">
 
             {/* 1. HERO SECTION */}
-            <section className="relative pt-24 lg:pt-32 pb-8 overflow-hidden">
+            <section className="relative pt-16 md:pt-20 lg:pt-32 pb-6 md:pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-white dark:from-blue-900/20 dark:via-[#020617] dark:to-[#020617] -z-10"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+                    <div className="grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-10 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                             className="max-w-2xl order-2 lg:order-1 flex flex-col"
                         >
-                            <h1 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-3 md:mb-4 lg:mb-6 tracking-tight">
                                 {heroTitlePlain} <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                                     {heroTitleColored}

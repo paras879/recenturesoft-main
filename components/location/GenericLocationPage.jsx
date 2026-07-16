@@ -105,23 +105,25 @@ export default function GenericLocationPage({ page }) {
     return (
         <div className="min-h-screen bg-[#fafcff] dark:bg-[#020617] selection:bg-blue-500/30 font-manrope">
             {/* --- PREMIUM HERO SECTION --- */}
-            <section className="relative pt-24 pb-8 md:pt-32 md:pb-12 overflow-hidden">
-                {/* Background ambient glows */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-50/80 to-transparent dark:from-blue-900/20 dark:to-transparent pointer-events-none" />
-                <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
-                <div className="absolute top-20 -left-20 w-[400px] h-[400px] bg-cyan-400/10 dark:bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none" />
+            <section className="relative pt-24 pb-8 md:pt-32 md:pb-12">
+                {/* Background ambient glows — isolated so decorative blobs don't clip text */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-50/80 to-transparent dark:from-blue-900/20 dark:to-transparent" />
+                    <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-[120px]" />
+                    <div className="absolute top-20 -left-20 w-[400px] h-[400px] bg-cyan-400/10 dark:bg-cyan-600/10 rounded-full blur-[100px]" />
+                </div>
 
-                <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+                <div className="container mx-auto px-3 sm:px-6 max-w-7xl relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center">
                         {/* Text Content */}
-                        <div className="text-left max-w-2xl">
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.15] mb-6 tracking-tight">
+                        <div className="dynamic-page-hero text-left w-full max-w-full lg:max-w-2xl">
+                            <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.15] mb-4 md:mb-6 tracking-tight w-full">
                                 {title} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">
                                     {highlight}
                                 </span>
                             </h1>
-                            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-10 max-w-xl">
+                            <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-6 md:mb-10 max-w-xl">
                                 Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.
                             </p>
                              <div className="flex flex-col sm:flex-row gap-4">
@@ -151,7 +153,7 @@ export default function GenericLocationPage({ page }) {
             </section>
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
-            <section className="py-8 md:py-16 px-6 relative">
+            <section className="py-8 md:py-16 px-3 sm:px-6 relative">
                 <div className="max-w-6xl mx-auto">
                     {blocks.length > 0 ? (
                         <div className="space-y-24">

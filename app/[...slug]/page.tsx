@@ -65,10 +65,10 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
     return (
         <>
             <Navbar />
-            <main className="min-h-[60vh] pt-32 pb-16 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-200">
-                        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">{page.name}</h1>
+            <main className="min-h-[60vh] pt-20 sm:pt-24 md:pt-32 pb-16 bg-slate-50">
+                <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+                    <div className="bg-white rounded-2xl sm:rounded-3xl px-4 py-5 sm:p-6 md:p-12 shadow-sm border border-slate-200">
+                        <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-8 leading-tight tracking-tight w-full">{page.name}</h1>
                         <div className="prose prose-slate max-w-none prose-lg">
                             {/* Currently just placeholder content for newly created dynamic pages */}
                             <p className="text-slate-600 leading-relaxed">

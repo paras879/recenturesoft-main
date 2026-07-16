@@ -267,6 +267,15 @@ body {
     line-height: 1.05 !important;
   }
 
+  /* ── Dynamic Admin Panel pages: prevent body overflow-x:hidden from
+     clipping the hero h1. The heading must stay within the viewport. ── */
+  .dynamic-page-hero h1 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+
   h2 {
     line-height: 1.1 !important;
   }
