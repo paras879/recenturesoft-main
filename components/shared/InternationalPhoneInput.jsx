@@ -17,6 +17,8 @@ export default function InternationalPhoneInput({
   containerClassName = "",
   disabled = false,
   defaultCountry = "IN",
+  onFocus,
+  onBlur,
 }) {
   const [error, setError] = useState("");
   const [touched, setTouched] = useState(false);
@@ -50,13 +52,21 @@ export default function InternationalPhoneInput({
     if (!el) return;
     const input = el.querySelector("input");
     if (!input) return;
-    const onBlur = () => {
+    const handleBlur = () => {
       setTouched(true);
       doValidate(value, true);
+      onBlur?.();
     };
-    input.addEventListener("blur", onBlur);
-    return () => input.removeEventListener("blur", onBlur);
-  }, [value, doValidate]);
+    const handleFocus = () => {
+      onFocus?.();
+    };
+    input.addEventListener("blur", handleBlur);
+    input.addEventListener("focus", handleFocus);
+    return () => {
+      input.removeEventListener("blur", handleBlur);
+      input.removeEventListener("focus", handleFocus);
+    };
+  }, [value, doValidate, onFocus, onBlur]);
 
   const errorClass = error ? "phone-error" : "";
 
@@ -193,6 +203,7 @@ export default function InternationalPhoneInput({
           required={required}
           placeholder={placeholder}
           id={inputId}
+          className={className}
         />
       </div>
       {error && (

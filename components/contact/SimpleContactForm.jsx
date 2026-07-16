@@ -190,6 +190,9 @@ export default function SimpleContactForm() {
                                 onValidationChange={(valid) => setPhoneValid(valid)}
                                 required
                                 placeholder="Phone Number"
+                                className="pl-12"
+                                onFocus={() => setFocusedField('phone')}
+                                onBlur={() => setFocusedField(null)}
                             />
                         </div>
                     </div>
