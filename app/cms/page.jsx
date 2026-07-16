@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import Image from "next/image";
 import CmsContent from "@/components/cms/CmsContent";
 import FutureFooter from "@/components/FutureFooter";
@@ -28,8 +28,7 @@ export default async function CmsPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best CMS Software Development Company In India | RecentureSoft","description":"RecentureSoft offers top-tier custom CMS software development services in India to manage digital content and streamline business processes.","url":"https://recenturesoft.com/cms"}) }} />
             <Navbar />
-            <PageHero
-                badge={heroData.badge || "CMS Development"}
+            <ContentHero
                 title={heroData.title || "Content Management"}
                 highlight={heroData.highlight || "System"}
                 description={heroData.description || "Empowering businesses with custom, robust CMS software solutions to easily create, manage, and publish digital content."}
@@ -39,7 +38,7 @@ export default async function CmsPage() {
                     <div className="absolute inset-0 bg-[#020617] z-10" style={{ opacity: parseInt(heroData.bannerOpacity) / 100 }} />
                 )}
                 <Image src={heroData.bannerImage || "/Banner/CMS.webp"} alt="cms Banner" fill className="object-cover object-center z-0" priority sizes="(max-width: 768px) 100vw, 50vw" />
-            </PageHero>
+            </ContentHero>
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">

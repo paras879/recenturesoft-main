@@ -1,0 +1,106 @@
+"use client";
+import Image from "next/image";
+
+export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, hideContactButton, ctaText, ctaLink, highlightClass, children }) {
+    const opacityValue = bannerOpacity !== undefined ? (parseInt(bannerOpacity) / 100) : 0.7;
+    const hasBg = !!(children || bannerImage);
+    return (
+        <section className={`relative pt-16 md:pt-20 lg:pt-24 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${hasBg ? 'bg-[#020617]' : 'bg-background'}`}>
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes scaleIn {
+                    from { opacity: 0; transform: scale(0.95); }
+                    to { opacity: 1; transform: scale(1); }
+                }
+                .animate-fade-up-1 {
+                    animation: fadeInUp 0.6s ease-out 0.1s both;
+                }
+                .animate-fade-up-2 {
+                    animation: fadeInUp 0.6s ease-out 0.2s both;
+                }
+                .animate-scale-in {
+                    animation: scaleIn 0.8s ease-out 0.3s both;
+                }
+            `}} />
+
+            {hasBg && (
+                <>
+                    <div className="absolute inset-0 z-0 pointer-events-none">
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f61a_1px,transparent_1px),linear-gradient(to_bottom,#3b82f61a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-50 dark:opacity-20" />
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] md:w-[60%] h-[300px] bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-[120px]" />
+                        <div className="absolute -left-[10%] top-[20%] w-[40%] h-[40%] bg-cyan-400/10 dark:bg-cyan-500/10 rounded-full blur-[100px]" />
+                        <div className="absolute -right-[10%] top-[20%] w-[40%] h-[40%] bg-blue-300/10 dark:bg-blue-600/10 rounded-full blur-[100px]" />
+                    </div>
+                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                        {bannerImage && (
+                            <Image
+                                src={bannerImage.includes('res.cloudinary.com') ? bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : bannerImage}
+                                alt="Background Banner"
+                                fill
+                                sizes="100vw"
+                                priority
+                                className="object-cover"
+                            />
+                        )}
+                        <div className="absolute inset-0 bg-[#020617]" style={{ opacity: opacityValue }}>
+                            {children}
+                        </div>
+                    </div>
+                </>
+            )}
+
+            <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 relative z-20">
+                <div className={`flex flex-col justify-end md:justify-center items-start text-left min-h-[40vh] md:min-h-[45vh] pb-0 md:pb-0 md:pt-16 gap-4 md:gap-5`}>
+
+                    <h1 className={`font-light md:font-medium tracking-[-0.02em] leading-[1.15] animate-fade-up-1 text-[clamp(1.75rem,4.5vw,3.5rem)] sm:text-[clamp(2rem,4vw,4rem)] md:text-[clamp(2.5rem,3.5vw,4.5rem)] lg:text-[clamp(3rem,3vw,5rem)] max-w-5xl ${hasBg ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-foreground'}`}>
+                        {title} <br className="hidden md:block" />
+                        <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
+                    </h1>
+
+                    {description && (
+                        <p className={`text-[clamp(0.95rem,1.5vw,1.15rem)] leading-[1.6] max-w-3xl font-light animate-fade-up-2 ${hasBg ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-muted-foreground'}`}>
+                            {description}
+                        </p>
+                    )}
+
+                    {!hideContactButton && (
+                        <div className="animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
+                            {ctaLink && (ctaLink.startsWith('/') || ctaLink.startsWith('http')) ? (
+                                <a
+                                    href={ctaLink}
+                                    className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                >
+                                    {ctaText || "Get in Touch"}
+                                    <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        if (ctaLink && ctaLink.startsWith('#')) {
+                                            document.getElementById(ctaLink.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+                                        } else {
+                                            document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
+                                        }
+                                    }}
+                                    className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                >
+                                    {ctaText || "Get in Touch"}
+                                    <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                    )}
+
+                </div>
+            </div>
+        </section>
+    );
+}

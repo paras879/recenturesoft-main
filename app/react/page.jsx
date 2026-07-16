@@ -4,7 +4,7 @@ import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import ReactContent from "@/components/react/ReactContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
@@ -47,8 +47,7 @@ export default async function ReactPage() {
             <Script id="react-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React.js Development Services | RecentureSoft","description":"Build fast, scalable, and highly interactive web applications with RecentureSoft","url":"https://recenturesoft.com/react"}) }} />
             <Navbar />
             
-            <PageHero
-                badge={pageData?.content?.heroBadge || "Frontend Development"}
+            <ContentHero
                 title={pageData?.content?.heroTitle || "React.js"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Deliver unparalleled user experiences with high-performance, interactive, and scalable Single Page Applications powered by React."}

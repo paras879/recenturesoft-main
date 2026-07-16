@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import DashboardContent from "@/components/dashboard/DashboardContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
@@ -19,8 +19,7 @@ export default function DashboardPage() {
             
             {/* Note: Omitted 'children' since we don't have a specific banner image yet. 
                 PageHero gracefully falls back to a clean light-blue tech background. */}
-            <PageHero
-                badge="Data Visualization"
+            <ContentHero
                 title="Custom Dashboard"
                 highlight="Development"
                 description="Consolidate complex data into intuitive, real-time visual interfaces that empower your team to make faster, smarter decisions."

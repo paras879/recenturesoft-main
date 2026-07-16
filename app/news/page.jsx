@@ -1,7 +1,7 @@
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import FutureFooter from "@/components/FutureFooter";
 import NewsList from "@/components/news/NewsList";
 import CTASection from "@/components/CTASection";
@@ -53,9 +53,8 @@ export default async function NewsPage() {
             <Navbar />
             
             {newsHero.isVisible !== false && (
-                <PageHero 
+                <ContentHero 
                     hideContactButton={newsHero.hideContactButton !== false}
-                    badge={newsHero.badge || "Live Updates"}
                     title={newsHero.title || "Tech News"}
                     description={newsHero.description || "Discover real-time global technology news, breaking industry insights, and digital innovations."}
                     bannerImage={newsHero.bannerImage}

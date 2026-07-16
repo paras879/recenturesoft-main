@@ -1,7 +1,7 @@
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import Image from "next/image";
 import MagentoContent from "@/components/magento-development/MagentoContent";
 import FutureFooter from "@/components/FutureFooter";
@@ -30,15 +30,14 @@ export default async function MagentoPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Magento Development Company In India | RecentureSoft","description":"RecentureSoft is a top Magento development company in India, offering custom, scalable, and smooth-operating eCommerce applications and solutions.","url":"https://recenturesoft.com/magento-development"}) }} />
             <Navbar />
-            <PageHero
-                badge={heroData.badge || "eCommerce Solutions"}
+            <ContentHero
                 title={heroData.title || "Magento"}
                 highlight={heroData.highlight || "Development"}
                 description={heroData.description || "Empower your eCommerce business with highly scalable, secure, and custom Magento development solutions built for enterprise growth."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
                 <Image src={heroData.bannerImage || "/Banner/magnto-dev-min.webp"} alt="magento-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
-            </PageHero>
+            </ContentHero>
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">

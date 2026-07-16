@@ -1,7 +1,7 @@
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import FutureFooter from "@/components/FutureFooter";
 import ProjectGallery from "@/components/portfolio/ProjectGallery";
 import Transformations from "@/components/portfolio/Transformations";
@@ -55,8 +55,7 @@ export default async function PortfolioPage() {
                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] rounded-full" />
             </div>
             <Navbar />
-            <PageHero hideContactButton={true}
-                badge={content.hero?.badge || "Our Work"}
+            <ContentHero hideContactButton={true}
                 title={content.hero?.title || "Engineering"}
                 highlight={content.hero?.highlight || "Success"}
                 description={content.hero?.desc || "Discover award-worthy digital products, enterprise platforms, AI-powered solutions, and transformative experiences engineered to accelerate business growth."}

@@ -1,7 +1,7 @@
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import FutureFooter from "@/components/FutureFooter";
 import FeaturedArticle from "@/components/blog/FeaturedArticle";
 import ArticleGrid from "@/components/blog/ArticleGrid";
@@ -59,8 +59,7 @@ export default async function BlogPage() {
             </div>
 
             <Navbar />
-            <PageHero hideContactButton={true}
-                badge={pageContent?.hero?.badge || "Editorial"}
+            <ContentHero hideContactButton={true}
                 title={pageContent?.hero?.title || "Insights &"}
                 highlight={pageContent?.hero?.highlight || "Perspectives"}
                 description={pageContent?.hero?.description || "Explore deep technical deep-dives, industry trends, and thoughts on the future of enterprise software and design."}

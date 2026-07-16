@@ -4,7 +4,7 @@ import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import NodeJsContent from "@/components/node-js/NodeJsContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
@@ -47,8 +47,7 @@ export default async function NodeJsPage() {
             <Script id="nodejs-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Node.js Development Services | RecentureSoft","description":"Hire expert Node.js developers at RecentureSoft. We build highly scalable, secure, and lightning-fast backend REST APIs and microservices architectures.","url":"https://recenturesoft.com/node-js"}) }} />
             <Navbar />
             
-            <PageHero
-                badge={pageData?.content?.heroBadge || "Backend Engineering"}
+            <ContentHero
                 title={pageData?.content?.heroTitle || "Node.js API"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Architect highly scalable, data-intensive, real-time backend applications and microservices using enterprise-grade Node.js."}

@@ -4,7 +4,7 @@ import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
-import PageHero from "@/components/PageHero";
+import ContentHero from "@/components/ContentHero";
 import NextJsContent from "@/components/next-js/NextJsContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
@@ -47,8 +47,7 @@ export default async function NextJsPage() {
             <Script id="nextjs-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Next.js Development Company | Enterprise Next.js Solutions | RecentureSoft","description":"Hire top Next.js developers at RecentureSoft. We build lightning-fast, highly scalable, and SEO-optimized enterprise applications using Next.js and React.","url":"https://recenturesoft.com/next-js"}) }} />
             <Navbar />
             
-            <PageHero
-                badge={pageData?.content?.heroBadge || "Web Development"}
+            <ContentHero
                 title={pageData?.content?.heroTitle || "Next.js App"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Harness the power of React Server Components, SSR, and Edge computing to build the fastest, most scalable web applications on the internet."}
