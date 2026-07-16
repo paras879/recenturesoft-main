@@ -1,12 +1,11 @@
 import { connectDB } from "@/lib/mongodb";
-import WebPage from "@/models/WebPage";
+import SitemapEntry from "@/models/SitemapEntry";
 import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 import React from 'react';
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import SitemapClient from "./SitemapClient";
-import mongoose from "mongoose";
 
 const defaultMetadata = {
     title: "Sitemap | RecentureSoft",
@@ -23,29 +22,42 @@ const defaultMetadata = {
 
 export async function generateMetadata() {
     await connectDB();
-    const page = await WebPage.findOne({ path: "/sitemap" }).lean();
+    const page = await SitemapEntry.findOne({ path: "/sitemap" }).lean();
     if (!page) return defaultMetadata;
     return {
-        title: page.seoTitle || defaultMetadata.title,
-        description: page.seoDescription || defaultMetadata.description,
+        title: defaultMetadata.title,
+        description: defaultMetadata.description,
         alternates: defaultMetadata.alternates
     };
 }
 
 export default async function SitemapPage() {
     await connectDB();
-    const pageDataRaw = await WebPage.findOne({ path: "/sitemap" }).lean();
-    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
 
     const isActive = await checkPageStatus("/sitemap");
     if (!isActive) return notFound();
 
+    const entries = await SitemapEntry.find({ status: "active" })
+        .sort({ section: 1, priority: -1, name: 1 })
+        .lean();
+
+    const sections = {
+        information: entries.filter(e => e.section === "information"),
+        locations: entries.filter(e => e.section === "locations"),
+        legal: entries.filter(e => e.section === "legal"),
+    };
+
+    const serialized = {
+        information: JSON.parse(JSON.stringify(sections.information)),
+        locations: JSON.parse(JSON.stringify(sections.locations)),
+        legal: JSON.parse(JSON.stringify(sections.legal)),
+    };
+
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", "name": "Sitemap | RecentureSoft", "description": "Navigate through all pages, services, and resources available on the RecentureSoft platform. Find the information you need quickly and easily.", "url": "https://recenturesoft.com/sitemap" }) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", "name": "Sitemap | RecentureSoft", "description": "Navigate through all pages, services, and resources available on the RecentureSoft platform.", "url": "https://recenturesoft.com/sitemap" }) }} />
             <Navbar />
 
-            {/* Sitemap Header */}
             <section className="pt-32 pb-16 relative overflow-hidden">
                 <div className="absolute inset-0 bg-blue-600/5 dark:bg-blue-900/10" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -60,7 +72,7 @@ export default async function SitemapPage() {
                 </div>
             </section>
 
-            <SitemapClient />
+            <SitemapClient sections={serialized} />
 
             <FutureFooter />
         </main>
