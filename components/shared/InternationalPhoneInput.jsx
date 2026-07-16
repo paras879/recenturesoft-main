@@ -58,134 +58,132 @@ export default function InternationalPhoneInput({
     return () => input.removeEventListener("blur", onBlur);
   }, [value, doValidate]);
 
-  const errorBorder = error ? "phone-error" : "";
-
-  const inputStyles = `${className} ${error ? "phone-error-input" : ""}`;
+  const errorClass = error ? "phone-error" : "";
 
   return (
     <div className={containerClassName}>
       <style>{`
-        .pwrap-${genId} .PhoneInput {
-          display: flex;
-          align-items: center;
-          gap: 0;
-        }
-        .pwrap-${genId} .PhoneInputCountry {
-          display: flex;
-          align-items: center;
-          align-self: stretch;
-          padding: 0.625rem 0.5rem 0.625rem 0.75rem;
-          background: transparent;
-          border: 1px solid rgb(203 213 225);
-          border-right: none;
-          border-radius: 0.75rem 0 0 0.75rem;
-          cursor: pointer;
-          transition: all 0.2s;
+        .pi-${genId} {
           position: relative;
         }
-        :is(.dark) .pwrap-${genId} .PhoneInputCountry {
+        .pi-${genId} .PhoneInput {
+          display: flex;
+          align-items: stretch;
+          border-radius: 0.75rem;
+          border: 1px solid rgb(203 213 225);
+          background: rgb(248 250 252);
+          transition: border-color 0.2s, box-shadow 0.2s;
+          min-height: 2.75rem;
+          overflow: hidden;
+        }
+        :is(.dark) .pi-${genId} .PhoneInput {
+          background: rgba(255 255 255 / 0.05);
           border-color: rgba(255 255 255 / 0.1);
         }
-        .pwrap-${genId} .PhoneInputCountry:hover {
+        .pi-${genId} .PhoneInput:focus-within {
+          border-color: rgb(6 182 212);
+          box-shadow: 0 0 0 2px rgba(6 182 212 / 0.3);
+        }
+        :is(.dark) .pi-${genId} .PhoneInput:focus-within {
+          border-color: rgb(6 182 212);
+        }
+
+        .pi-${genId} .PhoneInputCountry {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.25rem;
+          padding: 0 0.5rem 0 0.75rem;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          position: relative;
+          flex-shrink: 0;
+          min-width: 3rem;
+        }
+        .pi-${genId} .PhoneInputCountry:hover {
           background: rgb(241 245 249);
         }
-        :is(.dark) .pwrap-${genId} .PhoneInputCountry:hover {
+        :is(.dark) .pi-${genId} .PhoneInputCountry:hover {
           background: rgba(255 255 255 / 0.05);
         }
-        .pwrap-${genId} .PhoneInputCountrySelect {
+        .pi-${genId} .PhoneInputCountrySelect {
           position: absolute;
           inset: 0;
           opacity: 0;
           cursor: pointer;
           font-size: 1rem;
+          width: 100%;
+          height: 100%;
         }
-        .pwrap-${genId} .PhoneInputCountryIcon {
-          width: 1.25rem;
-          height: 0.875rem;
+
+        .pi-${genId} .PhoneInputCountryIcon {
           display: flex;
           align-items: center;
           justify-content: center;
+          width: 1.25rem;
+          height: 0.875rem;
           border-radius: 0.125rem;
           overflow: hidden;
           flex-shrink: 0;
         }
-        .pwrap-${genId} .PhoneInputCountryIcon img,
-        .pwrap-${genId} .PhoneInputCountryIcon svg {
+        .pi-${genId} .PhoneInputCountryIcon img,
+        .pi-${genId} .PhoneInputCountryIcon svg {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        .pwrap-${genId} .PhoneInputCountryIcon--border {
+        .pi-${genId} .PhoneInputCountryIcon--border {
           box-shadow: 0 0 0 1px rgba(0 0 0 / 0.1);
         }
-        .pwrap-${genId} .PhoneInputCountryIconUnicode {
+        .pi-${genId} .PhoneInputCountryIconUnicode {
           font-size: 1.25rem;
           line-height: 1;
         }
-        .pwrap-${genId} .PhoneInputCountry select + svg {
-          margin-left: 0.25rem;
+
+        .pi-${genId} .PhoneInputCountry select + svg {
           width: 0.625rem;
           height: 0.375rem;
           opacity: 0.5;
-          transition: transform 0.2s;
           flex-shrink: 0;
         }
-        .pwrap-${genId} .PhoneInputCountry:hover select + svg {
+        .pi-${genId} .PhoneInputCountry:hover select + svg {
           opacity: 0.8;
         }
-        .pwrap-${genId} .PhoneInputInput {
+
+        .pi-${genId} .PhoneInputInput {
           flex: 1;
           min-width: 0;
-          border: 1px solid rgb(203 213 225);
-          border-left: none;
-          border-radius: 0 0.75rem 0.75rem 0;
-          padding: 0.75rem 1rem;
+          border: none;
+          background: transparent;
+          padding: 0.625rem 1rem;
           font-size: 0.875rem;
           line-height: 1.25rem;
-          background: rgb(248 250 252);
           color: rgb(15 23 42);
           outline: none;
-          transition: all 0.2s;
-          height: 2.75rem;
         }
-        :is(.dark) .pwrap-${genId} .PhoneInputInput {
-          background: rgba(255 255 255 / 0.05);
-          border-color: rgba(255 255 255 / 0.1);
+        :is(.dark) .pi-${genId} .PhoneInputInput {
           color: rgb(255 255 255);
         }
-        .pwrap-${genId} .PhoneInputInput::placeholder {
+        .pi-${genId} .PhoneInputInput::placeholder {
           color: rgb(148 163 184);
         }
-        :is(.dark) .pwrap-${genId} .PhoneInputInput::placeholder {
+        :is(.dark) .pi-${genId} .PhoneInputInput::placeholder {
           color: rgb(100 116 139);
         }
-        .pwrap-${genId} .PhoneInputInput:focus {
-          border-color: rgb(6 182 212);
-          box-shadow: 0 0 0 2px rgba(6 182 212 / 0.3);
-        }
-        :is(.dark) .pwrap-${genId} .PhoneInputInput:focus {
-          border-color: rgb(6 182 212);
-        }
-        .pwrap-${genId}.phone-error .PhoneInputInput,
-        .pwrap-${genId}.phone-error .PhoneInputCountry {
+
+        .pi-${genId}.phone-error .PhoneInput {
           border-color: rgb(248 113 113);
         }
-        :is(.dark) .pwrap-${genId}.phone-error .PhoneInputInput,
-        :is(.dark) .pwrap-${genId}.phone-error .PhoneInputCountry {
+        :is(.dark) .pi-${genId}.phone-error .PhoneInput {
           border-color: rgb(239 68 68);
         }
-        .pwrap-${genId}.phone-error .PhoneInputInput:focus {
+        .pi-${genId}.phone-error .PhoneInput:focus-within {
           border-color: rgb(248 113 113);
           box-shadow: 0 0 0 2px rgba(248 113 113 / 0.3);
         }
-        .pwrap-${genId} .PhoneInput--focus .PhoneInputInput {
-          border-color: rgb(6 182 212);
-        }
-        .pwrap-${genId} input.phone-error-input {
-          border-color: rgb(248 113 113);
-        }
       `}</style>
-      <div ref={wrapperRef} className={`pwrap-${genId} ${errorBorder}`}>
+      <div ref={wrapperRef} className={`pi-${genId} ${errorClass}`}>
         <PhoneInputLib
           international
           defaultCountry={defaultCountry}
