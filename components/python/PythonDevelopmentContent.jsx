@@ -112,7 +112,7 @@ export default function PythonDevelopmentContent({ dynamicData }) {
             <section className="relative pt-24 lg:pt-32 pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-white dark:from-blue-900/20 dark:via-[#020617] dark:to-[#020617] -z-10"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -143,14 +143,13 @@ export default function PythonDevelopmentContent({ dynamicData }) {
                             transition={{ duration: 1, delay: 0.2 }}
                             className="relative order-1 lg:order-2 mt-0 md:mt-4 lg:mt-0"
                         >
-                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
-                                <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
+                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg shadow-black/5 dark:shadow-black/20 group">
                                 <Image
                                     src={heroImage}
                                     alt="Python Enterprise Backend"
                                     fill
                                     sizes="(max-width: 768px) 100vw, 50vw"
-                                    className="object-contain lg:object-cover z-10 transition-transform duration-700 group-hover:scale-105"
+                                    className="object-cover z-10 transition-transform duration-700 group-hover:scale-105"
                                     priority
                                     loading="eager"
                                 />

@@ -31,31 +31,31 @@ const AIChatbotContent = ({ faqs = [], content = {} }) => {
     return (
         <div className="w-full bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 overflow-hidden">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-16 pb-8 lg:pt-32 lg:pb-8 overflow-hidden bg-white dark:bg-[#020617]">
+            <section className="relative pt-12 pb-6 lg:pt-20 lg:pb-8 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
                 <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
                             className="order-2 lg:order-1"
                         >
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-slate-900 dark:text-white leading-tight mb-6 tracking-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-slate-900 dark:text-white leading-[1.2] mb-4 tracking-tight">
                                 {content?.aiChatbotHero?.title || "Enterprise AI"} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
                                     {content?.aiChatbotHero?.titleHighlight || "Chatbot Development"}
                                 </span>
                             </h1>
-                            <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl">
+                            <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed max-w-2xl">
                                 {content?.aiChatbotHero?.description || "Enhance customer experience and automate support with intelligent, conversational AI chatbots powered by cutting-edge NLP and machine learning."}
                             </p>
-                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto">
-                                <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-medium md:font-semibold text-lg transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1">
+                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 w-full sm:w-auto">
+                                <button onClick={openMeetingModal} className="w-full sm:w-auto text-center px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-semibold transition-all shadow-md shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5">
                                     {content?.aiChatbotHero?.primaryBtnText || "Get Free Consultation"}
                                 </button>
-                                <Link href="/contact" className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 text-base md:text-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-medium md:font-semibold text-lg transition-all hover:-translate-y-1 shadow-sm backdrop-blur-md">
+                                <Link href="/contact" className="w-full sm:w-auto text-center px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-800/30 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-full font-semibold transition-all hover:-translate-y-0.5 shadow-sm">
                                     {content?.aiChatbotHero?.secondaryBtnText || "Talk to AI Experts"}
                                 </Link>
                             </div>
@@ -63,11 +63,10 @@ const AIChatbotContent = ({ faqs = [], content = {} }) => {
 
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative order-1 lg:order-2 mt-6 md:mt-12 lg:mt-0"
+                            className="relative order-1 lg:order-2 mt-4 md:mt-6 lg:mt-0"
                         >
-                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
-                                <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
-                                <Image src={content?.aiChatbotHero?.image || "/images/ai-chatbot/hero_ai_chatbot.webp"} alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain lg:object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
+                            <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg shadow-black/5 dark:shadow-black/20 group">
+                                <Image src={content?.aiChatbotHero?.image || "/images/ai-chatbot/hero_ai_chatbot.webp"} alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
                             </div>
                         </motion.div>
                     </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function PageHero({ title, highlight, description, banner, highlightClass, hideContactButton, children, bannerImage, bannerOpacity, ctaText, ctaLink }) {
     const opacityValue = bannerOpacity !== undefined ? (parseInt(bannerOpacity) / 100) : 0.7;
     return (
-        <section className={`relative pt-24 md:pt-28 lg:pt-32 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${(children || bannerImage) ? 'bg-[#020617]' : 'bg-background'}`}>
+        <section className={`relative pt-16 md:pt-20 lg:pt-24 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${(children || bannerImage) ? 'bg-[#020617]' : 'bg-background'}`}>
             {/* CSS entry animations */}
             <style dangerouslySetInnerHTML={{
                 __html: `
@@ -64,29 +64,28 @@ export default function PageHero({ title, highlight, description, banner, highli
                 </div>
             )}
 
-            <div className="container mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 relative z-20 max-w-[1500px] h-full">
-                {/* Left aligned if image is present, centered otherwise */}
-                <div className={`flex flex-col ${(children || bannerImage) ? 'justify-end md:justify-center items-start text-left min-h-[55vh] md:min-h-[50vh] pb-0 md:pb-0 md:pt-20' : 'justify-center items-center text-center'}`}>
+            <div className="mx-auto px-4 sm:px-6 md:px-8 relative z-20 max-w-7xl h-full">
+                <div className={`flex flex-col ${(children || bannerImage) ? 'justify-end md:justify-center items-start text-left min-h-[40vh] md:min-h-[45vh] pb-0 md:pb-0 md:pt-16' : 'justify-center items-center text-center'} gap-3 md:gap-4`}>
 
                     <h1
-                        className={`font-light md:font-medium tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6 animate-fade-up-1 text-[2.2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] ${(children || bannerImage) ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
+                        className={`font-light md:font-medium tracking-[-0.02em] leading-[1.15] animate-fade-up-1 text-[clamp(1.75rem,4.5vw,3.5rem)] sm:text-[clamp(2rem,4vw,4rem)] md:text-[clamp(2.5rem,3.5vw,4.5rem)] lg:text-[clamp(3rem,3vw,5rem)] ${(children || bannerImage) ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] max-w-4xl' : 'text-foreground'}`}
                     >
                         {title} <br className="hidden md:block" />
                         <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
                     </h1>
 
                     <p
-                        className={`text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.6] max-w-3xl font-light mb-8 md:mb-12 animate-fade-up-2 ${(children || bannerImage) ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-muted-foreground'}`}
+                        className={`text-[clamp(0.95rem,1.5vw,1.15rem)] leading-[1.6] max-w-3xl font-light animate-fade-up-2 ${(children || bannerImage) ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-muted-foreground'}`}
                     >
                         {description}
                     </p>
 
                     { !hideContactButton && (
-                        <div className="mt-8 md:mt-12 animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
+                        <div className="animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
                             {ctaLink && (ctaLink.startsWith('/') || ctaLink.startsWith('http')) ? (
                                 <a
                                     href={ctaLink}
-                                    className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-light text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                    className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
                                 >
                                     {ctaText || "Get in Touch"}
                                     <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,7 +101,7 @@ export default function PageHero({ title, highlight, description, banner, highli
                                             document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
                                         }
                                     }}
-                                    className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-light text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                    className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
                                 >
                                     {ctaText || "Get in Touch"}
                                     <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
