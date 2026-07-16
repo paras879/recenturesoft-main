@@ -174,7 +174,7 @@ export default function NewsList({ initialData = [], initialNextPage = null }) {
         if (!dateStr) return "Recently";
         try {
             const d = new Date(dateStr);
-            return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            return d.toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata', year: 'numeric', month: 'short', day: 'numeric' });
         } catch {
             return dateStr;
         }
