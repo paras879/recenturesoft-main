@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Contact from "@/models/Contact";
-import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
+import { validatePhone } from "@/lib/phoneValidation";
 
 export async function POST(req) {
     try {
@@ -33,14 +33,24 @@ export async function POST(req) {
             );
         }
 
-        // Validate phone number (if provided)
+        // Validate phone number (if provided) using libphonenumber-js
         if (phone) {
-            const phoneResult = validatePhone(phone);
-            if (!phoneResult.valid) {
-                return NextResponse.json(
-                    { success: false, message: phoneResult.message },
-                    { status: 400 }
-                );
+            try {
+                const { isValidPhoneNumber } = await import("libphonenumber-js");
+                if (!isValidPhoneNumber(phone)) {
+                    return NextResponse.json(
+                        { success: false, message: "Please enter a valid phone number for the selected country." },
+                        { status: 400 }
+                    );
+                }
+            } catch {
+                const fallback = validatePhone(phone);
+                if (!fallback.valid) {
+                    return NextResponse.json(
+                        { success: false, message: fallback.message },
+                        { status: 400 }
+                    );
+                }
             }
         }
 
@@ -77,7 +87,7 @@ export async function POST(req) {
         const contact = await Contact.create({
             name,
             email,
-            phone: phone ? sanitizePhone(phone) : "",
+            phone: phone || "",
             subject,
             message,
         });

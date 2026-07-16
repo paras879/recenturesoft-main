@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Mail, Phone as PhoneIcon, MessageSquare, Send, CheckCircle2 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
-import PhoneInput from "@/components/shared/PhoneInput";
+import InternationalPhoneInput from "@/components/shared/InternationalPhoneInput";
 import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
 
 export default function SimpleContactForm() {
@@ -184,15 +184,12 @@ export default function SimpleContactForm() {
                         </div>
                         <div className="relative">
                             <PhoneIcon className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${focusedField === 'phone' ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}`} />
-                            <PhoneInput
+                            <InternationalPhoneInput
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 onValidationChange={(valid) => setPhoneValid(valid)}
                                 required
                                 placeholder="Phone Number"
-                                className={`w-full bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'phone' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-3.5 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none transition-all duration-300`}
-                                onFocus={() => setFocusedField('phone')}
-                                onBlur={() => setFocusedField(null)}
                             />
                         </div>
                     </div>

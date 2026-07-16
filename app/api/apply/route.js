@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import JobApplication from "@/models/JobApplication";
 import { Readable } from "stream";
 import { v2 as cloudinary } from "cloudinary";
-import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
+import { validatePhone } from "@/lib/phoneValidation";
 
 export async function POST(req) {
     try {
@@ -16,10 +16,17 @@ export async function POST(req) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
-        // Validate phone number
-        const phoneResult = validatePhone(phone);
-        if (!phoneResult.valid) {
-            return NextResponse.json({ error: phoneResult.message }, { status: 400 });
+        // Validate phone number using libphonenumber-js
+        try {
+            const { isValidPhoneNumber } = await import("libphonenumber-js");
+            if (!isValidPhoneNumber(phone)) {
+                return NextResponse.json({ error: "Please enter a valid phone number for the selected country." }, { status: 400 });
+            }
+        } catch {
+            const fallback = validatePhone(phone);
+            if (!fallback.valid) {
+                return NextResponse.json({ error: fallback.message }, { status: 400 });
+            }
         }
 
         // Verify reCAPTCHA token
@@ -52,7 +59,7 @@ export async function POST(req) {
             name,
             email,
             city,
-            phone: sanitizePhone(phone),
+            phone,
             applyFor,
             experience,
             message,
@@ -85,7 +92,7 @@ export async function POST(req) {
                     <h2>New Job Application Received</h2>
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Phone:</strong> ${sanitizePhone(phone)}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
                     <p><strong>City:</strong> ${city}</p>
                     <p><strong>Applied For:</strong> ${applyFor}</p>
                     <p><strong>Experience:</strong> ${experience}</p>

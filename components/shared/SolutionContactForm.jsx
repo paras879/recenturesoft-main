@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import PhoneInput from "@/components/shared/PhoneInput";
-import { sanitizePhone } from "@/lib/phoneValidation";
+import InternationalPhoneInput from "@/components/shared/InternationalPhoneInput";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
@@ -115,7 +114,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                 body: JSON.stringify({
                     name: form.name,
                     email: form.email,
-                    phone: sanitizePhone(form.phone),
+                    phone: form.phone,
                     subject: `Solution Inquiry: ${serviceName}`,
                     message: form.message,
                     recaptchaToken,
@@ -235,14 +234,12 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                     <label htmlFor="scf-phone" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                                         Phone Number
                                     </label>
-                                    <PhoneInput
+                                    <InternationalPhoneInput
                                         id="scf-phone"
                                         value={form.phone}
                                         onChange={handleChange}
                                         onValidationChange={setPhoneValid}
-                                        required={false}
-                                        placeholder="9999999999"
-                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
+                                        placeholder="Enter phone number"
                                     />
                                 </div>
 
