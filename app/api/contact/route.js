@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Contact from "@/models/Contact";
+import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
 
 export async function POST(req) {
     try {
@@ -30,6 +31,17 @@ export async function POST(req) {
                 },
                 { status: 400 }
             );
+        }
+
+        // Validate phone number (if provided)
+        if (phone) {
+            const phoneResult = validatePhone(phone);
+            if (!phoneResult.valid) {
+                return NextResponse.json(
+                    { success: false, message: phoneResult.message },
+                    { status: 400 }
+                );
+            }
         }
 
         // Verify reCAPTCHA token if a secret key is configured
@@ -65,7 +77,7 @@ export async function POST(req) {
         const contact = await Contact.create({
             name,
             email,
-            phone: phone || "",
+            phone: phone ? sanitizePhone(phone) : "",
             subject,
             message,
         });

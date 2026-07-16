@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import JobApplication from "@/models/JobApplication";
 import { Readable } from "stream";
 import { v2 as cloudinary } from "cloudinary";
+import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
 
 export async function POST(req) {
     try {
@@ -13,6 +14,12 @@ export async function POST(req) {
 
         if (!name || !email || !city || !phone || !applyFor || !experience || !resumeUrl) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        }
+
+        // Validate phone number
+        const phoneResult = validatePhone(phone);
+        if (!phoneResult.valid) {
+            return NextResponse.json({ error: phoneResult.message }, { status: 400 });
         }
 
         // Verify reCAPTCHA token
@@ -45,7 +52,7 @@ export async function POST(req) {
             name,
             email,
             city,
-            phone,
+            phone: sanitizePhone(phone),
             applyFor,
             experience,
             message,
@@ -78,7 +85,7 @@ export async function POST(req) {
                     <h2>New Job Application Received</h2>
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Phone:</strong> ${phone}</p>
+                    <p><strong>Phone:</strong> ${sanitizePhone(phone)}</p>
                     <p><strong>City:</strong> ${city}</p>
                     <p><strong>Applied For:</strong> ${applyFor}</p>
                     <p><strong>Experience:</strong> ${experience}</p>

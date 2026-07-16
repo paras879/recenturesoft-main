@@ -2,14 +2,19 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Mail, Phone, MessageSquare, Send, CheckCircle2 } from "lucide-react";
+import { User, Mail, Phone as PhoneIcon, MessageSquare, Send, CheckCircle2 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
+import PhoneInput from "@/components/shared/PhoneInput";
+import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
 
 export default function SimpleContactForm() {
     const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
     const [error, setError] = useState(null);
     const [focusedField, setFocusedField] = useState(null);
     const [recaptchaToken, setRecaptchaToken] = useState("");
+    const [phone, setPhone] = useState("");
+    const [phoneValid, setPhoneValid] = useState(false);
+    const [phoneError, setPhoneError] = useState("");
     const [userInteracted, setUserInteracted] = useState(false);
     const recaptchaRef = useRef(null);
 
@@ -21,6 +26,12 @@ export default function SimpleContactForm() {
             return;
         }
 
+        const phoneResult = validatePhone(phone);
+        if (!phoneResult.valid) {
+            setError(phoneResult.message);
+            return;
+        }
+
         setFormStatus("submitting");
         setError(null);
 
@@ -28,11 +39,11 @@ export default function SimpleContactForm() {
         const firstName = formData.get("firstName") || "";
         const lastName = formData.get("lastName") || "";
         const email = formData.get("email") || "";
-        const phone = formData.get("phone") || "";
         const message = formData.get("message") || "";
 
         const name = `${firstName} ${lastName}`.trim();
         const subject = `Recenture Inquiry from ${name}`;
+        const sanitizedPhone = sanitizePhone(phone);
 
         try {
             const res = await fetch("/api/contact", {
@@ -40,7 +51,7 @@ export default function SimpleContactForm() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email, phone, subject, message, recaptchaToken }),
+                body: JSON.stringify({ name, email, phone: sanitizedPhone, subject, message, recaptchaToken }),
             });
 
             const data = await res.json();
@@ -172,10 +183,15 @@ export default function SimpleContactForm() {
                             />
                         </div>
                         <div className="relative">
-                            <Phone className={iconClasses('phone')} />
-                            <input 
-                                required type="text" name="phone" placeholder="Phone Number" 
-                                className={inputClasses('phone')}
+                            <PhoneIcon className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${focusedField === 'phone' ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}`} />
+                            <PhoneInput
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                onValidationChange={(valid) => setPhoneValid(valid)}
+                                required
+                                placeholder="Phone Number"
+                                label=""
+                                className={`bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'phone' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-3.5`}
                                 onFocus={() => setFocusedField('phone')}
                                 onBlur={() => setFocusedField(null)}
                             />

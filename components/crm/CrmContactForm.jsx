@@ -2,12 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import PhoneInput from "@/components/shared/PhoneInput";
+import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
 
 export default function CrmContactForm() {
     const [num1, setNum1] = useState(0);
     const [num2, setNum2] = useState(0);
     const [captchaInput, setCaptchaInput] = useState("");
     const [status, setStatus] = useState("idle");
+    const [phone, setPhone] = useState("");
+    const [phoneValid, setPhoneValid] = useState(false);
 
     useEffect(() => {
         setNum1(Math.floor(Math.random() * 10) + 1);
@@ -16,7 +20,13 @@ export default function CrmContactForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
+        const phoneResult = validatePhone(phone);
+        if (!phoneResult.valid) {
+            alert(phoneResult.message);
+            return;
+        }
+
         if (parseInt(captchaInput) !== num1 + num2) {
             alert("Incorrect Captcha! Please try again.");
             setNum1(Math.floor(Math.random() * 10) + 1);
@@ -59,8 +69,15 @@ export default function CrmContactForm() {
                             <input required type="text" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white transition-all" placeholder="John Doe" />
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Phone No.</label>
-                            <input required type="text" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white transition-all" placeholder="+91 XXXXXXXXXX" />
+                            <PhoneInput
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                onValidationChange={setPhoneValid}
+                                required
+                                placeholder="9999999999"
+                                label="Phone No."
+                                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white transition-all"
+                            />
                         </div>
                     </div>
                     

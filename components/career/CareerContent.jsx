@@ -4,12 +4,16 @@ import { useState, useRef } from "react";
 import { Briefcase, MapPin, Clock, Upload, CheckCircle, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
+import PhoneInput from "@/components/shared/PhoneInput";
+import { sanitizePhone } from "@/lib/phoneValidation";
 
 export default function CareerContent({ jobs, dynamicData }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState({ type: "", message: "" });
     const [fileName, setFileName] = useState("No file chosen");
     const [recaptchaToken, setRecaptchaToken] = useState("");
+    const [phone, setPhone] = useState("");
+    const [phoneValid, setPhoneValid] = useState(false);
     const recaptchaRef = useRef(null);
 
     const handleFileChange = (e) => {
@@ -24,6 +28,12 @@ export default function CareerContent({ jobs, dynamicData }) {
         e.preventDefault();
         setIsSubmitting(true);
         setStatus({ type: "", message: "" });
+
+        if (!phoneValid) {
+            setStatus({ type: "error", message: "Please enter a valid phone number (10-15 digits)." });
+            setIsSubmitting(false);
+            return;
+        }
 
         const formData = new FormData(e.target);
         const resumeFile = formData.get("resume");
@@ -48,6 +58,7 @@ export default function CareerContent({ jobs, dynamicData }) {
             // 2. Submit Application Data to our API
             formData.delete("resume");
             const applicationData = Object.fromEntries(formData.entries());
+            applicationData.phone = sanitizePhone(phone);
             applicationData.resumeUrl = cloudinaryData.secure_url;
             applicationData.recaptchaToken = recaptchaToken;
 
@@ -170,10 +181,15 @@ export default function CareerContent({ jobs, dynamicData }) {
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="flex flex-col gap-1.5">
-                                        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Phone No. *</label>
-                                        <input type="tel" name="phone" required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="+1 234 567 8900" />
-                                    </div>
+                                    <PhoneInput
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        onValidationChange={setPhoneValid}
+                                        required
+                                        placeholder="1234567890"
+                                        label="Phone No. *"
+                                        className="w-full px-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                    />
                                     <div className="flex flex-col gap-1.5">
                                         <label className="text-sm font-medium text-slate-700 dark:text-slate-300">City *</label>
                                         <input type="text" name="city" required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="New York" />
