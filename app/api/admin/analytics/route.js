@@ -34,10 +34,10 @@ export async function GET(req) {
         while (currDate <= now) {
             let key;
             if (range === '1y') {
-                key = currDate.toLocaleString('default', { month: 'short', year: '2-digit' });
+                key = currDate.toLocaleString('default', { month: 'short', year: '2-digit', timeZone: 'Asia/Kolkata' });
                 currDate.setMonth(currDate.getMonth() + 1);
             } else {
-                key = currDate.toLocaleString('default', { month: 'short', day: 'numeric' });
+                key = currDate.toLocaleString('default', { month: 'short', day: 'numeric', timeZone: 'Asia/Kolkata' });
                 currDate.setDate(currDate.getDate() + 1);
             }
             if (!dataMap.has(key)) dataMap.set(key, { name: key, projects: 0, meetings: 0, contacts: 0 });
@@ -47,8 +47,8 @@ export async function GET(req) {
             items.forEach(item => {
                 const date = new Date(item.createdAt);
                 let key = range === '1y' 
-                    ? date.toLocaleString('default', { month: 'short', year: '2-digit' })
-                    : date.toLocaleString('default', { month: 'short', day: 'numeric' });
+                    ? date.toLocaleString('default', { month: 'short', year: '2-digit', timeZone: 'Asia/Kolkata' })
+                    : date.toLocaleString('default', { month: 'short', day: 'numeric', timeZone: 'Asia/Kolkata' });
                 
                 if (dataMap.has(key)) {
                     dataMap.get(key)[type]++;
