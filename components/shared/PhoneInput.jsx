@@ -11,16 +11,13 @@ export default function PhoneInput({
   id,
   required = false,
   placeholder = "Enter phone number",
-  label = "Phone Number",
   className = "",
   containerClassName = "",
-  inputClassName = "",
   disabled = false,
   onFocus,
   onBlur,
 }) {
   const [error, setError] = useState("");
-  const [focused, setFocused] = useState(false);
 
   const handleChange = useCallback((e) => {
     const raw = e.target.value;
@@ -50,12 +47,10 @@ export default function PhoneInput({
   }, [onChange, name]);
 
   const handleFocus = useCallback((e) => {
-    setFocused(true);
     onFocus?.(e);
   }, [onFocus]);
 
   const handleBlur = useCallback((e) => {
-    setFocused(false);
     if (!value && !required) {
       setError("");
       onValidationChange?.(true);
@@ -68,13 +63,10 @@ export default function PhoneInput({
     onBlur?.(e);
   }, [value, required, onValidationChange, onBlur]);
 
+  const errorBorder = error ? "!border-red-400 dark:!border-red-500" : "";
+
   return (
-    <div className={`${containerClassName}`}>
-      {label && (
-        <label htmlFor={id || name} className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-          {label} {required && <span className="text-red-500">*</span>}
-        </label>
-      )}
+    <div className={containerClassName}>
       <input
         id={id || name}
         type="tel"
@@ -92,7 +84,7 @@ export default function PhoneInput({
         required={required}
         placeholder={placeholder}
         disabled={disabled}
-        className={`w-full text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${error ? "border-red-400 dark:border-red-500" : ""} ${className} ${inputClassName}`}
+        className={`${className} ${errorBorder}`}
       />
       {error && (
         <p className="text-xs text-red-500 dark:text-red-400 mt-1">{error}</p>

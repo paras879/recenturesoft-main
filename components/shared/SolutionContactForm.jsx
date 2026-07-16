@@ -231,15 +231,20 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
                                 </div>
 
                                 {/* Phone */}
-                                <PhoneInput
-                                    id="scf-phone"
-                                    value={form.phone}
-                                    onChange={handleChange}
-                                    onValidationChange={setPhoneValid}
-                                    required={false}
-                                    placeholder="9999999999"
-                                    label="Phone Number"
-                                />
+                                <div className="space-y-1.5">
+                                    <label htmlFor="scf-phone" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                                        Phone Number
+                                    </label>
+                                    <PhoneInput
+                                        id="scf-phone"
+                                        value={form.phone}
+                                        onChange={handleChange}
+                                        onValidationChange={setPhoneValid}
+                                        required={false}
+                                        placeholder="9999999999"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-white/10 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all duration-200"
+                                    />
+                                </div>
 
                                 {/* Service (pre-filled read-only) */}
                                 <div className="space-y-1.5">

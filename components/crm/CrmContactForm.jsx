@@ -69,13 +69,13 @@ export default function CrmContactForm() {
                             <input required type="text" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white transition-all" placeholder="John Doe" />
                         </div>
                         <div>
+                            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Phone No.</label>
                             <PhoneInput
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 onValidationChange={setPhoneValid}
                                 required
                                 placeholder="9999999999"
-                                label="Phone No."
                                 className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white transition-all"
                             />
                         </div>

@@ -181,15 +181,17 @@ export default function CareerContent({ jobs, dynamicData }) {
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <PhoneInput
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                        onValidationChange={setPhoneValid}
-                                        required
-                                        placeholder="1234567890"
-                                        label="Phone No. *"
-                                        className="w-full px-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                    />
+                                    <div className="flex flex-col gap-1.5">
+                                        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Phone No. *</label>
+                                        <PhoneInput
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
+                                            onValidationChange={setPhoneValid}
+                                            required
+                                            placeholder="1234567890"
+                                            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                        />
+                                    </div>
                                     <div className="flex flex-col gap-1.5">
                                         <label className="text-sm font-medium text-slate-700 dark:text-slate-300">City *</label>
                                         <input type="text" name="city" required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="New York" />

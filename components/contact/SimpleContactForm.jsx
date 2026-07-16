@@ -190,8 +190,7 @@ export default function SimpleContactForm() {
                                 onValidationChange={(valid) => setPhoneValid(valid)}
                                 required
                                 placeholder="Phone Number"
-                                label=""
-                                className={`bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'phone' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-3.5`}
+                                className={`w-full bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'phone' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-3.5 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none transition-all duration-300`}
                                 onFocus={() => setFocusedField('phone')}
                                 onBlur={() => setFocusedField(null)}
                             />
