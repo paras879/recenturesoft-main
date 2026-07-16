@@ -67,7 +67,7 @@ const AIChatbotContent = ({ faqs = [], content = {} }) => {
                         >
                             <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-[30px] lg:rounded-[40px] overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-50 dark:from-slate-800/40 dark:to-slate-900/40 border border-white/40 dark:border-slate-700/50 shadow-2xl flex items-center justify-center backdrop-blur-xl group">
                                 <div className="absolute inset-0 bg-blue-500/5 rounded-full animate-pulse blur-xl z-0"></div>
-                                <Image src={content?.aiChatbotHero?.image || "/images/ai-chatbot/hero_ai_chatbot.webp"} alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
+                                <Image src={content?.aiChatbotHero?.image || "/images/ai-chatbot/hero_ai_chatbot.webp"} alt="AI Consulting Meeting" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain lg:object-cover z-10 transition-transform duration-700 group-hover:scale-105" priority loading="eager" />
                             </div>
                         </motion.div>
                     </div>

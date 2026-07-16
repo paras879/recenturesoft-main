@@ -106,16 +106,31 @@ export default function GenericCrmPage({ page }) {
     return (
         <div className="min-h-screen bg-[#fafcff] dark:bg-[#020617] selection:bg-blue-500/30 font-manrope">
             {/* --- PREMIUM HERO SECTION --- */}
-            <section className="relative pt-24 pb-8 md:pt-32 md:pb-12 overflow-hidden">
+            <section className="relative pt-24 pb-8 md:pt-32 md:pb-12 overflow-x-hidden">
                 {/* Background ambient glows */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-50/80 to-transparent dark:from-blue-900/20 dark:to-transparent pointer-events-none" />
                 <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
                 <div className="absolute top-20 -left-20 w-[400px] h-[400px] bg-cyan-400/10 dark:bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none" />
 
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
-                        {/* Text Content */}
-                        <div className="text-left max-w-2xl">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center">
+                        {/* Image Presentation — shows first on mobile, right on desktop */}
+                        <div className="relative w-full aspect-[4/3] lg:aspect-square max-h-[600px] flex items-center justify-center order-1 lg:order-2">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/10 rounded-[3rem] transform rotate-3 scale-105 transition-transform duration-700 hover:rotate-6" />
+                            <div className="absolute inset-0 bg-white dark:bg-slate-900 rounded-[3rem] shadow-xl border border-slate-200/50 dark:border-white/10 overflow-hidden transform transition-transform duration-700 hover:scale-[1.02]">
+                                <Image
+                                    src={desktopBanner}
+                                    alt={`${title} Banner`}
+                                    fill sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-contain object-center p-2 lg:object-cover lg:p-0"
+                                    priority
+                                />
+                                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-[3rem]" />
+                            </div>
+                        </div>
+
+                        {/* Text Content — shows second on mobile, left on desktop */}
+                        <div className="text-left max-w-2xl order-2 lg:order-1">
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.15] mb-6 tracking-tight">
                                 {title} <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">
@@ -129,22 +144,6 @@ export default function GenericCrmPage({ page }) {
                                 <ClientCTAButton text="Get Started Now" url="#schedule" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
                                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </ClientCTAButton>
-                            </div>
-                        </div>
-
-                        {/* Image Presentation */}
-                        <div className="relative w-full aspect-[4/3] lg:aspect-square max-h-[600px] flex items-center justify-center">
-                            {/* Decorative elements behind image */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/10 rounded-[3rem] transform rotate-3 scale-105 transition-transform duration-700 hover:rotate-6" />
-                            <div className="absolute inset-0 bg-white dark:bg-slate-900 rounded-[3rem] shadow-xl border border-slate-200/50 dark:border-white/10 overflow-hidden transform transition-transform duration-700 hover:scale-[1.02]">
-                                <Image
-                                    src={desktopBanner}
-                                    alt={`${title} Banner`}
-                                    fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center"
-                                    priority
-                                />
-                                {/* Inner glow/shadow for premium feel */}
-                                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-[3rem]" />
                             </div>
                         </div>
                     </div>

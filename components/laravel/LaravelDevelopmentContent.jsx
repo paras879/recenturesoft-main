@@ -179,7 +179,7 @@ export default function LaravelDevelopmentContent({ dynamicData }) {
                                     alt="Laravel Hero"
                                     fill
                                     sizes="(max-width: 768px) 100vw, 50vw"
-                                    className="object-cover z-10 transition-transform duration-700 group-hover:scale-105"
+                                    className="object-contain lg:object-cover z-10 transition-transform duration-700 group-hover:scale-105"
                                     priority
                                     loading="eager"
                                 />
