@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import Contact from "@/models/Contact";
 import AdminDataTable from "@/components/admin/AdminDataTable";
+import { formatDateIST } from "@/lib/formatDateIST";
 import DashboardChart from "@/components/admin/DashboardChart";
 import { generateLast7DaysChartData } from "@/lib/chartUtils";
 
@@ -30,11 +31,7 @@ export default async function LeadsPage() {
         email: r.email,
         subject: r.subject,
         message: r.message,
-        date: new Date(r.createdAt).toLocaleDateString("en-US", {
-            timeZone: 'Asia/Kolkata',
-            year: 'numeric', month: 'short', day: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        }),
+        date: formatDateIST(r.createdAt),
     }));
 
     return (

@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import MeetingRequest from "@/models/MeetingRequest";
 import AdminDataTable from "@/components/admin/AdminDataTable";
+import { formatDateIST } from "@/lib/formatDateIST";
 import DashboardChart from "@/components/admin/DashboardChart";
 import { generateLast7DaysChartData } from "@/lib/chartUtils";
 
@@ -31,11 +32,7 @@ export default async function MeetingsPage() {
         date: r.date,
         time: r.time,
         topic: r.topic,
-        submittedAt: new Date(r.createdAt).toLocaleDateString("en-US", {
-            timeZone: 'Asia/Kolkata',
-            year: 'numeric', month: 'short', day: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        }),
+        submittedAt: formatDateIST(r.createdAt),
     }));
 
     return (

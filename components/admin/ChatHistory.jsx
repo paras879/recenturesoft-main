@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, MessageSquare, Clock, User, Bot, LayoutList, Flame, Snowflake, Trash2, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { formatDateIST, formatDateISTTime } from "@/lib/formatDateIST";
 
 export default function ChatHistory({ chats }) {
     const router = useRouter();
@@ -22,11 +23,7 @@ export default function ChatHistory({ chats }) {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [selectedChat]);
 
-    const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleString("en-US", {
-            month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
-        });
-    };
+    const formatDate = (dateString) => formatDateIST(dateString);
 
     const handleDeleteChat = async (chatId, e) => {
         e.stopPropagation(); // Prevent selecting the chat when clicking delete

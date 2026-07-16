@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import AdminDataTable from "@/components/admin/AdminDataTable";
 import Link from "next/link";
+import { formatDateIST } from "@/lib/formatDateIST";
 import { Plus } from "lucide-react";
 import DashboardChart from "@/components/admin/DashboardChart";
 import { generateLast7DaysChartData } from "@/lib/chartUtils";
@@ -34,11 +35,7 @@ export default async function BlogsPage() {
         tags: r.tags || [],
         views: r.views || 0,
         published: r.published,
-        date: new Date(r.createdAt).toLocaleDateString("en-US", {
-            timeZone: 'Asia/Kolkata',
-            year: 'numeric', month: 'short', day: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        }),
+        date: formatDateIST(r.createdAt),
     }));
 
     return (

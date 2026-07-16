@@ -8,11 +8,11 @@ import { ArrowUpRight, MessageSquare, PlusCircle, Download, Clock } from "lucide
 import DashboardStats from "@/components/admin/DashboardStats";
 import DashboardChart from "@/components/admin/DashboardChart";
 import Link from "next/link";
+import { formatDateISTShort } from "@/lib/formatDateIST";
 
-// Helper to format date
 const formatDate = (date) => {
     if (!date) return "N/A";
-    return new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    return formatDateISTShort(date);
 };
 
 // Set to force dynamic rendering so stats are always up to date
@@ -49,27 +49,25 @@ export default async function DashboardPage() {
         const d = new Date();
         d.setDate(d.getDate() - i);
         
-        let label = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        let label = d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "Asia/Kolkata" });
         if (i === 0) label = "Today";
         if (i === 1) label = "Yesterday";
         
-        // Use the standard date string as the key to map DB records
-        const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const dateStr = formatDateISTShort(d);
         leadsByDate[dateStr] = { label, leads: 0 };
     }
 
     recentLeadsForChart.forEach(lead => {
-        const dateStr = new Date(lead.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const dateStr = formatDateISTShort(lead.createdAt);
         if (leadsByDate[dateStr]) {
             leadsByDate[dateStr].leads++;
         }
     });
 
-    // Build the final array chronologically (from 6 days ago to Today)
     for (let i = 6; i >= 0; i--) {
         const d = new Date();
         d.setDate(d.getDate() - i);
-        const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const dateStr = formatDateISTShort(d);
         
         if (leadsByDate[dateStr]) {
             chartData.push({

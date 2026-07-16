@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import ActivityLog from "@/models/ActivityLog";
 import AdminDataTable from "@/components/admin/AdminDataTable";
+import { formatDateIST } from "@/lib/formatDateIST";
 
 export const metadata = {
     title: "Activity Logs | RecentureSoft Admin",
@@ -17,9 +18,7 @@ export default async function ActivityLogsPage() {
     const logs = rawLogs.map(log => ({
         ...log,
         _id: log._id.toString(),
-        createdAt: new Date(log.createdAt).toLocaleString("en-US", {
-            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-        })
+        createdAt: formatDateIST(log.createdAt)
     }));
 
     return (
