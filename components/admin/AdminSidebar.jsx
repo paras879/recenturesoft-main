@@ -18,7 +18,8 @@ import {
     Sparkles,
     Activity,
     UserCog,
-    Star
+    Star,
+    FolderTree
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -51,6 +52,7 @@ export default function AdminSidebar() {
         { name: "Blogs Content", href: "/admin/blogs", icon: FileText },
         { name: "Client Reviews", href: "/admin/reviews", icon: Star },
         { name: "AI Chat History", href: "/admin/chats", icon: BotMessageSquare },
+        { name: "Sitemap", href: "/admin/sitemap", icon: FolderTree },
         ...(role === "super_admin" ? [
             { name: "Activity Logs", href: "/admin/activity", icon: Activity },
             { name: "Manage Admins", href: "/admin/admins", icon: UserCog }
