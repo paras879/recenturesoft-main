@@ -19,6 +19,7 @@ export default function InternationalPhoneInput({
   defaultCountry = "IN",
   onFocus,
   onBlur,
+  bordered = true,
 }) {
   const [error, setError] = useState("");
   const [touched, setTouched] = useState(false);
@@ -71,51 +72,36 @@ export default function InternationalPhoneInput({
   const errorClass = error ? "phone-error" : "";
 
   return (
-    <div className={containerClassName}>
+    <div className={`${containerClassName} min-w-0 max-w-full`}>
       <style>{`
         .pi-${genId} {
           position: relative;
         }
         .pi-${genId} .PhoneInput {
-          display: flex;
-          align-items: stretch;
-          border-radius: 0.75rem;
-          border: 1px solid rgb(203 213 225);
-          background: rgb(248 250 252);
-          transition: border-color 0.2s, box-shadow 0.2s;
-          min-height: 2.75rem;
-          overflow: hidden;
+          display: contents;
         }
-        :is(.dark) .pi-${genId} .PhoneInput {
-          background: rgba(255 255 255 / 0.05);
-          border-color: rgba(255 255 255 / 0.1);
-        }
-        .pi-${genId} .PhoneInput:focus-within {
-          border-color: rgb(6 182 212);
-          box-shadow: 0 0 0 2px rgba(6 182 212 / 0.3);
-        }
-        :is(.dark) .pi-${genId} .PhoneInput:focus-within {
-          border-color: rgb(6 182 212);
-        }
-
         .pi-${genId} .PhoneInputCountry {
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 0.25rem;
-          padding: 0 0.5rem 0 0.75rem;
+          padding: 0 0.5rem 0 0;
           border: none;
           background: transparent;
           cursor: pointer;
           position: relative;
           flex-shrink: 0;
-          min-width: 3rem;
         }
-        .pi-${genId} .PhoneInputCountry:hover {
-          background: rgb(241 245 249);
+        .pi-${genId} .PhoneInputCountry::after {
+          content: '';
+          display: block;
+          width: 1px;
+          height: 1.25rem;
+          background: rgb(226 232 240);
+          margin-left: 0.5rem;
         }
-        :is(.dark) .pi-${genId} .PhoneInputCountry:hover {
-          background: rgba(255 255 255 / 0.05);
+        :is(.dark) .pi-${genId} .PhoneInputCountry::after {
+          background: rgba(255 255 255 / 0.15);
         }
         .pi-${genId} .PhoneInputCountrySelect {
           position: absolute;
@@ -126,7 +112,6 @@ export default function InternationalPhoneInput({
           width: 100%;
           height: 100%;
         }
-
         .pi-${genId} .PhoneInputCountryIcon {
           display: flex;
           align-items: center;
@@ -149,8 +134,8 @@ export default function InternationalPhoneInput({
         .pi-${genId} .PhoneInputCountryIconUnicode {
           font-size: 1.25rem;
           line-height: 1;
+          flex-shrink: 0;
         }
-
         .pi-${genId} .PhoneInputCountry select + svg {
           width: 0.625rem;
           height: 0.375rem;
@@ -160,13 +145,12 @@ export default function InternationalPhoneInput({
         .pi-${genId} .PhoneInputCountry:hover select + svg {
           opacity: 0.8;
         }
-
         .pi-${genId} .PhoneInputInput {
           flex: 1;
           min-width: 0;
           border: none;
           background: transparent;
-          padding: 0.625rem 1rem;
+          padding: 0.625rem 1rem 0.625rem 0.75rem;
           font-size: 0.875rem;
           line-height: 1.25rem;
           color: rgb(15 23 42);
@@ -181,19 +165,25 @@ export default function InternationalPhoneInput({
         :is(.dark) .pi-${genId} .PhoneInputInput::placeholder {
           color: rgb(100 116 139);
         }
-
-        .pi-${genId}.phone-error .PhoneInput {
-          border-color: rgb(248 113 113);
+        .pi-${genId}.phone-error .PhoneInputInput {
+          color: rgb(15 23 42);
         }
-        :is(.dark) .pi-${genId}.phone-error .PhoneInput {
-          border-color: rgb(239 68 68);
-        }
-        .pi-${genId}.phone-error .PhoneInput:focus-within {
-          border-color: rgb(248 113 113);
-          box-shadow: 0 0 0 2px rgba(248 113 113 / 0.3);
+        :is(.dark) .pi-${genId}.phone-error .PhoneInputInput {
+          color: rgb(255 255 255);
         }
       `}</style>
-      <div ref={wrapperRef} className={`pi-${genId} ${errorClass}`}>
+      <div
+        ref={wrapperRef}
+        className={`pi-${genId} ${
+          bordered
+            ? `flex items-stretch rounded-2xl border bg-slate-50/50 dark:bg-black/20 transition-all duration-300 ${
+                error
+                  ? "border-red-400 dark:border-red-500"
+                  : "border-slate-300 dark:border-white/10"
+              }`
+            : "flex-1 min-w-0 flex items-stretch"
+        } ${className} ${bordered ? errorClass : ""}`}
+      >
         <PhoneInputLib
           international
           defaultCountry={defaultCountry}
@@ -203,11 +193,10 @@ export default function InternationalPhoneInput({
           required={required}
           placeholder={placeholder}
           id={inputId}
-          className={className}
         />
       </div>
       {error && (
-        <p className="text-xs text-red-500 dark:text-red-400 mt-1">{error}</p>
+        <p className="text-xs text-red-500 dark:text-red-400 mt-1 break-words max-w-full">{error}</p>
       )}
     </div>
   );

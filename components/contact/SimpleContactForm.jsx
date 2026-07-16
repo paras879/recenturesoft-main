@@ -8,13 +8,13 @@ import InternationalPhoneInput from "@/components/shared/InternationalPhoneInput
 import { sanitizePhone, validatePhone } from "@/lib/phoneValidation";
 
 export default function SimpleContactForm() {
-    const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
+    const [formStatus, setFormStatus] = useState("idle");
     const [error, setError] = useState(null);
     const [focusedField, setFocusedField] = useState(null);
     const [recaptchaToken, setRecaptchaToken] = useState("");
     const [phone, setPhone] = useState("");
     const [phoneValid, setPhoneValid] = useState(false);
-    const [phoneError, setPhoneError] = useState("");
+    const [phoneTouched, setPhoneTouched] = useState(false);
     const [userInteracted, setUserInteracted] = useState(false);
     const recaptchaRef = useRef(null);
 
@@ -89,17 +89,25 @@ export default function SimpleContactForm() {
         }
     };
 
-    const inputClasses = (fieldName) => `
-        w-full bg-slate-50/50 dark:bg-black/20 
-        border ${focusedField === fieldName ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} 
-        rounded-2xl pl-12 pr-4 py-3.5 
-        text-slate-900 dark:text-white text-sm
-        placeholder:text-slate-400 dark:placeholder:text-slate-500
-        focus:outline-none transition-all duration-300
+    const containerClasses = (fieldName, isTextarea = false) => `
+        flex ${isTextarea ? 'items-start' : 'items-stretch'} w-full bg-slate-50/50 dark:bg-black/20 
+        border ${
+            focusedField === fieldName
+                ? 'border-cyan-500 ring-4 ring-cyan-500/10'
+                : (fieldName === 'phone' && !phoneValid && phoneTouched
+                    ? 'border-red-400 dark:border-red-500'
+                    : 'border-slate-300 dark:border-white/10')
+        } 
+        rounded-2xl transition-all duration-300 ${fieldName === 'phone' ? 'overflow-hidden' : ''}
     `;
 
-    const iconClasses = (fieldName) => `
-        absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300
+    const iconBoxClasses = (fieldName) => `
+        flex items-center justify-center w-12 flex-shrink-0
+        ${focusedField === fieldName ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}
+    `;
+
+    const textareaIconClasses = (fieldName) => `
+        flex items-start justify-center w-12 flex-shrink-0 pt-[0.9rem]
         ${focusedField === fieldName ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}
     `;
 
@@ -109,12 +117,10 @@ export default function SimpleContactForm() {
             animate={{ opacity: 1, y: 0 }}
             className="w-full relative group"
         >
-            {/* Glowing background behind form */}
             <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-[2.5rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" />
             
             <div className="bg-white/90 dark:bg-slate-900/80 border border-slate-200/50 dark:border-white/10 rounded-[2rem] p-6 md:p-8 lg:p-10 backdrop-blur-2xl relative shadow-2xl overflow-hidden">
                 
-                {/* Success Overlay */}
                 <AnimatePresence>
                     {formStatus === "success" && (
                         <motion.div 
@@ -152,20 +158,24 @@ export default function SimpleContactForm() {
                     onTouchStart={() => setUserInteracted(true)}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div className="relative">
-                            <User className={iconClasses('firstName')} />
+                        <div className={containerClasses('firstName')}>
+                            <div className={iconBoxClasses('firstName')}>
+                                <User className="w-5 h-5" />
+                            </div>
                             <input 
                                 required type="text" name="firstName" placeholder="First Name" 
-                                className={inputClasses('firstName')}
+                                className="flex-1 min-w-0 bg-transparent border-none outline-none py-3.5 pr-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
                                 onFocus={() => setFocusedField('firstName')}
                                 onBlur={() => setFocusedField(null)}
                             />
                         </div>
-                        <div className="relative">
-                            <User className={iconClasses('lastName')} />
+                        <div className={containerClasses('lastName')}>
+                            <div className={iconBoxClasses('lastName')}>
+                                <User className="w-5 h-5" />
+                            </div>
                             <input 
                                 required type="text" name="lastName" placeholder="Last Name" 
-                                className={inputClasses('lastName')}
+                                className="flex-1 min-w-0 bg-transparent border-none outline-none py-3.5 pr-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
                                 onFocus={() => setFocusedField('lastName')}
                                 onBlur={() => setFocusedField(null)}
                             />
@@ -173,35 +183,44 @@ export default function SimpleContactForm() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div className="relative">
-                            <Mail className={iconClasses('email')} />
+                        <div className={containerClasses('email')}>
+                            <div className={iconBoxClasses('email')}>
+                                <Mail className="w-5 h-5" />
+                            </div>
                             <input 
                                 required type="email" name="email" placeholder="Email Address" 
-                                className={inputClasses('email')}
+                                className="flex-1 min-w-0 bg-transparent border-none outline-none py-3.5 pr-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
                                 onFocus={() => setFocusedField('email')}
                                 onBlur={() => setFocusedField(null)}
                             />
                         </div>
-                        <div className="relative">
-                            <PhoneIcon className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${focusedField === 'phone' ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}`} />
+                        <div className={containerClasses('phone')}>
+                            <div className={iconBoxClasses('phone')}>
+                                <PhoneIcon className="w-5 h-5" />
+                            </div>
                             <InternationalPhoneInput
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 onValidationChange={(valid) => setPhoneValid(valid)}
                                 required
                                 placeholder="Phone Number"
-                                className="pl-12"
+                                bordered={false}
                                 onFocus={() => setFocusedField('phone')}
-                                onBlur={() => setFocusedField(null)}
+                                onBlur={() => {
+                                    setPhoneTouched(true);
+                                    setFocusedField(null);
+                                }}
                             />
                         </div>
                     </div>
 
-                    <div className="relative">
-                        <MessageSquare className={`absolute left-4 top-4 w-5 h-5 transition-colors duration-300 ${focusedField === 'message' ? 'text-cyan-500' : 'text-slate-400 dark:text-slate-500'}`} />
+                    <div className={containerClasses('message', true)}>
+                        <div className={textareaIconClasses('message')}>
+                            <MessageSquare className="w-5 h-5" />
+                        </div>
                         <textarea 
                             required name="message" rows="4" placeholder="Tell us about your project or enterprise needs..." 
-                            className={`w-full bg-slate-50/50 dark:bg-black/20 border ${focusedField === 'message' ? 'border-cyan-500 ring-4 ring-cyan-500/10' : 'border-slate-300 dark:border-white/10'} rounded-2xl pl-12 pr-4 py-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none transition-all duration-300 resize-none`}
+                            className="flex-1 min-w-0 bg-transparent border-none outline-none py-4 pr-4 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none"
                             onFocus={() => setFocusedField('message')}
                             onBlur={() => setFocusedField(null)}
                         ></textarea>

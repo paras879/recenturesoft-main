@@ -134,14 +134,16 @@ export default function PrivacyPolicyContent() {
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
+            <div className="flex items-center w-full sm:w-64 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl transition-all focus-within:ring-2 focus-within:ring-blue-500/50">
+              <div className="flex items-center justify-center w-10 flex-shrink-0 h-full">
+                <Search className="w-5 h-5 text-zinc-400" />
+              </div>
               <input
                 type="text"
                 placeholder="Search policy..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full sm:w-64 pl-10 pr-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-500"
+                className="flex-1 min-w-0 bg-transparent border-none outline-none py-3 pr-4 text-zinc-900 dark:text-white placeholder:text-zinc-500"
               />
             </div>
             <button

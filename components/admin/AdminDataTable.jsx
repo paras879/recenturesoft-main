@@ -248,14 +248,16 @@ export default function AdminDataTable({ title, data, type }) {
                 </div>
                 
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <div className="relative w-full sm:w-auto">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <div className="flex items-center w-full sm:w-64 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl focus-within:ring-2 focus-within:ring-cyan-500">
+                        <div className="flex items-center justify-center w-10 flex-shrink-0 h-full">
+                            <Search className="w-4 h-4 text-slate-400" />
+                        </div>
                         <input 
                             type="text" 
                             placeholder="Search records..." 
                             value={search}
                             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                            className="w-full sm:w-64 pl-10 pr-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            className="flex-1 min-w-0 bg-transparent border-none outline-none py-2 pr-3 text-sm"
                         />
                     </div>
                     <button onClick={handleExportCSV} className="p-2 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300" title="Export CSV">

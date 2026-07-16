@@ -214,14 +214,16 @@ export default function NewsList({ initialData = [], initialNextPage = null }) {
 
                     {/* Search Panel */}
                     <div className="flex items-center justify-center">
-                        <div className="relative w-full max-w-xl">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 w-4 h-4" />
+                        <div className="flex items-center w-full max-w-xl bg-white dark:bg-[#080d19]/80 border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm transition-all focus-within:ring-2 focus-within:ring-emerald-500/40 focus-within:border-emerald-500">
+                            <div className="flex items-center justify-center w-11 flex-shrink-0 h-full">
+                                <Search className="text-slate-400 dark:text-slate-500 w-4 h-4" />
+                            </div>
                             <input
                                 type="text"
                                 placeholder="Search articles by title keywords..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-11 pr-4 py-3 bg-white dark:bg-[#080d19]/80 border border-slate-200 dark:border-white/10 rounded-2xl text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-all shadow-sm"
+                                className="flex-1 min-w-0 bg-transparent border-none outline-none py-3 pr-4 text-slate-900 dark:text-white text-sm"
                             />
                         </div>
                     </div>
