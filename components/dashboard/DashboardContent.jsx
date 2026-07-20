@@ -1,10 +1,11 @@
 "use client";
 
 import CinematicServiceTemplate from "@/components/shared/CinematicServiceTemplate";
+import * as LucideIcons from "lucide-react";
 import { LayoutDashboard, BarChart3, LineChart, PieChart, Activity, ShieldCheck, Zap, Database } from "lucide-react";
 
-export default function DashboardContent() {
-    const features = [
+export default function DashboardContent({ dynamicData }) {
+    const defaultFeatures = [
         {
             icon: LayoutDashboard,
             title: "Customizable Interfaces",
@@ -43,16 +44,31 @@ export default function DashboardContent() {
         }
     ];
 
+    const c = dynamicData?.content || {};
+    
+    // Resolve dynamic features if available
+    const resolvedFeatures = c.features && c.features.length > 0 
+        ? c.features.map(f => {
+            const Icon = LucideIcons[f.icon] || LayoutDashboard;
+            return {
+                icon: Icon,
+                title: f.title,
+                desc: f.desc,
+                highlights: f.highlights || []
+            };
+        }) 
+        : defaultFeatures;
+
     return (
         <CinematicServiceTemplate
-            title="Transform Raw Data into"
-            subtitle="Actionable Insights"
+            title={c.contentTitle || "Transform Raw Data into"}
+            subtitle={c.contentSubtitle || "Actionable Insights"}
             themeColor="sky"
-            introParagraphs={[
+            introParagraphs={c.introParagraphs || [
                 "In today's fast-paced digital economy, data is your most valuable asset. However, raw data without proper visualization is just noise. At RecentureSoft, we specialize in developing custom, high-performance dashboard applications that consolidate complex datasets into intuitive, easy-to-understand visual interfaces.",
                 "Whether you need an internal admin panel, a client-facing analytics portal, or a complex financial trading dashboard, our engineering team uses cutting-edge technologies like React, Next.js, and advanced charting libraries to build solutions that empower decision-making."
             ]}
-            features={features}
+            features={resolvedFeatures}
         />
     );
 }

@@ -22,9 +22,7 @@ export default async function WordPressPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/wordpress-development-customization" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
-    const dynamicData = pageData?.content || {};
-    const heroData = dynamicData.wordpressHero || {};
-
+    const heroData = pageData?.content?.hero || {};
 
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
@@ -34,6 +32,9 @@ export default async function WordPressPage() {
                 title={heroData.title || "WordPress"}
                 highlight={heroData.highlight || "Customization"}
                 description={heroData.description || "Create stunning, high-performance, and SEO-optimized websites with our custom WordPress development and theme customization services."}
+                bannerImage={heroData.bannerImage || ""}
+                ctaText={heroData.ctaText || ""}
+                ctaLink={heroData.ctaLink || ""}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
                 <Image src={heroData.bannerImage || "/Banner/Wordpress.webp"} alt="wordpress-development-customization Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
@@ -41,7 +42,7 @@ export default async function WordPressPage() {
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <WordPressContent dynamicData={dynamicData} />
+                    <WordPressContent dynamicData={pageData} />
                 </div>
             </section>
 

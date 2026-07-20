@@ -36,17 +36,28 @@ export default async function WebDesignPage() {
     const isActive = await checkPageStatus("/web-design");
     if (!isActive) return notFound();
 
+    const content = pageData?.content || {};
+    const hero = content.hero || {};
+    const heroTitle = hero.title || "Next-Gen Web";
+    const heroHighlight = hero.highlight || "Design";
+    const heroDescription = hero.description || "We create stunning, AI-enhanced, and user-friendly web designs that offer an all-immersive digital brand experience for your customers.";
+    const bannerImage = hero.bannerImage || "/Banner/webdesign.webp";
+    const ctaText = hero.ctaText || "";
+    const ctaLink = hero.ctaLink || "";
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Web Design Company In India | RecentureSoft","description":"RecentureSoft is the leading web design company in India, offering stunning, user-friendly, and AI-powered responsive web designs for your brand.","url":"https://recenturesoft.com/web-design"}) }} />
             <Navbar />
             <ContentHero
-                title="Next-Gen Web"
-                highlight="Design"
-                description="We create stunning, AI-enhanced, and user-friendly web designs that offer an all-immersive digital brand experience for your customers."
+                title={heroTitle}
+                highlight={heroHighlight}
+                description={heroDescription}
                 highlightClass="text-blue-500 dark:text-blue-400"
+                ctaText={ctaText}
+                ctaLink={ctaLink}
             >
-                <Image src="/Banner/webdesign.webp" alt="web-design Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={bannerImage} alt="web-design Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

@@ -31,15 +31,25 @@ export default function SeoContent({ dynamicData }) {
         "Pondicherry", "Varanasi"
     ];
 
+    const introTitle = dynamicData?.content?.introTitle || "What are the pros of an SEO Company in India?";
+    const introDesc = dynamicData?.content?.introDesc || "Are you struggling to generate high-quality traffic for your website? Let your digital footprint disrupt your competitors with Recenturesoft's Ecommerce SEO services! We provide highly adaptable marketing services to increase your search engine ranking consistently.";
+    const approachTitle = dynamicData?.content?.approachTitle || "Our Strategic Approach";
+    const approachDesc = dynamicData?.content?.approachDesc || "From day 1, we kick start your SEO campaign by delivering creative strategies that help Google understand you and your brand better.";
+    const whyTitle = dynamicData?.content?.whyTitle || "Why Recenturesoft?";
+    const whyDesc = dynamicData?.content?.whyDesc || "Among the thousands of fly-by-night SEO Agencies, the good news is you have found us. We provide a host of customizable services tailored to boost your digital presence and make your webpage a leading industry resource.";
+    const servicesTitle = dynamicData?.content?.servicesTitle || "Our SEO Service Offerings Include";
+    const locationsTitle = dynamicData?.content?.locationsTitle || "Our Presence Across India";
+    const ctaTitle = dynamicData?.content?.ctaTitle || "Top Search Ranking is a Coveted Position";
+    const ctaDesc = dynamicData?.content?.ctaDesc || "We can help you get there. Just give us a call or drop a message and let's collaborate to accelerate your digital growth.";
+    const ctaBtnText = dynamicData?.content?.ctaBtnText || "Boost Your SEO Today";
+
     return (
         <div className="w-full mt-4 mb-4">
             {/* Intro Section */}
             <div className="prose prose-slate dark:prose-invert max-w-none mb-16 text-center px-4">
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-slate-900 dark:text-white tracking-tight">
-                    What are the pros of an <span className="text-blue-500">SEO Company</span> in India?
-                </h3>
+                <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-slate-900 dark:text-white tracking-tight" dangerouslySetInnerHTML={{ __html: introTitle.replace('SEO Company', '<span class="text-blue-500">SEO Company</span>') }} />
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">
-                    Are you struggling to generate high-quality traffic for your website? Let your digital footprint disrupt your competitors with Recenturesoft's Ecommerce SEO services! We provide highly adaptable marketing services to increase your search engine ranking consistently.
+                    {introDesc}
                 </p>
             </div>
 
@@ -50,9 +60,9 @@ export default function SeoContent({ dynamicData }) {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <Target className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-                        <h4 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Our Strategic Approach</h4>
+                        <h4 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">{approachTitle}</h4>
                         <p className="text-slate-600 dark:text-slate-400 mt-3 max-w-2xl mx-auto">
-                            From day 1, we kick start your SEO campaign by delivering creative strategies that help Google understand you and your brand better.
+                            {approachDesc}
                         </p>
                     </div>
 
@@ -76,9 +86,9 @@ export default function SeoContent({ dynamicData }) {
                     <div className="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
                     
                     <div className="md:w-2/3 relative z-10">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Why Recenturesoft?</h3>
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{whyTitle}</h3>
                         <p className="text-blue-100 text-lg leading-relaxed">
-                            Among the thousands of fly-by-night SEO Agencies, the good news is you have found us. We provide a host of customizable services tailored to boost your digital presence and make your webpage a leading industry resource.
+                            {whyDesc}
                         </p>
                     </div>
                     
@@ -92,11 +102,11 @@ export default function SeoContent({ dynamicData }) {
 
             {/* Service Offerings Grid */}
             <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                Our SEO Service Offerings Include
+                {servicesTitle}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
                 {services.map((service, index) => {
-                    const Icon = service.icon;
+                    const Icon = service.icon || Crosshair;
                     return (
                         <motion.div
                             key={index}
@@ -120,7 +130,7 @@ export default function SeoContent({ dynamicData }) {
             <div className="bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 md:p-12 mb-20 text-center">
                 <MapPin className="w-10 h-10 text-blue-500 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-                    Our Presence Across India
+                    {locationsTitle}
                 </h3>
                 <div className="flex flex-wrap justify-center gap-3">
                     {locations.map((location, i) => (
@@ -135,13 +145,13 @@ export default function SeoContent({ dynamicData }) {
             <div className="text-center mt-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-10 md:p-16 shadow-xl">
                 <BarChart3 className="w-12 h-12 text-blue-300 mx-auto mb-6" />
                 <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Top Search Ranking is a Coveted Position
+                    {ctaTitle}
                 </h4>
                 <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg">
-                    We can help you get there. Just give us a call or drop a message and let's collaborate to accelerate your digital growth.
+                    {ctaDesc}
                 </p>
                 <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
-                    Boost Your SEO Today
+                    {ctaBtnText}
                 </button>
             </div>
         </div>

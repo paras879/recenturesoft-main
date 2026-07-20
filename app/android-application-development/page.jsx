@@ -41,12 +41,12 @@ export default async function AndroidAppsPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Android Application Development Company In India | RecentureSoft","description":"Scale your business with the best Android application development company in India. We build highly scalable, custom, and secure Android mobile apps.","url":"https://recenturesoft.com/android-application-development"}) }} />
             <Navbar />
             <ContentHero
-                title="Android Application Development Company"
-                highlight="In India"
-                description=""
+                title={pageData?.content?.heroTitle || "Android Application Development Company"}
+                highlight={pageData?.content?.heroHighlight || "In India"}
+                description={pageData?.content?.heroDesc || ""}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src="/Banner/android.webp" alt="android-application-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={pageData?.content?.heroImage || "/Banner/android.webp"} alt="android-application-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

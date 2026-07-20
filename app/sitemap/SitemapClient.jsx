@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, MapPin, Shield, ChevronDown, ArrowRight, MessageSquare, Calendar } from 'lucide-react';
+import { Globe, MapPin, Shield, ChevronDown, ArrowRight, ChevronRight, MessageSquare, Calendar } from 'lucide-react';
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
@@ -11,38 +11,154 @@ const SECTION_CONFIG = {
         title: "Information",
         icon: Globe,
         gradient: "from-blue-500 to-cyan-400",
-        bgLight: "bg-blue-50 dark:bg-blue-500/10",
+        iconBg: "bg-blue-50 dark:bg-blue-500/10",
         iconColor: "text-blue-600 dark:text-blue-400",
-        hoverBorder: "hover:border-blue-200 dark:hover:border-blue-700",
-        accentLine: "from-blue-500 to-cyan-400",
+        accent: "from-blue-500 to-cyan-400",
         linkHover: "group-hover/link:text-blue-600 dark:group-hover/link:text-cyan-400",
+        badge: "bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300",
     },
     locations: {
         title: "Locations",
         icon: MapPin,
         gradient: "from-emerald-500 to-teal-400",
-        bgLight: "bg-emerald-50 dark:bg-emerald-500/10",
+        iconBg: "bg-emerald-50 dark:bg-emerald-500/10",
         iconColor: "text-emerald-600 dark:text-emerald-400",
-        hoverBorder: "hover:border-emerald-200 dark:hover:border-emerald-700",
-        accentLine: "from-emerald-500 to-teal-400",
+        accent: "from-emerald-500 to-teal-400",
         linkHover: "group-hover/link:text-emerald-600 dark:group-hover/link:text-emerald-400",
+        badge: "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300",
     },
     legal: {
         title: "Legal",
         icon: Shield,
         gradient: "from-purple-500 to-pink-400",
-        bgLight: "bg-purple-50 dark:bg-purple-500/10",
+        iconBg: "bg-purple-50 dark:bg-purple-500/10",
         iconColor: "text-purple-600 dark:text-purple-400",
-        hoverBorder: "hover:border-purple-200 dark:hover:border-purple-700",
-        accentLine: "from-purple-500 to-pink-400",
+        accent: "from-purple-500 to-pink-400",
         linkHover: "group-hover/link:text-purple-600 dark:group-hover/link:text-purple-400",
+        badge: "bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300",
     },
 };
 
-function AccordionSection({ sectionKey, entries, isOpen, onToggle }) {
+function countAll(sectionData) {
+    if (!sectionData) return 0;
+    if (Array.isArray(sectionData)) {
+        if (sectionData.length === 0) return 0;
+        if (sectionData[0]?.pages) {
+            return sectionData.reduce((sum, g) => sum + (g.pages?.length || 0), 0);
+        }
+        return sectionData.length;
+    }
+    return 0;
+}
+
+function PageLink({ href, name, config, isChild }) {
+    return (
+        <Link
+            href={href}
+            className={`group/link relative flex items-center gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-[#151f32] hover:bg-white hover:shadow-md dark:hover:bg-[#1e293b] border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-200 ${isChild ? 'ml-5' : ''}`}
+        >
+            <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-gradient-to-b ${config.accent} rounded-r-full group-hover/link:h-1/2 transition-all duration-300`} />
+            <ChevronRight className={`w-3.5 h-3.5 text-slate-400 shrink-0 transition-colors group-hover/link:${config.linkHover}`} />
+            <span className={`text-sm font-medium text-slate-700 dark:text-slate-300 transition-colors duration-200 ${config.linkHover}`}>
+                {name}
+            </span>
+            <ArrowRight className="ml-auto w-3.5 h-3.5 text-slate-300 dark:text-slate-600 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-200" />
+        </Link>
+    );
+}
+
+function AccordionSection({ sectionKey, data, isOpen, onToggle }) {
     const config = SECTION_CONFIG[sectionKey];
     const Icon = config.icon;
-    const count = entries?.length || 0;
+    const total = countAll(data);
+
+    const [expandedCountries, setExpandedCountries] = useState({});
+
+    const toggleCountry = (key) => {
+        setExpandedCountries(prev => ({ ...prev, [key]: !prev[key] }));
+    };
+
+    const renderContent = () => {
+        if (!data || total === 0) {
+            return (
+                <p className="text-center text-slate-400 dark:text-slate-500 py-10 text-sm">
+                    No pages in this section yet.
+                </p>
+            );
+        }
+
+        if (sectionKey === "legal") {
+            return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    {data.map((page, idx) => (
+                        <PageLink key={page._id || idx} href={page.path} name={page.name} config={config} />
+                    ))}
+                </div>
+            );
+        }
+
+        if (sectionKey === "information") {
+            return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    {data.map((page, idx) => (
+                        <PageLink key={page._id || idx} href={page.path} name={page.name} config={config} />
+                    ))}
+                </div>
+            );
+        }
+
+        if (sectionKey === "locations") {
+            return (
+                <div className="space-y-3">
+                    {data.map((group, gi) => {
+                        const isCountryOpen = expandedCountries[gi] !== false;
+                        return (
+                            <div key={gi} className="bg-slate-50/50 dark:bg-white/[0.02] rounded-xl border border-slate-100 dark:border-white/5 overflow-hidden">
+                                <button
+                                    onClick={() => toggleCountry(gi)}
+                                    className="w-full flex items-center justify-between px-4 py-3 text-left cursor-pointer hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <MapPin className="w-4 h-4 text-emerald-500" />
+                                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                                            {group.country}
+                                        </span>
+                                        <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-semibold ${config.badge}`}>
+                                            {group.pages.length}
+                                        </span>
+                                    </div>
+                                    <motion.div
+                                        animate={{ rotate: isCountryOpen ? 180 : 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <ChevronDown className="w-4 h-4 text-slate-400" />
+                                    </motion.div>
+                                </button>
+                                <AnimatePresence initial={false}>
+                                    {isCountryOpen && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                                        >
+                                            <div className="px-4 pb-4 space-y-2">
+                                                {group.pages.map((page, pi) => (
+                                                    <PageLink key={page._id || pi} href={page.path} name={page.name} config={config} />
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        }
+
+        return null;
+    };
 
     return (
         <motion.div
@@ -60,12 +176,12 @@ function AccordionSection({ sectionKey, entries, isOpen, onToggle }) {
 
             <button
                 onClick={onToggle}
-                className="w-full flex items-center justify-between p-5 md:p-8 text-left focus:outline-none"
+                className="w-full flex items-center justify-between p-5 md:p-8 text-left focus:outline-none cursor-pointer"
             >
                 <div className="flex items-center gap-4 md:gap-6">
                     <div className={`p-3.5 rounded-xl transition-all duration-300 ${
                         isOpen
-                        ? `${config.bgLight} ${config.iconColor} shadow-inner`
+                        ? `${config.iconBg} ${config.iconColor} shadow-inner`
                         : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 group-hover:bg-slate-200 dark:group-hover:bg-white/10 group-hover:text-slate-700 dark:group-hover:text-slate-300'
                     }`}>
                         <Icon className="w-5 h-5" />
@@ -79,7 +195,7 @@ function AccordionSection({ sectionKey, entries, isOpen, onToggle }) {
                         <p className={`text-sm mt-1 transition-all duration-300 ${
                             isOpen ? 'text-slate-500 dark:text-slate-400' : 'text-slate-400 dark:text-slate-500 opacity-0 md:opacity-100'
                         }`}>
-                            {count} {count === 1 ? "Page" : "Pages"}
+                            {total} {total === 1 ? "Page" : "Pages"}
                         </p>
                     </div>
                 </div>
@@ -105,29 +221,8 @@ function AccordionSection({ sectionKey, entries, isOpen, onToggle }) {
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <div className="px-5 md:px-8 pb-8 pt-2">
-                            <div className="w-full h-px bg-slate-100 dark:bg-white/5 mb-6" />
-                            {count === 0 ? (
-                                <p className="text-center text-slate-400 dark:text-slate-500 py-8">
-                                    No pages in this section yet.
-                                </p>
-                            ) : (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                    {entries.map((entry, idx) => (
-                                        <Link
-                                            key={entry._id || idx}
-                                            href={entry.path}
-                                            className={`group/link relative flex items-center p-4 rounded-xl bg-slate-50 dark:bg-[#151f32] hover:bg-white hover:shadow-md dark:hover:bg-[#1e293b] border border-transparent ${config.hoverBorder} transition-all duration-300`}
-                                        >
-                                            <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-gradient-to-b ${config.accentLine} rounded-r-full group-hover/link:h-1/2 transition-all duration-300`} />
-
-                                            <span className={`ml-2 text-base font-semibold text-slate-700 dark:text-slate-300 transition-colors duration-300 ${config.linkHover}`}>
-                                                {entry.name}
-                                            </span>
-                                            <ArrowRight className={`ml-auto w-4 h-4 text-slate-300 dark:text-slate-600 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300`} />
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
+                            <div className="w-full h-px bg-slate-100 dark:bg-white/5 mb-5" />
+                            {renderContent()}
                         </div>
                     </motion.div>
                 )}
@@ -136,7 +231,7 @@ function AccordionSection({ sectionKey, entries, isOpen, onToggle }) {
     );
 }
 
-export default function SitemapClient({ sections }) {
+export default function SitemapClient({ data }) {
     const [openSection, setOpenSection] = useState(null);
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
@@ -154,7 +249,6 @@ export default function SitemapClient({ sections }) {
             <div className="absolute top-[20%] right-[-10%] w-[40%] h-[50%] rounded-full bg-cyan-400/5 dark:bg-cyan-600/10 blur-[120px] pointer-events-none" />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
                 <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -187,7 +281,7 @@ export default function SitemapClient({ sections }) {
                         <AccordionSection
                             key={key}
                             sectionKey={key}
-                            entries={sections?.[key] || []}
+                            data={data?.[key] || []}
                             isOpen={openSection === key}
                             onToggle={() => toggleSection(key)}
                         />

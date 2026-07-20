@@ -12,7 +12,7 @@ import PrivacySection from './PrivacySection';
 import QuickSummary from './QuickSummary';
 import { DataFlowIllustration, SecurityShieldIllustration } from './Illustrations';
 
-const SECTIONS = [
+const DEFAULT_SECTIONS = [
   { id: 'introduction', title: '1. Introduction', icon: Info },
   { id: 'user-information', title: '2. User Information', icon: User },
   { id: 'cookies', title: '3. Cookies Policy', icon: Cookie },
@@ -25,10 +25,28 @@ const SECTIONS = [
   { id: 'contact', title: '10. Contact Information', icon: Phone },
 ];
 
-export default function PrivacyPolicyContent() {
+export default function PrivacyPolicyContent({ dynamicData }) {
+  const lastUpdated = dynamicData?.content?.lastUpdated || 'June 17, 2026';
+  const heroDesc = dynamicData?.content?.heroDesc || 'We believe in full transparency. Learn exactly how we collect, use, and protect your personal information in our simple, easy-to-read policy.';
+
+  // Merge DB sections with icon/id defaults
+  const SECTIONS = (() => {
+    const dbSections = dynamicData?.content?.sections;
+    if (dbSections && dbSections.length > 0) {
+      return dbSections.map((s, i) => ({
+        id: DEFAULT_SECTIONS[i]?.id || `section-${i}`,
+        title: s.title || DEFAULT_SECTIONS[i]?.title || `Section ${i + 1}`,
+        icon: DEFAULT_SECTIONS[i]?.icon || FileText,
+        htmlContent: s.content || '',
+      }));
+    }
+    return DEFAULT_SECTIONS;
+  })();
+
   const [activeSection, setActiveSection] = useState(SECTIONS[0].id);
   const [searchQuery, setSearchQuery] = useState('');
   const [showBackToTop, setShowBackToTop] = useState(false);
+
 
   useEffect(() => {
     let ticking = false;
@@ -119,13 +137,13 @@ export default function PrivacyPolicyContent() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              Last Updated: June 17, 2026
+              Last Updated: {lastUpdated}
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
               Privacy Policy
             </h1>
             <p className="text-lg text-zinc-600 dark:text-zinc-400">
-              We believe in full transparency. Learn exactly how we collect, use, and protect your personal information in our simple, easy-to-read policy.
+              {heroDesc}
             </p>
           </motion.div>
 
@@ -168,92 +186,52 @@ export default function PrivacyPolicyContent() {
         {/* Main Content */}
         <div className="flex-1 order-1 lg:order-2">
 
-          <div className={!searchQuery || 'Introduction'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="introduction" title="1. Introduction" icon={SECTIONS[0].icon}>
-              <p className="mb-4">Welcome to our Privacy Policy. This document explains how we collect, use, disclose, and safeguard your information when you visit our website and use our software services. Please read this privacy policy carefully.</p>
-              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/50 flex gap-3 my-6">
-                <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-blue-800 dark:text-blue-200 m-0">By using our services, you consent to the data practices described in this statement. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
-              </div>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'User Information data collect'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="user-information" title="2. User Information" icon={SECTIONS[1].icon}>
-              <p className="mb-4">We collect information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about us or our products, or otherwise contact us.</p>
-              <ul className="list-disc pl-5 mb-4 space-y-2">
-                <li><strong>Personal Data:</strong> Name, email address, phone number, and physical address.</li>
-                <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the site, such as your IP address, browser type, and operating system.</li>
-              </ul>
-              <div className="my-8">
-                <h4 className="text-base font-semibold mb-4 text-zinc-900 dark:text-white">Data Flow Overview</h4>
-                <DataFlowIllustration />
-              </div>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Cookies tracking'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="cookies" title="3. Cookies Policy" icon={SECTIONS[2].icon}>
-              <p className="mb-4">We may use cookies, web beacons, tracking pixels, and other tracking technologies on the Site to help customize the Site and improve your experience.</p>
-              <p>Most browsers are set to accept cookies by default. You can remove or reject cookies, but be aware that such action could affect the availability and functionality of the Site.</p>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Third-Party Links'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="third-party" title="4. Third-Party Links" icon={SECTIONS[3].icon}>
-              <p className="mb-4">The Site may contain links to third-party websites and applications of interest, including advertisements and external services, that are not affiliated with us.</p>
-              <p>Once you have used these links to leave the Site, any information you provide to these third parties is not covered by this Privacy Policy, and we cannot guarantee the safety and privacy of your information.</p>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Information Sharing vendors'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="information-sharing" title="5. Information Sharing" icon={SECTIONS[4].icon}>
-              <p className="mb-4">We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.</p>
-              <ul className="list-disc pl-5 mb-4 space-y-2">
-                <li><strong>Vendors & Consultants:</strong> Third-party vendors who perform services for us.</li>
-                <li><strong>Business Transfers:</strong> In connection with any merger or sale of company assets.</li>
-              </ul>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Information Security protect'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="information-security" title="6. Information Security" icon={SECTIONS[5].icon}>
-              <p className="mb-6">We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable.</p>
-              <SecurityShieldIllustration />
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Data Retention keep'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="data-retention" title="7. Data Retention" icon={SECTIONS[6].icon}>
-              <p className="mb-4">We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law.</p>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'User Rights delete update'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="user-rights" title="8. User Rights" icon={SECTIONS[7].icon}>
-              <p className="mb-4">Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances.</p>
-              <p>To request to review, update, or delete your personal information, please submit a request form through our contact page.</p>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Grievance Redressal complaint questions'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="grievance" title="9. Grievance Redressal" icon={SECTIONS[8].icon}>
-              <p className="mb-4">If you have any questions or concerns about our privacy practices or your data, you have the right to file a grievance with our designated Data Protection Officer.</p>
-              <p>We take all grievances seriously and aim to resolve them within 30 business days.</p>
-            </PrivacySection>
-          </div>
-
-          <div className={!searchQuery || 'Contact Information email address'.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
-            <PrivacySection id="contact" title="10. Contact Information" icon={SECTIONS[9].icon}>
-              <p className="mb-4">If you have questions or comments about this notice, you may email us or by post to:</p>
-              <div className="bg-zinc-50 dark:bg-zinc-800/50 p-6 rounded-xl border border-zinc-200 dark:border-zinc-700/50">
-                <p className="font-semibold text-zinc-900 dark:text-white mb-2">Software Dev Company Inc.</p>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-1">123 Innovation Drive, Tech Park</p>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">San Francisco, CA 94105</p>
-                <a href="mailto:privacy@company.com" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">privacy@company.com</a>
-              </div>
-            </PrivacySection>
-          </div>
+          {SECTIONS.map((section, idx) => (
+            <div key={section.id} className={!searchQuery || section.title.toLowerCase().includes(searchQuery.toLowerCase()) ? 'block' : 'hidden'}>
+              <PrivacySection id={section.id} title={section.title} icon={section.icon}>
+                {section.htmlContent ? (
+                  <div className="whitespace-pre-line text-zinc-600 dark:text-zinc-400" dangerouslySetInnerHTML={{ __html: section.htmlContent }} />
+                ) : idx === 0 ? (
+                  <>
+                    <p className="mb-4">Welcome to our Privacy Policy. This document explains how we collect, use, disclose, and safeguard your information when you visit our website and use our software services. Please read this privacy policy carefully.</p>
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/50 flex gap-3 my-6">
+                      <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-blue-800 dark:text-blue-200 m-0">By using our services, you consent to the data practices described in this statement. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
+                    </div>
+                  </>
+                ) : idx === 1 ? (
+                  <>
+                    <p className="mb-4">We collect information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about us or our products, or otherwise contact us.</p>
+                    <ul className="list-disc pl-5 mb-4 space-y-2">
+                      <li><strong>Personal Data:</strong> Name, email address, phone number, and physical address.</li>
+                      <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the site, such as your IP address, browser type, and operating system.</li>
+                    </ul>
+                    <div className="my-8">
+                      <h4 className="text-base font-semibold mb-4 text-zinc-900 dark:text-white">Data Flow Overview</h4>
+                      <DataFlowIllustration />
+                    </div>
+                  </>
+                ) : idx === 5 ? (
+                  <>
+                    <p className="mb-6">We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable.</p>
+                    <SecurityShieldIllustration />
+                  </>
+                ) : idx === 9 ? (
+                  <>
+                    <p className="mb-4">If you have questions or comments about this notice, you may email us or by post to:</p>
+                    <div className="bg-zinc-50 dark:bg-zinc-800/50 p-6 rounded-xl border border-zinc-200 dark:border-zinc-700/50">
+                      <p className="font-semibold text-zinc-900 dark:text-white mb-2">RecentureSoft Infotech</p>
+                      <p className="text-zinc-600 dark:text-zinc-400 mb-1">123 Innovation Drive, Tech Park</p>
+                      <p className="text-zinc-600 dark:text-zinc-400 mb-4">San Francisco, CA 94105</p>
+                      <a href="mailto:privacy@recenturesoft.com" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">privacy@recenturesoft.com</a>
+                    </div>
+                  </>
+                ) : (
+                  <p className="text-zinc-600 dark:text-zinc-400">{section.content || ''}</p>
+                )}
+              </PrivacySection>
+            </div>
+          ))}
 
           {/* FAQ Section */}
           <div className="mt-16 mb-12">

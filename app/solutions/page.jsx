@@ -49,16 +49,18 @@ export default async function SolutionsPage() {
         updatedAt: s.updatedAt?.toISOString()
     }));
 
+    const c = pageData?.content || {};
+
     return (
         <main className="bg-slate-50 dark:bg-[#020617] min-h-screen">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Enterprise Solutions | RecentureSoft","description":"Explore our premium enterprise solutions, digital intelligence, and modern technology architecture.","url":"https://recenturesoft.com/solutions"}) }} />
             <Navbar />
             
             <PageHero
-                badge="Our Expertise"
-                title="Engineering"
-                highlight="Digital Excellence"
-                description="Discover our comprehensive suite of enterprise-grade solutions. We architect scalable, secure, and blazing fast digital products."
+                badge={c.hero?.badge || "Our Expertise"}
+                title={c.hero?.title || "Engineering"}
+                highlight={c.hero?.highlight || "Digital Excellence"}
+                description={c.hero?.description || "Discover our comprehensive suite of enterprise-grade solutions. We architect scalable, secure, and blazing fast digital products."}
             />
 
             <EnterpriseServices services={servicesData} />
@@ -68,15 +70,14 @@ export default async function SolutionsPage() {
             <SolutionsProcess />
 
             <CTASection
-                title="Transform Your Architecture"
-                description="Ready to upgrade your tech stack with our premium engineering solutions? Let's build the future together."
-                primaryBtnText="Start Your Project"
-                secondaryBtnText="Schedule Consultation"
+                title={c.cta?.title || "Transform Your Architecture"}
+                description={c.cta?.description || "Ready to upgrade your tech stack with our premium engineering solutions? Let's build the future together."}
+                primaryBtnText={c.cta?.primaryBtnText || "Start Your Project"}
+                secondaryBtnText={c.cta?.secondaryBtnText || "Schedule Consultation"}
             />
             
             <PageFAQSection pageName="solutions" />
 
-            
             <FutureFooter />
         </main>
     );

@@ -7,6 +7,8 @@ import SalesforceContent from "@/components/salesforce/SalesforceContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
+import { connectDB } from "@/lib/mongodb";
+import WebPage from "@/models/WebPage";
 
 export const metadata = {
     title: "Best Salesforce Integration Company In India | RecentureSoft",
@@ -18,31 +20,33 @@ export default async function SalesforcePage() {
     const isActive = await checkPageStatus("/salesforce");
     if (!isActive) return notFound();
 
+    await connectDB();
+    const pageDataRaw = await WebPage.findOne({ path: "/salesforce" }).lean();
+    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const dynamicData = pageData?.content || {};
+
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Salesforce Integration Company In India | RecentureSoft","description":"RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.","url":"https://recenturesoft.com/salesforce"}) }} />
             <Navbar />
             <ContentHero
-                title="Salesforce"
-                highlight="Solutions"
-                description="Leverage the world's leading CRM platform to transform your sales, marketing, and customer service strategy with our full-cycle consulting."
+                title={dynamicData.heroTitle || "Salesforce"}
+                highlight={dynamicData.heroHighlight || "Solutions"}
+                description={dynamicData.heroDesc || "Leverage the world's leading CRM platform to transform your sales, marketing, and customer service strategy with our full-cycle consulting."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src="/Banner/salesforce.webp" alt="salesforce Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={dynamicData.heroImage || "/Banner/salesforce.webp"} alt="salesforce Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <SalesforceContent />
+                    <SalesforceContent dynamicData={dynamicData} />
                 </div>
             </section>
 
             <SolutionContactForm serviceName="Salesforce Development" />
 
-
             <PageFAQSection pageName="salesforce" />
-
-
 
             <FutureFooter />
         </main>
