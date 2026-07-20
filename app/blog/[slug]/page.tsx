@@ -185,28 +185,40 @@ dark:text-white
                                 prose-headings:font-semibold
                                 prose-headings:tracking-tight
                                 prose-headings:scroll-mt-28
+                                prose-headings:mt-6
+                                prose-headings:mb-2
 
                                 prose-h1:text-5xl
                                 prose-h2:text-3xl
+                                prose-h2:mt-8
+                                prose-h2:mb-3
                                 prose-h3:text-2xl
+                                prose-h3:mt-6
+                                prose-h3:mb-2
 
                                 prose-p:leading-7
-prose-p:text-slate-700
-dark:prose-p:text-slate-300
+                                prose-p:my-3
+                                prose-p:text-slate-700
+                                dark:prose-p:text-slate-300
 
-prose-a:text-cyan-500
+                                prose-ul:my-3
+                                prose-ol:my-3
+                                prose-li:my-1
 
-prose-strong:text-cyan-500
+                                prose-a:text-cyan-500
 
-prose-li:marker:text-cyan-500
+                                prose-strong:text-cyan-500
 
-prose-img:rounded-2xl
+                                prose-li:marker:text-cyan-500
 
-prose-table:border
-prose-table:border-slate-300
+                                prose-img:rounded-2xl
+                                prose-img:my-6
 
-prose-th:bg-slate-100
-dark:prose-th:bg-slate-800
+                                prose-table:border
+                                prose-table:border-slate-300
+
+                                prose-th:bg-slate-100
+                                dark:prose-th:bg-slate-800
 "
                             >
                                 <ReactMarkdown
