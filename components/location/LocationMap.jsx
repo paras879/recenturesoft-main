@@ -64,18 +64,14 @@ export default function LocationMap({ highlightState = "" }) {
   const stateToShade = cityToStateMap[cityName] || highlightState;
 
   return (
-    <div className="w-full relative py-12 lg:py-20 flex flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-[#020617] dark:to-[#030a18] border-t border-slate-200/50 dark:border-white/5 overflow-hidden">
+    <div className="w-full relative py-6 lg:py-10 flex flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-[#020617] dark:to-[#030a18] border-t border-slate-200/50 dark:border-white/5 overflow-hidden">
       {/* Background glows */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-400/5 dark:bg-cyan-500/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-400/5 dark:bg-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 w-full z-10">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-100 dark:border-cyan-500/20 rounded-full px-4 py-1.5 mb-4">
-            <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-            <span className="text-cyan-700 dark:text-cyan-400 text-sm font-semibold tracking-wide uppercase">Our Locations</span>
-          </div>
+        <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
             {cityName ? `Serving Clients in ${cityName}` : "Our Presence Across India"}
           </h2>
@@ -88,7 +84,7 @@ export default function LocationMap({ highlightState = "" }) {
 
         <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
           {/* Map Container */}
-          <div className="relative w-full max-w-2xl mx-auto lg:mx-0 bg-white dark:bg-[#060d1f] border border-slate-100 dark:border-white/8 rounded-3xl shadow-2xl shadow-slate-200/60 dark:shadow-black/40 overflow-hidden">
+          <div className="relative w-full max-w-xl mx-auto lg:mx-0 bg-white dark:bg-[#060d1f] border border-slate-100 dark:border-white/8 rounded-3xl shadow-2xl shadow-slate-200/60 dark:shadow-black/40 overflow-visible">
             {/* Subtle grid overlay */}
             <div
               className="absolute inset-0 opacity-[0.03] dark:opacity-[0.06] pointer-events-none"
@@ -100,10 +96,10 @@ export default function LocationMap({ highlightState = "" }) {
             <ComposableMap
               projection="geoMercator"
               projectionConfig={{
-                center: [82.5, 22.0],
-                scale: 1050,
+                center: [83.0, 23.5],
+                scale: 880,
               }}
-              style={{ width: "100%", height: "auto", aspectRatio: "4/4.2" }}
+              style={{ width: "100%", height: "auto", aspectRatio: "4/4.5" }}
             >
               <Geographies geography={geoUrl}>
                 {({ geographies }) =>
