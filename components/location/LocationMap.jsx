@@ -76,7 +76,7 @@ export default function LocationMap({ highlightState = "" }) {
 
         <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
           {/* Map Container - Uses Official Survey of India Image Overlay System */}
-          <div className="relative w-full max-w-xl mx-auto lg:mx-0 bg-white dark:bg-[#060d1f] border border-slate-100 dark:border-white/8 rounded-3xl shadow-2xl shadow-slate-200/60 dark:shadow-black/40 overflow-hidden flex items-center justify-center p-8 aspect-[4/4.5]">
+          <div className="relative w-full max-w-xl mx-auto lg:mx-0 bg-white dark:bg-[#060d1f] border border-slate-100 dark:border-white/8 rounded-3xl shadow-2xl shadow-slate-200/60 dark:shadow-black/40 overflow-hidden flex items-center justify-center p-8 aspect-square">
             
             {/* Subtle grid overlay */}
             <div
