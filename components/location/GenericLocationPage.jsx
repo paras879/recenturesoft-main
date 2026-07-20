@@ -4,7 +4,6 @@ import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import ClientCTAButton from "@/components/shared/ClientCTAButton";
-import LocationMap from "@/components/location/LocationMap";
 
 const headingColorMap = {
     default: "text-slate-900 dark:text-white",
@@ -484,7 +483,6 @@ export default function GenericLocationPage({ page }) {
 
             <SolutionContactForm serviceName={`${title} ${highlight}`} />
             <PageFAQSection pageName={page.path.replace("/", "") || "crm"} />
-            <LocationMap highlightState={page.content?.highlightState} />
         </div>
     );
 }
