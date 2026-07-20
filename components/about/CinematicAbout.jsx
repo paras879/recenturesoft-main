@@ -64,6 +64,7 @@ function AboutHero({ data = {} }) {
                         {data?.desc || "We help global businesses build scalable software, AI solutions, cloud platforms, and enterprise digital products."}
                     </p>
                 </div>
+                </div>
             </div>
         </section>
     );
