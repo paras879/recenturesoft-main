@@ -22,6 +22,7 @@ export default async function CmsPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/cms" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.cmsHero || {};
     return (
@@ -37,7 +38,7 @@ export default async function CmsPage() {
                 {heroData.bannerOpacity !== undefined && (
                     <div className="absolute inset-0 bg-[#020617] z-10" style={{ opacity: parseInt(heroData.bannerOpacity) / 100 }} />
                 )}
-                <Image src={heroData.bannerImage || "/Banner/CMS.webp"} alt="cms Banner" fill className="object-cover object-center z-0" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || heroData.bannerImage || "/Banner/CMS.webp"} alt="cms Banner" fill className="object-cover object-center z-0" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

@@ -32,6 +32,7 @@ export default async function SeoPackagePage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/seo-package" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/seo-package");
     if (!isActive) return notFound();
@@ -47,7 +48,7 @@ export default async function SeoPackagePage() {
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
                 <Image
-                    src={pageData?.content?.heroImage || "/Banner/seo_package.webp"}
+                    src={cmsBannerImage || pageData?.content?.heroImage || "/Banner/seo_package.webp"}
                     alt={pageData?.content?.heroImageAlt || "seo-package Banner"}
                     fill
                     className="object-cover object-center"

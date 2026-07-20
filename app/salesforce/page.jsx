@@ -35,7 +35,7 @@ export default async function SalesforcePage() {
                 description={dynamicData.heroDesc || "Leverage the world's leading CRM platform to transform your sales, marketing, and customer service strategy with our full-cycle consulting."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src={dynamicData.heroImage || "/Banner/salesforce.webp"} alt="salesforce Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={dynamicData?.bannerConfig?.imageUrl || dynamicData.heroImage || "/Banner/salesforce.webp"} alt="salesforce Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

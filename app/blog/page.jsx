@@ -39,6 +39,7 @@ export default async function BlogPage() {
     try {
         const pageDataRaw = await WebPage.findOne({ path: "/blog" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
         if (pageData && pageData.content) {
             pageContent = pageData.content;
         }
@@ -63,7 +64,7 @@ export default async function BlogPage() {
                 title={pageContent?.hero?.title || "Insights &"}
                 highlight={pageContent?.hero?.highlight || "Perspectives"}
                 description={pageContent?.hero?.description || "Explore deep technical deep-dives, industry trends, and thoughts on the future of enterprise software and design."}
-                bannerImage={pageContent?.hero?.bannerImage}
+                bannerImage={cmsBannerImage || pageContent?.hero?.bannerImage}
                 bannerOpacity={pageContent?.hero?.bannerOpacity}
             />
 

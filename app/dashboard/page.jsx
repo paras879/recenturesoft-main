@@ -45,6 +45,7 @@ export default async function DashboardPage() {
                 title={c.hero?.title || "Custom Dashboard"}
                 highlight={c.hero?.highlight || "Development"}
                 description={c.hero?.description || "Consolidate complex data into intuitive, real-time visual interfaces that empower your team to make faster, smarter decisions."}
+                bannerImage={c.bannerConfig?.imageUrl || c.hero?.bannerImage}
                 highlightClass="text-blue-500 dark:text-blue-400"
             />
 

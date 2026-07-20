@@ -38,6 +38,7 @@ export default async function ReactPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/react" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/react");
     if (!isActive) return notFound();
@@ -52,7 +53,7 @@ export default async function ReactPage() {
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Deliver unparalleled user experiences with high-performance, interactive, and scalable Single Page Applications powered by React."}
                 highlightClass="text-sky-500 dark:text-sky-400"
-                bannerImage={pageData?.content?.heroImage || ""}
+                bannerImage={cmsBannerImage || pageData?.content?.heroImage || ""}
                 bannerOpacity={pageData?.content?.bannerOpacity}
                 ctaText={pageData?.content?.heroCtaText || "Get in Touch"}
             />

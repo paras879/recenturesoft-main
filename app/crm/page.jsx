@@ -22,6 +22,7 @@ export default async function CrmPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/crm" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.crmHero || {};
 
@@ -37,7 +38,7 @@ export default async function CrmPage() {
                 {heroData.bannerOpacity !== undefined && (
                     <div className="absolute inset-0 bg-[#020617]" style={{ opacity: parseInt(heroData.bannerOpacity) / 100 }} />
                 )}
-                <Image src={heroData.bannerImage || "/Banner/crm_banner.webp"} alt="crm Banner" fill className="hidden md:block object-cover object-center z-0" priority sizes="(max-width: 768px) 0vw, 100vw" />
+                <Image src={cmsBannerImage || heroData.bannerImage || "/Banner/crm_banner.webp"} alt="crm Banner" fill className="hidden md:block object-cover object-center z-0" priority sizes="(max-width: 768px) 0vw, 100vw" />
                 <Image src={heroData.bannerMobile || heroData.bannerImage || "/Banner/crm_mobile.webp"} alt="crm Mobile Banner" fill className="block md:hidden object-cover object-bottom z-0" priority sizes="(max-width: 768px) 100vw, 0vw" />
             </ContentHero>
 

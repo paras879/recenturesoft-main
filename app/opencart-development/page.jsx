@@ -22,6 +22,7 @@ export default async function OpenCartPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/opencart-development" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.opencartHero || {};
 
@@ -36,7 +37,7 @@ export default async function OpenCartPage() {
                 description={heroData.description || "Build highly customizable, feature-rich, and scalable online stores with our expert OpenCart development services tailored for your business."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src={heroData.bannerImage || "/Banner/opencart.png"} alt="opencart-development banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || heroData.bannerImage || "/Banner/opencart.png"} alt="opencart-development banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

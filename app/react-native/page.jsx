@@ -38,6 +38,7 @@ export default async function ReactNativePage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/react-native" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/react-native");
     if (!isActive) return notFound();
@@ -52,7 +53,7 @@ export default async function ReactNativePage() {
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Launch faster and cut costs with our React Native engineering services. Build native iOS and Android applications from a single unified codebase."}
                 highlightClass="text-indigo-500 dark:text-indigo-400"
-                bannerImage={pageData?.content?.heroImage || ""}
+                bannerImage={cmsBannerImage || pageData?.content?.heroImage || ""}
                 bannerOpacity={pageData?.content?.bannerOpacity}
                 ctaText={pageData?.content?.heroCtaText || "Get in Touch"}
                 ctaLink={pageData?.content?.heroCtaLink || ""}

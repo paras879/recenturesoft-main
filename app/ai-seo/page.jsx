@@ -32,6 +32,7 @@ export default async function AiSeoPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/ai-seo" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/ai-seo");
     if (!isActive) return notFound();
@@ -46,7 +47,7 @@ export default async function AiSeoPage() {
                 title={hero.title || "AI SEO Services in India"}
                 highlight={hero.highlight || ""}
                 description={hero.description || ""}
-                bannerImage={hero.bannerImage || ""}
+                bannerImage={cmsBannerImage || hero.bannerImage || ""}
                 ctaText={hero.ctaText || ""}
                 ctaLink={hero.ctaLink || ""}
                 highlightClass="text-blue-500 dark:text-blue-400"

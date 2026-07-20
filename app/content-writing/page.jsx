@@ -32,6 +32,7 @@ export default async function ContentWritingPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/content-writing" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/content-writing");
     if (!isActive) return notFound();
@@ -46,7 +47,7 @@ export default async function ContentWritingPage() {
                 description=""
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src={pageData?.content?.heroBanner || "/Banner/content_writting.webp"} alt="content-writing Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || pageData?.content?.heroBanner || "/Banner/content_writting.webp"} alt="content-writing Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

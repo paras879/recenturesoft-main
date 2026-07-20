@@ -38,6 +38,7 @@ export default async function NodeJsPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/node-js" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/node-js");
     if (!isActive) return notFound();
@@ -52,7 +53,7 @@ export default async function NodeJsPage() {
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Architect highly scalable, data-intensive, real-time backend applications and microservices using enterprise-grade Node.js."}
                 highlightClass="text-emerald-500 dark:text-emerald-400"
-                bannerImage={pageData?.content?.heroImage || ""}
+                bannerImage={cmsBannerImage || pageData?.content?.heroImage || ""}
                 bannerOpacity={pageData?.content?.bannerOpacity}
                 ctaText={pageData?.content?.heroCtaText || "Get in Touch"}
             />

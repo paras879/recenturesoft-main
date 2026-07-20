@@ -42,6 +42,7 @@ export default async function PortfolioPage() {
 
         const pageDataRaw = await WebPage.findOne({ path: "/portfolio" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
         content = pageData?.content || {};
     } catch (error) {
         console.error("Error fetching data from MongoDB:", error);
@@ -59,7 +60,7 @@ export default async function PortfolioPage() {
                 title={content.hero?.title || "Engineering"}
                 highlight={content.hero?.highlight || "Success"}
                 description={content.hero?.desc || "Discover award-worthy digital products, enterprise platforms, AI-powered solutions, and transformative experiences engineered to accelerate business growth."}
-                bannerImage={content.hero?.bannerImage}
+                bannerImage={cmsBannerImage || content.hero?.bannerImage}
                 bannerOpacity={content.hero?.bannerOpacity}
             />
 

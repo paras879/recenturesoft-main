@@ -38,6 +38,7 @@ export default async function NextJsPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/next-js" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/next-js");
     if (!isActive) return notFound();
@@ -52,7 +53,7 @@ export default async function NextJsPage() {
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Harness the power of React Server Components, SSR, and Edge computing to build the fastest, most scalable web applications on the internet."}
                 highlightClass="text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-black dark:from-white dark:to-slate-300"
-                bannerImage={pageData?.content?.heroImage || ""}
+                bannerImage={cmsBannerImage || pageData?.content?.heroImage || ""}
                 bannerOpacity={pageData?.content?.bannerOpacity}
                 ctaText={pageData?.content?.heroCtaText || "Get in Touch"}
             />

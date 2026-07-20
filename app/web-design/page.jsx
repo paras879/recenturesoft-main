@@ -32,6 +32,7 @@ export default async function WebDesignPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/web-design" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/web-design");
     if (!isActive) return notFound();
@@ -41,7 +42,7 @@ export default async function WebDesignPage() {
     const heroTitle = hero.title || "Next-Gen Web";
     const heroHighlight = hero.highlight || "Design";
     const heroDescription = hero.description || "We create stunning, AI-enhanced, and user-friendly web designs that offer an all-immersive digital brand experience for your customers.";
-    const bannerImage = hero.bannerImage || "/Banner/webdesign.webp";
+    const bannerImage = cmsBannerImage || hero.bannerImage || "/Banner/webdesign.webp";
     const ctaText = hero.ctaText || "";
     const ctaLink = hero.ctaLink || "";
 
@@ -57,7 +58,7 @@ export default async function WebDesignPage() {
                 ctaText={ctaText}
                 ctaLink={ctaLink}
             >
-                <Image src={bannerImage} alt="web-design Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || bannerImage} alt="web-design Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

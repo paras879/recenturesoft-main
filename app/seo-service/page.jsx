@@ -32,6 +32,7 @@ export default async function SeoPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/seo-service" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/seo-service");
     if (!isActive) return notFound();

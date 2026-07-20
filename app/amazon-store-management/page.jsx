@@ -22,6 +22,7 @@ export default async function AmazonStorePage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/amazon-store-management" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.amazonHero || {};
 
@@ -36,7 +37,7 @@ export default async function AmazonStorePage() {
                 description={heroData.description || "Establish a powerful presence on the world's biggest online marketplace with our end-to-end Amazon store and seller account management services."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src={heroData.bannerImage || "/Banner/amzon.webp"} alt="amazon-store-management Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || heroData.bannerImage || "/Banner/amzon.webp"} alt="amazon-store-management Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

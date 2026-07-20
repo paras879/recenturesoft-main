@@ -22,6 +22,7 @@ export default async function MagentoPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/magento-development" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.magentoHero || {};
 
@@ -36,7 +37,7 @@ export default async function MagentoPage() {
                 description={heroData.description || "Empower your eCommerce business with highly scalable, secure, and custom Magento development solutions built for enterprise growth."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src={heroData.bannerImage || "/Banner/magnto-dev-min.webp"} alt="magento-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || heroData.bannerImage || "/Banner/magnto-dev-min.webp"} alt="magento-development Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

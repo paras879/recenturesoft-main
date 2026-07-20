@@ -22,6 +22,7 @@ export default async function EbayStorePage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/ebay-store-management" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
     const heroData = dynamicData.ebayHero || {};
 
@@ -36,7 +37,7 @@ export default async function EbayStorePage() {
                 description={heroData.description || "Maximize your sales, optimize product listings, and streamline operations with our comprehensive eBay store management services."}
                 highlightClass="text-blue-500 dark:text-blue-400"
             >
-                <Image src={heroData.bannerImage || "/Banner/ebay.webp"} alt="ebay-store-management Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src={cmsBannerImage || heroData.bannerImage || "/Banner/ebay.webp"} alt="ebay-store-management Banner" fill className="object-cover object-center" priority sizes="(max-width: 768px) 100vw, 50vw" />
             </ContentHero>
 
             <section className="py-6 md:py-8 px-4">

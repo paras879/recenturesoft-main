@@ -49,6 +49,7 @@ export default async function SmoPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/social-networking" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
 
     const isActive = await checkPageStatus("/social-networking");
     if (!isActive) return notFound();
@@ -66,7 +67,7 @@ export default async function SmoPage() {
     const heroTitle = hero.title || "SMO Company in India";
     const heroHighlight = hero.highlight || "";
     const heroDescription = hero.description || "";
-    const bannerImage = hero.bannerImage || "/Banner/social_networking.webp";
+    const bannerImage = cmsBannerImage || hero.bannerImage || "/Banner/social_networking.webp";
     const bannerOpacity = hero.bannerOpacity !== undefined ? hero.bannerOpacity : 70;
     const ctaText = hero.ctaText || "Get in Touch";
     const ctaLink = hero.ctaLink || "";
@@ -85,7 +86,7 @@ export default async function SmoPage() {
                 title={heroTitle}
                 highlight={heroHighlight}
                 description={heroDescription}
-                bannerImage={bannerImage}
+                bannerImage={cmsBannerImage || bannerImage}
                 bannerOpacity={bannerOpacity}
                 ctaText={ctaText}
                 ctaLink={ctaLink}

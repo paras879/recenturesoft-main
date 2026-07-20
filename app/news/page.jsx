@@ -42,6 +42,7 @@ export default async function NewsPage() {
     await connectDB();
     const pageDataRaw = await WebPage.findOne({ path: "/news" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
     const dynamicData = pageData?.content || {};
 
     const newsHero = dynamicData.newsHero || {};
@@ -57,7 +58,7 @@ export default async function NewsPage() {
                     hideContactButton={newsHero.hideContactButton !== false}
                     title={newsHero.title || "Tech News"}
                     description={newsHero.description || "Discover real-time global technology news, breaking industry insights, and digital innovations."}
-                    bannerImage={newsHero.bannerImage}
+                    bannerImage={cmsBannerImage || newsHero.bannerImage}
                     bannerOpacity={newsHero.bannerOpacity}
                 />
             )}
