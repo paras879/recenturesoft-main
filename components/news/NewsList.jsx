@@ -41,6 +41,7 @@ function NewsImage({ src, alt, priority = false, sizes = "", className = "" }) {
                 <div className="absolute inset-0 bg-slate-200 dark:bg-slate-800 animate-pulse z-10" />
             )}
             <Image
+                unoptimized={true}
                 src={imgSrc}
                 alt={alt}
                 fill
