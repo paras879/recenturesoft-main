@@ -1,28 +1,26 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+import Link from 'next/link';
 
-// India GeoJSON
-const geoUrl = "/india-states.json";
-
-// Exact lat/lng coordinates for cities (longitude, latitude)
+// Approximate percentage coordinates (X, Y) for pins on the map image
+// This allows the pins to scale responsively with the official SVG/PNG map.
 const cityCoordinates = {
-  "Noida":      [77.3910, 28.5355],
-  "Delhi":      [77.2090, 28.6139],
-  "Gurgaon":    [77.0266, 28.4595],
-  "Bangalore":  [77.5946, 12.9716],
-  "Mumbai":     [72.8777, 19.0760],
-  "Pune":       [73.8567, 18.5204],
-  "Hyderabad":  [78.4867, 17.3850],
-  "Chennai":    [80.2707, 13.0827],
-  "Kolkata":    [88.3639, 22.5726],
-  "Ahmedabad":  [72.5714, 23.0225],
-  "Jaipur":     [75.7873, 26.9124],
-  "Lucknow":    [80.9462, 26.8467],
+  "Noida":      { x: 35, y: 30 },
+  "Delhi":      { x: 34.5, y: 30 },
+  "Gurgaon":    { x: 34, y: 31 },
+  "Bangalore":  { x: 35, y: 75 },
+  "Mumbai":     { x: 20, y: 60 },
+  "Pune":       { x: 22, y: 62 },
+  "Hyderabad":  { x: 40, y: 60 },
+  "Chennai":    { x: 45, y: 75 },
+  "Kolkata":    { x: 70, y: 50 },
+  "Ahmedabad":  { x: 15, y: 45 },
+  "Jaipur":     { x: 25, y: 35 },
+  "Lucknow":    { x: 45, y: 32 },
 };
 
-// State name match for light shading
+// State name match
 const cityToStateMap = {
   "Noida":      "Uttar Pradesh",
   "Gurgaon":    "Haryana",
@@ -39,10 +37,11 @@ const cityToStateMap = {
 };
 
 export default function LocationMap({ highlightState = "" }) {
-  const [hoveredState, setHoveredState] = useState("");
-  const [tooltipContent, setTooltipContent] = useState("");
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [isDark, setIsDark] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  
+  // Flag to check if official map exists, defaults to true to try loading it
+  const [hasMapImg, setHasMapImg] = useState(true);
 
   useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains("dark"));
@@ -52,13 +51,6 @@ export default function LocationMap({ highlightState = "" }) {
     return () => observer.disconnect();
   }, []);
 
-  const mapFillDefault    = isDark ? "#1e293b" : "#f1f5f9";
-  const mapStrokeDefault  = isDark ? "#334155" : "#cbd5e1";
-  const mapFillHighlight  = isDark ? "#1e3a5f" : "#dbeafe";
-  const mapStrokeHighlight= isDark ? "#3b82f6" : "#93c5fd";
-  const mapFillHover      = isDark ? "#0f172a" : "#e2e8f0";
-
-  // The city to display the pin on
   const cityName = highlightState;
   const pinCoords = cityCoordinates[cityName] || null;
   const stateToShade = cityToStateMap[cityName] || highlightState;
@@ -83,8 +75,9 @@ export default function LocationMap({ highlightState = "" }) {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
-          {/* Map Container */}
-          <div className="relative w-full max-w-xl mx-auto lg:mx-0 bg-white dark:bg-[#060d1f] border border-slate-100 dark:border-white/8 rounded-3xl shadow-2xl shadow-slate-200/60 dark:shadow-black/40 overflow-visible">
+          {/* Map Container - Uses Official Survey of India Image Overlay System */}
+          <div className="relative w-full max-w-xl mx-auto lg:mx-0 bg-white dark:bg-[#060d1f] border border-slate-100 dark:border-white/8 rounded-3xl shadow-2xl shadow-slate-200/60 dark:shadow-black/40 overflow-hidden flex items-center justify-center p-8 aspect-[4/4.5]">
+            
             {/* Subtle grid overlay */}
             <div
               className="absolute inset-0 opacity-[0.03] dark:opacity-[0.06] pointer-events-none"
@@ -93,63 +86,54 @@ export default function LocationMap({ highlightState = "" }) {
                 backgroundSize: "40px 40px"
               }}
             />
-            <ComposableMap
-              projection="geoMercator"
-              projectionConfig={{
-                center: [83.0, 23.5],
-                scale: 880,
-              }}
-              style={{ width: "100%", height: "auto", aspectRatio: "4/4.5" }}
-            >
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const stateName = geo.properties.NAME_1;
-                    const isHighlightedState = stateToShade && stateName === stateToShade;
-                    const isHovered = hoveredState === stateName;
 
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={(e) => {
-                          setHoveredState(stateName);
-                          setTooltipContent(stateName);
-                          setTooltipPos({ x: e.clientX, y: e.clientY });
-                        }}
-                        onMouseMove={(e) => {
-                          setTooltipPos({ x: e.clientX, y: e.clientY });
-                        }}
-                        onMouseLeave={() => {
-                          setHoveredState("");
-                          setTooltipContent("");
-                        }}
-                        style={{
-                          default: {
-                            fill: isHighlightedState ? mapFillHighlight : mapFillDefault,
-                            stroke: isHighlightedState ? mapStrokeHighlight : mapStrokeDefault,
-                            strokeWidth: isHighlightedState ? 1.0 : 0.5,
-                            outline: "none",
-                            transition: "all 200ms ease",
-                          },
-                          hover: {
-                            fill: isHighlightedState ? mapFillHighlight : mapFillHover,
-                            stroke: isHighlightedState ? mapStrokeHighlight : mapStrokeDefault,
-                            strokeWidth: 1.0,
-                            outline: "none",
-                            cursor: "default",
-                          },
-                          pressed: { outline: "none" },
-                        }}
-                      />
-                    );
-                  })
+            {/* SOI Map Instruction Placeholder (shows if image fails to load or hasn't been placed) */}
+            {!mapLoaded && hasMapImg && (
+               <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center animate-pulse z-0">
+                  <div className="w-16 h-16 rounded-full border-4 border-slate-200 border-t-cyan-500 animate-spin mb-4"></div>
+                  <p className="text-slate-500 text-sm">Loading Official Map...</p>
+               </div>
+            )}
+            
+            {!hasMapImg && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-slate-50 dark:bg-slate-800/50 z-0">
+                <svg className="w-12 h-12 text-slate-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+                <h3 className="font-bold text-slate-700 dark:text-slate-300 mb-2">Map Placeholder</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
+                  To comply with Government of India regulations, please download the official Political Map from the <a href="https://surveyofindia.gov.in" target="_blank" rel="noreferrer" className="text-cyan-500 underline">Survey of India</a> portal and place it in the public folder as <code>/india-official-map.png</code>.
+                </p>
+              </div>
+            )}
+
+            {/* The Official Map Image */}
+            <img 
+              src="/india-official-map.svg" 
+              alt="Official Political Map of India" 
+              className={`w-full h-full object-contain relative z-10 transition-opacity duration-500 ${mapLoaded ? 'opacity-100' : 'opacity-0'}`}
+              onLoad={() => setMapLoaded(true)}
+              onError={(e) => {
+                // If SVG fails, try PNG
+                if (e.target.src.includes('.svg')) {
+                  e.target.src = '/india-official-map.png';
+                } else {
+                  setHasMapImg(false);
                 }
-              </Geographies>
+              }}
+            />
 
-              {/* City Pin Marker */}
-              {pinCoords && (
-                <Marker coordinates={pinCoords}>
+            {/* City Pin Marker overlay */}
+            {pinCoords && hasMapImg && (
+              <div 
+                className="absolute z-20"
+                style={{ 
+                  left: `${pinCoords.x}%`, 
+                  top: `${pinCoords.y}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
+              >
+                <svg width="40" height="40" viewBox="-20 -20 40 40" style={{ overflow: 'visible' }}>
                   {/* Outer pulse ring 1 */}
                   <circle r={18} fill="#06b6d4" fillOpacity={0.12}>
                     <animate attributeName="r" from="12" to="26" dur="2s" repeatCount="indefinite" />
@@ -169,21 +153,21 @@ export default function LocationMap({ highlightState = "" }) {
                     textAnchor="middle"
                     y={-14}
                     style={{
-                      fontSize: "7px",
+                      fontSize: "10px",
                       fontFamily: "Inter, sans-serif",
                       fontWeight: "700",
-                      fill: "#0e7490",
+                      fill: isDark ? "#ffffff" : "#0e7490",
                       letterSpacing: "0.04em",
                       textTransform: "uppercase",
                       pointerEvents: "none",
-                      filter: "drop-shadow(0 1px 2px rgba(255,255,255,0.9))",
+                      filter: isDark ? "drop-shadow(0 1px 2px rgba(0,0,0,0.9))" : "drop-shadow(0 1px 2px rgba(255,255,255,0.9))",
                     }}
                   >
                     {cityName}
                   </text>
-                </Marker>
-              )}
-            </ComposableMap>
+                </svg>
+              </div>
+            )}
           </div>
 
           {/* Info Card (only shown when a city is selected) */}
@@ -221,7 +205,7 @@ export default function LocationMap({ highlightState = "" }) {
               </div>
 
               {/* CTA */}
-              <a
+              <Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold text-sm hover:bg-slate-700 dark:hover:bg-slate-100 transition-all duration-200 shadow-md"
               >
@@ -229,27 +213,11 @@ export default function LocationMap({ highlightState = "" }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
                 Get Free Consultation
-              </a>
+              </Link>
             </div>
           )}
         </div>
       </div>
-
-      {/* Tooltip */}
-      {tooltipContent && (
-        <div
-          className="fixed z-50 pointer-events-none bg-slate-900/95 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-2xl border border-white/10"
-          style={{ left: tooltipPos.x + 12, top: tooltipPos.y + 12 }}
-        >
-          {tooltipContent}
-        </div>
-      )}
-
-      {/* Dark mode CSS variables */}
-      <style dangerouslySetInnerHTML={{__html:`
-        .dark .india-map-state-default { fill: #1e293b; stroke: #334155; }
-        .dark .india-map-state-highlighted { fill: #1e3a5f; stroke: #3b82f6; }
-      `}} />
     </div>
   );
 }
