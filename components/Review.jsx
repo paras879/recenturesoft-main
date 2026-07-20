@@ -323,8 +323,14 @@ export default function Review({ initialReviews }) {
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchMove}
                 onPointerEnter={(e) => {
-                    if (e.pointerType === 'mouse') {
+                    // Only pause if it's a real mouse and the device supports hover
+                    if (e.pointerType === 'mouse' && window.matchMedia("(hover: hover)").matches) {
                         isPausedRef.current = true;
+                    }
+                }}
+                onPointerLeave={(e) => {
+                    if (e.pointerType === 'mouse') {
+                        isPausedRef.current = false;
                     }
                 }}
             >
