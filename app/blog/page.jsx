@@ -36,10 +36,12 @@ export default async function BlogPage() {
 
     // Fetch dynamic page content
     let pageContent = {};
+    let pageData = null;
+    let cmsBannerImage = null;
     try {
         const pageDataRaw = await WebPage.findOne({ path: "/blog" }).lean();
-    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
-    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
+        pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+        cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
         if (pageData && pageData.content) {
             pageContent = pageData.content;
         }

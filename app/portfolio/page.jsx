@@ -26,6 +26,8 @@ export default async function PortfolioPage() {
 
     let projects = [];
     let content = {};
+    let pageData = null;
+    let cmsBannerImage = null;
     
     try {
         await connectDB();
@@ -41,8 +43,8 @@ export default async function PortfolioPage() {
         }));
 
         const pageDataRaw = await WebPage.findOne({ path: "/portfolio" }).lean();
-    const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
-    const cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
+        pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
+        cmsBannerImage = pageData?.content?.bannerConfig?.imageUrl;
         content = pageData?.content || {};
     } catch (error) {
         console.error("Error fetching data from MongoDB:", error);

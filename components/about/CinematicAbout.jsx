@@ -8,26 +8,29 @@ import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 // SECTION 1: HERO
 // ==========================================
 function AboutHero({ data = {} }) {
-    const opacityValue = data?.bannerOpacity !== undefined ? (parseInt(data.bannerOpacity) / 100) : 0.7;
+    const bannerImage = data?.bannerConfig?.imageUrl || data?.bannerImage;
+    const opacityValue = data?.bannerConfig?.opacity !== undefined ? (parseInt(data.bannerConfig.opacity) / 100) : (data?.bannerOpacity !== undefined ? (parseInt(data.bannerOpacity) / 100) : 0.7);
+    const objectFitClass = data?.bannerConfig?.objectFit === 'contain' ? 'object-contain' : 'object-cover';
+
     return (
-        <section className={`relative min-h-auto w-full flex items-center justify-center pt-28 md:pt-32 lg:pt-36 pb-0 overflow-hidden px-4 sm:px-6 lg:px-12 transition-colors duration-300 ${data?.bannerImage ? 'bg-[#020617]' : 'bg-slate-50 dark:bg-[#020617]'}`}>
+        <section className={`relative pt-16 md:pt-20 lg:pt-24 pb-2 md:pb-4 lg:pb-6 w-full overflow-hidden flex items-center min-h-fit transition-colors duration-300 ${bannerImage ? 'bg-[#020617]' : 'bg-slate-50 dark:bg-[#020617]'}`}>
             {/* Background Image Passed as bannerImage */}
-            {data?.bannerImage && (
-                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            {bannerImage && (
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
                     <Image
-                        src={data.bannerImage.includes('res.cloudinary.com') ? data.bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : data.bannerImage}
+                        src={bannerImage.includes('res.cloudinary.com') ? bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : bannerImage}
                         alt="About Hero Background"
                         fill
                         sizes="100vw"
                         priority
-                        className="object-cover"
+                        className={objectFitClass}
                     />
                     <div className="absolute inset-0 z-0 bg-[#020617]" style={{ opacity: opacityValue }} />
                 </div>
             )}
 
             {/* Background Atmosphere */}
-            <div className={`absolute inset-0 pointer-events-none ${data?.bannerImage ? 'opacity-50' : 'opacity-100'}`}>
+            <div className={`absolute inset-0 pointer-events-none ${bannerImage ? 'opacity-50' : 'opacity-100'}`}>
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
                 <div className="absolute inset-0 opacity-5 mix-blend-screen">
@@ -40,9 +43,10 @@ function AboutHero({ data = {} }) {
                 </div>
             </div>
 
-            <div className="max-w-[1400px] w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
-                {/* Left Content */}
-                <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
+            <div className="max-w-[1400px] w-full px-4 sm:px-6 lg:px-12 mx-auto relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center justify-end md:justify-center min-h-[30vh] sm:min-h-[40vh] md:min-h-[55vh] lg:min-h-[65vh] pb-0 md:pb-0 md:pt-16">
+                    {/* Left Content */}
+                    <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
                     <h1
                         className={`text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4rem] font-[600] tracking-[-0.04em] leading-[1.05] tracking-tight animate-fade-up ${data?.bannerImage ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-slate-900 dark:text-white'}`}
                         style={{ animationDelay: "0.1s" }}
