@@ -44,7 +44,7 @@ function AboutHero({ data = {} }) {
             </div>
 
             <div className="max-w-[1400px] w-full px-4 sm:px-6 lg:px-12 mx-auto relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center justify-end md:justify-center min-h-[30vh] sm:min-h-[40vh] md:min-h-[55vh] lg:min-h-[65vh] pb-0 md:pb-0 md:pt-16">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center justify-end md:justify-center min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] lg:min-h-[45vh] pb-0 md:pb-0 md:pt-16">
                     {/* Left Content */}
                     <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
                     <h1
