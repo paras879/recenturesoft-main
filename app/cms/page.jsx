@@ -29,7 +29,7 @@ export default async function CmsPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best CMS Software Development Company In India | RecentureSoft","description":"RecentureSoft offers top-tier custom CMS software development services in India to manage digital content and streamline business processes.","url":"https://recenturesoft.com/cms"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "Content Management"}
                 highlight={heroData.highlight || "System"}
                 description={heroData.description || "Empowering businesses with custom, robust CMS software solutions to easily create, manage, and publish digital content."}

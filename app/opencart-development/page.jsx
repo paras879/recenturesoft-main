@@ -31,7 +31,7 @@ export default async function OpenCartPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best OpenCart Development Company In India | RecentureSoft","description":"RecentureSoft is the leading OpenCart development company in India, offering robust, scalable, and feature-packed eCommerce solutions tailored to your needs.","url":"https://recenturesoft.com/opencart-development"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "OpenCart"}
                 highlight={heroData.highlight || "Development"}
                 description={heroData.description || "Build highly customizable, feature-rich, and scalable online stores with our expert OpenCart development services tailored for your business."}

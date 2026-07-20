@@ -41,7 +41,7 @@ export default async function IphoneAppsPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"iPhone App Development Company In India | RecentureSoft","description":"RecentureSoft is a leading iOS and iPhone app development company in India offering robust, enterprise-grade, and engaging mobile applications.","url":"https://recenturesoft.com/iphone-apps-development"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "iPhone App Development Company"}
                 highlight={pageData?.content?.heroHighlight || "In India"}
                 description=""

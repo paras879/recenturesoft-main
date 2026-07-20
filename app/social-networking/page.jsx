@@ -82,7 +82,7 @@ export default async function SmoPage() {
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }} />
             )}
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroTitle}
                 highlight={heroHighlight}
                 description={heroDescription}

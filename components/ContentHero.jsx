@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 
-export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, hideContactButton, ctaText, ctaLink, highlightClass, children }) {
-    const opacityValue = bannerOpacity !== undefined ? (parseInt(bannerOpacity) / 100) : 0.7;
+export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, bannerConfig, hideContactButton, ctaText, ctaLink, highlightClass, children }) {
+    const configOpacity = bannerConfig?.opacity !== undefined ? bannerConfig.opacity : bannerOpacity;
+    const opacityValue = configOpacity !== undefined ? (parseInt(configOpacity) / 100) : 0.7;
+    const objectFitClass = bannerConfig?.objectFit === 'contain' ? 'object-contain' : 'object-cover';
+    
     const hasBg = !!(children || bannerImage);
     return (
         <section className={`relative pt-16 md:pt-20 lg:pt-24 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${hasBg ? 'bg-[#020617]' : 'bg-background'}`}>
@@ -35,7 +38,7 @@ export default function ContentHero({ title, highlight, description, bannerImage
                         <div className="absolute -left-[10%] top-[20%] w-[40%] h-[40%] bg-cyan-400/10 dark:bg-cyan-500/10 rounded-full blur-[100px]" />
                         <div className="absolute -right-[10%] top-[20%] w-[40%] h-[40%] bg-blue-300/10 dark:bg-blue-600/10 rounded-full blur-[100px]" />
                     </div>
-                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
                         {bannerImage && (
                             <Image
                                 src={bannerImage.includes('res.cloudinary.com') ? bannerImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low/') : bannerImage}
@@ -43,7 +46,7 @@ export default function ContentHero({ title, highlight, description, bannerImage
                                 fill
                                 sizes="100vw"
                                 priority
-                                className="object-cover"
+                                className={objectFitClass}
                             />
                         )}
                         <div className="absolute inset-0 bg-[#020617]" style={{ opacity: opacityValue }}>
@@ -54,7 +57,7 @@ export default function ContentHero({ title, highlight, description, bannerImage
             )}
 
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 relative z-20">
-                <div className={`flex flex-col justify-end md:justify-center items-start text-left min-h-[40vh] md:min-h-[45vh] pb-0 md:pb-0 md:pt-16 gap-4 md:gap-5`}>
+                <div className={`flex flex-col justify-end md:justify-center items-start text-left min-h-[30vh] sm:min-h-[40vh] md:min-h-[55vh] lg:min-h-[65vh] pb-0 md:pb-0 md:pt-16 gap-4 md:gap-5`}>
 
                     <h1 className={`font-light md:font-medium tracking-[-0.02em] leading-[1.15] animate-fade-up-1 text-[clamp(1.75rem,4.5vw,3.5rem)] sm:text-[clamp(2rem,4vw,4rem)] md:text-[clamp(2.5rem,3.5vw,4.5rem)] lg:text-[clamp(3rem,3vw,5rem)] max-w-5xl ${hasBg ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-foreground'}`}>
                         {title} <br className="hidden md:block" />

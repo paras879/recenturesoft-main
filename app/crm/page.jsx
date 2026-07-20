@@ -30,7 +30,7 @@ export default async function CrmPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", "name": "Best CRM Software Development Company In India | RecentureSoft", "description": "RecentureSoft is a leading CRM Development Company in India. We build powerful CRM software solutions to enhance customer relationships, marketing, and sales.", "url": "https://recenturesoft.com/crm" }) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "Customer Relationship"}
                 highlight={heroData.highlight || "Management"}
                 highlightClass="text-blue-500 dark:text-blue-400"

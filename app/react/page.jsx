@@ -48,7 +48,7 @@ export default async function ReactPage() {
             <Script id="react-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React.js Development Services | RecentureSoft","description":"Build fast, scalable, and highly interactive web applications with RecentureSoft","url":"https://recenturesoft.com/react"}) }} />
             <Navbar />
             
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "React.js"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Deliver unparalleled user experiences with high-performance, interactive, and scalable Single Page Applications powered by React."}

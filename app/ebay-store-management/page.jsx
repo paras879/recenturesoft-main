@@ -31,7 +31,7 @@ export default async function EbayStorePage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best eBay Store Management Company In India | RecentureSoft","description":"Expert eBay store management solutions including design, product listing, marketing, and inventory management tailored for your business.","url":"https://recenturesoft.com/ebay-store-management"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "eBay Store"}
                 highlight={heroData.highlight || "Solutions"}
                 description={heroData.description || "Maximize your sales, optimize product listings, and streamline operations with our comprehensive eBay store management services."}

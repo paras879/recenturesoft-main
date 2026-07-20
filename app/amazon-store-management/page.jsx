@@ -31,7 +31,7 @@ export default async function AmazonStorePage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Amazon Store Management Company In India | RecentureSoft","description":"Expert Amazon store management and FBA setup services in India. Improve revenue, product listings, and discoverability with our top-class solutions.","url":"https://recenturesoft.com/amazon-store-management"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "Amazon Store"}
                 highlight={heroData.highlight || "Solutions"}
                 description={heroData.description || "Establish a powerful presence on the world's biggest online marketplace with our end-to-end Amazon store and seller account management services."}

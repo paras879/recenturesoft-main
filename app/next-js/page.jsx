@@ -48,7 +48,7 @@ export default async function NextJsPage() {
             <Script id="nextjs-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Next.js Development Company | Enterprise Next.js Solutions | RecentureSoft","description":"Hire top Next.js developers at RecentureSoft. We build lightning-fast, highly scalable, and SEO-optimized enterprise applications using Next.js and React.","url":"https://recenturesoft.com/next-js"}) }} />
             <Navbar />
             
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "Next.js App"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Harness the power of React Server Components, SSR, and Edge computing to build the fastest, most scalable web applications on the internet."}

@@ -56,7 +56,7 @@ export default async function PortfolioPage() {
                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] rounded-full" />
             </div>
             <Navbar />
-            <ContentHero hideContactButton={true}
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig} hideContactButton={true}
                 title={content.hero?.title || "Engineering"}
                 highlight={content.hero?.highlight || "Success"}
                 description={content.hero?.desc || "Discover award-worthy digital products, enterprise platforms, AI-powered solutions, and transformative experiences engineered to accelerate business growth."}

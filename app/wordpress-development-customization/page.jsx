@@ -29,7 +29,7 @@ export default async function WordPressPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"WordPress Development & Customization Company In India | RecentureSoft","description":"Expert WordPress development and customization services in India. Build responsive, secure, and fully customized WordPress websites with our agile team.","url":"https://recenturesoft.com/wordpress-development-customization"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "WordPress"}
                 highlight={heroData.highlight || "Customization"}
                 description={heroData.description || "Create stunning, high-performance, and SEO-optimized websites with our custom WordPress development and theme customization services."}

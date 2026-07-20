@@ -48,7 +48,7 @@ export default async function NodeJsPage() {
             <Script id="nodejs-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Node.js Development Services | RecentureSoft","description":"Hire expert Node.js developers at RecentureSoft. We build highly scalable, secure, and lightning-fast backend REST APIs and microservices architectures.","url":"https://recenturesoft.com/node-js"}) }} />
             <Navbar />
             
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "Node.js API"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Architect highly scalable, data-intensive, real-time backend applications and microservices using enterprise-grade Node.js."}

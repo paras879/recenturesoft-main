@@ -43,7 +43,7 @@ export default async function AiSeoPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"AI SEO Services In India | RecentureSoft","description":"Boost your search rankings with advanced AI SEO services from RecentureSoft. We use Artificial Intelligence to optimize your website and maximize your ROI.","url":"https://recenturesoft.com/ai-seo"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={hero.title || "AI SEO Services in India"}
                 highlight={hero.highlight || ""}
                 description={hero.description || ""}

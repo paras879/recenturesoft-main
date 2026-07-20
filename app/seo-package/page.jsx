@@ -41,7 +41,7 @@ export default async function SeoPackagePage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"SEO Packages In India | RecentureSoft","description":"Explore our comprehensive SEO packages including Bronze, Silver, Gold, and Platinum. Get custom Website Audit, On-Page Optimization, and Content Marketing.","url":"https://recenturesoft.com/seo-package"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "SEO Package"}
                 highlight={pageData?.content?.heroHighlight || ""}
                 description={pageData?.content?.heroDescription || "Choose the perfect SEO package for your business. We offer highly tailored, transparent, and result-driven strategies designed to maximize your digital growth."}

@@ -29,7 +29,7 @@ export default async function SalesforcePage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Salesforce Integration Company In India | RecentureSoft","description":"RecentureSoft offers comprehensive Salesforce integration and consulting services in India to boost sales, efficiency, and customer relationships.","url":"https://recenturesoft.com/salesforce"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={dynamicData.heroTitle || "Salesforce"}
                 highlight={dynamicData.heroHighlight || "Solutions"}
                 description={dynamicData.heroDesc || "Leverage the world's leading CRM platform to transform your sales, marketing, and customer service strategy with our full-cycle consulting."}

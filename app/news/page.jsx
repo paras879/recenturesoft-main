@@ -54,7 +54,7 @@ export default async function NewsPage() {
             <Navbar />
             
             {newsHero.isVisible !== false && (
-                <ContentHero 
+                <ContentHero bannerConfig={pageData?.content?.bannerConfig} 
                     hideContactButton={newsHero.hideContactButton !== false}
                     title={newsHero.title || "Tech News"}
                     description={newsHero.description || "Discover real-time global technology news, breaking industry insights, and digital innovations."}

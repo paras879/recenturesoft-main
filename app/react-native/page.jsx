@@ -48,7 +48,7 @@ export default async function ReactNativePage() {
             <Script id="reactnative-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"React Native App Development Company | RecentureSoft","description":"Hire the best React Native app developers in India. We build high-performance, cross-platform mobile apps for iOS and Android.","url":"https://recenturesoft.com/react-native"}) }} />
             <Navbar />
             
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "React Native App"}
                 highlight={pageData?.content?.heroHighlight || "Development"}
                 description={pageData?.content?.heroDesc || "Launch faster and cut costs with our React Native engineering services. Build native iOS and Android applications from a single unified codebase."}

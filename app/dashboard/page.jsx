@@ -41,7 +41,7 @@ export default async function DashboardPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Custom Dashboard Development Company | RecentureSoft","description":"Build custom, high-performance, data-driven dashboard applications with RecentureSoft. Transform raw data into actionable insights.","url":"https://recenturesoft.com/dashboard"}) }} />
             <Navbar />
             
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={c.hero?.title || "Custom Dashboard"}
                 highlight={c.hero?.highlight || "Development"}
                 description={c.hero?.description || "Consolidate complex data into intuitive, real-time visual interfaces that empower your team to make faster, smarter decisions."}

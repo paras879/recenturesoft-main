@@ -41,7 +41,7 @@ export default async function AndroidAppsPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Android Application Development Company In India | RecentureSoft","description":"Scale your business with the best Android application development company in India. We build highly scalable, custom, and secure Android mobile apps.","url":"https://recenturesoft.com/android-application-development"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "Android Application Development Company"}
                 highlight={pageData?.content?.heroHighlight || "In India"}
                 description={pageData?.content?.heroDesc || ""}

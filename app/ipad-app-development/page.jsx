@@ -41,7 +41,7 @@ export default async function IpadAppsPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"iPad App Development Company In India | RecentureSoft","description":"Scale your business with the best iPad app development company in India. We build reliable, fast, and elegant iPad applications tailored to your goals.","url":"https://recenturesoft.com/ipad-app-development"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={pageData?.content?.heroTitle || "iPad App Development Company"}
                 highlight={pageData?.content?.heroHighlight || "In India"}
                 description=""

@@ -31,7 +31,7 @@ export default async function MagentoPage() {
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Best Magento Development Company In India | RecentureSoft","description":"RecentureSoft is a top Magento development company in India, offering custom, scalable, and smooth-operating eCommerce applications and solutions.","url":"https://recenturesoft.com/magento-development"}) }} />
             <Navbar />
-            <ContentHero
+            <ContentHero bannerConfig={pageData?.content?.bannerConfig}
                 title={heroData.title || "Magento"}
                 highlight={heroData.highlight || "Development"}
                 description={heroData.description || "Empower your eCommerce business with highly scalable, secure, and custom Magento development solutions built for enterprise growth."}
