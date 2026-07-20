@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function InteractiveContactForm({ data = {} }) {
     const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
     const [error, setError] = useState(null);
+    const [loadMap, setLoadMap] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoadMap(true);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const heading1 = data.heading1 || "Let's build something";
     const headingAccent = data.headingAccent || "extraordinary.";
@@ -125,17 +133,23 @@ export default function InteractiveContactForm({ data = {} }) {
                             
                             {/* Inner map container */}
                             <div className="relative flex-grow rounded-[2rem] overflow-hidden bg-slate-100 dark:bg-slate-800 isolate">
-                                <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14009.689437142078!2d77.37580665!3d28.6170669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5662bb1e17d%3A0xc3cf9c7717dc4fbc!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                                    width="100%" 
-                                    height="100%" 
-                                    style={{ border: 0, minHeight: '100%', position: 'absolute', inset: 0 }} 
-                                    allowFullScreen="" 
-                                    loading="lazy" 
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    title="RecentureSoft Headquarters Map"
-                                    className="grayscale-[20%] contrast-[1.1] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                                ></iframe>
+                                {loadMap ? (
+                                    <iframe 
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14009.689437142078!2d77.37580665!3d28.6170669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5662bb1e17d%3A0xc3cf9c7717dc4fbc!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                                        width="100%" 
+                                        height="100%" 
+                                        style={{ border: 0, minHeight: '100%', position: 'absolute', inset: 0 }} 
+                                        allowFullScreen="" 
+                                        loading="lazy" 
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                        title="RecentureSoft Headquarters Map"
+                                        className="grayscale-[20%] contrast-[1.1] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                                    ></iframe>
+                                ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-slate-200 dark:bg-slate-800 animate-pulse text-slate-500 text-sm">
+                                        Loading map...
+                                    </div>
+                                )}
 
                                 {/* Floating Overlay Gradient to blend edges */}
                                 <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_40px_rgba(0,0,0,0.4)] pointer-events-none rounded-[2rem]"></div>
