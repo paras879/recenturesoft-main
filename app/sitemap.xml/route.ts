@@ -4,7 +4,7 @@ import WebPage from "@/models/WebPage";
 
 export const dynamic = 'force-dynamic';
 
-const baseUrl = 'https://recenturesoft.com';
+const baseUrl = 'https://recenturesoft-main.vercel.app';
 
 const MAIN_PATHS = new Set([
   '/', '/about', '/contact', '/portfolio', '/blog', '/news', '/events', '/career',
@@ -77,22 +77,42 @@ export async function GET() {
       if (LEGAL_PATHS.has(p) && page.status === 'active') {
         addEntry(p, 0.3, 'legal');
       } else if (page.templateType === 'location-template' && page.status === 'active') {
-        addEntry(p, 0.8, 'location');
+        addEntry(p, 0.8, 'locations');
       } else if (page.status === 'active') {
         addEntry(p, 0.8, 'information');
       }
     }
 
-    const groupOrder: Record<string, number> = { information: 0, location: 1, legal: 2 };
-    entries.sort((a, b) => groupOrder[a.group] - groupOrder[b.group]);
+    const informationEntries = entries.filter(e => e.group === 'information');
+    const locationEntries = entries.filter(e => e.group === 'locations');
+    const legalEntries = entries.filter(e => e.group === 'legal');
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:rs="https://recenturesoft.com/sitemap-ext">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 `;
 
-    for (const entry of entries) {
-      xml += `  <url>\n    <loc>${escapeXml(entry.loc)}</loc>\n    <priority>${entry.priority}</priority>\n    <rs:group>${entry.group}</rs:group>\n  </url>\n`;
+    if (informationEntries.length > 0) {
+      xml += `  <Information>\n`;
+      for (const entry of informationEntries) {
+        xml += `    <url>\n      <loc>${escapeXml(entry.loc)}</loc>\n      <priority>${entry.priority}</priority>\n    </url>\n`;
+      }
+      xml += `  </Information>\n`;
+    }
+
+    if (locationEntries.length > 0) {
+      xml += `  <Locations>\n`;
+      for (const entry of locationEntries) {
+        xml += `    <url>\n      <loc>${escapeXml(entry.loc)}</loc>\n      <priority>${entry.priority}</priority>\n    </url>\n`;
+      }
+      xml += `  </Locations>\n`;
+    }
+
+    if (legalEntries.length > 0) {
+      xml += `  <Legal>\n`;
+      for (const entry of legalEntries) {
+        xml += `    <url>\n      <loc>${escapeXml(entry.loc)}</loc>\n      <priority>${entry.priority}</priority>\n    </url>\n`;
+      }
+      xml += `  </Legal>\n`;
     }
 
     xml += `</urlset>`;
@@ -103,7 +123,7 @@ export async function GET() {
   } catch (error) {
     console.error('Error generating sitemap:', error);
     return new NextResponse(
-      '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:rs="https://recenturesoft.com/sitemap-ext"></urlset>',
+      '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>',
       { headers: { 'Content-Type': 'application/xml; charset=utf-8' } },
     );
   }

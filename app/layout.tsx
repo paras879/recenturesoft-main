@@ -34,13 +34,13 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://recenturesoft.com'),
+  metadataBase: new URL('https://recenturesoft-main.vercel.app'),
   title: "RecentureSoft | Enterprise Software Development",
   description: "RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.",
   openGraph: {
     title: "RecentureSoft | Enterprise Software Development",
     description: "RecentureSoft builds scalable enterprise software, AI products, web platforms, and mobile applications for global businesses.",
-    url: 'https://recenturesoft.com',
+    url: 'https://recenturesoft-main.vercel.app',
     siteName: 'RecentureSoft',
     images: [
       {
