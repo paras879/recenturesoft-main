@@ -73,6 +73,7 @@ export default function CookiesContent({ dynamicData }) {
   const [activeSection, setActiveSection] = useState(SECTIONS[0]?.id || '');
   const [searchQuery, setSearchQuery] = useState('');
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     if (!SECTIONS.length) return;
@@ -110,9 +111,24 @@ export default function CookiesContent({ dynamicData }) {
 
   const handleDownloadPDF = async () => {
     try {
+      setIsDownloading(true);
+
+      const originalElement = document.getElementById('policy-content');
+      const clone = originalElement.cloneNode(true);
+      clone.id = 'policy-content-clone';
+
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'absolute';
+      wrapper.style.left = '-9999px';
+      wrapper.style.top = '-9999px';
+      wrapper.style.width = originalElement.offsetWidth + 'px';
+      
+      wrapper.appendChild(clone);
+      document.body.appendChild(wrapper);
+
       const style = document.createElement('style');
       style.innerHTML = `
-        #policy-content, #policy-content * {
+        #policy-content-clone, #policy-content-clone * {
           color: rgb(15, 23, 42) !important;
           background-color: rgb(255, 255, 255) !important;
           border-color: rgb(226, 232, 240) !important;
@@ -125,23 +141,26 @@ export default function CookiesContent({ dynamicData }) {
           background-image: none !important;
         }
       `;
-      document.head.appendChild(style);
+      wrapper.appendChild(style);
+
+      await new Promise(resolve => setTimeout(resolve, 150));
 
       const html2pdf = (await import('html2pdf.js')).default;
-      const element = document.getElementById('policy-content');
       const opt = {
         margin:       [0.5, 0.5, 0.5, 0.5],
         filename:     'Cookies_Policy.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 2, useCORS: true, windowWidth: originalElement.offsetWidth },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
       
-      await html2pdf().set(opt).from(element).save();
+      await html2pdf().set(opt).from(clone).save();
       
-      document.head.removeChild(style);
+      document.body.removeChild(wrapper);
+      setIsDownloading(false);
     } catch (error) {
       console.error("Error generating PDF:", error);
+      setIsDownloading(false);
     }
   };
 
@@ -154,13 +173,7 @@ export default function CookiesContent({ dynamicData }) {
             animate={{ opacity: 1, x: 0 }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-              Last Updated: {dynamicData?.content?.lastUpdated || 'June 25, 2026'}
-            </div>
+
             <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
               {dynamicData?.content?.heroTitle || 'Cookies Policy'}
             </h1>
@@ -188,10 +201,11 @@ export default function CookiesContent({ dynamicData }) {
             </div>
             <button
               onClick={handleDownloadPDF}
-              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors shadow-sm"
+              disabled={isDownloading}
+              className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors shadow-sm cursor-pointer ${isDownloading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <Download className="w-5 h-5" />
-              <span>Download PDF</span>
+              <span>{isDownloading ? 'Downloading...' : 'Download PDF'}</span>
             </button>
           </motion.div>
         </div>
