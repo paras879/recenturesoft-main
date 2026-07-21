@@ -91,7 +91,7 @@ export default function EventGalleryModal({ isOpen, onClose, event }) {
         <AnimatePresence>
             <div 
                 onClick={handleOverlayClick}
-                className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/40 dark:bg-black/80 backdrop-blur-xl flex items-start justify-center p-4 md:p-6 lg:p-10 pt-16 md:pt-20 lg:pt-28"
+                className="fixed inset-0 z-[10000] overflow-y-auto bg-slate-950/40 dark:bg-black/80 backdrop-blur-xl flex items-start justify-center p-4 md:p-6 lg:p-10 pt-16 md:pt-20 lg:pt-28"
             >
                 {/* Modal Container */}
                 <motion.div

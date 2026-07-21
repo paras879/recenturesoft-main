@@ -141,13 +141,13 @@ export default function EventLightbox({ images, currentIndex, onClose, onPrev, o
 
     return (
         <div 
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center select-none"
+            className="fixed inset-0 z-[10050] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center select-none"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
             {/* Top Toolbar */}
-            <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-[110]">
+            <div className="absolute top-6 md:top-8 left-4 md:left-8 right-4 md:right-8 flex items-center justify-between z-[10100]">
                 {/* Counter */}
                 <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-semibold tracking-wider">
                     {currentIndex + 1} / {images.length}
@@ -204,7 +204,7 @@ export default function EventLightbox({ images, currentIndex, onClose, onPrev, o
                 {images.length > 1 && !isZoomed && (
                     <button
                         onClick={handlePrev}
-                        className="absolute left-4 md:left-6 z-[110] p-3 md:p-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+                        className="absolute left-4 md:left-8 z-[10100] p-3 md:p-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:scale-110 cursor-pointer"
                         aria-label="Previous Image"
                     >
                         <ChevronLeft size={24} />
@@ -256,7 +256,7 @@ export default function EventLightbox({ images, currentIndex, onClose, onPrev, o
                 {images.length > 1 && !isZoomed && (
                     <button
                         onClick={handleNext}
-                        className="absolute right-4 md:right-6 z-[110] p-3 md:p-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+                        className="absolute right-4 md:right-8 z-[10100] p-3 md:p-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:scale-110 cursor-pointer"
                         aria-label="Next Image"
                     >
                         <ChevronRight size={24} />

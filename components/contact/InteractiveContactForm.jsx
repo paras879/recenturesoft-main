@@ -134,17 +134,34 @@ export default function InteractiveContactForm({ data = {} }) {
                             {/* Inner map container */}
                             <div className="relative flex-grow rounded-[2rem] overflow-hidden bg-slate-100 dark:bg-slate-800 isolate">
                                 {loadMap ? (
-                                    <iframe 
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14009.689437142078!2d77.37580665!3d28.6170669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5662bb1e17d%3A0xc3cf9c7717dc4fbc!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                                        width="100%" 
-                                        height="100%" 
-                                        style={{ border: 0, minHeight: '100%', position: 'absolute', inset: 0 }} 
-                                        allowFullScreen="" 
-                                        loading="lazy" 
-                                        referrerPolicy="no-referrer-when-downgrade"
-                                        title="RecentureSoft Headquarters Map"
-                                        className="grayscale-[20%] contrast-[1.1] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                                    ></iframe>
+                                    <>
+                                        <iframe 
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14009.689437142078!2d77.37580665!3d28.6170669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5662bb1e17d%3A0xc3cf9c7717dc4fbc!2sSector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                                            width="100%" 
+                                            height="100%" 
+                                            style={{ border: 0, minHeight: '100%', position: 'absolute', inset: 0 }} 
+                                            allowFullScreen="" 
+                                            loading="lazy" 
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                            title="RecentureSoft Headquarters Map"
+                                            className="grayscale-[20%] contrast-[1.1] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                                        ></iframe>
+                                        
+                                        {/* Custom Red Pin for Office Location (Approximate A-125 location) */}
+                                        <div className="absolute z-[15] bottom-[22%] left-[25%] flex flex-col items-center group/pin cursor-pointer transform -translate-x-1/2 -translate-y-full hover:scale-110 transition-transform duration-300">
+                                            {/* Tooltip */}
+                                            <div className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg mb-2 shadow-xl whitespace-nowrap">
+                                                RecentureSoft (A-125)
+                                            </div>
+                                            {/* Pin SVG */}
+                                            <div className="relative">
+                                                <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-60"></div>
+                                                <svg className="w-10 h-10 text-red-600 relative drop-shadow-[0_10px_10px_rgba(220,38,38,0.5)] z-10" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </>
                                 ) : (
                                     <div className="absolute inset-0 flex items-center justify-center bg-slate-200 dark:bg-slate-800 animate-pulse text-slate-500 text-sm">
                                         Loading map...
