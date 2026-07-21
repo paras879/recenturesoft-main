@@ -210,7 +210,7 @@ export default function Review({ initialReviews }) {
         if (!container || !track) return;
 
         const x = e.pageX - container.offsetLeft;
-        const walk = (x - startXRef.current) * 1.5; // Drag speed multiplier
+        const walk = (x - startXRef.current) * 1; // Drag speed multiplier set to 1 for natural tracking
         let targetScroll = scrollLeftRef.current - walk;
 
         const halfWidth = track.scrollWidth / 2;
@@ -248,7 +248,7 @@ export default function Review({ initialReviews }) {
         if (!container || !track) return;
 
         const x = e.touches[0].pageX - container.offsetLeft;
-        const walk = (x - startXRef.current) * 1.5;
+        const walk = (x - startXRef.current) * 1; // Drag speed multiplier set to 1 for natural tracking
         let targetScroll = scrollLeftRef.current - walk;
 
         const halfWidth = track.scrollWidth / 2;
