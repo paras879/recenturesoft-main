@@ -84,7 +84,7 @@ export default function AboutSection({ cmsData = {} }) {
             <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-cyan-500/5 blur-[100px] md:blur-[160px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-indigo-600/5 blur-[100px] md:blur-[160px] rounded-full pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
+            <div className="w-full px-5 sm:px-6 lg:px-12 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
 
                     {/* Left Content Column */}
@@ -136,12 +136,12 @@ export default function AboutSection({ cmsData = {} }) {
 
                     {/* Right Column (3D Interactive Tilt Cards + Three.js Background) */}
                     {isLargeScreen && (
-                        <div className="relative h-[560px] hidden lg:block perspective-[1500px]">
+                        <div className="relative w-full aspect-square max-h-[700px] xl:max-h-[800px] mx-auto hidden lg:block perspective-[1500px]">
                             {/* Background Tech Orbits */}
                             <TechOrbitBackground />
 
                             {/* Image Card 1 */}
-                            <TiltCard className="absolute top-0 right-0 w-[320px] h-[210px] z-10 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                            <TiltCard className="absolute top-0 right-0 w-[55%] aspect-[32/21] z-10 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                                 <Image
                                     src={d.image1 || "/about/about1.jpg"}
                                     alt="Innovative digital workspace"
@@ -155,7 +155,7 @@ export default function AboutSection({ cmsData = {} }) {
                             </TiltCard>
 
                             {/* Image Card 2 */}
-                            <TiltCard className="absolute top-[160px] left-0 w-[290px] h-[210px] z-20 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                            <TiltCard className="absolute top-[28%] left-0 w-[50%] aspect-[29/21] z-20 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                                 <Image
                                     src={d.image2 || "/about/about2.jpg"}
                                     alt="Advanced Cloud infrastructure"
@@ -169,7 +169,7 @@ export default function AboutSection({ cmsData = {} }) {
                             </TiltCard>
 
                             {/* Image Card 3 */}
-                            <TiltCard className="absolute bottom-0 right-12 w-[310px] h-[210px] z-10 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                            <TiltCard className="absolute bottom-[5%] right-[8%] w-[54%] aspect-[31/21] z-10 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                                 <Image
                                     src={d.image3 || "/about/about3.jpg"}
                                     alt="AI and data integrations"

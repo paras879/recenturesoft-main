@@ -173,7 +173,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
 
     return (
         <header className="fixed top-0 left-0 right-0 z-[9999] px-2 sm:px-4 lg:px-6 py-2">
-            <nav className="max-w-7xl mx-auto bg-white/70 dark:bg-slate-950/70 backdrop-blur-2xl border border-white/30 dark:border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300">
+            <nav className="w-full bg-white/70 dark:bg-slate-950/70 backdrop-blur-2xl border border-white/30 dark:border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300">
                 <div className="px-4 lg:px-8 h-14 lg:h-16 flex items-center justify-between relative">
 
                     {/* ════ LOGO AREA ════ */}

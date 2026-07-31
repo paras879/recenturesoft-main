@@ -296,7 +296,7 @@ export default function Review({ initialReviews }) {
             <div className="absolute top-1/3 left-1/4 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-cyan-100/50 dark:bg-cyan-950/15 blur-[100px] md:blur-[130px] rounded-full pointer-events-none transition-colors duration-300" />
             <div className="absolute bottom-1/3 right-1/4 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-100/50 dark:bg-purple-950/15 blur-[100px] md:blur-[130px] rounded-full pointer-events-none transition-colors duration-300" />
 
-            <div className="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
+            <div className="w-full px-5 sm:px-6 relative z-10">
                 {/* Header */}
                 <div className="text-center mb-2 md:mb-4">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mt-2 tracking-tight leading-[1.15]">

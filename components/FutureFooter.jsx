@@ -185,7 +185,7 @@ export default async function FutureFooter() {
         >
             <FooterBackground />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6">
+            <div className="relative z-10 w-full px-6">
 
                 {/* ════ PREMIUM GRID (Navigation & Brand) ════ */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-8 lg:gap-12 mb-10 md:mb-12 lg:mb-16">

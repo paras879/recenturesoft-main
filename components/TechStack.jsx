@@ -242,7 +242,7 @@ export default function TechStack() {
             <div className="absolute top-1/4 right-0 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-cyan-400/10 dark:bg-cyan-950/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 left-0 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-indigo-400/10 dark:bg-indigo-950/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
+            <div className="w-full px-5 sm:px-6 relative z-10">
 
                 {/* Header Section */}
                 <div className="text-center mb-4">

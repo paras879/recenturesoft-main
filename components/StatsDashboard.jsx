@@ -519,7 +519,7 @@ export default function StatsDashboard({ cmsData = {} }) {
             </div>
 
             <div
-                className="relative z-10 max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+                className="relative z-10 w-full px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
             >
                 {counters.map((c, i) => (
                     <div key={c.id}>
@@ -535,7 +535,7 @@ export default function StatsDashboard({ cmsData = {} }) {
 
             {/* ═══ Analytics dashboard ═══ */}
             <div
-                className="relative z-10 max-w-7xl mx-auto px-6 mt-8 md:mt-12"
+                className="relative z-10 w-full px-6 mt-8 md:mt-12"
             >
                 {/* Live status */}
                 <LiveStatusBar />

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { TECH_ICONS, MARQUEE_TECH_LIST } from "./TechStack";
 
 /* ═══════════════════════════════════════════════════════
@@ -117,7 +117,7 @@ const Logos = [
 /* ═══════════════════════════════════════════════════════
    ANIMATED COUNTER
    ═══════════════════════════════════════════════════════ */
-function Counter({ prefix = "", value, suffix, label, icon, showExitIcon = false, variant = "card" }) {
+function Counter({ prefix = "", value, suffix, label, icon, showExitIcon = false, variant = "card", innerRef }) {
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
@@ -179,7 +179,7 @@ function Counter({ prefix = "", value, suffix, label, icon, showExitIcon = false
   }
 
   return (
-    <div className={`group relative flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[#0b1329]/60 border border-slate-200/60 dark:border-white/[0.04] shadow-sm hover:border-blue-400/40 dark:hover:border-cyan-500/30 hover:shadow-[0_12px_24px_-5px_rgba(6,230,255,0.05)] hover:-translate-y-0.5 transition-all duration-300 w-full h-[135px] ${showExitIcon ? "pt-4 pb-7 px-5" : "p-5"}`}>
+    <div ref={innerRef} className={`group relative flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[#0b1329]/60 border border-slate-200/60 dark:border-white/[0.04] shadow-sm hover:border-blue-400/40 dark:hover:border-cyan-500/30 hover:shadow-[0_12px_24px_-5px_rgba(6,230,255,0.05)] hover:-translate-y-0.5 transition-all duration-300 w-full h-[135px] ${showExitIcon ? "pt-4 pb-7 px-5" : "p-5"}`}>
       {/* Ambient background card glow */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-cyan-500/0 group-hover:to-cyan-500/[0.02] transition-all duration-500 pointer-events-none" />
 
@@ -303,6 +303,56 @@ function InfiniteMarquee() {
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
 export default function TrustedClients() {
+  const gridRef = useRef(null);
+  const leftNodeRef = useRef(null);
+  const rightNodeRef = useRef(null);
+  const fallbackPath = "M 230 616 L 460 616 A 36 36 0 0 0 496 580 L 496 208 A 36 36 0 0 1 532 172 L 780 172";
+  const [svgPath, setSvgPath] = useState(fallbackPath);
+
+  useEffect(() => {
+    const updatePath = () => {
+      if (!gridRef.current || !leftNodeRef.current || !rightNodeRef.current) return;
+      
+      const gridRect = gridRef.current.getBoundingClientRect();
+      const leftRect = leftNodeRef.current.getBoundingClientRect();
+      const rightRect = rightNodeRef.current.getBoundingClientRect();
+      
+      if (gridRect.width === 0) return;
+      
+      // Calculate start and end points based on actual DOM positions
+      // Start exactly at the bottom center of the left node (where the document icon is)
+      const startX = leftRect.left - gridRect.left + (leftRect.width / 2); 
+      // End exactly at the left edge of the right node icon (approx 52px left from center)
+      const endX = rightRect.left - gridRect.left + (rightRect.width / 2) - 52;
+      
+      // Calculate Y coordinates
+      // yBottom is below the left node (under the document exit icon which is -bottom-3.5 = 14px down, and height is 28px, so center is exactly at bottom edge)
+      const yBottom = leftRect.bottom - gridRect.top;
+      // yTop is exactly vertically centered on the cyan icon of the right node
+      const yTop = rightRect.top - gridRect.top + 16;
+      
+      // Calculate gap center
+      const gapSize = 32;
+      const colWidth = (gridRect.width - (11 * gapSize)) / 12;
+      const leftCardWidth = (5 * colWidth) + (4 * gapSize);
+      const gapCenter = leftCardWidth + (gapSize / 2);
+      
+      const r = Math.max(10, Math.min(40, Math.abs(yBottom - yTop) / 2 - 5)); 
+      
+      if (gapCenter < 0) return;
+      
+      const p = `M ${startX} ${yBottom} L ${gapCenter - r} ${yBottom} A ${r} ${r} 0 0 0 ${gapCenter} ${yBottom - r} L ${gapCenter} ${yTop + r} A ${r} ${r} 0 0 1 ${gapCenter + r} ${yTop} L ${endX} ${yTop}`;
+      
+      setSvgPath(p);
+    };
+
+    updatePath();
+    // Use ResizeObserver on the document body to catch any layout shifts
+    const observer = new ResizeObserver(updatePath);
+    observer.observe(document.body);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="relative py-2 md:py-4 lg:py-6 overflow-hidden bg-background border-b border-slate-200 dark:border-white/5 transition-colors duration-300">
       {/* Ambient Background */}
@@ -315,7 +365,7 @@ export default function TrustedClients() {
         <div className="absolute inset-0 opacity-[0.015] mix-blend-screen" style={{ backgroundImage: `linear-gradient(${C.primary}10 1px, transparent 1px), linear-gradient(90deg, ${C.primary}10 1px, transparent 1px)`, backgroundSize: "40px 40px", transform: "perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px)" }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mb-[clamp(1rem,2vw,2rem)]">
+      <div className="relative z-10 w-full px-6 mb-[clamp(1rem,2vw,2rem)]">
         {/* Performance Dashboard Header */}
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 mb-2 text-center sm:text-left pb-2">
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -324,7 +374,7 @@ export default function TrustedClients() {
         </div>
 
         {/* Live Counters & Performance Stats - Bento Grid */}
-        <div className="relative mt-4 grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto items-stretch">
+        <div ref={gridRef} className="relative mt-4 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full items-stretch">
 
           {/* Animated Connecting Pipeline SVG - Desktop Only */}
           <div className="absolute inset-0 pointer-events-none z-20 hidden lg:block overflow-visible">
@@ -339,7 +389,7 @@ export default function TrustedClients() {
 
               {/* S-shaped pipeline path from left card bottom (Client Satisfaction) to top card in the right panel */}
               <path
-                d="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172"
+                d={svgPath}
                 stroke="url(#pipelineGrad)"
                 strokeWidth="4"
                 strokeLinecap="round"
@@ -349,7 +399,7 @@ export default function TrustedClients() {
 
               {/* Animated flowing dash overlay */}
               <path
-                d="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172"
+                d={svgPath}
                 stroke="url(#pipelineGrad)"
                 strokeWidth="4"
                 strokeLinecap="round"
@@ -359,19 +409,19 @@ export default function TrustedClients() {
 
               {/* Flowing animated data packet document icons */}
               <g>
-                <animateMotion dur="6s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
+                <animateMotion dur="6s" repeatCount="indefinite" path={svgPath} />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#06E6FF" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#06E6FF" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#06E6FF" strokeWidth="1" strokeLinecap="round" />
               </g>
               <g>
-                <animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
+                <animateMotion dur="6s" begin="2s" repeatCount="indefinite" path={svgPath} />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#3B82F6" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#3B82F6" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#3B82F6" strokeWidth="1" strokeLinecap="round" />
               </g>
               <g>
-                <animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M 230 616 L 460 616 C 485 616, 496 606, 496 576 L 496 215 C 496 172, 540 172, 580 172 L 780 172" />
+                <animateMotion dur="6s" begin="4s" repeatCount="indefinite" path={svgPath} />
                 <rect x="-6" y="-8" width="12" height="16" rx="1.5" fill="white" stroke="#8B5CF6" strokeWidth="1.2" />
                 <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#8B5CF6" strokeWidth="1" strokeLinecap="round" />
                 <line x1="-3" y1="2" x2="3" y2="2" stroke="#8B5CF6" strokeWidth="1" strokeLinecap="round" />
@@ -427,6 +477,7 @@ export default function TrustedClients() {
                 />
                 <div className="sm:col-span-1 lg:col-span-1">
                   <Counter
+                    innerRef={leftNodeRef}
                     value="98"
                     suffix="%"
                     label="Client Satisfaction"
@@ -494,7 +545,7 @@ export default function TrustedClients() {
 
                 {/* Nodes (Grid Positions matching Mockup) */}
                 {/* Node 1: Top Center */}
-                <div className="absolute top-[3px] left-[50%] -translate-x-1/2 w-[170px]">
+                <div ref={rightNodeRef} className="absolute top-[3px] left-[50%] -translate-x-1/2 w-[170px]">
                   <Counter
                     value="99.99"
                     suffix="%"

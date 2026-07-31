@@ -172,7 +172,7 @@ export default function EnterpriseServices({ services = [], cmsData = {} }) {
 
     return (
         <section className="font-manrope relative w-full py-[clamp(0.5rem,2vw,1rem)] bg-background px-4 md:px-8 lg:px-12 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-4">
 
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
