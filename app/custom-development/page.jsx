@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import FutureFooter from "@/components/FutureFooter";
 import ContentHero from "@/components/ContentHero";
-import DashboardContent from "@/components/dashboard/DashboardContent";
+import CustomDevContent from "@/components/custom-development/CustomDevContent";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 import { connectDB } from "@/lib/mongodb";
@@ -10,14 +10,14 @@ import { checkPageStatus } from "@/lib/checkPageStatus";
 import { notFound } from "next/navigation";
 
 const defaultMetadata = {
-    title: "Custom Dashboard Development Company | RecentureSoft",
-    description: "Build custom, high-performance, data-driven dashboard applications with RecentureSoft. Transform raw data into actionable insights.",
-    alternates: { canonical: "/dashboard" }
+    title: "Custom Development Company | RecentureSoft",
+    description: "Build custom, high-performance applications with RecentureSoft.",
+    alternates: { canonical: "/custom-development" }
 };
 
 export async function generateMetadata() {
     await connectDB();
-    const page = await WebPage.findOne({ path: "/dashboard" }).lean();
+    const page = await WebPage.findOne({ path: "/custom-development" }).lean();
     if (!page) return defaultMetadata;
     return {
         title: page.seoTitle || defaultMetadata.title,
@@ -26,38 +26,38 @@ export async function generateMetadata() {
     };
 }
 
-export default async function DashboardPage() {
+export default async function CustomDevelopmentPage() {
     await connectDB();
-    const pageDataRaw = await WebPage.findOne({ path: "/dashboard" }).lean();
+    const pageDataRaw = await WebPage.findOne({ path: "/custom-development" }).lean();
     const pageData = pageDataRaw ? JSON.parse(JSON.stringify(pageDataRaw)) : null;
 
-    const isActive = await checkPageStatus("/dashboard");
+    const isActive = await checkPageStatus("/custom-development");
     if (!isActive) return notFound();
 
     const c = pageData?.content || {};
 
     return (
         <main className="min-h-screen bg-white dark:bg-[#020617] selection:bg-blue-500/30">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Custom Dashboard Development Company | RecentureSoft","description":"Build custom, high-performance, data-driven dashboard applications with RecentureSoft. Transform raw data into actionable insights.","url":"https://recenturesoft.com/dashboard"}) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"Custom Development Company | RecentureSoft","description":"Build custom, high-performance applications with RecentureSoft.","url":"https://recenturesoft.com/custom-development"}) }} />
             <Navbar />
             
             <ContentHero bannerConfig={pageData?.content?.bannerConfig}
-                title={c.hero?.title || "Custom Dashboard"}
+                title={c.hero?.title || "Custom"}
                 highlight={c.hero?.highlight || "Development"}
-                description={c.hero?.description || "Consolidate complex data into intuitive, real-time visual interfaces that empower your team to make faster, smarter decisions."}
+                description={c.hero?.description || "Build customized, scalable, and high-performance applications that empower your team to achieve business goals."}
                 bannerImage={c.bannerConfig?.imageUrl || c.hero?.bannerImage}
                 highlightClass="text-blue-500 dark:text-blue-400"
             />
 
             <section className="py-8 md:py-12 lg:py-16 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <DashboardContent dynamicData={pageData} />
+                    <CustomDevContent dynamicData={pageData} />
                 </div>
             </section>
 
-            <SolutionContactForm serviceName="Dashboard Development" />
+            <SolutionContactForm serviceName="Custom Development" />
 
-            <PageFAQSection pageName="dashboard" />
+            <PageFAQSection pageName="custom-development" />
 
             <FutureFooter />
         </main>

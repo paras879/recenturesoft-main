@@ -137,9 +137,32 @@ function HolographicCore() {
 /* ═══════════════════════════════════════════════════════
    FLOATING MINI-DASHBOARD (shown on bar hover)
    ═══════════════════════════════════════════════════════ */
-function MiniDashboard({ data, isPeak, hovered, isLast }) {
-    const translateX = isLast ? "-translate-x-[85%]" : "-translate-x-1/2";
-    const arrowLeft = isLast ? "left-[85%]" : "left-1/2";
+function MiniDashboard({ data, isPeak, hovered, index }) {
+    let translateX = "-translate-x-1/2";
+    let arrowLeft = "left-1/2";
+
+    if (index === 11) {
+        translateX = "-translate-x-[85%]";
+        arrowLeft = "left-[85%]";
+    } else if (index === 10) {
+        translateX = "-translate-x-[75%] sm:-translate-x-1/2";
+        arrowLeft = "left-[75%] sm:left-1/2";
+    } else if (index === 9) {
+        translateX = "-translate-x-[65%] sm:-translate-x-1/2";
+        arrowLeft = "left-[65%] sm:left-1/2";
+    } else if (index === 8) {
+        translateX = "-translate-x-[55%] sm:-translate-x-1/2";
+        arrowLeft = "left-[55%] sm:left-1/2";
+    } else if (index === 0) {
+        translateX = "-translate-x-[15%] sm:-translate-x-1/2";
+        arrowLeft = "left-[15%] sm:left-1/2";
+    } else if (index === 1) {
+        translateX = "-translate-x-[25%] sm:-translate-x-1/2";
+        arrowLeft = "left-[25%] sm:left-1/2";
+    } else if (index === 2) {
+        translateX = "-translate-x-[35%] sm:-translate-x-1/2";
+        arrowLeft = "left-[35%] sm:left-1/2";
+    }
 
     return (
         <div
@@ -229,7 +252,7 @@ function AnalyticsBar({ data, maxValue, index, peakValue, chartHeight }) {
             className="relative flex flex-col items-center flex-1 min-w-0 group"
         >
             {/* Floating mini-dashboard on hover */}
-            <MiniDashboard data={data} isPeak={isPeak} hovered={hovered} isLast={index === 11} />
+            <MiniDashboard data={data} isPeak={isPeak} hovered={hovered} index={index} />
 
             {/* Floating value label */}
             <div

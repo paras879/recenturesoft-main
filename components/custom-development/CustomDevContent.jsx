@@ -4,7 +4,7 @@ import CinematicServiceTemplate from "@/components/shared/CinematicServiceTempla
 import * as LucideIcons from "lucide-react";
 import { LayoutDashboard, BarChart3, LineChart, PieChart, Activity, ShieldCheck, Zap, Database } from "lucide-react";
 
-export default function DashboardContent({ dynamicData }) {
+export default function CustomDevContent({ dynamicData }) {
     const defaultFeatures = [
         {
             icon: LayoutDashboard,
@@ -39,7 +39,7 @@ export default function DashboardContent({ dynamicData }) {
         {
             icon: Zap,
             title: "High Performance",
-            desc: "Optimized queries and rendering to ensure your dashboard loads instantly even with big data.",
+            desc: "Optimized queries and rendering to ensure your application loads instantly even with big data.",
             highlights: ["Query optimization", "Edge caching", "Virtualization"]
         }
     ];

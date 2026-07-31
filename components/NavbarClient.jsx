@@ -28,7 +28,7 @@ const solutionsMenu = [
             { name: "CRM", href: "/crm" },
             { name: "CMS", href: "/cms" },
             { name: "Salesforce", href: "/salesforce" },
-            { name: "Dashboard", href: "/dashboard" },
+            { name: "Custom Development", href: "/custom-development" },
         ]
     },
     {
@@ -37,11 +37,8 @@ const solutionsMenu = [
         color: "text-cyan-500",
         bg: "bg-cyan-500/10",
         items: [
-            { name: "Next JS", href: "/next-js" },
-            { name: "React", href: "/react" },
             { name: "Web Design", href: "/web-design" },
             { name: "PHP Development", href: "/php-development" },
-            { name: "Laravel", href: "/laravel-development" },
         ]
     },
     {
@@ -50,7 +47,10 @@ const solutionsMenu = [
         color: "text-purple-500",
         bg: "bg-purple-500/10",
         items: [
-            { name: "OpenCart Development", href: "/opencart-development" },
+            { name: "React.js", href: "/react" },
+            { name: "Next.js", href: "/next-js" },
+            { name: "OpenCart", href: "/opencart-development" },
+            { name: "Laravel", href: "/laravel-development" },
             { name: "Magento", href: "/magento-development" },
             { name: "eBay Store", href: "/ebay-store-management" },
             { name: "Amazon Store", href: "/amazon-store-management" },
@@ -147,7 +147,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
             if (dp.category === "Solutions" && dp.subcategory) {
                 const cat = combinedSolutionsMenu.find(c => c.title === dp.subcategory);
                 if (cat) {
-                    if (dp.path !== "/ai-services" && !cat.items.some(item => item.href === dp.path)) {
+                    if (dp.path !== "/ai-services" && dp.path !== "/dashboard" && !cat.items.some(item => item.href === dp.path)) {
                         cat.items.push({ name: dp.name, href: dp.path });
                     }
                 }
@@ -239,15 +239,14 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                             {/* Top gradient border accent */}
                                             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
 
-                                            <div className={`grid gap-x-6 gap-y-8 relative z-10 ${
-                                                link.name === "Solutions" 
-                                                    ? "grid-cols-4" 
+                                            <div className={`grid gap-x-6 gap-y-8 relative z-10 ${link.name === "Solutions"
+                                                    ? "grid-cols-4"
                                                     : (industriesMenu.length === 1 ? "grid-cols-1"
-                                                       : industriesMenu.length === 2 ? "grid-cols-2"
-                                                       : industriesMenu.length === 3 ? "grid-cols-3"
-                                                       : industriesMenu.length === 4 ? "grid-cols-4"
-                                                       : "grid-cols-5")
-                                            }`}>
+                                                        : industriesMenu.length === 2 ? "grid-cols-2"
+                                                            : industriesMenu.length === 3 ? "grid-cols-3"
+                                                                : industriesMenu.length === 4 ? "grid-cols-4"
+                                                                    : "grid-cols-5")
+                                                }`}>
                                                 {(link.name === "Solutions" ? activeSolutionsMenu : industriesMenu).map((category, idx) => {
                                                     const Icon = category.icon;
                                                     return (
@@ -375,7 +374,7 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                                         {(link.name === "Solutions" ? activeSolutionsMenu : industriesMenu).map((cat, idx) => (
                                                             <div key={idx} className={`${link.name === "Solutions" ? "border-b border-slate-100 dark:border-white/5 last:border-0" : ""}`}>
                                                                 {link.name === "Solutions" && (
-                                                                    <button 
+                                                                    <button
                                                                         onClick={() => setExpandedCategory(expandedCategory === `${link.name}-${idx}` ? null : `${link.name}-${idx}`)}
                                                                         className="w-full flex items-center justify-between py-3 group"
                                                                     >

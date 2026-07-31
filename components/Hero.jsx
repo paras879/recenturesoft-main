@@ -235,7 +235,7 @@ export default function Hero({ cmsData = {} }) {
                 <div
                     className="absolute inset-0 md:hidden"
                     style={{
-                        background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.8) 80%, rgba(255,255,255,0) 100%)"
+                        background: "linear-gradient(to right, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 80%, rgba(255,255,255,0) 100%)"
                     }}
                 />
                 <div
@@ -255,7 +255,7 @@ export default function Hero({ cmsData = {} }) {
                 <div
                     className="absolute inset-0 hidden dark:block md:dark:hidden"
                     style={{
-                        background: "linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.95) 50%, rgba(3,7,18,0.8) 80%, rgba(3,7,18,0) 100%)"
+                        background: "linear-gradient(to right, rgba(3,7,18,0.6) 0%, rgba(3,7,18,0.4) 50%, rgba(3,7,18,0.1) 80%, rgba(3,7,18,0) 100%)"
                     }}
                 />
                 <div
@@ -339,7 +339,7 @@ export default function Hero({ cmsData = {} }) {
                             >
                                 <span className="relative z-10">{displayCta1}</span>
                             </button>
-                            <button onClick={openMeetingModal} className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/15 bg-white/80 text-slate-800 dark:text-white font-[500] md:hover:bg-white dark:md:hover:bg-white/10 md:hover:border-slate-400 dark:md:hover:border-white/30 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
+                            <button onClick={openMeetingModal} className="px-6 md:px-8 py-3.5 md:py-4 rounded-full border border-slate-300 dark:border-white/30 bg-white/80 dark:bg-transparent text-slate-800 dark:text-white font-[500] hover:bg-white dark:hover:bg-white/10 active:scale-[0.98] backdrop-blur-md transition-all duration-300 w-full max-w-[380px] sm:w-auto text-center">
                                 {displayCta2}
                             </button>
                         </div>
