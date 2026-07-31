@@ -44,7 +44,7 @@ export default function ArticleGrid({ articles = [], categories = [] }) {
 
     return (
         <section className="pt-[clamp(1rem,2vw,2rem)] pb-[clamp(1.5rem,5vw,5rem)] bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
-            <div className="container mx-auto px-6 max-w-7xl">
+            <div className="w-full px-5 sm:px-8 lg:px-12 mx-auto">
 
                 {/* Filters and Search */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 md:mb-12">

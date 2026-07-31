@@ -53,7 +53,7 @@ function EventsHero({ data }) {
                 <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px]" />
             </div>
 
-            <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl">
+            <div className="relative z-10 flex flex-col items-center text-center px-6 w-full mx-auto">
                 <h1 className={`text-[clamp(2rem,6vw,5rem)] font-extrabold tracking-tight mb-4 md:mb-6 leading-none ${data?.bannerImage ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-slate-900 dark:text-white'}`}>
                     {data?.titlePart1 || "Life At"} <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">
@@ -78,7 +78,7 @@ function FeaturedEvent({ event, onViewGallery }) {
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
                 onClick={onViewGallery}
-                className="relative w-full max-w-7xl h-[320px] sm:h-[400px] md:h-[600px] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-cyan-500/20 dark:hover:border-cyan-400/20 hover:-translate-y-2 transition-all duration-500"
+                className="relative w-full h-[320px] sm:h-[400px] md:h-[600px] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-cyan-500/20 dark:hover:border-cyan-400/20 hover:-translate-y-2 transition-all duration-500"
             >
                 {/* Background Image */}
                 <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]">
@@ -196,7 +196,7 @@ function EventBentoGallery({ events, onSelectEvent, data }) {
 
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
+            <div className="w-full mx-auto flex flex-col gap-2 md:gap-4">
                 <div className="flex flex-col gap-3 text-center items-center">
                     <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-900 dark:text-white">
                         {data?.titlePart1 || "Moments"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.titleHighlight || "Captured"}</span>
@@ -246,7 +246,7 @@ function EventTimeline({ data }) {
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto flex flex-col gap-5 md:gap-6 relative z-10">
+            <div className="w-full mx-auto flex flex-col gap-5 md:gap-6 relative z-10">
                 <div className="text-center max-w-2xl mx-auto">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1.5 tracking-tight">
                         {data?.titlePart1 || "Our"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500">{data?.titleHighlight || "Journey"}</span>
@@ -308,7 +308,7 @@ function CultureStats({ data }) {
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 overflow-hidden transition-colors duration-300">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683311-eac922347aa1?q=80&w=2000')] bg-cover bg-center opacity-5 mix-blend-screen dark:mix-blend-screen" />
-            <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="w-full mx-auto relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {stats.map((stat, i) => (
                     <div
                         key={i}
@@ -330,7 +330,7 @@ function VideoReelPreview({ data }) {
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 flex justify-center transition-colors duration-300">
             <div
-                className="relative w-full max-w-6xl h-[50vh] md:h-[70vh] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none"
+                className="relative w-full h-[50vh] md:h-[70vh] rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none"
             >
                 <Image src={data?.thumbnail || IMAGES.videoThumb} alt="Culture Reel" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" quality={50} className="object-cover transition-transform duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors duration-500" />
@@ -384,7 +384,7 @@ function EmployeeTestimonials({ teamMembers = [], data }) {
 
     return (
         <section className="relative w-full py-2 md:py-3 bg-slate-50 dark:bg-[#020617] px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto flex flex-col gap-2 md:gap-4">
+            <div className="w-full mx-auto flex flex-col gap-2 md:gap-4">
                 <div className="text-center">
                     <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-slate-900 dark:text-white mb-3 md:mb-4">
                         {data?.titlePart1 || "Hear From Our"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-600 dark:from-purple-400 dark:to-cyan-500">{data?.titleHighlight || "Team"}</span>

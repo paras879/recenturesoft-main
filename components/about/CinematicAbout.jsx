@@ -43,7 +43,7 @@ function AboutHero({ data = {} }) {
                 </div>
             </div>
 
-            <div className="max-w-[1400px] w-full px-4 sm:px-6 lg:px-12 mx-auto relative z-10">
+            <div className="w-full px-4 sm:px-6 lg:px-12 mx-auto relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center justify-end md:justify-center min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] lg:min-h-[45vh] pb-0 md:pb-0 md:pt-16">
                     {/* Left Content */}
                     <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
@@ -85,7 +85,7 @@ function CompanyStory({ data = [] }) {
     const timeline = data && data.length > 0 ? data : DEFAULT_STORY_TIMELINE;
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-5 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-16 items-start">
+            <div className="w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-16 items-start">
 
                 {/* Left: Premium Image Card */}
                 <div
@@ -163,7 +163,7 @@ function CultureGallery({ data = {} }) {
 
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-8 md:gap-10">
+            <div className="w-full mx-auto flex flex-col gap-8 md:gap-10">
                 <div className="flex flex-col gap-2 max-w-2xl">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">{data?.heading || "Our Culture"}</h2>
                     <p className="text-sm md:text-base lg:text-lg text-slate-600 dark:text-slate-400 whitespace-pre-wrap">{data?.desc || "Life at RecentureSoft is fueled by curiosity, collaboration, and coffee. Lots of coffee."}</p>
@@ -185,7 +185,7 @@ function CultureGallery({ data = {} }) {
 function WhyChooseUs({ data = {} }) {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-3 md:gap-4 lg:gap-5">
+            <div className="w-full mx-auto flex flex-col gap-3 md:gap-4 lg:gap-5">
                 <div className="text-center max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-2 leading-tight">{data?.heading1 || "Why"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">{data?.headingAccent || "Choose Us"}</span></h2>
                     <p className="text-[13px] md:text-sm lg:text-base lg:text-lg text-slate-600 dark:text-slate-400 whitespace-pre-wrap">{data?.desc || "We don't just write code. We build scalable digital businesses with a mindset engineered for success."}</p>
@@ -244,7 +244,7 @@ function CompanyStats({ data = [] }) {
 
     return (
         <section className="relative w-full pt-2 pb-6 bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            <div className="w-full mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
                 {stats.map((stat, i) => (
                     <div
                         key={i}
@@ -269,7 +269,7 @@ const PROCESS_STEPS = ["Discover", "Plan", "Design", "Develop", "Deploy", "Scale
 function OurProcess({ data = {} }) {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 overflow-hidden transition-colors duration-300">
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20">
+            <div className="w-full mx-auto flex flex-col gap-10 md:gap-14 lg:gap-20">
                 <div className="text-center">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white mb-6 leading-tight">{data?.heading1 || "The Engineering"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{data?.headingAccent || "Process"}</span></h2>
                 </div>
@@ -362,7 +362,7 @@ function TechnologyEcosystem({ data = {} }) {
             {/* Ambient Background Blur */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] pointer-events-none rounded-full" />
 
-            <div className="max-w-[1400px] mx-auto flex flex-col gap-4 md:gap-6 lg:gap-8 items-center text-center relative z-10">
+            <div className="w-full mx-auto flex flex-col gap-4 md:gap-6 lg:gap-8 items-center text-center relative z-10">
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">{data?.heading1 || "Technology"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">{data?.headingAccent || "Ecosystem"}</span></h2>
 
                 <div className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-5xl">

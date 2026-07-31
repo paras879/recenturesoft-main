@@ -66,8 +66,8 @@ export default function InteractiveContactForm({ data = {} }) {
     };
 
     return (
-        <section className="py-1 md:py-2 lg:py-4 bg-slate-50 dark:bg-[#020617] relative transition-colors duration-300">
-            <div className="container mx-auto px-4 max-w-[1400px]">
+        <section className="py-[clamp(1rem,3vw,3rem)] bg-slate-50 dark:bg-[#020617] relative transition-colors duration-300">
+            <div className="w-full px-5 sm:px-8 lg:px-12 mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10">
 
                     {/* Contact Info */}

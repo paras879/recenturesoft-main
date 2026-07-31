@@ -33,7 +33,7 @@ export default function Transformations({ data = {} }) {
 
     return (
         <section className="pt-2 pb-4 md:pt-4 md:pb-6 lg:pt-6 lg:pb-8 bg-background transition-colors duration-300">
-            <div className="container mx-auto px-5 sm:px-8 lg:px-12 max-w-[1100px] xl:max-w-[1200px]">
+            <div className="w-full px-5 sm:px-8 lg:px-12 mx-auto">
                 <div className="text-center mb-4 md:mb-6">
                     <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[2.8rem] lg:text-[3rem] font-[600] text-foreground leading-[1.05] tracking-[-0.04em] mb-4">{data?.title || "Digital Transformations"}</h2>
                     <p className="text-slate-600 dark:text-slate-300 text-[0.95rem] md:text-[1rem] lg:text-lg leading-7 md:leading-8 max-w-xl md:max-w-2xl mx-auto whitespace-pre-wrap">{data?.desc || "Compare legacy systems with modern digital experiences and discover how strategic engineering transforms performance, scalability, and user engagement."}</p>

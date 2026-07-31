@@ -189,7 +189,7 @@ export default function NewsList({ initialData = [], initialNextPage = null }) {
                 <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[120px]" />
             </div>
 
-            <div className="container mx-auto px-6 max-w-7xl relative z-10">
+            <div className="w-full px-6 max-w-7xl relative z-10">
                 {/* Search & Category Header */}
                 <div className="flex flex-col gap-8 mb-12">
                     

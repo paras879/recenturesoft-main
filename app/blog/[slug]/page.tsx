@@ -50,7 +50,7 @@ export default async function BlogDetail({
         <>
             <Navbar />
             <main className="min-h-screen bg-white dark:bg-[#020617]">
-                <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8 pt-16 md:pt-20 pb-10 md:pb-16">
+                <div className="w-full mx-auto px-5 sm:px-8 lg:px-12 pt-16 md:pt-20 pb-10 md:pb-16">
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-20">
 
@@ -179,7 +179,7 @@ dark:text-white
                             </p>
 
                             <article
-                                className=" prose prose-base lg:prose-lg max-w-[720px] 
+                                className=" prose prose-base lg:prose-lg w-full max-w-none
                                 dark:prose-invert
 
                                 prose-headings:font-semibold

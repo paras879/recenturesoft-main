@@ -16,7 +16,7 @@ export default function FeaturedArticle({ article, title = "Featured Insight" })
 
     return (
         <section className="pt-8 pb-8 lg:pt-12 lg:pb-12 bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
-            <div className="container mx-auto px-4 max-w-[1200px]">
+            <div className="w-full px-5 sm:px-8 lg:px-12 mx-auto">
                 <div className="flex justify-between items-end mb-12">
                     <h2 className="text-[clamp(2rem,3vw,3rem)] font-extrabold text-slate-900 dark:text-white">{title}</h2>
                 </div>

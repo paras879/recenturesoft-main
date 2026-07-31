@@ -287,7 +287,7 @@ export default function ContactHero({ data = {} }) {
             <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[100px] pointer-events-none" />
 
-            <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-12 relative z-10 flex flex-col gap-[clamp(2rem,4vw,4rem)] lg:gap-[clamp(2rem,4vw,4rem)]">
+            <div className="w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10 flex flex-col gap-[clamp(2rem,4vw,4rem)] lg:gap-[clamp(2rem,4vw,4rem)]">
 
                 {/* --- 45/55 SPLIT LAYOUT --- */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8 lg:gap-8 items-center">
