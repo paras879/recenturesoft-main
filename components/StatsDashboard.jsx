@@ -659,7 +659,7 @@ export default function StatsDashboard({ cmsData = {} }) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-2 text-[10px] text-slate-500 dark:text-gray-500 col-span-2 sm:col-span-1">
+                            <div className="flex items-center gap-2 text-[10px] text-slate-700 dark:text-gray-400 col-span-2 sm:col-span-1">
                                 <span className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.05]">
                                     <svg className="w-3 h-3" style={{ color: C.primary }} viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />

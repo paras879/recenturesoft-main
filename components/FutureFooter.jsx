@@ -195,7 +195,7 @@ export default async function FutureFooter() {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
                             {Object.entries(activeFooterLinks).map(([category, links]) => (
                                 <div key={category}>
-                                    <h4 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide text-sm">{category}</h4>
+                                    <h3 className="text-slate-900 dark:text-white font-semibold mb-6 tracking-wide text-sm">{category}</h3>
                                     <ul className="space-y-4">
                                         {links.map((link, linkIdx) => (
                                             <li key={linkIdx}>
@@ -254,7 +254,7 @@ export default async function FutureFooter() {
                     <div className="order-3 md:order-2 lg:order-3 md:col-span-1 lg:col-span-8 lg:col-start-5">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 pt-0 lg:pt-4">
                             <div className="flex flex-col justify-center">
-                                <h4 className="text-slate-900 dark:text-white font-semibold mb-3 tracking-wide text-sm uppercase">Newsletter</h4>
+                                <h3 className="text-slate-900 dark:text-white font-semibold mb-3 tracking-wide text-sm uppercase">Newsletter</h3>
                                 <p className="text-slate-600 dark:text-gray-400 text-[15px] leading-relaxed">
                                     Get the latest tech news, updates, and special offers delivered directly to your inbox.
                                 </p>
@@ -268,7 +268,7 @@ export default async function FutureFooter() {
                                 />
                                 <button
                                     type="button"
-                                    className="w-full bg-primary hover:bg-blue-600 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all shadow-md shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5"
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all shadow-md shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5"
                                 >
                                     Subscribe
                                 </button>

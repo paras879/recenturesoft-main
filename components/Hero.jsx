@@ -223,7 +223,7 @@ export default function Hero({ cmsData = {} }) {
                                 fetchPriority={i === 0 ? "high" : "auto"}
                                 sizes="100vw"
                                 className="object-cover"
-                                quality={75}
+                                quality={60}
                             />
                         </div>
                     );

@@ -116,9 +116,9 @@ function ReviewCard({ review, index }) {
                         />
                     </div>
                     <div>
-                        <h4 className="text-slate-800 dark:text-gray-200 text-sm font-bold group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
+                        <h3 className="text-slate-800 dark:text-gray-200 text-sm font-bold group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
                             {review.name}
-                        </h4>
+                        </h3>
                         <p className="text-slate-500 dark:text-gray-500 text-xs mt-0.5">
                             {review.role} <span className="text-cyan-600 dark:text-cyan-400 font-semibold ml-1">@{review.company}</span>
                         </p>
