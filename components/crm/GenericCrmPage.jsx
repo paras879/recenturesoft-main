@@ -129,8 +129,8 @@ export default function GenericCrmPage({ page }) {
             />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
-            <section className="pt-6 pb-2 md:pt-8 md:pb-4 lg:pt-10 lg:pb-6 px-3 sm:px-6 relative">
-                <div className="max-w-6xl mx-auto">
+            <section className="pt-6 pb-2 md:pt-8 md:pb-4 lg:pt-10 lg:pb-6 px-2 md:px-4 relative">
+                <div className="w-full mx-auto">
                     {blocks.length > 0 ? (
                         <div className="space-y-4 md:space-y-6 lg:space-y-8">
                             {blocks.map((block, index) => {
@@ -191,18 +191,27 @@ export default function GenericCrmPage({ page }) {
 
                                     // If we have side images (left or right), we wrap the content body in a split layout
                                     if (leftImages.length > 0 || rightImages.length > 0) {
+                                        const getImageColClass = (images) => {
+                                            if (!images || images.length === 0) return '';
+                                            const size = images[0].size || 'medium';
+                                            if (size === 'small') return 'lg:max-w-[25%] lg:basis-[25%]';
+                                            if (size === 'medium') return 'lg:max-w-[35%] lg:basis-[35%]';
+                                            if (size === 'large') return 'lg:max-w-[45%] lg:basis-[45%]';
+                                            return 'lg:max-w-[35%] lg:basis-[35%]';
+                                        };
+
                                         return (
-                                            <div className="flex flex-col lg:flex-row gap-8 md:gap-10 lg:gap-16 items-center w-full">
+                                            <div className="flex flex-col lg:flex-row gap-8 md:gap-10 lg:gap-12 items-center w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
                                                 {leftImages.length > 0 && (
-                                                    <div className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6">
+                                                    <div className={`w-full ${getImageColClass(leftImages)} shrink-0 flex flex-col gap-4 md:gap-6`}>
                                                         {leftImages.map((img, i) => renderImage(img, `left-${i}`))}
                                                     </div>
                                                 )}
-                                                <div className={`w-full ${leftImages.length > 0 && rightImages.length > 0 ? 'lg:w-1/3' : 'lg:w-1/2'}`}>
+                                                <div className="w-full flex-grow flex-1 lg:min-w-[400px]">
                                                     {contentBody}
                                                 </div>
                                                 {rightImages.length > 0 && (
-                                                    <div className="w-full lg:w-1/2 flex flex-col gap-6">
+                                                    <div className={`w-full ${getImageColClass(rightImages)} shrink-0 flex flex-col gap-6`}>
                                                         {rightImages.map((img, i) => renderImage(img, `right-${i}`))}
                                                     </div>
                                                 )}
@@ -319,6 +328,9 @@ export default function GenericCrmPage({ page }) {
                                 // 4. STEPS BLOCK (Vertical Timeline)
                                 else if (block.type === 'steps') {
                                     if (!block.title && (!block.steps || block.steps.length === 0)) return null;
+                                    
+                                    const hasSideImage = (block.images && block.images.some(img => img.url && (img.align === 'left' || img.align === 'right'))) || (block.imageUrl && (block.imageAlign === 'left' || block.imageAlign === 'right' || !block.imageAlign));
+
                                     return (
                                         <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper>
@@ -329,13 +341,13 @@ export default function GenericCrmPage({ page }) {
                                                         </div>
                                                     )}
                                                     {block.steps && block.steps.length > 0 && (
-                                                        <div className="space-y-6 md:space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-200 dark:before:via-blue-900 before:to-transparent">
+                                                        <div className={`space-y-6 md:space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-200 dark:before:via-blue-900 before:to-transparent ${hasSideImage ? '' : 'md:before:mx-auto md:before:translate-x-0'}`}>
                                                             {block.steps?.map((step, i) => (
-                                                                <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                                                                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-[#020617] bg-blue-500 text-white font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-lg z-10">
+                                                                <div key={i} className={`relative flex items-center justify-between group ${hasSideImage ? 'md:justify-start gap-6' : 'md:justify-normal md:odd:flex-row-reverse'}`}>
+                                                                    <div className={`flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-[#020617] bg-blue-500 text-white font-bold shrink-0 shadow-lg z-10 ${hasSideImage ? '' : 'md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2'}`}>
                                                                         {i + 1}
                                                                     </div>
-                                                                    <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white dark:bg-slate-900/60 p-4 md:p-6 lg:p-8 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500/30 transition-all duration-300">
+                                                                    <div className={`w-[calc(100%-4rem)] bg-white dark:bg-slate-900/60 p-4 md:p-6 lg:p-8 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500/30 transition-all duration-300 min-w-[240px] sm:min-w-[280px] ${hasSideImage ? '' : 'md:w-[calc(50%-3rem)]'}`}>
                                                                         <h5 style={{ ...getSubHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-base md:text-xl mb-1 md:mb-2 ${getSubHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{step.stage}</h5>
                                                                         <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-xs sm:text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"}`}>{step.desc}</p>
                                                                     </div>
