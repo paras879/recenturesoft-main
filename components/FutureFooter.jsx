@@ -32,9 +32,7 @@ const FOOTER_LINKS = {
     ],
 
     "E-commerce & CMS": [
-        { name: "WordPress Dev", href: "/wordpress-development-customization" },
         { name: "OpenCart Dev", href: "/opencart-development" },
-        { name: "Ebay Store", href: "/ebay-store-management" },
         { name: "CMS Solutions", href: "/cms" },
     ],
 
