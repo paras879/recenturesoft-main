@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, bannerConfig, hideContactButton, ctaText, ctaLink, highlightClass, children }) {
+export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, bannerConfig, hideContactButton, ctaText, ctaLink, highlightClass, children, ctaBgColor, ctaTextColor }) {
     const configOpacity = bannerConfig?.opacity !== undefined ? bannerConfig.opacity : bannerOpacity;
     const opacityValue = configOpacity !== undefined ? (parseInt(configOpacity) / 100) : 0.7;
     const objectFitClass = bannerConfig?.objectFit === 'contain' ? 'object-contain' : 'object-cover';
@@ -75,7 +75,11 @@ export default function ContentHero({ title, highlight, description, bannerImage
                             {ctaLink && (ctaLink.startsWith('/') || ctaLink.startsWith('http')) ? (
                                 <a
                                     href={ctaLink}
-                                    className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                    style={{
+                                        background: ctaBgColor || undefined,
+                                        color: ctaTextColor || undefined
+                                    }}
+                                    className={`inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium transition-all duration-300 rounded-full hover:scale-105 active:scale-95 ${!ctaBgColor ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'hover:opacity-90 shadow-sm'}`}
                                 >
                                     {ctaText || "Get in Touch"}
                                     <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +99,11 @@ export default function ContentHero({ title, highlight, description, bannerImage
                                         }
                                         document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
                                     }}
-                                    className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
+                                    style={{
+                                        background: ctaBgColor || undefined,
+                                        color: ctaTextColor || undefined
+                                    }}
+                                    className={`inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium transition-all duration-300 rounded-full hover:scale-105 active:scale-95 ${!ctaBgColor ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'hover:opacity-90 shadow-sm'}`}
                                 >
                                     {ctaText || "Get in Touch"}
                                     <svg className="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

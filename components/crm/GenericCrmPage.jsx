@@ -108,6 +108,8 @@ export default function GenericCrmPage({ page }) {
     const firstButton = (bannerConfig.buttons && bannerConfig.buttons.length > 0) ? bannerConfig.buttons[0] : null;
     const ctaText = firstButton?.text || heroContent.ctaText || bannerConfig.buttonText || "Get Started Now";
     const ctaLink = firstButton?.url || heroContent.ctaLink || bannerConfig.buttonLink || "#schedule";
+    const ctaBgColor = firstButton?.bgColor || undefined;
+    const ctaTextColor = firstButton?.textColor || undefined;
 
     return (
         <div className="min-h-screen bg-[#fafcff] dark:bg-[#020617] selection:bg-blue-500/30 font-manrope">
@@ -122,6 +124,8 @@ export default function GenericCrmPage({ page }) {
                 bannerOpacity={bannerConfig.opacity || heroContent.bannerOpacity}
                 ctaText={ctaText}
                 ctaLink={ctaLink}
+                ctaBgColor={ctaBgColor}
+                ctaTextColor={ctaTextColor}
             />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
