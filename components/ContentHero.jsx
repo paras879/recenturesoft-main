@@ -84,12 +84,16 @@ export default function ContentHero({ title, highlight, description, bannerImage
                                 </a>
                             ) : (
                                 <button
-                                    onClick={() => {
-                                        if (ctaLink && ctaLink.startsWith('#')) {
-                                            document.getElementById(ctaLink.substring(1))?.scrollIntoView({ behavior: 'smooth' });
-                                        } else {
-                                            document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        if (ctaLink && ctaLink.startsWith('#') && ctaLink.length > 1) {
+                                            const el = document.getElementById(ctaLink.substring(1));
+                                            if (el) {
+                                                el.scrollIntoView({ behavior: 'smooth' });
+                                                return;
+                                            }
                                         }
+                                        document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
                                     }}
                                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm sm:text-base font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:scale-105 active:scale-95"
                                 >
