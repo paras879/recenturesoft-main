@@ -79,7 +79,7 @@ export default function AboutSection({ cmsData = {} }) {
     ];
 
     return (
-        <section id="aboutUs" className="relative py-[clamp(1.5rem,4vw,4.5rem)] min-h-[550px] sm:min-h-[600px] md:min-h-0 bg-background transition-colors duration-300 overflow-hidden">
+        <section id="aboutUs" className="relative py-[clamp(1.5rem,4vw,4.5rem)] bg-background transition-colors duration-300 overflow-hidden">
             {/* Ambient background glows */}
             <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-cyan-500/5 blur-[100px] md:blur-[160px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-indigo-600/5 blur-[100px] md:blur-[160px] rounded-full pointer-events-none" />

@@ -10,7 +10,7 @@ import DeferredAIMount from "@/components/ai/DeferredAIMount";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  preload: false,
+  preload: true,
   // FIX #7: explicit display:swap. Without it, behavior across browsers
   // for the default can be inconsistent — being explicit guarantees text
   // using this font never blocks paint waiting on the font file (it falls
@@ -21,7 +21,7 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-  preload: false,
+  preload: true,
   display: "swap",
 });
 
@@ -30,7 +30,7 @@ const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
-  preload: false,
+  preload: true,
 });
 
 export const metadata: Metadata = {

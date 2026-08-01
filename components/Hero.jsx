@@ -215,26 +215,14 @@ export default function Hero({ cmsData = {} }) {
                             className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0"}`}
                             aria-hidden={i !== current}
                         >
-                            {/* Mobile Image - Low quality to save bandwidth */}
                             <Image
                                 src={s.bg}
                                 alt="Hero Background"
                                 fill
                                 priority={i === 0}
                                 fetchPriority={i === 0 ? "high" : "auto"}
-                                sizes="(max-width: 768px) 100vw, 1px"
-                                className="object-cover md:hidden"
-                                quality={50}
-                            />
-                            {/* Desktop Image - Normal quality */}
-                            <Image
-                                src={s.bg}
-                                alt="Hero Background"
-                                fill
-                                priority={i === 0}
-                                fetchPriority={i === 0 ? "high" : "auto"}
-                                sizes="(min-width: 769px) 100vw, 1px"
-                                className="object-cover hidden md:block"
+                                sizes="100vw"
+                                className="object-cover"
                                 quality={75}
                             />
                         </div>
