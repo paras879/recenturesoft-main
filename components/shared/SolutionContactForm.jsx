@@ -145,7 +145,7 @@ export default function SolutionContactForm({ serviceName = "Our Service" }) {
     return (
         <section 
             id="contact-form-section" 
-            className="relative py-10 md:py-14 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950"
+            className="relative pt-4 pb-10 md:pt-6 md:pb-14 lg:pt-8 lg:pb-16 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 dark:from-slate-950 dark:via-[#090d16] dark:to-slate-950"
             onMouseEnter={() => setUserInteracted(true)} 
             onClick={() => setUserInteracted(true)} 
             onFocus={() => setUserInteracted(true)}

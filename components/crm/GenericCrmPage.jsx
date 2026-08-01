@@ -129,10 +129,10 @@ export default function GenericCrmPage({ page }) {
             />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
-            <section className="py-6 md:py-8 lg:py-10 px-3 sm:px-6 relative">
+            <section className="pt-6 pb-2 md:pt-8 md:pb-4 lg:pt-10 lg:pb-6 px-3 sm:px-6 relative">
                 <div className="max-w-6xl mx-auto">
                     {blocks.length > 0 ? (
-                        <div className="space-y-8 md:space-y-10 lg:space-y-12">
+                        <div className="space-y-4 md:space-y-6 lg:space-y-8">
                             {blocks.map((block, index) => {
                                 // Helper to wrap any block with a side image if provided
                                 const LayoutWrapper = ({ children, isText }) => {
