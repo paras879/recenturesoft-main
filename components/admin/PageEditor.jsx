@@ -346,8 +346,13 @@ export default function PageEditor({ pageData, slug }) {
                                 <div><h3 className="text-sm font-semibold text-slate-800 dark:text-white">Approach Cards</h3><p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Cards displayed on the right side.</p></div>
                             </div>
                             <Repeater items={approachCards} onChange={setApproachCards} fields={[
-                                { key: "icon", label: "Icon", type: "icon" }, { key: "title", label: "Title", placeholder: "Card title" }, { key: "description", label: "Description", placeholder: "Short description", rows: 2 },
-                            ]} addLabel="Add Card" defaultItem={{ icon: "Star", title: "", description: "", visible: true }} />
+                                { key: "icon", label: "Icon", type: "icon" }, 
+                                { key: "title", label: "Title", placeholder: "Card title" }, 
+                                { key: "description", label: "Description", placeholder: "Short description", rows: 2 },
+                                { key: "link", label: "Link URL", placeholder: "e.g., /contact" },
+                                { key: "backgroundImage", label: "Background Image", placeholder: "e.g., /images/bg.jpg" },
+                                { key: "backgroundOpacity", label: "Bg Opacity (0-100)", placeholder: "e.g., 50" }
+                            ]} addLabel="Add Card" defaultItem={{ icon: "Star", title: "", description: "", link: "", backgroundImage: "", backgroundOpacity: 50, visible: true }} />
                         </div>
                     </div>
                 );
@@ -363,8 +368,13 @@ export default function PageEditor({ pageData, slug }) {
                                 <div><h3 className="text-sm font-semibold text-slate-800 dark:text-white">Feature Cards</h3><p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Add, edit, reorder, or hide feature cards.</p></div>
                             </div>
                             <Repeater items={featuresCards} onChange={setFeaturesCards} fields={[
-                                { key: "icon", label: "Icon", type: "icon" }, { key: "title", label: "Title", placeholder: "Feature title" }, { key: "description", label: "Description", placeholder: "Feature description", rows: 3 },
-                            ]} addLabel="Add Feature Card" defaultItem={{ icon: "Star", title: "", description: "", visible: true }} />
+                                { key: "icon", label: "Icon", type: "icon" }, 
+                                { key: "title", label: "Title", placeholder: "Feature title" }, 
+                                { key: "description", label: "Description", placeholder: "Feature description", rows: 3 },
+                                { key: "link", label: "Link URL", placeholder: "e.g., /contact" },
+                                { key: "backgroundImage", label: "Background Image", placeholder: "e.g., /images/bg.jpg" },
+                                { key: "backgroundOpacity", label: "Bg Opacity (0-100)", placeholder: "e.g., 50" }
+                            ]} addLabel="Add Feature Card" defaultItem={{ icon: "Star", title: "", description: "", link: "", backgroundImage: "", backgroundOpacity: 50, visible: true }} />
                         </div>
                     </div>
                 );

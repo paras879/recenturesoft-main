@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ContentHero from "@/components/ContentHero";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
@@ -290,16 +291,35 @@ export default function GenericCrmPage({ page }) {
                                                 )}
                                                 {block.items && block.items.length > 0 && (
                                                     <div className={`grid grid-cols-1 ${block.imageUrl ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'} gap-4 md:gap-6 lg:gap-8`}>
-                                                        {block.items?.map((s, i) => (
-                                                            <div key={i} className="group bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/10 p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden h-full flex flex-col">
-                                                                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                                                <div className="relative z-10 flex flex-col flex-1">
-                                                                    {s.icon && <div className="text-3xl md:text-4xl mb-4 md:mb-6 bg-blue-50 dark:bg-blue-500/10 w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center border border-blue-100 dark:border-blue-500/20">{s.icon}</div>}
-                                                                    <h5 style={{ ...getSubHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-base md:text-xl mb-2 md:mb-4 ${getSubHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
-                                                                    <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-xs sm:text-sm md:text-base ${getTextStyle(block).className || "text-slate-600 dark:text-slate-400"} flex-1`}>{s.desc}</p>
+                                                        {block.items?.map((s, i) => {
+                                                            const cardClasses = "group bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/10 p-5 md:p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden h-full flex flex-col block";
+                                                            const CardInner = (
+                                                                <>
+                                                                    {s.backgroundImage && (
+                                                                        <div className="absolute inset-0 z-0">
+                                                                            <Image src={s.backgroundImage} alt={s.title || "Card Background"} fill className="object-cover" />
+                                                                            <div className="absolute inset-0 bg-black" style={{ opacity: (s.backgroundOpacity !== undefined ? s.backgroundOpacity : 50) / 100 }} />
+                                                                        </div>
+                                                                    )}
+                                                                    <div className={`absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900/20 transition-opacity duration-300 ${s.backgroundImage ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+                                                                    <div className="relative z-10 flex flex-col flex-1">
+                                                                        {s.icon && <div className={`text-3xl md:text-4xl mb-4 md:mb-6 ${s.backgroundImage ? 'bg-white/20' : 'bg-blue-50 dark:bg-blue-500/10'} w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center border ${s.backgroundImage ? 'border-white/30 text-white' : 'border-blue-100 dark:border-blue-500/20'}`}>{s.icon}</div>}
+                                                                        <h5 style={{ ...getSubHeadingStyle(block).style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-base md:text-xl mb-2 md:mb-4 ${s.backgroundImage ? 'text-white' : getSubHeadingStyle(block).className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
+                                                                        <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-xs sm:text-sm md:text-base ${s.backgroundImage ? 'text-white/90' : getTextStyle(block).className || "text-slate-600 dark:text-slate-400"} flex-1`}>{s.desc}</p>
+                                                                    </div>
+                                                                </>
+                                                            );
+
+                                                            return s.link ? (
+                                                                <Link key={i} href={s.link} className={cardClasses}>
+                                                                    {CardInner}
+                                                                </Link>
+                                                            ) : (
+                                                                <div key={i} className={cardClasses}>
+                                                                    {CardInner}
                                                                 </div>
-                                                            </div>
-                                                        ))}
+                                                            );
+                                                        })}
                                                     </div>
                                                 )}
                                                 {renderBlockButtons(block)}
