@@ -90,17 +90,14 @@ const renderBlockButtons = (block) => {
 };
 
 export default function GenericLocationPage({ page }) {
-    const heroContent = page.content?.crmHero || {};
-    const rawBlocks = page.content?.crmBlocks || [];
-    const blocks = [...rawBlocks].sort((a, b) => {
-        const aTop = a.isTopBanner ? 1 : 0;
-        const bTop = b.isTopBanner ? 1 : 0;
-        return bTop - aTop;
-    });
+    const bannerConfig = page.content?.bannerConfig || {};
+    const heroContent = page.content?.crmHero || page.content?.hero || {};
 
-    const title = heroContent.title || page.name || "Customer Relationship";
+    const title = heroContent.title !== undefined && heroContent.title !== "" ? heroContent.title : (heroContent.highlight ? "" : page.name || "Customer Relationship");
     const highlight = heroContent.highlight !== undefined ? heroContent.highlight : (heroContent.title || page.name ? "" : "Management");
-    const desktopBanner = heroContent.desktopBanner || "/Banner/crm_banner.webp";
+    const desktopBanner = bannerConfig.imageUrl || heroContent.desktopBanner || heroContent.bannerImage || "/Banner/crm_banner.webp";
+    const description = heroContent.description || "Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.";
+    const ctaText = heroContent.ctaText || bannerConfig.buttonText || "Get Started Now";
 
     return (
         <div className="min-h-screen bg-[#fafcff] dark:bg-[#020617] selection:bg-blue-500/30 font-manrope">
@@ -124,10 +121,10 @@ export default function GenericLocationPage({ page }) {
                                 </span>
                             </h1>
                             <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-6 md:mb-10 max-w-xl">
-                                Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.
+                                {description}
                             </p>
                              <div className="flex flex-col sm:flex-row gap-4">
-                                 <ClientCTAButton text="Get Started Now" url="#schedule" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
+                                 <ClientCTAButton text={ctaText} url="#schedule" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
                                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                                  </ClientCTAButton>
                              </div>
