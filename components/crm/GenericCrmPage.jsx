@@ -105,7 +105,7 @@ export default function GenericCrmPage({ page }) {
     const highlight = heroContent.highlight !== undefined ? heroContent.highlight : (heroContent.title || page.name ? "" : "Management");
     const desktopBanner = bannerConfig.imageUrl || heroContent.desktopBanner || heroContent.bannerImage || "/Banner/crm_banner.webp";
     const description = heroContent.description || "Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.";
-    const firstButton = (bannerConfig.buttons && bannerConfig.buttons.length > 0) ? bannerConfig.buttons[0] : null;
+    const firstButton = (heroContent.buttons && Array.isArray(heroContent.buttons) && heroContent.buttons.length > 0) ? heroContent.buttons[0] : ((bannerConfig.buttons && Array.isArray(bannerConfig.buttons) && bannerConfig.buttons.length > 0) ? bannerConfig.buttons[0] : (bannerConfig.buttons && bannerConfig.buttons.bgColor ? bannerConfig.buttons : null));
     const ctaText = firstButton?.text || heroContent.ctaText || bannerConfig.buttonText || "Get Started Now";
     const ctaLink = firstButton?.url || heroContent.ctaLink || bannerConfig.buttonLink || "#schedule";
     const ctaBgColor = firstButton?.bgColor || undefined;
