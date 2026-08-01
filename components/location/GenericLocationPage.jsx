@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ContentHero from "@/components/ContentHero";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
 import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
@@ -103,57 +104,24 @@ export default function GenericLocationPage({ page }) {
     const highlight = heroContent.highlight !== undefined ? heroContent.highlight : (heroContent.title || page.name ? "" : "Management");
     const desktopBanner = bannerConfig.imageUrl || heroContent.desktopBanner || heroContent.bannerImage || "/Banner/crm_banner.webp";
     const description = heroContent.description || "Enhance your business workflow, connect your tools, and supercharge your team's productivity with our enterprise-grade solutions.";
-    const ctaText = heroContent.ctaText || bannerConfig.buttonText || "Get Started Now";
+    const firstButton = (bannerConfig.buttons && bannerConfig.buttons.length > 0) ? bannerConfig.buttons[0] : null;
+    const ctaText = firstButton?.text || heroContent.ctaText || bannerConfig.buttonText || "Get Started Now";
+    const ctaLink = firstButton?.url || heroContent.ctaLink || bannerConfig.buttonLink || "#schedule";
 
     return (
         <div className="min-h-screen bg-[#fafcff] dark:bg-[#020617] selection:bg-blue-500/30 font-manrope">
             {/* --- PREMIUM HERO SECTION --- */}
-            <section className="relative pt-24 pb-8 md:pt-32 md:pb-12">
-                {/* Background ambient glows — isolated so decorative blobs don't clip text */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-50/80 to-transparent dark:from-blue-900/20 dark:to-transparent" />
-                    <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-blue-400/10 dark:bg-blue-600/10 rounded-full blur-[120px]" />
-                    <div className="absolute top-20 -left-20 w-[400px] h-[400px] bg-cyan-400/10 dark:bg-cyan-600/10 rounded-full blur-[100px]" />
-                </div>
-
-                <div className="container mx-auto px-3 sm:px-6 max-w-7xl relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center">
-                        {/* Text Content */}
-                        <div className="dynamic-page-hero text-left w-full max-w-full lg:max-w-2xl">
-                            <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.15] mb-4 md:mb-6 tracking-tight w-full">
-                                {title} <br className="hidden md:block" />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">
-                                    {highlight}
-                                </span>
-                            </h1>
-                            <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-6 md:mb-10 max-w-xl">
-                                {description}
-                            </p>
-                             <div className="flex flex-col sm:flex-row gap-4">
-                                 <ClientCTAButton text={ctaText} url="#schedule" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95 group w-full sm:w-auto">
-                                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                                 </ClientCTAButton>
-                             </div>
-                        </div>
-
-                        {/* Image Presentation */}
-                        <div className="relative w-full aspect-[4/3] lg:aspect-square max-h-[600px] flex items-center justify-center">
-                            {/* Decorative elements behind image */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/10 rounded-[3rem] transform rotate-3 scale-105 transition-transform duration-700 hover:rotate-6" />
-                            <div className="absolute inset-0 bg-white dark:bg-slate-900 rounded-[3rem] shadow-xl border border-slate-200/50 dark:border-white/10 overflow-hidden transform transition-transform duration-700 hover:scale-[1.02]">
-                                <Image
-                                    src={desktopBanner}
-                                    alt={`${title} Banner`}
-                                    fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center"
-                                    priority
-                                />
-                                {/* Inner glow/shadow for premium feel */}
-                                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-[3rem]" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <ContentHero 
+                bannerConfig={bannerConfig}
+                title={title}
+                highlight={highlight}
+                description={description}
+                highlightClass="text-blue-500 dark:text-blue-400"
+                bannerImage={desktopBanner}
+                bannerOpacity={bannerConfig.opacity || heroContent.bannerOpacity}
+                ctaText={ctaText}
+                ctaLink={ctaLink}
+            />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
             <section className="py-8 md:py-16 px-3 sm:px-6 relative">
