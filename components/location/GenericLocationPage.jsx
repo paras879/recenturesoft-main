@@ -98,8 +98,8 @@ export default function GenericLocationPage({ page }) {
         return bTop - aTop;
     });
 
-    const title = heroContent.title || "Customer Relationship";
-    const highlight = heroContent.highlight || "Management";
+    const title = heroContent.title || page.name || "Customer Relationship";
+    const highlight = heroContent.highlight !== undefined ? heroContent.highlight : (heroContent.title || page.name ? "" : "Management");
     const desktopBanner = heroContent.desktopBanner || "/Banner/crm_banner.webp";
 
     return (
@@ -474,8 +474,8 @@ export default function GenericLocationPage({ page }) {
                             })}
                         </div>
                     ) : (
-                        <div className="dynamic-crm-content-wrapper">
-                            <CrmContent />
+                        <div className="py-20 text-center text-slate-500">
+                            <p>Content will be added soon.</p>
                         </div>
                     )}
                 </div>
