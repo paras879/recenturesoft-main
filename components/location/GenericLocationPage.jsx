@@ -128,10 +128,10 @@ export default function GenericLocationPage({ page }) {
             />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
-            <section className="py-8 md:py-16 px-3 sm:px-6 relative">
+            <section className="py-6 md:py-8 lg:py-10 px-3 sm:px-6 relative">
                 <div className="max-w-6xl mx-auto">
                     {blocks.length > 0 ? (
-                        <div className="space-y-24">
+                        <div className="space-y-8 md:space-y-10 lg:space-y-12">
                             {blocks.map((block, index) => {
                                 // Helper to wrap any block with a side image if provided
                                 const LayoutWrapper = ({ children, isText }) => {
@@ -251,10 +251,10 @@ export default function GenericLocationPage({ page }) {
                                     return (
                                         <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper>
-                                                <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-[2rem] p-10 md:p-14 text-white shadow-2xl shadow-blue-500/20 text-center">
+                                                <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-[2rem] p-8 md:p-10 text-white shadow-2xl shadow-blue-500/20 text-center">
                                                     <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
                                                     <div className="relative z-10 max-w-3xl mx-auto">
-                                                        {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-6 tracking-tight ${(block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
+                                                        {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold mb-4 tracking-tight ${(block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
                                                         {block.desc1 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`mb-6 leading-relaxed text-xl ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-50"}`}>{block.desc1}</p>}
                                                         {block.desc2 && <p style={{ ...getTextStyle(block).style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`text-lg ${(block.textColor || block.textColorType === 'custom') ? getTextStyle(block).className : "text-blue-100/80"}`}>{block.desc2}</p>}
                                                         {renderBlockButtons({ ...block, buttonAlign: block.buttonAlign || 'center' })}
@@ -273,9 +273,9 @@ export default function GenericLocationPage({ page }) {
                                         <LayoutWrapper>
                                             <div>
                                                 {block.title && (
-                                                    <div className="text-center mb-12">
+                                                    <div className="text-center mb-8">
                                                         <h4 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
-                                                        <div className="w-20 h-1.5 bg-blue-500 mx-auto mt-6 rounded-full" />
+                                                        <div className="w-20 h-1.5 bg-blue-500 mx-auto mt-4 rounded-full" />
                                                     </div>
                                                 )}
                                                 {block.items && block.items.length > 0 && (
@@ -323,7 +323,7 @@ export default function GenericLocationPage({ page }) {
                                             <LayoutWrapper>
                                                 <div>
                                                     {block.title && (
-                                                        <div className="mb-12">
+                                                        <div className="mb-8">
                                                             <h4 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-3xl md:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         </div>
                                                     )}

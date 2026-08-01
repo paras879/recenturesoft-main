@@ -129,10 +129,10 @@ export default function GenericCrmPage({ page }) {
             />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
-            <section className="py-6 md:py-10 lg:py-16 px-3 sm:px-6 relative">
+            <section className="py-6 md:py-8 lg:py-10 px-3 sm:px-6 relative">
                 <div className="max-w-6xl mx-auto">
                     {blocks.length > 0 ? (
-                        <div className="space-y-12 md:space-y-16 lg:space-y-24">
+                        <div className="space-y-8 md:space-y-10 lg:space-y-12">
                             {blocks.map((block, index) => {
                                 // Helper to wrap any block with a side image if provided
                                 const LayoutWrapper = ({ children, isText }) => {
@@ -252,7 +252,7 @@ export default function GenericCrmPage({ page }) {
                                     return (
                                         <div key={index} style={getSpacingStyle(block)}>
                                             <LayoutWrapper>
-                                                <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-6 md:p-10 lg:p-14 text-white shadow-2xl shadow-blue-500/20 text-center">
+                                                <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-6 md:p-8 lg:p-10 text-white shadow-2xl shadow-blue-500/20 text-center">
                                                     <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
                                                     <div className="relative z-10 max-w-3xl mx-auto">
                                                         {block.title && <h3 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 md:mb-6 tracking-tight ${(block.mainHeadingColor || block.mainHeadingColorType === 'custom' || block.headingColor || block.headingColorType === 'custom') ? getHeadingStyle(block).className : "text-white"}`}>{block.title}</h3>}
@@ -274,7 +274,7 @@ export default function GenericCrmPage({ page }) {
                                         <LayoutWrapper>
                                             <div>
                                                 {block.title && (
-                                                    <div className="text-center mb-8 md:mb-12">
+                                                    <div className="text-center mb-6 md:mb-8">
                                                         <h4 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         <div className="w-16 md:w-20 h-1 bg-blue-500 mx-auto mt-4 md:mt-6 rounded-full" />
                                                     </div>
@@ -324,7 +324,7 @@ export default function GenericCrmPage({ page }) {
                                             <LayoutWrapper>
                                                 <div>
                                                     {block.title && (
-                                                        <div className="mb-8 md:mb-12">
+                                                        <div className="mb-6 md:mb-8">
                                                             <h4 style={{ ...getHeadingStyle(block).style, fontSize: (block.mainHeadingSize && block.mainHeadingSize !== 'default') ? block.mainHeadingSize : undefined }} className={`text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight ${getHeadingStyle(block).className}`}>{block.title}</h4>
                                                         </div>
                                                     )}
