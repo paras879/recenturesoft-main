@@ -93,6 +93,12 @@ const renderBlockButtons = (block) => {
 export default function GenericCrmPage({ page }) {
     const bannerConfig = page.content?.bannerConfig || {};
     const heroContent = page.content?.crmHero || page.content?.hero || {};
+    const rawBlocks = page.content?.crmBlocks || [];
+    const blocks = [...rawBlocks].sort((a, b) => {
+        const aTop = a.isTopBanner ? 1 : 0;
+        const bTop = b.isTopBanner ? 1 : 0;
+        return bTop - aTop;
+    });
 
     const title = heroContent.title !== undefined && heroContent.title !== "" ? heroContent.title : (heroContent.highlight ? "" : page.name || "Customer Relationship");
     const highlight = heroContent.highlight !== undefined ? heroContent.highlight : (heroContent.title || page.name ? "" : "Management");
