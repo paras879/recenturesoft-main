@@ -22,6 +22,7 @@ export async function POST(req) {
         }
 
         revalidateTag("inactive-pages");
+        revalidateTag("global-blocks");
 
         if (pagePath) {
             revalidatePath(pagePath);

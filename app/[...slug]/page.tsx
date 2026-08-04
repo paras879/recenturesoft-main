@@ -16,13 +16,27 @@ const getPageData = async (path: string) => {
             const page = await db.collection("webpages").findOne({ path: path, status: "active" });
             return page;
         },
-        ["dynamic-page-data", path], // base cache key including path
+        ["dynamic-page-data", path],
         {
-            tags: [`page-${path}`], // Dynamic tag for targeted revalidation
-            revalidate: 3600, // Revalidate every hour as a fallback
+            tags: [`page-${path}`],
+            revalidate: 3600,
         }
     )();
 };
+
+const getGlobalBlocks = unstable_cache(
+    async () => {
+        await connectDB();
+        const db = mongoose.connection;
+        const blocks = await db.collection("globalblocks").find({ isActive: true }).toArray();
+        return blocks;
+    },
+    ["global-blocks-list"],
+    {
+        tags: ["global-blocks"],
+        revalidate: 3600,
+    }
+);
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
     const resolvedParams = await params;
@@ -42,18 +56,36 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
     const path = resolvedParams?.slug?.length
         ? "/" + resolvedParams.slug.join("/")
         : "/";
-    const page = await getPageData(path);
+    const [page, allGlobalBlocksRaw] = await Promise.all([
+        getPageData(path),
+        getGlobalBlocks(),
+    ]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const allGlobalBlocks: any[] = allGlobalBlocksRaw as any[];
 
     if (!page) {
         notFound();
     }
+
+    // Determine the category of this page (from its DB record)
+    const pageCategory = ((page as any).category || "").toLowerCase();
+
+    // Filter global blocks that apply to this page
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const applicableBlocks: any[] = allGlobalBlocks.filter((b: any) => {
+        if (b.targetCategory === "all") return true;
+        if (b.targetCategory === "industries" && pageCategory === "industries") return true;
+        if (b.targetCategory === "solutions" && pageCategory === "solutions") return true;
+        return false;
+    });
 
     if (page.templateType === "crm-template") {
         return (
             <>
                 <Navbar />
                 <main>
-                    <GenericCrmPage page={page} />
+                    {/* @ts-expect-error - JSX component accepts globalBlocks but is untyped */}
+                    <GenericCrmPage page={page as any} globalBlocks={applicableBlocks} />
                 </main>
                 <FutureFooter />
             </>
@@ -65,7 +97,8 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
             <>
                 <Navbar />
                 <main>
-                    <GenericLocationPage page={page} />
+                    {/* @ts-expect-error - JSX component accepts globalBlocks but is untyped */}
+                    <GenericLocationPage page={page as any} globalBlocks={applicableBlocks} />
                 </main>
                 <FutureFooter />
             </>

@@ -6,6 +6,7 @@ import PageFAQSection from "@/components/shared/PageFAQSection";
 import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import ClientCTAButton from "@/components/shared/ClientCTAButton";
+import GlobalBlockRenderer from "@/components/shared/GlobalBlockRenderer";
 
 const headingColorMap = {
     default: "text-slate-900 dark:text-white",
@@ -91,7 +92,7 @@ const renderBlockButtons = (block) => {
     );
 };
 
-export default function GenericLocationPage({ page }) {
+export default function GenericLocationPage({ page, globalBlocks = [] }) {
     const bannerConfig = page.content?.bannerConfig || {};
     const heroContent = page.content?.crmHero || page.content?.hero || {};
     const rawBlocks = page.content?.crmBlocks || [];
@@ -488,8 +489,18 @@ export default function GenericLocationPage({ page }) {
                 </div>
             </section>
 
+            {/* --- GLOBAL BLOCKS BEFORE FOOTER --- */}
+            {globalBlocks.filter(b => b.position === 'before-footer').map((b, i) => (
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+            ))}
+
             <SolutionContactForm serviceName={`${title} ${highlight}`} />
             <PageFAQSection pageName={page.path.replace("/", "") || "crm"} />
+
+            {/* --- GLOBAL BLOCKS BOTTOM --- */}
+            {globalBlocks.filter(b => b.position === 'bottom').map((b, i) => (
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+            ))}
         </div>
     );
 }

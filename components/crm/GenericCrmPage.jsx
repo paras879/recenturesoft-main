@@ -7,6 +7,7 @@ import CrmContent from "@/components/crm/CrmContent";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import ClientCTAButton from "@/components/shared/ClientCTAButton";
 import ClientCardsGrid from "@/components/crm/ClientCardsGrid";
+import GlobalBlockRenderer from "@/components/shared/GlobalBlockRenderer";
 
 
 const headingColorMap = {
@@ -130,6 +131,11 @@ export default function GenericCrmPage({ page }) {
                 ctaTextColor={ctaTextColor}
                 reverseTitle={true}
             />
+
+            {/* --- GLOBAL BLOCKS TOP --- */}
+            {globalBlocks.filter(b => b.position === 'top').map((b, i) => (
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+            ))}
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
             <section className="pt-6 pb-2 md:pt-8 md:pb-4 lg:pt-10 lg:pb-6 px-2 md:px-4 relative">
@@ -458,8 +464,18 @@ export default function GenericCrmPage({ page }) {
                 </div>
             </section>
 
+            {/* --- GLOBAL BLOCKS BEFORE FOOTER --- */}
+            {globalBlocks.filter(b => b.position === 'before-footer').map((b, i) => (
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+            ))}
+
             <SolutionContactForm serviceName={`${title} ${highlight}`} />
             <PageFAQSection pageName={page.path.replace("/", "") || "crm"} />
+
+            {/* --- GLOBAL BLOCKS BOTTOM --- */}
+            {globalBlocks.filter(b => b.position === 'bottom').map((b, i) => (
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+            ))}
         </div>
     );
 }
