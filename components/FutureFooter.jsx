@@ -199,7 +199,7 @@ export default async function FutureFooter() {
                                             <li key={linkIdx}>
                                                 <Link
                                                     href={link.href}
-                                                    className="text-slate-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-white transition-colors relative group block w-fit"
+                                                    className="text-slate-800 dark:text-slate-300 text-sm font-medium hover:text-primary dark:hover:text-white transition-colors relative group block w-fit"
                                                 >
                                                     <span className="relative z-10 group-hover:translate-x-2 inline-block transition-transform duration-300">
                                                         {link.name}
@@ -220,7 +220,7 @@ export default async function FutureFooter() {
                             <img src={logoUrl} alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm dark:hidden" />
                             <img src="/logo_white.PNG" alt="RecentureSoft Logo" width="200" height="80" className="h-20 w-auto object-contain drop-shadow-sm hidden dark:block" />
                         </div>
-                        <p className="text-slate-600 dark:text-gray-400 text-base leading-relaxed mb-6 lg:mb-10 max-w-sm">
+                        <p className="text-slate-700 dark:text-gray-300 font-medium text-base leading-relaxed mb-6 lg:mb-10 max-w-sm">
                             Engineering Tomorrow&apos;s Digital Future. We build resilient, globally distributed systems and award-winning enterprise user experiences.
                         </p>
                         <div className="flex justify-center sm:justify-start gap-2 overflow-x-auto">
@@ -252,8 +252,8 @@ export default async function FutureFooter() {
                     <div className="order-3 md:order-2 lg:order-3 md:col-span-1 lg:col-span-8 lg:col-start-5">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 pt-0 lg:pt-4">
                             <div className="flex flex-col justify-center">
-                                <h3 className="text-slate-900 dark:text-white font-semibold mb-3 tracking-wide text-sm uppercase">Newsletter</h3>
-                                <p className="text-slate-600 dark:text-gray-400 text-[15px] leading-relaxed">
+                                <h3 className="text-slate-900 dark:text-white font-bold mb-3 tracking-wide text-sm uppercase">Newsletter</h3>
+                                <p className="text-slate-700 dark:text-gray-300 font-medium text-[15px] leading-relaxed">
                                     Get the latest tech news, updates, and special offers delivered directly to your inbox.
                                 </p>
                             </div>
@@ -261,12 +261,12 @@ export default async function FutureFooter() {
                                 <input
                                     type="email"
                                     placeholder="Your email address"
-                                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all shadow-sm"
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all shadow-sm"
                                     required
                                 />
                                 <button
                                     type="button"
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all shadow-md shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5"
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-bold text-sm transition-all shadow-md shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5"
                                 >
                                     Subscribe
                                 </button>
@@ -277,7 +277,7 @@ export default async function FutureFooter() {
                 </div>
 
                 {/* ════ CONTACT & CERTIFICATIONS CARDS ════ */}
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 lg:gap-10 w-full mb-10">
                     <a
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
                         target="_blank"
