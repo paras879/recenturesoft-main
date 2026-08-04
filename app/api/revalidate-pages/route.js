@@ -25,6 +25,7 @@ export async function POST(req) {
 
         if (pagePath) {
             revalidatePath(pagePath);
+            revalidateTag(`page-${pagePath}`);
         }
 
         return NextResponse.json({

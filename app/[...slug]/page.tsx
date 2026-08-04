@@ -8,18 +8,21 @@ import GenericLocationPage from "@/components/location/GenericLocationPage";
 
 import { unstable_cache } from "next/cache";
 
-const getPageData = unstable_cache(
-    async (path: string) => {
-        await connectDB();
-        const db = mongoose.connection;
-        const page = await db.collection("webpages").findOne({ path: path, status: "active" });
-        return page;
-    },
-    ["dynamic-page-data"], // base cache key
-    {
-        revalidate: 3600, // Revalidate every hour as a fallback
-    }
-);
+const getPageData = async (path: string) => {
+    return unstable_cache(
+        async () => {
+            await connectDB();
+            const db = mongoose.connection;
+            const page = await db.collection("webpages").findOne({ path: path, status: "active" });
+            return page;
+        },
+        ["dynamic-page-data", path], // base cache key including path
+        {
+            tags: [`page-${path}`], // Dynamic tag for targeted revalidation
+            revalidate: 3600, // Revalidate every hour as a fallback
+        }
+    )();
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
     const resolvedParams = await params;
