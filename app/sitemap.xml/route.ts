@@ -15,15 +15,15 @@ const LEGAL_PATHS = new Set([
 ]);
 
 const STATIC_INFORMATION_PATHS = [
-  '/', '/about', '/ai-seo', '/amazon-store-management',
+  '/', '/about', '/ai-seo', 
   '/android-application-development', '/blog', '/career', '/cms',
   '/contact', '/content-writing', '/crm', '/dashboard',
-  '/ebay-store-management', '/events', '/ipad-app-development',
-  '/iphone-apps-development', '/magento-development', '/news',
+  '/events', '/ipad-app-development',
+  '/iphone-apps-development', '/news',
   '/next-js', '/node-js', '/opencart-development', '/portfolio',
   '/react', '/react-native', '/salesforce',
   '/seo-package', '/seo-service', '/social-networking', '/solutions',
-  '/web-design', '/wordpress-development-customization',
+  '/web-design', 
   '/generative-ai', '/ai-consulting-services', '/ai-agent-development',
   '/ai-chatbot-development', '/rag-development',
 ];
@@ -57,8 +57,21 @@ export async function GET() {
       entries.push({ loc: `${baseUrl}${path}`, priority, group });
     };
 
+    const webPages = await WebPage.find(
+      {},
+      { path: 1, templateType: 1, status: 1 },
+    ).lean();
+
+    const deletedPaths = new Set<string>();
+    for (const page of webPages) {
+      if (page.status === 'deleted') {
+        deletedPaths.add(normalizePath(page.path));
+      }
+    }
+
     for (const p of STATIC_INFORMATION_PATHS) {
       if (LEGAL_PATHS.has(p)) continue;
+      if (deletedPaths.has(normalizePath(p))) continue;
       addEntry(p, getPriority(p), 'information');
     }
 
@@ -66,10 +79,7 @@ export async function GET() {
       addEntry(p, 0.3, 'legal');
     }
 
-    const webPages = await WebPage.find(
-      {},
-      { path: 1, templateType: 1, status: 1 },
-    ).lean();
+    // webPages already fetched above
 
     for (const page of webPages) {
       const p = normalizePath(page.path);
