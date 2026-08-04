@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, bannerConfig, hideContactButton, ctaText, ctaLink, highlightClass, children, ctaBgColor, ctaTextColor }) {
+export default function ContentHero({ title, highlight, description, bannerImage, bannerOpacity, bannerConfig, hideContactButton, ctaText, ctaLink, highlightClass, children, ctaBgColor, ctaTextColor, reverseTitle }) {
     const configOpacity = bannerConfig?.opacity !== undefined ? bannerConfig.opacity : bannerOpacity;
     const opacityValue = configOpacity !== undefined ? (parseInt(configOpacity) / 100) : 0.7;
     const objectFitClass = bannerConfig?.objectFit === 'contain' ? 'object-contain' : 'object-cover';
@@ -60,8 +60,17 @@ export default function ContentHero({ title, highlight, description, bannerImage
                 <div className={`flex flex-col justify-end md:justify-center items-start text-left min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] lg:min-h-[45vh] pb-10 md:pb-0 md:pt-16 gap-4 md:gap-5`}>
 
                     <h1 className={`font-light md:font-medium tracking-[-0.02em] leading-[1.15] animate-fade-up-1 text-[clamp(1.75rem,4.5vw,3.5rem)] sm:text-[clamp(2rem,4vw,4rem)] md:text-[clamp(2.5rem,3.5vw,4.5rem)] lg:text-[clamp(3rem,3vw,5rem)] max-w-5xl ${hasBg ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-foreground'}`}>
-                        {title} <br className="hidden md:block" />
-                        <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
+                        {reverseTitle ? (
+                            <>
+                                <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
+                                <br className="hidden md:block" /> {title}
+                            </>
+                        ) : (
+                            <>
+                                {title} <br className="hidden md:block" />
+                                <span className={highlightClass || "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"}>{highlight}</span>
+                            </>
+                        )}
                     </h1>
 
                     {description && (

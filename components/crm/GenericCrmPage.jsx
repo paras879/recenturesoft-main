@@ -127,6 +127,7 @@ export default function GenericCrmPage({ page }) {
                 ctaLink={ctaLink}
                 ctaBgColor={ctaBgColor}
                 ctaTextColor={ctaTextColor}
+                reverseTitle={true}
             />
 
             {/* --- DYNAMIC BLOCKS SECTION --- */}
