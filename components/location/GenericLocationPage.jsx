@@ -30,7 +30,7 @@ const getHeadingStyle = (block) => {
     const isCustom = block.mainHeadingColorType === 'custom' || (!block.mainHeadingColorType && block.headingColorType === 'custom');
     if (isCustom) {
         const customColor = block.customMainHeadingColor || block.customHeadingColor;
-        if (customColor) return { style: { color: customColor }, className: "" };
+        if (customColor) return { style: { '--custom-heading': customColor }, className: "text-[color:var(--custom-heading)] dark:text-white" };
     }
     const colorKey = block.mainHeadingColor || block.headingColor || 'default';
     const colorClass = headingColorMap[colorKey] || headingColorMap.default;
@@ -40,7 +40,7 @@ const getHeadingStyle = (block) => {
 const getSubHeadingStyle = (block) => {
     const isCustom = block.subHeadingColorType === 'custom';
     if (isCustom && block.customSubHeadingColor) {
-        return { style: { color: block.customSubHeadingColor }, className: "" };
+        return { style: { '--custom-subheading': block.customSubHeadingColor }, className: "text-[color:var(--custom-subheading)] dark:text-slate-200" };
     }
     const colorKey = block.subHeadingColor || 'default';
     const colorClass = headingColorMap[colorKey] || headingColorMap.default;
@@ -49,7 +49,7 @@ const getSubHeadingStyle = (block) => {
 
 const getTextStyle = (block) => {
     if (block.textColorType === 'custom' && block.customTextColor) {
-        return { style: { color: block.customTextColor }, className: "" };
+        return { style: { '--custom-text': block.customTextColor }, className: "text-[color:var(--custom-text)] dark:text-slate-300" };
     }
     const colorClass = textColorMap[block.textColor] || textColorMap.default;
     return { className: colorClass, style: {} };
