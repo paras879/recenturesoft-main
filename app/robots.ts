@@ -4,8 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
-      disallow: ['/admin/', '/private/'],
+      disallow: '/',
     },
     sitemap: 'https://recenturesoft.com/sitemap.xml',
   };
