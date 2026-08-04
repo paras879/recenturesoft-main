@@ -6,12 +6,20 @@ import Navbar from "@/components/Navbar";
 import GenericCrmPage from "@/components/crm/GenericCrmPage";
 import GenericLocationPage from "@/components/location/GenericLocationPage";
 
-async function getPageData(path: string) {
-    await connectDB();
-    const db = mongoose.connection;
-    const page = await db.collection("webpages").findOne({ path: path, status: "active" });
-    return page;
-}
+import { unstable_cache } from "next/cache";
+
+const getPageData = unstable_cache(
+    async (path: string) => {
+        await connectDB();
+        const db = mongoose.connection;
+        const page = await db.collection("webpages").findOne({ path: path, status: "active" });
+        return page;
+    },
+    ["dynamic-page-data"], // base cache key
+    {
+        revalidate: 3600, // Revalidate every hour as a fallback
+    }
+);
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
     const resolvedParams = await params;
