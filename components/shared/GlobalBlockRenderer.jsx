@@ -7,7 +7,7 @@ import Link from "next/link";
  * Renders a single GlobalBlock (from Admin's Shared Blocks) into the page.
  * It reuses the same visual design as GenericCrmPage blocks.
  */
-export default function GlobalBlockRenderer({ globalBlock }) {
+export default function GlobalBlockRenderer({ globalBlock, pagePath }) {
     if (!globalBlock?.blockData?.blocks?.length) return null;
 
     const blocks = globalBlock.blockData.blocks;
@@ -22,10 +22,22 @@ export default function GlobalBlockRenderer({ globalBlock }) {
                 {blocks.map((block, index) => {
                     // CARDS BLOCK
                     if (block.type === "cards") {
+                        let filteredBlock = { ...block };
+                        if (pagePath && filteredBlock.items) {
+                            filteredBlock.items = filteredBlock.items.filter(item => {
+                                if (item.link) {
+                                    const cleanLink = item.link.toLowerCase().replace(/\/$/, '');
+                                    const cleanPath = pagePath.toLowerCase().replace(/\/$/, '');
+                                    if (cleanLink === cleanPath) return false;
+                                }
+                                return true;
+                            });
+                        }
+
                         return (
                             <div key={index} className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 lg:py-16">
                                 <ClientCardsGrid
-                                    block={block}
+                                    block={filteredBlock}
                                     headingStyle={headingStyle}
                                     subHeadingStyle={subHeadingStyle}
                                     textStyle={textStyle}

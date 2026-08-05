@@ -491,12 +491,12 @@ export default function GenericLocationPage({ page, globalBlocks = [] }) {
 
             {/* --- GLOBAL BLOCKS BEFORE FOOTER --- */}
             {globalBlocks.filter(b => b.position === 'before-footer').map((b, i) => (
-                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} pagePath={page.path} />
             ))}
 
             {/* --- GLOBAL BLOCKS BOTTOM --- */}
             {globalBlocks.filter(b => b.position === 'bottom').map((b, i) => (
-                <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
+                <GlobalBlockRenderer key={b._id || i} globalBlock={b} pagePath={page.path} />
             ))}
 
             <SolutionContactForm serviceName={`${title} ${highlight}`} />
