@@ -24,7 +24,9 @@ export async function POST(req) {
         revalidateTag("inactive-pages");
         revalidateTag("global-blocks");
 
-        if (pagePath) {
+        if (body?.revalidateAll) {
+            revalidatePath('/', 'layout');
+        } else if (pagePath) {
             revalidatePath(pagePath);
             revalidateTag(`page-${pagePath}`);
         }
