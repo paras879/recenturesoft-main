@@ -21,7 +21,8 @@ import {
     Star,
     FolderTree,
     Scale,
-    Globe
+    Globe,
+    Layers
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -57,6 +58,7 @@ export default function AdminSidebar() {
         { name: "Sitemap", href: "/admin/sitemap", icon: FolderTree },
         { name: "Legal Pages", href: "/admin/legal", icon: Scale },
         { name: "Pages", href: "/admin/pages", icon: Globe },
+        { name: "Shared Blocks", href: "/admin/shared-blocks", icon: Layers },
         ...(role === "super_admin" ? [
             { name: "Activity Logs", href: "/admin/activity", icon: Activity },
             { name: "Manage Admins", href: "/admin/admins", icon: UserCog }
