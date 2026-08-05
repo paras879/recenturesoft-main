@@ -469,13 +469,13 @@ export default function GenericCrmPage({ page, globalBlocks = [] }) {
                 <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
             ))}
 
-            <SolutionContactForm serviceName={`${title} ${highlight}`} />
-            <PageFAQSection pageName={page.path.replace("/", "") || "crm"} />
-
             {/* --- GLOBAL BLOCKS BOTTOM --- */}
             {globalBlocks.filter(b => b.position === 'bottom').map((b, i) => (
                 <GlobalBlockRenderer key={b._id || i} globalBlock={b} />
             ))}
+
+            <SolutionContactForm serviceName={`${title} ${highlight}`} />
+            <PageFAQSection pageName={page.path.replace("/", "") || "crm"} />
         </div>
     );
 }
