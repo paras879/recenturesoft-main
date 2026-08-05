@@ -94,7 +94,7 @@ const renderBlockButtons = (block) => {
     );
 };
 
-export default function GenericCrmPage({ page }) {
+export default function GenericCrmPage({ page, globalBlocks = [] }) {
     const bannerConfig = page.content?.bannerConfig || {};
     const heroContent = page.content?.crmHero || page.content?.hero || {};
     const rawBlocks = page.content?.crmBlocks || [];
