@@ -13,7 +13,8 @@ export default function CinematicServiceTemplate({
     ctaTitle,
     ctaSubtitle,
     ctaBtnText,
-    ctaBtnLink
+    ctaBtnLink,
+    children
 }) {
     // Dynamic color maps for the specific theme
     const themeMaps = {
@@ -158,6 +159,13 @@ export default function CinematicServiceTemplate({
                     );
                 })}
             </div>
+
+            {/* Custom Content Area */}
+            {children && (
+                <div className="relative z-10 mb-20 space-y-20">
+                    {children}
+                </div>
+            )}
 
             {/* 3. Call to Action Mini-Ribbon */}
             <motion.div

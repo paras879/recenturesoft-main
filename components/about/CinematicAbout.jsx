@@ -47,23 +47,23 @@ function AboutHero({ data = {} }) {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center justify-end md:justify-center min-h-[30vh] sm:min-h-[35vh] md:min-h-[40vh] lg:min-h-[45vh] pb-0 md:pb-0 md:pt-16">
                     {/* Left Content */}
                     <div className="lg:col-span-12 flex flex-col items-start gap-6 ">
-                    <h1
-                        className={`text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4rem] font-[600] tracking-[-0.04em] leading-[1.05] tracking-tight animate-fade-up ${data?.bannerImage ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-slate-900 dark:text-white'}`}
-                        style={{ animationDelay: "0.1s" }}
-                    >
-                        {data?.heading1 || "Engineering The Future"} <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-500 dark:to-indigo-500 animate-gradient-x">
-                            {data?.headingAccent || "Digital Innovation"}
-                        </span>
-                    </h1>
+                        <h1
+                            className={`text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4rem] font-[600] tracking-[-0.04em] leading-[1.05] tracking-tight animate-fade-up ${data?.bannerImage ? 'text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]' : 'text-slate-900 dark:text-white'}`}
+                            style={{ animationDelay: "0.1s" }}
+                        >
+                            {data?.heading1 || "Engineering The Future"} <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-500 dark:to-indigo-500 animate-gradient-x">
+                                {data?.headingAccent || "Digital Innovation"}
+                            </span>
+                        </h1>
 
-                    <p
-                        className={`text-base sm:text-lg md:text-xl max-w-xl leading-8 animate-fade-up whitespace-pre-wrap ${data?.bannerImage ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-slate-600 dark:text-slate-300'}`}
-                        style={{ animationDelay: "0.2s" }}
-                    >
-                        {data?.desc || "We help global businesses build scalable software, AI solutions, cloud platforms, and enterprise digital products."}
-                    </p>
-                </div>
+                        <p
+                            className={`text-base sm:text-lg md:text-xl max-w-xl leading-8 animate-fade-up whitespace-pre-wrap ${data?.bannerImage ? 'text-slate-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-slate-600 dark:text-slate-300'}`}
+                            style={{ animationDelay: "0.2s" }}
+                        >
+                            {data?.desc || "We help global businesses build scalable software, AI solutions, cloud platforms, and enterprise digital products."}
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -164,11 +164,11 @@ function CultureGallery({ data = {} }) {
     return (
         <section className="relative w-full py-[clamp(1rem,2.5vw,2rem)] bg-slate-50 dark:bg-[#020617] px-4 sm:px-6 lg:px-12 transition-colors duration-300">
             <div className="w-full mx-auto flex flex-col gap-8 md:gap-10">
-                <div className="flex flex-col gap-2 max-w-2xl">
+                <div className="flex flex-col items-center text-center gap-3 md:gap-4 max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-[500] text-slate-900 dark:text-white leading-tight">{data?.heading || "Our Culture"}</h2>
                     <p className="text-sm md:text-base lg:text-lg text-slate-600 dark:text-slate-400 whitespace-pre-wrap">{data?.desc || "Life at RecentureSoft is fueled by curiosity, collaboration, and coffee. Lots of coffee."}</p>
                 </div>
-                
+
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                     {images.map((src, i) => (
                         <div key={i} className="relative rounded-3xl overflow-hidden group aspect-[4/5]">
