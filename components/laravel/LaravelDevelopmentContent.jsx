@@ -153,9 +153,13 @@ export default function LaravelDevelopmentContent({ dynamicData }) {
                                 <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">{heroTitleColored}</span>
                             </h1>
-                            <p className="text-base md:text-lg md:text-base md:text-xl text-slate-600 dark:text-slate-300 mb-4 md:mb-8 leading-relaxed">
-                                {heroDesc}
-                            </p>
+                            <div className="text-base md:text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-4 md:mb-8 leading-relaxed">
+                                {heroDesc ? heroDesc.split('\n').map((paragraph, i) => (
+                                    <span key={i} className="block mb-3 last:mb-0">
+                                        {paragraph}
+                                    </span>
+                                )) : null}
+                            </div>
                             <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
                                 <Link href={heroBtn1Link} className="w-full sm:w-auto text-center px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white font-medium md:font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all hover:scale-105 hover:-translate-y-1">
                                     {heroBtn1}
@@ -257,9 +261,13 @@ export default function LaravelDevelopmentContent({ dynamicData }) {
                                 {aboutTitle}
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-4 md:mb-8"></div>
-                            <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-4 md:mb-10 leading-relaxed">
-                                {aboutDesc}
-                            </p>
+                            <div className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-4 md:mb-10 leading-relaxed">
+                                {aboutDesc ? aboutDesc.split('\n').map((paragraph, i) => (
+                                    <span key={i} className="block mb-4 last:mb-0">
+                                        {paragraph}
+                                    </span>
+                                )) : null}
+                            </div>
 
                             <div className="grid grid-cols-2 gap-8">
                                 {aboutStatsList.map((stat, idx) => (
@@ -512,8 +520,14 @@ export default function LaravelDevelopmentContent({ dynamicData }) {
                                             <Icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h3 className="text-base md:text-lg font-medium md:font-bold text-slate-900 dark:text-white mb-1">{item.title}</h3>
-                                            <p className="text-slate-600 dark:text-slate-400">{item.desc}</p>
+                                            <h3 className="text-base md:text-lg font-medium md:font-bold text-slate-900 dark:text-white mb-2">{item.title}</h3>
+                                            <div className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
+                                                {item.desc ? item.desc.split('\n').map((paragraph, i) => (
+                                                    <span key={i} className="block mb-3 last:mb-0">
+                                                        {paragraph}
+                                                    </span>
+                                                )) : null}
+                                            </div>
                                         </div>
                                     </motion.div>
                                 )
