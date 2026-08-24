@@ -15,6 +15,19 @@ import {
     Star, Quote, CpuIcon, Target, Search, Compass, Workflow, PlayCircle, Settings
 } from 'lucide-react';
 
+const iconMap = {
+    Brain, Cpu, Code, Database, Globe, Layers, Server, Shield,
+    Smartphone, Zap, ChevronDown, CheckCircle2, ArrowRight,
+    MessageSquare, FileText, BarChart3, Bot, Network,
+    Building2, HeartPulse, Landmark, ShoppingBag,
+    Briefcase, Truck, Scale, Plane, Stethoscope,
+    Star, Quote, CpuIcon, Target, Search, Compass, Workflow, PlayCircle, Settings
+};
+
+const getIcon = (iconName, FallbackIcon) => {
+    return iconMap[iconName] || FallbackIcon;
+};
+
 const RAGDevelopmentContent = ({ faqs = [], content = {} }) => {
     const { openModal } = useProjectModal();
     const { openMeetingModal } = useMeetingModal();
@@ -249,11 +262,58 @@ const RAGDevelopmentContent = ({ faqs = [], content = {} }) => {
                 </div>
             </section>
 
-            
-            
+            {/* 6. ACTIONABLE INSIGHTS SOLUTIONS */}
+            <section className="py-12 bg-slate-50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                            {content?.ragActionable?.title || "Enterprise RAG Solutions To Revamp Unstructured Data Into Actionable Insights"}
+                        </h2>
+                        <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                            {content?.ragActionable?.desc || "Our professional RAG development agency in India delivers contextual, top-notch outcomes for insight discovery, enterprise search, and internal copilots. These are the solutions we offer:"}
+                        </p>
+                    </div>
 
-            
-            
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {(content?.ragActionable?.cards?.length > 0 ? content.ragActionable.cards : [
+                            { 
+                                title: "RAG-driven knowledge bots", 
+                                desc: "Our AI-powered bots offer precise and quick answers by extracting data from your docs, internal wikis, and databases, reducing employee search time by 50%.",
+                                icon: "Bot" 
+                            },
+                            { 
+                                title: "Adaptive document assistants", 
+                                desc: "Boosting your productivity has now become hassle-free with smart document navigation, thanks to our RAG LLM tools, which combine required sections, data points, and clauses in seconds.",
+                                icon: "FileText" 
+                            },
+                            { 
+                                title: "Real-time insight summarizers", 
+                                desc: "Our RAG development packages in India help turn lengthy meetings, reports, and data streams into actionable summaries that focus only on the major trends and vital details.",
+                                icon: "BarChart3" 
+                            }
+                        ]).map((card, idx) => {
+                            const Icon = getIcon(card.icon, Bot);
+                            return (
+                                <motion.div 
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.15 }}
+                                    className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/5 transition-all group"
+                                >
+                                    <div className="w-14 h-14 bg-blue-50 dark:bg-slate-900/50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 transition-all duration-300">
+                                        <Icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{card.title}</h3>
+                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{card.desc}</p>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
 
             {/* 8. WHY CHOOSE RECENTURESOFT */}
             <section className="py-8 bg-slate-50 dark:bg-slate-900/30">
