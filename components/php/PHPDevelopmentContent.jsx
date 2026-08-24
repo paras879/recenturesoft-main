@@ -132,13 +132,13 @@ export default function PHPDevelopmentContent({ dynamicData }) {
     ];
 
     // 10. Final CTA
-    const ctaTitlePlain = content.ctaTitlePlain || 'Ready to Build Your';
-    const ctaTitleColored = content.ctaTitleColored || 'PHP Web?';
-    const ctaDesc = content.ctaDesc || 'Turn your app idea into a high-performance mobile application with PHP experts at RecentureSoft.';
-    const ctaBtn1 = content.ctaBtn1 || 'Start Your Project';
-    const ctaBtn1Link = content.ctaBtn1Link || '/contact';
-    const ctaBtn2 = content.ctaBtn2 || 'Talk to PHP Experts';
-    const ctaBtn2Link = content.ctaBtn2Link || '/contact';
+    const ctaTitlePlain = content.ctaTitlePlain ?? 'Ready to Build Your';
+    const ctaTitleColored = content.ctaTitleColored ?? 'PHP Web?';
+    const ctaDesc = content.ctaDesc ?? 'Turn your app idea into a high-performance mobile application with PHP experts at RecentureSoft.';
+    const ctaBtn1 = content.ctaBtn1 ?? 'Start Your Project';
+    const ctaBtn1Link = content.ctaBtn1Link ?? '/contact';
+    const ctaBtn2 = content.ctaBtn2 ?? 'Talk to PHP Experts';
+    const ctaBtn2Link = content.ctaBtn2Link ?? '/contact';
 
     return (
         <div className="font-sans selection:bg-blue-500/30">
@@ -601,8 +601,8 @@ export default function PHPDevelopmentContent({ dynamicData }) {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-medium md:font-extrabold text-white mb-6 leading-tight">
-                            {ctaTitlePlain} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">{ctaTitleColored}</span>
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium md:font-extrabold text-white mb-6 leading-tight">
+                            {ctaTitlePlain} {ctaTitleColored && <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">{ctaTitleColored}</span>}
                         </h2>
                         <p className="text-xl text-blue-100 mb-4 md:mb-10 leading-relaxed max-w-2xl mx-auto">
                             {ctaDesc}
