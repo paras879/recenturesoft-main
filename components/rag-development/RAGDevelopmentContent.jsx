@@ -256,7 +256,7 @@ const RAGDevelopmentContent = ({ faqs = [], content = {} }) => {
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                             className="lg:col-span-7 relative h-[250px] md:h-[400px] lg:h-[640px] lg:mt-[100px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl"
                         >
-                            <Image src="/images/rag-development/dashboard_rag.webp" alt="AI Analytics Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" />
+                            <Image src="/images/rag-development/dashboard_rag.webp" alt="AI Analytics Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" priority loading="eager" />
                         </motion.div>
                     </div>
                 </div>
