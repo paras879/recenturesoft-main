@@ -80,6 +80,17 @@ export default function ReactContent({ dynamicData }) {
     ];
     const hiringOutro = content.hiringOutro ?? "Wondering about hiring a React JS development company in India to make your dream business successful? RecentureSoft is a top-notch React JS development company with a team of developers who can create remarkable, tailored web apps.";
 
+    const reactStepsTitle = content.reactStepsTitle ?? "Our Proven React JS Development Process";
+    const reactStepsIntro = content.reactStepsIntro ?? "At RecentureSoft, we follow an agile and structured React JS development process to build robust, scalable, and SEO-friendly web applications that drive business growth.";
+    const reactStepsList = content.reactStepsList ?? [
+        { title: "Requirement Analysis", desc: "We analyze your business goals, target audience, and technical requirements to define a comprehensive React JS frontend strategy." },
+        { title: "UI/UX Strategy", desc: "Our designers craft intuitive user interfaces and wireframes focused on delivering exceptional user experiences and high engagement." },
+        { title: "Architecture Planning", desc: "We design a scalable React architecture, selecting the best state management tools and component structures for long-term growth." },
+        { title: "Custom Development", desc: "Our expert React developers write clean, reusable, and SEO-optimized code to build high-performance single-page applications (SPAs)." },
+        { title: "Quality Testing", desc: "We conduct extensive performance, security, and cross-browser testing to ensure your web app functions flawlessly across all devices." },
+        { title: "Deployment & Support", desc: "After successful deployment, we continuously monitor and optimize your React JS application for maximum speed and SEO visibility." }
+    ];
+
     return (
         <CinematicServiceTemplate
             title={title}
@@ -92,6 +103,30 @@ export default function ReactContent({ dynamicData }) {
             ctaBtnText={content.ctaBtnText}
             ctaBtnLink={content.ctaBtnLink}
         >
+            {/* React Development Process Section */}
+            <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8 md:p-12 shadow-xl mb-12">
+                <div className="text-center max-w-3xl mx-auto mb-12">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6">
+                        {reactStepsTitle}
+                    </h2>
+                    <p className="text-lg text-slate-600 dark:text-slate-400">
+                        {reactStepsIntro}
+                    </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+                    {reactStepsList.map((step, index) => (
+                        <div key={index} className="relative p-6 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700 hover:-translate-y-1 transition-transform group">
+                            <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                {index + 1}
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{step.title}</h3>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{step.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             {/* Hiring Process Section */}
             <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8 md:p-12 shadow-xl">
                 <div className="text-center max-w-3xl mx-auto mb-12">
