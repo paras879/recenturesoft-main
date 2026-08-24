@@ -13,7 +13,7 @@ export default function NodeJsContent({ dynamicData }) {
         if (typeof iconName === 'string') {
             return iconMap[iconName] || FallbackIcon || FileText;
         }
-        return iconName || FallbackIcon || FileText;
+        return FallbackIcon || FileText;
     };
 
     const content = dynamicData?.content || {};

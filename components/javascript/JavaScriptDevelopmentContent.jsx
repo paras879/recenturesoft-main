@@ -23,10 +23,10 @@ export default function JavaScriptDevelopmentContent({ dynamicData }) {
     const [expandedGrids, setExpandedGrids] = useState({})
 
     const getIcon = (iconName, FallbackIcon) => {
-        if (typeof iconName === 'string' && iconMap[iconName]) {
-            return iconMap[iconName];
+        if (typeof iconName === 'string') {
+            return iconMap[iconName] || FallbackIcon || FileText;
         }
-        return iconName || FallbackIcon || FileText;
+        return FallbackIcon || FileText;
     };
 
     const content = dynamicData?.content || {};
