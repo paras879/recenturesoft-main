@@ -4,6 +4,67 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const renderDesc = (desc) => {
+    if (!desc) return null;
+    
+    if (desc.includes('•') || desc.includes('\n')) {
+        const lines = desc.split('\n');
+        
+        if (lines.length === 1 && desc.includes('•')) {
+            const parts = desc.split('•').map(p => p.trim());
+            const descText = parts[0];
+            const bullets = parts.slice(1).filter(Boolean);
+            return (
+                <div className="flex flex-col gap-3">
+                    {descText && <span className="block leading-relaxed">{descText}</span>}
+                    {bullets.length > 0 && (
+                        <ul className="list-disc pl-5 space-y-1.5">
+                            {bullets.map((pt, idx) => <li key={idx} className="leading-relaxed">{pt}</li>)}
+                        </ul>
+                    )}
+                </div>
+            );
+        }
+        
+        const elements = [];
+        let currentBullets = [];
+        
+        lines.forEach((line, idx) => {
+            const trimmed = line.trim();
+            if (!trimmed) return;
+            
+            if (trimmed.startsWith('•') || trimmed.startsWith('- ')) {
+                currentBullets.push(trimmed.replace(/^[•-]\s*/, ''));
+            } else if (trimmed.includes('•')) {
+                const parts = trimmed.split('•').map(p => p.trim());
+                if (parts[0]) {
+                    if (currentBullets.length > 0) {
+                        elements.push(<ul key={`ul-${idx}-prev`} className="list-disc pl-5 space-y-1.5 my-2">{currentBullets.map((pt, i) => <li key={i} className="leading-relaxed">{pt}</li>)}</ul>);
+                        currentBullets = [];
+                    }
+                    elements.push(<span key={`span-${idx}`} className="block leading-relaxed mb-2">{parts[0]}</span>);
+                }
+                currentBullets.push(...parts.slice(1).filter(Boolean));
+            } else {
+                if (currentBullets.length > 0) {
+                    elements.push(<ul key={`ul-${idx}`} className="list-disc pl-5 space-y-1.5 my-2">{currentBullets.map((pt, i) => <li key={i} className="leading-relaxed">{pt}</li>)}</ul>);
+                    currentBullets = [];
+                }
+                const isHeading = trimmed.length > 0 && (trimmed.endsWith(':') || (trimmed.length < 60 && idx > 0));
+                elements.push(<span key={`text-${idx}`} className={`block leading-relaxed ${isHeading ? 'font-semibold mt-3 mb-1 text-slate-900 dark:text-white' : ''}`}>{trimmed}</span>);
+            }
+        });
+        
+        if (currentBullets.length > 0) {
+            elements.push(<ul key="ul-last" className="list-disc pl-5 space-y-1.5 my-2">{currentBullets.map((pt, i) => <li key={i} className="leading-relaxed">{pt}</li>)}</ul>);
+        }
+        
+        return <div className="flex flex-col w-full">{elements}</div>;
+    }
+    
+    return desc;
+};
+
 export default function ClientCardsGrid({ block, headingStyle, subHeadingStyle, textStyle, renderButtons }) {
     const [showAll, setShowAll] = useState(false);
     const gridRef = React.useRef(null);
@@ -58,7 +119,9 @@ export default function ClientCardsGrid({ block, headingStyle, subHeadingStyle, 
                             <div className="relative z-10 flex flex-col flex-1">
                                 {s.icon && <div className={`text-3xl md:text-4xl mb-4 md:mb-6 ${s.backgroundImage ? 'bg-white/20' : 'bg-blue-50 dark:bg-blue-500/10'} w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center border ${s.backgroundImage ? 'border-white/30 text-white' : 'border-blue-100 dark:border-blue-500/20'}`}>{s.icon}</div>}
                                 <h5 style={{ ...subHeadingStyle.style, fontSize: (block.subHeadingSize && block.subHeadingSize !== 'default') ? block.subHeadingSize : undefined }} className={`font-bold text-base md:text-xl mb-2 md:mb-4 ${s.backgroundImage ? 'text-white' : subHeadingStyle.className || "text-slate-900 dark:text-white"}`}>{s.title}</h5>
-                                <p style={{ ...textStyle.style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`leading-relaxed text-xs sm:text-sm md:text-base ${s.backgroundImage ? 'text-white/90' : textStyle.className || "text-slate-600 dark:text-slate-400"} flex-1`}>{s.desc}</p>
+                                <div style={{ ...textStyle.style, fontSize: (block.bodyTextSize && block.bodyTextSize !== 'default') ? block.bodyTextSize : undefined }} className={`text-xs sm:text-sm md:text-base ${s.backgroundImage ? 'text-white/90' : textStyle.className || "text-slate-600 dark:text-slate-400"} flex-1`}>
+                                    {renderDesc(s.desc)}
+                                </div>
                             </div>
                         </>
                     );

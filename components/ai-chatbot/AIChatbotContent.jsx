@@ -276,14 +276,11 @@ const AIChatbotContent = ({ faqs = [], content = {} }) => {
                                 ]).map((reason, idx) => {
                                     const Icon = reason.icon || Brain;
                                     return (
-                                        <div key={idx} className={`flex items-start gap-4 ${idx >= 3 && !expandedGrids['why_choose'] ? 'hidden md:flex' : ''}`}>
+                                        <div key={idx} className={`flex items-center gap-4 ${idx >= 3 && !expandedGrids['why_choose'] ? 'hidden md:flex' : ''}`}>
                                             <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center flex-shrink-0">
                                                 <Icon className="w-6 h-6" />
                                             </div>
-                                            <div>
-                                                <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white mb-1">{reason.title}</h3>
-                                                <p className="text-slate-600 dark:text-slate-400">{reason.desc || "Delivering exceptional value and strategic guidance at every step of your AI journey."}</p>
-                                            </div>
+                                            <h3 className="text-xl font-medium md:font-bold text-slate-900 dark:text-white">{reason.title}</h3>
                                         </div>
                                     )
                                 })}

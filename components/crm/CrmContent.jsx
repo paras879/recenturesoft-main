@@ -1,4 +1,5 @@
-import React from 'react';
+import { Brain, Cpu, Code, Database, Globe, Layers, Server, Shield, Smartphone, Zap, ChevronDown, CheckCircle2, ArrowRight, MessageSquare, FileText, BarChart3, Bot, Network, Building2, HeartPulse, Landmark, ShoppingBag, Briefcase, Truck, Scale, Plane, Stethoscope, Star, Quote, CpuIcon, Target, Search, Compass, Workflow, PlayCircle, Settings } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function CrmContent({ dynamicData = {} }) {
     const {
@@ -86,12 +87,75 @@ export default function CrmContent({ dynamicData = {} }) {
                 {crmServices.heading || "Recenturesoft Services: CRM Development Company In India"}
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                {(crmServices.items?.length > 0 ? crmServices.items : defaultServices).map((s, i) => (
-                    <div key={i} className="border border-slate-200 dark:border-slate-700 p-4 rounded-lg bg-white dark:bg-slate-900/40">
-                        <h5 className="font-bold text-indigo-600 dark:text-indigo-400 mb-2">{s.title}</h5>
-                        <p className="text-sm text-slate-600 dark:text-slate-300">{s.desc}</p>
-                    </div>
-                ))}
+                {(crmServices.items?.length > 0 ? crmServices.items : defaultServices).map((s, i) => {
+                    const renderDesc = (desc) => {
+                        if (!desc) return null;
+                        
+                        if (desc.includes('•') || desc.includes('\n')) {
+                            const lines = desc.split('\n');
+                            
+                            if (lines.length === 1 && desc.includes('•')) {
+                                const parts = desc.split('•').map(p => p.trim());
+                                const descText = parts[0];
+                                const bullets = parts.slice(1).filter(Boolean);
+                                return (
+                                    <div className="flex flex-col gap-3">
+                                        {descText && <span className="block leading-relaxed">{descText}</span>}
+                                        {bullets.length > 0 && (
+                                            <ul className="list-disc pl-5 space-y-1.5">
+                                                {bullets.map((pt, idx) => <li key={idx} className="leading-relaxed">{pt}</li>)}
+                                            </ul>
+                                        )}
+                                    </div>
+                                );
+                            }
+                            
+                            const elements = [];
+                            let currentBullets = [];
+                            
+                            lines.forEach((line, idx) => {
+                                const trimmed = line.trim();
+                                if (!trimmed) return;
+                                
+                                if (trimmed.startsWith('•') || trimmed.startsWith('- ')) {
+                                    currentBullets.push(trimmed.replace(/^[•-]\s*/, ''));
+                                } else if (trimmed.includes('•')) {
+                                    const parts = trimmed.split('•').map(p => p.trim());
+                                    if (parts[0]) {
+                                        if (currentBullets.length > 0) {
+                                            elements.push(<ul key={`ul-${idx}-prev`} className="list-disc pl-5 space-y-1.5 my-2">{currentBullets.map((pt, i) => <li key={i} className="leading-relaxed">{pt}</li>)}</ul>);
+                                            currentBullets = [];
+                                        }
+                                        elements.push(<span key={`span-${idx}`} className="block leading-relaxed mb-2">{parts[0]}</span>);
+                                    }
+                                    currentBullets.push(...parts.slice(1).filter(Boolean));
+                                } else {
+                                    if (currentBullets.length > 0) {
+                                        elements.push(<ul key={`ul-${idx}`} className="list-disc pl-5 space-y-1.5 my-2">{currentBullets.map((pt, i) => <li key={i} className="leading-relaxed">{pt}</li>)}</ul>);
+                                        currentBullets = [];
+                                    }
+                                    const isHeading = trimmed.length > 0 && (trimmed.endsWith(':') || (trimmed.length < 60 && idx > 0));
+                                    elements.push(<span key={`text-${idx}`} className={`block leading-relaxed ${isHeading ? 'font-semibold mt-3 mb-1 text-slate-900 dark:text-white' : ''}`}>{trimmed}</span>);
+                                }
+                            });
+                            
+                            if (currentBullets.length > 0) {
+                                elements.push(<ul key="ul-last" className="list-disc pl-5 space-y-1.5 my-2">{currentBullets.map((pt, i) => <li key={i} className="leading-relaxed">{pt}</li>)}</ul>);
+                            }
+                            
+                            return <div className="flex flex-col w-full">{elements}</div>;
+                        }
+                        
+                        return desc;
+                    };
+
+                    return (
+                        <div key={i} className="border border-slate-200 dark:border-slate-700 p-4 rounded-lg bg-white dark:bg-slate-900/40">
+                            <h5 className="font-bold text-indigo-600 dark:text-indigo-400 mb-2">{s.title}</h5>
+                            <div className="text-sm text-slate-600 dark:text-slate-300">{renderDesc(s.desc)}</div>
+                        </div>
+                    );
+                })}
             </div>
 
             <h4 className="text-xl font-bold mt-8 mb-8">
@@ -114,11 +178,52 @@ export default function CrmContent({ dynamicData = {} }) {
             <h4 className="text-xl font-bold mt-8 mb-8">
                 {crmBenefits.heading || "Benefits Of CRM Development Company In India"}
             </h4>
-            <ul className="list-disc pl-5 mb-8 text-slate-600 dark:text-slate-300 space-y-2">
-                {(crmBenefits.items?.length > 0 ? crmBenefits.items : defaultBenefits).map((item, idx) => (
-                    <li key={idx}><strong>{item.title}:</strong> {item.desc}</li>
-                ))}
-            </ul>
+            {(() => {
+                const items = crmBenefits.items?.length > 0 ? crmBenefits.items : defaultBenefits;
+                let description = crmBenefits.desc;
+                let listItems = [...items];
+
+                if (!description && listItems.length > 0 && listItems[0].title && listItems[0].title.length > 150) {
+                    description = listItems[0].title;
+                    if (listItems[0].desc) {
+                        listItems[0] = { title: "", desc: listItems[0].desc };
+                    } else {
+                        listItems.shift();
+                    }
+                }
+
+                return (
+                    <div className="mb-12">
+                        {description && <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 leading-relaxed whitespace-pre-wrap">{description}</p>}
+                        
+                        {listItems.length > 0 && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {listItems.map((item, idx) => {
+                                    const cleanDesc = item.desc ? item.desc.replace(/^:\s*/, '') : '';
+                                    return (
+                                        <div
+                                            key={idx}
+                                            className="p-4 md:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-start gap-4 shadow-sm hover:shadow-md hover:border-blue-500/30 transition-all group"
+                                        >
+                                            <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 mt-0.5">
+                                                <Zap className="w-5 h-5" />
+                                            </div>
+                                            <div className="flex flex-col justify-center min-h-[2.5rem]">
+                                                {item.title && <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{item.title}</h3>}
+                                                {cleanDesc && (
+                                                    <p className={`text-slate-600 dark:text-slate-400 leading-relaxed ${item.title ? 'mt-1 text-sm' : 'text-lg font-medium group-hover:text-blue-600 transition-colors'}`}>
+                                                        {cleanDesc}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+                );
+            })()}
         </div>
     );
 }

@@ -194,12 +194,12 @@ const AIDevelopmentContent = ({ faqs = [], content = {} }) => {
             {/* 5. CONSULTING SOLUTIONS */}
             <section className="py-8 bg-white dark:bg-[#020617]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-stretch">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                            className="lg:col-span-5"
+                            className="lg:col-span-5 flex flex-col justify-center"
                         >
-                            <h2 className="text-3xl lg:text-3xl xl:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight lg:whitespace-nowrap">
+                            <h2 className="text-3xl lg:text-3xl xl:text-4xl font-medium md:font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                                 {content?.aiDevelopmentSolutions?.title || "Business Challenges We Solve"}
                             </h2>
                             <div className="w-20 h-1 bg-blue-600 rounded-full mb-10"></div>
@@ -241,7 +241,7 @@ const AIDevelopmentContent = ({ faqs = [], content = {} }) => {
                         
                         <motion.div 
                             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                            className="lg:col-span-7 relative h-[250px] md:h-[400px] lg:h-[640px] lg:mt-[100px] rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl"
+                            className="lg:col-span-7 relative h-[250px] md:h-[400px] lg:h-full rounded-[32px] overflow-hidden bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-xl"
                         >
                             <Image src="/images/ai-development/projects_ai_dashboard.webp" alt="AI Analytics Dashboard" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" />
                         </motion.div>
