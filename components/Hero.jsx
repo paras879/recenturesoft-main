@@ -6,7 +6,26 @@ import dynamic from "next/dynamic";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
-import HeroGraphic from './HeroGraphic';
+import dynamic from "next/dynamic";
+
+const DynamicHeroGraphic = dynamic(() => import('./HeroGraphic'), { ssr: false });
+
+function DesktopHeroGraphic({ accent }) {
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 768px)");
+        setIsDesktop(mq.matches);
+        const handleChange = (e) => setIsDesktop(e.matches);
+        mq.addEventListener("change", handleChange);
+        return () => mq.removeEventListener("change", handleChange);
+    }, []);
+
+    if (!isDesktop) return null;
+
+    return <DynamicHeroGraphic accent={accent} />;
+}
+
 /* ═══════════════════════════════════════════
    SLIDE DATA  –  add your own images here
 ═══════════════════════════════════════════ */
@@ -218,12 +237,11 @@ export default function Hero({ cmsData = {} }) {
             />
             <div className="absolute bottom-[-5%] left-[-5%] w-[180px] md:w-[400px] h-[180px] md:h-[400px] bg-blue-500/20 dark:bg-blue-900/20 rounded-full pointer-events-none z-[-1] opacity-20 md:opacity-100" />
 
-            {/* ── Hero SVG scene ── */}
             <div
                 style={{ transform: `translateY(${sphereY}px)` }}
                 className="hidden md:block absolute inset-x-0 bottom-[-10%] top-auto h-[350px] sm:h-[400px] lg:bottom-auto lg:top-0 lg:inset-0 lg:left-[45%] lg:h-full z-[-1] pointer-events-none opacity-40 sm:opacity-50 lg:opacity-100"
             >
-                <HeroGraphic accent={slide.accent} />
+                <DesktopHeroGraphic accent={slide.accent} />
             </div>
 
             {/* ── Text content ── */}
