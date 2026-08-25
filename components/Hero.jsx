@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
-import dynamic from "next/dynamic";
+
 
 const DynamicHeroGraphic = dynamic(() => import('./HeroGraphic'), { ssr: false });
 
