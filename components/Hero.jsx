@@ -6,8 +6,7 @@ import dynamic from "next/dynamic";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
 
-const HeroScene = dynamic(() => import('./HeroGraphic'), { ssr: false });
-
+import HeroGraphic from './HeroGraphic';
 /* ═══════════════════════════════════════════
    SLIDE DATA  –  add your own images here
 ═══════════════════════════════════════════ */
@@ -80,62 +79,6 @@ export default function Hero({ cmsData = {} }) {
     const bgOpacity = 1;
     const sphereY = 0;
 
-    // FIX #1 (root cause of desktop-only TBT spike):
-    // The old code did `const [isDesktop, setIsDesktop] = useState(false)` and
-    // flipped it to true inside useEffect via window.innerWidth check. This
-    // meant HeroScene (6 infinite CSS animations + SVG + framer-motion
-    // wrapper) mounted as an EXTRA render pass, purely on desktop, right
-    // after hydration — doubling paint/style work exactly when Lighthouse's
-    // desktop run measures Total Blocking Time.
-    //
-    // FIX #4 (mobile LCP/Speed Index fix, added now):
-    // We bring the isDesktop check BACK, but the goal this time is the
-    // opposite problem: on mobile, `hidden md:block` only hides HeroScene
-    // visually with CSS — the component still MOUNTS, so the dynamic
-    // import() chunk for HeroGraphic still gets fetched and parsed on
-    // mobile even though nobody ever sees it. That's wasted bandwidth and
-    // JS execution competing directly with the LCP image and hero text on
-    // a throttled Slow 4G mobile test — exactly where Speed Index (7.3s)
-    // and LCP (3.8s) were failing.
-    //
-    // Fix: gate HeroScene behind an actual JS matchMedia check, in
-    // addition to the CSS `hidden md:block`, so the dynamic import chunk
-    // is never requested at all on mobile. On desktop, the animation
-    // start is still deferred to window `load` via heroSceneReady, same
-    // as before, keeping it off the critical path for TBT.
-    const [isDesktop, setIsDesktop] = useState(false);
-    const [heroSceneReady, setHeroSceneReady] = useState(false);
-
-    useEffect(() => {
-        const mq = window.matchMedia("(min-width: 768px)");
-        let idleCallbackId;
-        let timeoutId;
-
-        const updateIsDesktop = (matches) => {
-            if (matches) {
-                // Defer mounting heavy components on desktop to reduce initial TBT
-                if (typeof window.requestIdleCallback === 'function') {
-                    idleCallbackId = window.requestIdleCallback(() => setIsDesktop(true), { timeout: 2000 });
-                } else {
-                    timeoutId = setTimeout(() => setIsDesktop(true), 1500);
-                }
-            } else {
-                setIsDesktop(false);
-            }
-        };
-
-        // Initial check
-        updateIsDesktop(mq.matches);
-
-        const handleChange = (e) => updateIsDesktop(e.matches);
-        mq.addEventListener("change", handleChange);
-        return () => {
-            mq.removeEventListener("change", handleChange);
-            if (idleCallbackId) window.cancelIdleCallback(idleCallbackId);
-            if (timeoutId) clearTimeout(timeoutId);
-        };
-    }, []);
-
     // ── Auto-slide timer ─────
     const [loadedSlides, setLoadedSlides] = useState([0]);
 
@@ -151,20 +94,15 @@ export default function Hero({ cmsData = {} }) {
             }, INTERVAL);
         };
 
-        const markReady = () => setHeroSceneReady(true);
-
         if (document.readyState === "complete") {
             startCarousel();
-            markReady();
         } else {
             window.addEventListener("load", startCarousel, { once: true });
-            window.addEventListener("load", markReady, { once: true });
         }
 
         return () => {
             clearInterval(timer);
             window.removeEventListener("load", startCarousel);
-            window.removeEventListener("load", markReady);
         };
     }, []);
 
@@ -281,22 +219,12 @@ export default function Hero({ cmsData = {} }) {
             <div className="absolute bottom-[-5%] left-[-5%] w-[180px] md:w-[400px] h-[180px] md:h-[400px] bg-blue-500/20 dark:bg-blue-900/20 rounded-full pointer-events-none z-[-1] opacity-20 md:opacity-100" />
 
             {/* ── Hero SVG scene ── */}
-            {/*
-                  FIX #4 (cont.): `hidden md:block` still handles the CSS
-                  side of visibility (so there's no flash on desktop while
-                  isDesktop resolves), but the component is now only ever
-                  placed in the tree — and its dynamic import chunk only
-                  ever fetched — when isDesktop is actually true. Mobile
-                  never downloads or parses this chunk at all.
-                */}
-            {isDesktop && (
-                <div
-                    style={{ transform: `translateY(${sphereY}px)` }}
-                    className="hidden md:block absolute inset-x-0 bottom-[-10%] top-auto h-[350px] sm:h-[400px] lg:bottom-auto lg:top-0 lg:inset-0 lg:left-[45%] lg:h-full z-[-1] pointer-events-none opacity-40 sm:opacity-50 lg:opacity-100"
-                >
-                    {heroSceneReady && <HeroScene accent={slide.accent} emissive="#3b82f6" />}
-                </div>
-            )}
+            <div
+                style={{ transform: `translateY(${sphereY}px)` }}
+                className="hidden md:block absolute inset-x-0 bottom-[-10%] top-auto h-[350px] sm:h-[400px] lg:bottom-auto lg:top-0 lg:inset-0 lg:left-[45%] lg:h-full z-[-1] pointer-events-none opacity-40 sm:opacity-50 lg:opacity-100"
+            >
+                <HeroGraphic accent={slide.accent} />
+            </div>
 
             {/* ── Text content ── */}
             <div
