@@ -168,7 +168,7 @@ dark:text-white
                                 <div className="flex flex-wrap items-center gap-3 text-sm">
                                     <span className="font-semibold">{blog.author}</span>
                                     <span>•</span>
-                                    <span>{formatDate(blog.publishDate || blog.createdAt)}</span>
+                                    <span>{formatDate(blog.publishDate || blog.createdAt || blog.updatedAt || new Date('2024-01-01T00:00:00Z').toISOString())}</span>
                                     <span>•</span>
                                     <span>{blog.readingTime || blog.readTime || "5 min read"}</span>
                                 </div>

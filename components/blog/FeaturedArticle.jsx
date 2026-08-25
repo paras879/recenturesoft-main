@@ -54,7 +54,7 @@ export default function FeaturedArticle({ article, title = "Featured Insight" })
                                     <span className="px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-full border border-cyan-500/30">
                                         {article.category}
                                     </span>
-                                    <span className="text-gray-400 text-sm">{formatDate(article.publishDate || article.createdAt)}</span>
+                                    <span className="text-gray-400 text-sm">{formatDate(article.publishDate || article.createdAt || article.updatedAt || new Date('2024-01-01T00:00:00Z').toISOString())}</span>
                                  </div>
                                 <h3 className="text-[clamp(2rem,4vw,3.5rem)] font-bold text-white leading-tight mb-6 group-hover:text-cyan-300 transition-colors duration-300">
                                     {article.title}

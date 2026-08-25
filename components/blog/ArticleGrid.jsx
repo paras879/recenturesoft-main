@@ -112,7 +112,7 @@ export default function ArticleGrid({ articles = [], categories = [] }) {
                                             {article.excerpt}
                                         </p>
                                         <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-200 dark:border-white/5">
-                                            <span className="text-slate-500 dark:text-gray-500 text-xs">{formatDate(article.publishDate || article.createdAt || article.date)}</span>
+                                            <span className="text-slate-500 dark:text-gray-500 text-xs">{formatDate(article.publishDate || article.createdAt || article.updatedAt || article.date || new Date('2024-01-01T00:00:00Z').toISOString())}</span>
                                             <span className="text-cyan-600 dark:text-cyan-400 text-xs font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                                 Read Article
                                                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
