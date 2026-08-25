@@ -25,7 +25,7 @@ export default async function BlogPage() {
     if (!isActive) return notFound();
 
     await connectDB();
-    const blogs = await Blog.find({ published: true }).sort({ createdAt: -1 }).lean();
+    const blogs = await Blog.find({ published: true }).sort({ publishDate: -1, createdAt: -1 }).lean();
 
     const featuredArticle = blogs.find(b => b.featured) || blogs[0] || null;
     const gridArticles = featuredArticle ? blogs.filter(b => b.slug !== featuredArticle.slug) : blogs;
