@@ -59,17 +59,7 @@ export default function IpadAppsContent({ dynamicData }) {
         { title: "Maintenance", desc: "Providing ongoing support, updates, and analytics monitoring post-launch." }
     ];
 
-    // Why Choose Us
-    const whyUsTitle = content.whyUsTitle || "Why Should You Choose Recenturesoft?";
-    const whyUsDesc = content.whyUsDesc || "We are your 'numero uno' iPad app development company. We assure qualitative iOS development services from our side at no extra cost.";
-    const whyChooseUs = content.whyChooseUs || [
-        { icon: "Lock", title: "100% Confidentiality", desc: "We ensure your app code stands tall on expectations with absolute confidentiality. It is never reused or shared." },
-        { icon: "HeartHandshake", title: "Post-Launch Support", desc: "Full proactive support, active data analytics, user monitoring, and hotfixes even after the app launch." },
-        { icon: "Clock", title: "On-Time App Delivery", desc: "Timely delivery is our forte. We ensure your iPad application is launched exactly as planned." },
-        { icon: "TrendingUp", title: "Maximum ROI", desc: "We provide highly efficient iPad apps that give you the best Return on Investment and competitive edge." },
-        { icon: "Users", title: "Proficient App Developers", desc: "Engaged with the most skilled iPad developers who understand how to popularise your brand." },
-        { icon: "ShieldCheck", title: "Trusted Partners", desc: "Your trusted partners from layout design to submission, assuring qualitative services at no extra cost." }
-    ];
+
 
     // CTA
     const ctaTitle = content.ctaTitle || "Got an iPad app idea in your head?";
@@ -189,31 +179,7 @@ export default function IpadAppsContent({ dynamicData }) {
                 </div>
             </div>
 
-            {/* Why Choose Us */}
-            <div className="mb-20">
-                <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                    {whyUsTitle}
-                </h3>
-                <p className="text-center text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto">
-                    {whyUsDesc}
-                </p>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {whyChooseUs.map((item, i) => {
-                        const Icon = getIcon(item.icon, Lock);
-                        return (
-                            <div key={i} className="flex gap-5 items-start p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-colors">
-                                <div className="mt-1 bg-white dark:bg-slate-800 p-3 rounded-full shadow-sm text-blue-500 shrink-0">
-                                    <Icon className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{item.desc}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
+
 
             {/* Call to Action */}
             <div className="text-center mt-12 bg-blue-600 dark:bg-blue-900/40 rounded-3xl p-10 md:p-16 border border-transparent dark:border-blue-800">
