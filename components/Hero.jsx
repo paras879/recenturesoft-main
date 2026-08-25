@@ -15,10 +15,20 @@ function DesktopHeroGraphic({ accent }) {
 
     useEffect(() => {
         const mq = window.matchMedia("(min-width: 768px)");
-        setIsDesktop(mq.matches);
-        const handleChange = (e) => setIsDesktop(e.matches);
-        mq.addEventListener("change", handleChange);
-        return () => mq.removeEventListener("change", handleChange);
+        if (!mq.matches) return; // mobile — never mount
+
+        // Defer mounting until browser is idle to avoid TBT spike
+        let id;
+        if (typeof window.requestIdleCallback === 'function') {
+            id = window.requestIdleCallback(() => setIsDesktop(true), { timeout: 2500 });
+        } else {
+            id = setTimeout(() => setIsDesktop(true), 1500);
+        }
+
+        return () => {
+            if (typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(id);
+            else clearTimeout(id);
+        };
     }, []);
 
     if (!isDesktop) return null;
