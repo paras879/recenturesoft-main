@@ -8,7 +8,7 @@ import Image from "next/image";
 import AndroidAppsContent from "@/components/android-application-development/AndroidAppsContent";
 import FutureFooter from "@/components/FutureFooter";
 import SolutionContactForm from "@/components/shared/SolutionContactForm";
-import PageFAQSection from "@/components/shared/PageFAQSection";
+import AndroidAppsFAQ from "@/components/android-application-development/AndroidAppsFAQ";
 
 const defaultMetadata = {
     title: "Android Application Development Company In India | RecentureSoft",
@@ -59,7 +59,7 @@ export default async function AndroidAppsPage() {
             <SolutionContactForm serviceName="Android Application Development" />
 
 
-            <PageFAQSection pageName="android-application-development" />
+            <AndroidAppsFAQ dynamicData={pageData} />
 
 
 
