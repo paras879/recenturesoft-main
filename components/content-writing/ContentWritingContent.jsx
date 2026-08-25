@@ -90,15 +90,15 @@ export default function ContentWritingContent({ dynamicData }) {
 
             {/* Impact Section */}
             <div className="bg-slate-50 dark:bg-slate-900/50 rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-slate-800 mb-20">
-                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-slate-900 dark:text-white text-center">
-                    How Content Marketing Services Impact Your Business
+                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-slate-900 dark:text-white text-center whitespace-pre-line">
+                    {dynamicData?.content?.marketingImpactTitle || "How Content Marketing Services Impact Your Business"}
                 </h3>
                 <div className="max-w-4xl mx-auto">
-                    <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed text-center">
-                        Content is one of the most valuable assets of any digital business. By utilizing the content, the company can reach its customers through various formats. This way, the business gains organic traffic by providing the exact information the customer needs at the exact moment they need it. Moreover, content marketing impacts your business in the following ways:
+                    <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed text-center whitespace-pre-line">
+                        {dynamicData?.content?.marketingImpactDesc || "Content is one of the most valuable assets of any digital business. By utilizing the content, the company can reach its customers through various formats. This way, the business gains organic traffic by providing the exact information the customer needs at the exact moment they need it. Moreover, content marketing impacts your business in the following ways:"}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                        {[
+                        {(dynamicData?.content?.marketingImpactBullets?.length > 0 ? dynamicData.content.marketingImpactBullets : [
                             "Increase organic traffic",
                             "Build authority and credibility",
                             "Increase website visitors' engagement rate",
@@ -108,15 +108,15 @@ export default function ContentWritingContent({ dynamicData }) {
                             "Improve social media presence",
                             "Enhance email marketing",
                             "Increase ROI"
-                        ].map((item, index) => (
+                        ]).map((item, index) => (
                             <div key={index} className="flex items-center gap-3 bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
                                 <LucideIcons.TrendingUp className="w-5 h-5 text-blue-500 shrink-0" />
                                 <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{item}</span>
                             </div>
                         ))}
                     </div>
-                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-center font-medium">
-                        These are important metrics for running a profitable business, and our content marketing agency in India ensures your business grows.
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-center font-medium whitespace-pre-line">
+                        {dynamicData?.content?.marketingImpactOutro || "These are important metrics for running a profitable business, and our content marketing agency in India ensures your business grows."}
                     </p>
                 </div>
             </div>
@@ -144,16 +144,16 @@ export default function ContentWritingContent({ dynamicData }) {
                 </div>
 
                 <div>
-                    <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Why Choose RecentureSoft?</h3>
+                    <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white whitespace-pre-line">{dynamicData?.content?.whyChooseTitle || "Why Choose RecentureSoft?"}</h3>
                     <div className="bg-slate-50 dark:bg-slate-900/40 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 h-full relative overflow-hidden flex flex-col">
                         <div className="absolute -right-[10%] top-[10%] w-[50%] h-[80%] bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-[80px] pointer-events-none" />
                         
                         <div className="relative z-10 flex-grow">
-                            <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-                                Every business deserves a competent content marketing company in India to help them deliver quality content. We want to be your partner in maintaining and ranking your website's content. We bring many advantages with our services, some of them are:
+                            <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed whitespace-pre-line">
+                                {dynamicData?.content?.whyChooseIntro || "Every business deserves a competent content marketing company in India to help them deliver quality content. We want to be your partner in maintaining and ranking your website's content. We bring many advantages with our services, some of them are:"}
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                                {[
+                                {(dynamicData?.content?.whyChooseBullets?.length > 0 ? dynamicData.content.whyChooseBullets : [
                                     "Professional SEO writers",
                                     "Unique and non-plagiarized content",
                                     "Industry research",
@@ -162,17 +162,15 @@ export default function ContentWritingContent({ dynamicData }) {
                                     "Strong branding",
                                     "On-time delivery",
                                     "Transparent communication"
-                                ].map((reason, i) => (
+                                ]).map((reason, i) => (
                                     <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
                                         <LucideIcons.ShieldCheck className="w-4 h-4 text-blue-500 shrink-0" />
                                         <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{reason}</span>
                                     </div>
                                 ))}
                             </div>
-                            <div className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed space-y-4">
-                                <p>Our content marketing packages in India vary from business to business and are customizable based on the required services.</p>
-                                <p>Let's create high-quality content for your business together to drive better engagement and increase profits.</p>
-                                <p className="font-semibold text-blue-600 dark:text-blue-400">Talk to our experts today to get started and discuss the project, goals and outcomes.</p>
+                            <div className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed space-y-4 whitespace-pre-line">
+                                {dynamicData?.content?.whyChooseOutro || "Our content marketing packages in India vary from business to business and are customizable based on the required services.\n\nLet's create high-quality content for your business together to drive better engagement and increase profits.\n\nTalk to our experts today to get started and discuss the project, goals and outcomes."}
                             </div>
                         </div>
                     </div>
