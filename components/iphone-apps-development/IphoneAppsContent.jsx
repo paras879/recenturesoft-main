@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-    Smartphone, PenTool, Globe, Layers, Settings, ShieldCheck, 
+import {
+    Smartphone, PenTool, Globe, Layers, Settings, ShieldCheck,
     Zap, Rocket, Users, Lock, ChevronDown, CheckCircle2,
-    MonitorPlay, Watch, Briefcase, ShoppingCart, HeartPulse, 
+    MonitorPlay, Watch, Briefcase, ShoppingCart, HeartPulse,
     Plane, Gamepad2, GraduationCap, Car, Truck, Code2, CheckSquare, FileText
 } from "lucide-react";
 
@@ -31,9 +31,9 @@ function TrendingUpIcon(props) {
 }
 
 const iconMap = {
-    Smartphone, PenTool, Globe, Layers, Settings, ShieldCheck, 
+    Smartphone, PenTool, Globe, Layers, Settings, ShieldCheck,
     Zap, Rocket, Users, Lock, ChevronDown, CheckCircle2,
-    MonitorPlay, Watch, Briefcase, ShoppingCart, HeartPulse, 
+    MonitorPlay, Watch, Briefcase, ShoppingCart, HeartPulse,
     Plane, Gamepad2, GraduationCap, Car, Truck, Code2, CheckSquare, FileText,
     TrendingUpIcon
 };
@@ -138,7 +138,11 @@ export default function IphoneAppsContent({ dynamicData }) {
 
     // CTA
     const ctaTitle = content.ctaTitle || "Ready to Get Started?";
-    const ctaDesc = content.ctaDesc || "Top the game with our tailor-made, enterprise-level iOS app development services. Join our happy customers and start building your dream app today.";
+    const ctaDesc = content.ctaDesc || `Top the game with our tailor-made, enterprise-level and professional ios app development services in India. Recenturesoft is a top-trusted iOS app development company in India that combines app development experience and expertise with the latest tools to fulfil the critical requirements of worldwide clients across several verticals.
+
+With years of domain expertise, successful iOS application development projects and happy customers, Recenturesoft has carved a niche in the iPhone application development industry.
+
+For more information about ios app development services India, call our helpline number or browse our website.`;
     const ctaBtnText = content.ctaBtnText || "Contact iOS Experts";
 
     return (
@@ -311,7 +315,7 @@ export default function IphoneAppsContent({ dynamicData }) {
                 <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">
                     {ctaTitle}
                 </h4>
-                <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg">
+                <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg whitespace-pre-line">
                     {ctaDesc}
                 </p>
                 <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
