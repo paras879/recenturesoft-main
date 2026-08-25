@@ -312,37 +312,37 @@ export default function TrustedClients() {
   useEffect(() => {
     const updatePath = () => {
       if (!gridRef.current || !leftNodeRef.current || !rightNodeRef.current) return;
-      
+
       const gridRect = gridRef.current.getBoundingClientRect();
       const leftRect = leftNodeRef.current.getBoundingClientRect();
       const rightRect = rightNodeRef.current.getBoundingClientRect();
-      
+
       if (gridRect.width === 0) return;
-      
+
       // Calculate start and end points based on actual DOM positions
       // Start exactly at the bottom center of the left node (where the document icon is)
-      const startX = leftRect.left - gridRect.left + (leftRect.width / 2); 
+      const startX = leftRect.left - gridRect.left + (leftRect.width / 2);
       // End exactly at the left edge of the right node icon (approx 52px left from center)
       const endX = rightRect.left - gridRect.left + (rightRect.width / 2) - 52;
-      
+
       // Calculate Y coordinates
       // yBottom is below the left node (under the document exit icon which is -bottom-3.5 = 14px down, and height is 28px, so center is exactly at bottom edge)
       const yBottom = leftRect.bottom - gridRect.top;
       // yTop is exactly vertically centered on the cyan icon of the right node
       const yTop = rightRect.top - gridRect.top + 16;
-      
+
       // Calculate gap center
       const gapSize = 32;
       const colWidth = (gridRect.width - (11 * gapSize)) / 12;
       const leftCardWidth = (5 * colWidth) + (4 * gapSize);
       const gapCenter = leftCardWidth + (gapSize / 2);
-      
-      const r = Math.max(10, Math.min(40, Math.abs(yBottom - yTop) / 2 - 5)); 
-      
+
+      const r = Math.max(10, Math.min(40, Math.abs(yBottom - yTop) / 2 - 5));
+
       if (gapCenter < 0) return;
-      
+
       const p = `M ${startX} ${yBottom} L ${gapCenter - r} ${yBottom} A ${r} ${r} 0 0 0 ${gapCenter} ${yBottom - r} L ${gapCenter} ${yTop + r} A ${r} ${r} 0 0 1 ${gapCenter + r} ${yTop} L ${endX} ${yTop}`;
-      
+
       setSvgPath(p);
     };
 

@@ -184,7 +184,7 @@ function TechCard({ tech, activeTech, setActiveTech }) {
                 <h4 className="text-slate-800 dark:text-gray-200 text-sm font-bold tracking-wide group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
                     {tech.name}
                 </h4>
-                <p className="text-slate-700 dark:text-gray-300 text-xs uppercase tracking-wider mt-1">
+                <p className="text-slate-700 dark:text-gray-300 text-xs mt-1">
                     {tech.cat}
                 </p>
             </div>
@@ -290,7 +290,7 @@ export default function TechStack() {
                         </div>
 
                         <div className="relative z-10 pointer-events-none md:mb-0 mb-4">
-                            <span className="text-blue-400 font-mono text-xs uppercase tracking-widest font-semibold font-bold">Integrated Map</span>
+                            <span className="text-blue-400 font-mono text-xs font-semibold font-bold">Integrated Map</span>
                             <h3 className="text-gray-900 dark:text-gray-100 text-xl font-bold mt-2 tracking-tight">
                                 Ecosystem Architecture
                             </h3>
@@ -319,7 +319,7 @@ export default function TechStack() {
                         <div className="hidden lg:block relative z-10 text-xs leading-relaxed w-full max-w-none bg-slate-100/90 dark:bg-slate-950/85 p-4 rounded-2xl border border-slate-200 dark:border-white/5 shadow-premium dark:shadow-2xl font-mono mt-auto backdrop-blur-md">
                             <div className="flex items-center gap-2 mb-3">
                                 <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
-                                <span className="text-slate-700 dark:text-gray-300 font-bold uppercase tracking-wider text-[10px]">System Telemetry</span>
+                                <span className="text-slate-700 dark:text-gray-300 font-bold text-[10px]">System Telemetry</span>
                             </div>
                             {activeTech ? (
                                 <div className="flex flex-col gap-1.5 text-slate-600 dark:text-gray-400">
@@ -340,7 +340,7 @@ export default function TechStack() {
                     {/* Bento Card 1: Core Value Vision Statement */}
                     <BentoCell colSpan="col-span-12 lg:col-span-7" rowSpan="row-span-1" className="flex flex-col justify-between">
                         <div>
-                            <span className="text-cyan-700 dark:text-cyan-300 font-mono text-sm uppercase tracking-widest font-semibold">Vision & Strategy</span>
+                            <span className="text-cyan-700 dark:text-cyan-300 font-mono text-sm font-semibold">Vision & Strategy</span>
                             <h3 className="text-slate-900 dark:text-gray-100 text-3xl md:text-4xl font-extrabold mt-3 mb-4 tracking-tight">
                                 High-Performance Engineering
                             </h3>
@@ -372,7 +372,7 @@ export default function TechStack() {
                     {/* Bento Card 4: Categorized Technology Stack Groups */}
                     <BentoCell colSpan="col-span-12" rowSpan="row-span-1" className="py-8 flex flex-col gap-6">
                         <div className="flex flex-col mb-2">
-                            <span className="text-cyan-700 dark:text-cyan-300 font-mono text-xs uppercase tracking-wide">System Segments</span>
+                            <span className="text-cyan-700 dark:text-cyan-300 font-mono text-xs tracking-wide">System Segments</span>
                             <h3 className="text-slate-900 dark:text-gray-100 text-xl font-bold mt-1 tracking-tight">
                                 Enterprise Stack Segmentation
                             </h3>
@@ -380,28 +380,28 @@ export default function TechStack() {
 
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 w-full">
                             <div className="bg-slate-50 dark:bg-white/[0.005] border border-slate-200 dark:border-white/5 rounded-2xl p-6 hover:bg-white dark:hover:bg-white/[0.015] hover:border-cyan-300 dark:hover:border-cyan-500/20 transition-all duration-300 shadow-sm dark:shadow-none">
-                                <span className="text-xs text-cyan-700 dark:text-cyan-300 font-mono uppercase tracking-widest font-semibold">01 / User Interface</span>
+                                <span className="text-xs text-cyan-700 dark:text-cyan-300 font-mono font-semibold">01 / User Interface</span>
                                 <h4 className="text-slate-800 dark:text-gray-200 text-base md:text-lg font-bold mt-2 mb-2">Frontend Core</h4>
                                 <p className="text-slate-700 dark:text-gray-300 text-sm font-normal leading-relaxed">
                                     React and Angular power our responsive web layouts, supported by Bootstrap for solid responsive grid layouts.
                                 </p>
                             </div>
                             <div className="bg-slate-50 dark:bg-white/[0.005] border border-slate-200 dark:border-white/5 rounded-2xl p-6 hover:bg-white dark:hover:bg-white/[0.015] hover:border-blue-300 dark:hover:border-blue-500/20 transition-all duration-300 shadow-sm dark:shadow-none">
-                                <span className="text-xs text-blue-600 dark:text-blue-400 font-mono uppercase tracking-widest font-semibold">02 / Execution Layer</span>
+                                <span className="text-xs text-blue-600 dark:text-blue-400 font-mono font-semibold">02 / Execution Layer</span>
                                 <h4 className="text-slate-800 dark:text-gray-200 text-base md:text-lg font-bold mt-2 mb-2">Backend Engine</h4>
                                 <p className="text-slate-700 dark:text-gray-300 text-sm font-normal leading-relaxed">
                                     Next.js fullstack capabilities, Node.js microservices, Laravel logic, and robust Java business platforms form the runtime.
                                 </p>
                             </div>
                             <div className="bg-slate-50 dark:bg-white/[0.005] border border-slate-200 dark:border-white/5 rounded-2xl p-6 hover:bg-white dark:hover:bg-white/[0.015] hover:border-purple-300 dark:hover:border-purple-500/20 transition-all duration-300 shadow-sm dark:shadow-none">
-                                <span className="text-xs text-purple-600 dark:text-purple-400 font-mono uppercase tracking-widest font-semibold">03 / Persistence</span>
+                                <span className="text-xs text-purple-600 dark:text-purple-400 font-mono font-semibold">03 / Persistence</span>
                                 <h4 className="text-slate-800 dark:text-gray-200 text-base md:text-lg font-bold mt-2 mb-2">Database Layer</h4>
                                 <p className="text-slate-700 dark:text-gray-300 text-sm font-normal leading-relaxed">
                                     MongoDB handles flexible JSON document storage, optimized query scaling, and multi-node redundancy.
                                 </p>
                             </div>
                             <div className="bg-slate-50 dark:bg-white/[0.005] border border-slate-200 dark:border-white/5 rounded-2xl p-6 hover:bg-white dark:hover:bg-white/[0.015] hover:border-pink-300 dark:hover:border-pink-500/20 transition-all duration-300 shadow-sm dark:shadow-none">
-                                <span className="text-xs text-pink-700 dark:text-pink-300 font-mono uppercase tracking-widest font-semibold">04 / Operations</span>
+                                <span className="text-xs text-pink-700 dark:text-pink-300 font-mono font-semibold">04 / Operations</span>
                                 <h4 className="text-slate-800 dark:text-gray-200 text-base md:text-lg font-bold mt-2 mb-2">Cloud Infrastructure</h4>
                                 <p className="text-slate-700 dark:text-gray-300 text-sm font-normal leading-relaxed">
                                     Automated CI/CD workflows, containerization, elastic clusters, and CDN edge distribution ensure global availability.

@@ -5,7 +5,7 @@ export default function ContentHero({ title, highlight, description, bannerImage
     const configOpacity = bannerConfig?.opacity !== undefined ? bannerConfig.opacity : bannerOpacity;
     const opacityValue = configOpacity !== undefined ? (parseInt(configOpacity) / 100) : 0.7;
     const objectFitClass = bannerConfig?.objectFit === 'contain' ? 'object-contain' : 'object-cover';
-    
+
     const hasBg = !!(children || bannerImage);
     return (
         <section className={`relative pt-16 md:pt-20 lg:pt-24 pb-2 md:pb-4 lg:pb-6 overflow-hidden min-h-fit flex items-center transition-colors duration-300 ${hasBg ? 'bg-[#020617]' : 'bg-background'}`}>

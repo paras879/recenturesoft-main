@@ -40,8 +40,8 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
     const imgs = images && images.length > 0 ? images : fallbacks;
 
     return (
-        <div className="w-full h-full flex items-center justify-center p-4">
-            <div className="relative w-[100px] md:w-[140px] lg:w-[160px] aspect-[9/19] bg-white dark:bg-slate-900 rounded-[1rem] border-[5px] md:border-[6px] border-slate-900 shadow-2xl overflow-hidden group">
+        <div className="w-full h-full flex items-center justify-center p-2 lg:p-4">
+            <div className="relative h-[180px] md:h-[220px] lg:h-[280px] aspect-[9/19] bg-white dark:bg-slate-900 rounded-[1rem] md:rounded-[1.25rem] border-[5px] md:border-[6px] border-slate-900 shadow-2xl overflow-hidden group">
                 {/* iPhone Notch */}
                 <div className="w-full h-full relative z-10">
                     {imgs.map((src, i) => (
@@ -53,8 +53,8 @@ function PhoneFrame({ activeSlide, images, fallbacks }) {
                                 src={src}
                                 alt={`Mobile Slide ${i + 1}`}
                                 fill
-                                sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 100px"
-                                className="object-contain block bg-white dark:bg-slate-900"
+                                sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 160px"
+                                className="object-cover object-top block bg-white dark:bg-slate-900"
                             />
                         </div>
                     ))}
@@ -108,7 +108,7 @@ function ServiceCard({ service, activeSlide }) {
 
             {/* Content Left/Top */}
             <div className="relative z-10 flex flex-col gap-3 w-full lg:w-7/12 justify-center transition-all duration-700 ease-out group-hover:translate-x-2 group-hover:-translate-y-1">
-                <h3 className="text-[1.3rem] md:text-[1.6rem] lg:text-[1.8rem] font-[600] text-slate-900 dark:text-white tracking-[-0.03em] leading-[1.1] transition-colors duration-500 whitespace-nowrap overflow-hidden text-ellipsis">{service.title}</h3>
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight leading-snug transition-colors duration-500">{service.title}</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-[0.95rem] md:text-base leading-7 font-[400] mt-2 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors duration-500 whitespace-pre-line">{service.description || service.shortDescription}</p>
 
                 <div className="flex flex-wrap gap-2 mt-4">

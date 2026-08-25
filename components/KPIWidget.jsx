@@ -1,9 +1,9 @@
 /* Color tokens — must match StatsDashboard.jsx */
 const C = {
-  primary:   "#06E6FF",
+  primary: "#06E6FF",
   secondary: "#3B82F6",
-  accent:    "#8B5CF6",
-  gradient:  "linear-gradient(135deg, #06E6FF, #3B82F6, #8B5CF6)",
+  accent: "#8B5CF6",
+  gradient: "linear-gradient(135deg, #06E6FF, #3B82F6, #8B5CF6)",
 };
 
 /**
@@ -27,7 +27,8 @@ export default function KPIWidget({ label, value, color, trend = "up", icon, ind
       className="group relative rounded-2xl cursor-pointer overflow-hidden animate-neonEdge hover:-translate-y-1.5 hover:scale-[1.03] transition-all duration-300"
     >
       {/* CSS float style */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes floatWidget {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-3px); }

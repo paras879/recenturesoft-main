@@ -167,8 +167,8 @@ function MiniDashboard({ data, isPeak, hovered, index }) {
     return (
         <div
             className={`absolute bottom-full left-1/2 ${translateX} mb-4 z-50 w-52 pointer-events-none transition-all duration-200 ease-out origin-bottom ${hovered
-                    ? "opacity-100 translate-y-0 scale-100 visible"
-                    : "opacity-0 translate-y-2 scale-95 invisible"
+                ? "opacity-100 translate-y-0 scale-100 visible"
+                : "opacity-0 translate-y-2 scale-95 invisible"
                 }`}
         >
             <div
@@ -458,7 +458,7 @@ function NetworkLines({ data, maxValue, chartHeight }) {
    ═══════════════════════════════════════════════════════ */
 function LiveCounter() {
     const [liveCount, setLiveCount] = useState(14580);
-    
+
     useEffect(() => {
         const id = setInterval(() => {
             setLiveCount((p) => p + Math.floor(Math.random() * 5) + 1);
@@ -525,9 +525,9 @@ export default function StatsDashboard({ cmsData = {} }) {
                     <div key={c.id}>
                         <Counter3D
                             icon={c.icon}
-                            value={cmsData.stats?.[`counter${i+1}Value`] || c.value}
+                            value={cmsData.stats?.[`counter${i + 1}Value`] || c.value}
                             suffix={c.suffix}
-                            label={cmsData.stats?.[`counter${i+1}Label`] || c.label}
+                            label={cmsData.stats?.[`counter${i + 1}Label`] || c.label}
                         />
                     </div>
                 ))}
@@ -545,7 +545,7 @@ export default function StatsDashboard({ cmsData = {} }) {
                     className="relative mt-5 rounded-3xl md:backdrop-blur-2xl overflow-hidden bg-slate-50 dark:bg-[#0a1225]/80 border border-slate-200 dark:border-white/[0.04] shadow-none md:shadow-[0_0_80px_rgba(6,230,255,0.06)]"
                 >
                     {/* Holographic background */}
-                    <HolographicCore />
+                    {/* <HolographicCore /> removed to reduce visual noise */}
 
                     {/* ── KPI cards ── */}
                     <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-4 md:p-6 lg:p-8 pb-0 md:pb-2">
@@ -615,7 +615,7 @@ export default function StatsDashboard({ cmsData = {} }) {
                             {/* SVG layers */}
                             <div className="ml-8 sm:ml-11 pb-2 sm:pb-0">
                                 <div className="relative w-full">
-                                    <NetworkLines data={displayData} maxValue={maxValue} chartHeight={chartHeight} />
+
                                     <TrendLine data={displayData} maxValue={maxValue} chartHeight={chartHeight} />
 
                                     {/* Bars */}

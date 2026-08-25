@@ -80,7 +80,7 @@ export default function PageHero({ title, highlight, description, banner, highli
                         {description}
                     </p>
 
-                    { !hideContactButton && (
+                    {!hideContactButton && (
                         <div className="animate-fade-up-2" style={{ animationDelay: '0.3s' }}>
                             {ctaLink && (ctaLink.startsWith('/') || ctaLink.startsWith('http')) ? (
                                 <a

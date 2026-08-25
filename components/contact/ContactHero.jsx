@@ -185,7 +185,8 @@ function CSSGlobe() {
                 />
             </div>
 
-            <style dangerouslySetInnerHTML={{__html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes orbitSpin1 {
                     from { transform: rotateX(70deg) rotateZ(0deg); }
                     to   { transform: rotateX(70deg) rotateZ(360deg); }
@@ -312,13 +313,13 @@ export default function ContactHero({ data = {} }) {
                             className="flex flex-col sm:flex-row w-full gap-3 pt-2 animate-fade-in-up"
                             style={{ animationDelay: "300ms" }}
                         >
-                            <button 
+                            <button
                                 onClick={openModal}
                                 className="px-7 py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-lg transition-colors"
                             >
                                 {primaryBtn}
                             </button>
-                            <button 
+                            <button
                                 onClick={openMeetingModal}
                                 className="px-7 py-3.5 bg-slate-200/50 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white font-semibold rounded-lg transition-colors backdrop-blur-sm"
                             >

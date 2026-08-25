@@ -221,12 +221,12 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                                             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-90" />
 
                                             <div className={`grid gap-x-6 gap-y-8 relative z-10 ${link.name === "Solutions"
-                                                    ? "grid-cols-4"
-                                                    : (industriesMenu.length === 1 ? "grid-cols-1"
-                                                        : industriesMenu.length === 2 ? "grid-cols-2"
-                                                            : industriesMenu.length === 3 ? "grid-cols-3"
-                                                                : industriesMenu.length === 4 ? "grid-cols-4"
-                                                                    : "grid-cols-5")
+                                                ? "grid-cols-4"
+                                                : (industriesMenu.length === 1 ? "grid-cols-1"
+                                                    : industriesMenu.length === 2 ? "grid-cols-2"
+                                                        : industriesMenu.length === 3 ? "grid-cols-3"
+                                                            : industriesMenu.length === 4 ? "grid-cols-4"
+                                                                : "grid-cols-5")
                                                 }`}>
                                                 {(link.name === "Solutions" ? activeSolutionsMenu : industriesMenu).map((category, idx) => {
                                                     const Icon = category.icon;

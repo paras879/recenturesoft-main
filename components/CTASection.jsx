@@ -33,13 +33,13 @@ export default function CTASection({ title = "Ready to build something extraordi
                     <div
                         className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
                     >
-                        <button 
+                        <button
                             onClick={openModal}
                             className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-semibold rounded-full hover:bg-cyan-600 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
                             {primaryBtnText}
                         </button>
-                        <button 
+                        <button
                             onClick={openMeetingModal}
                             className="w-full sm:w-auto px-8 py-4 bg-slate-200/50 dark:bg-white/[0.05] text-slate-800 dark:text-white border border-slate-300 dark:border-white/10 font-semibold rounded-full hover:bg-slate-300/50 dark:hover:bg-white/[0.1] transition-all duration-300 transform hover:scale-105 active:scale-95"
                         >

@@ -82,17 +82,17 @@ function FeaturedEvent({ event, onViewGallery }) {
             >
                 {/* Background Image */}
                 <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]">
-                    <Image 
+                    <Image
                         src={
-                            event.heroImage.includes('res.cloudinary.com') 
-                                ? event.heroImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low,w_800/') 
+                            event.heroImage.includes('res.cloudinary.com')
+                                ? event.heroImage.replace('/image/upload/', '/image/upload/f_auto,q_auto:low,w_800/')
                                 : event.heroImage
                         }
                         unoptimized={true}
-                        alt={event.title} 
-                        fill 
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" 
-                        className="object-cover" 
+                        alt={event.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                        className="object-cover"
                         priority
                         fetchPriority="high"
                     />
@@ -106,7 +106,7 @@ function FeaturedEvent({ event, onViewGallery }) {
                         <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-extrabold text-white leading-tight tracking-tight drop-shadow-md">
                             {event.title}
                         </h2>
-                        
+
                         {/* Event Location, Date & Photo Count badges */}
                         <div className="flex flex-wrap items-center gap-3 text-slate-200 text-xs md:text-sm font-semibold select-none">
                             {event.date && (
@@ -125,7 +125,7 @@ function FeaturedEvent({ event, onViewGallery }) {
                         </div>
                     </div>
 
-                    <button 
+                    <button
                         onClick={(e) => {
                             e.stopPropagation();
                             onViewGallery();
@@ -150,17 +150,17 @@ function BentoCard({ src, colSpan, rowSpan, title, date, photoCount, onClick }) 
             className={`relative rounded-3xl overflow-hidden group cursor-pointer border border-slate-200 dark:border-white/5 bg-white dark:bg-white/5 shadow-md hover:shadow-2xl hover:border-cyan-500/20 dark:hover:border-cyan-400/20 ${colSpan} ${rowSpan} hover:-translate-y-2.5 hover:z-10 transition-all duration-300`}
         >
             <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]">
-                <Image 
+                <Image
                     src={
-                        src.includes('res.cloudinary.com') 
-                            ? src.replace('/image/upload/', '/image/upload/f_auto,q_auto:low,w_600/') 
+                        src.includes('res.cloudinary.com')
+                            ? src.replace('/image/upload/', '/image/upload/f_auto,q_auto:low,w_600/')
                             : src
-                    } 
+                    }
                     unoptimized={true}
-                    alt={title} 
-                    fill 
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
-                    className="object-cover" 
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
@@ -170,7 +170,7 @@ function BentoCard({ src, colSpan, rowSpan, title, date, photoCount, onClick }) 
 
             <div className="absolute bottom-0 left-0 p-5 md:p-6 lg:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 text-left">
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight drop-shadow-md">{title}</h3>
-                
+
                 <div className="flex flex-wrap items-center gap-2 select-none">
                     <span className="text-cyan-400 font-bold text-xs uppercase tracking-wider">{date}</span>
                     <span className="w-1 h-1 rounded-full bg-cyan-400" />
@@ -266,7 +266,7 @@ function EventTimeline({ data }) {
                             const Icon = item.icon;
                             return (
                                 <div key={idx} className={`relative flex flex-col md:flex-row items-start md:items-center ${isEven ? 'md:flex-row-reverse' : ''} pl-14 md:pl-0 group`}>
-                                    
+
                                     {/* Timeline Node/Dot */}
                                     <div className={`absolute left-[28px] md:left-1/2 w-10 h-10 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-50 dark:border-[#020617] shadow-md transform -translate-x-1/2 -mt-1 md:mt-0 z-10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110`}>
                                         <div className={`w-full h-full rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center`}>
@@ -363,7 +363,8 @@ function InfiniteEventMarquee() {
                 ))}
             </div>
 
-            <style dangerouslySetInnerHTML={{__html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 .animate-marquee {
                     animation: marquee 30s linear infinite;
                 }
@@ -437,7 +438,7 @@ function EventsCTA({ data }) {
                     {data?.description || "Whether you're looking to join our engineering teams or partner with us for your next digital transformation, we're ready."}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
-                    <button 
+                    <button
                         onClick={() => window.location.href = data?.btnLink || '/contact'}
                         className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1"
                     >
@@ -490,22 +491,22 @@ export default function CinematicEvents({ events = [], teamMembers = [], content
     return (
         <div className="w-full flex flex-col bg-slate-50 dark:bg-[#020617] transition-colors duration-300">
             <EventsHero data={content?.hero} />
-            
+
             {featuredEvent && (
-                <FeaturedEvent 
-                    event={featuredEvent} 
-                    onViewGallery={() => handleOpenGallery(featuredEvent)} 
+                <FeaturedEvent
+                    event={featuredEvent}
+                    onViewGallery={() => handleOpenGallery(featuredEvent)}
                 />
             )}
-            
+
             {otherEvents.length > 0 && (
-                <EventBentoGallery 
-                    events={otherEvents} 
-                    onSelectEvent={handleOpenGallery} 
+                <EventBentoGallery
+                    events={otherEvents}
+                    onSelectEvent={handleOpenGallery}
                     data={content?.gallery}
                 />
             )}
-            
+
             <EventTimeline data={content?.timeline} />
             <CultureStats data={content?.stats} />
             <VideoReelPreview data={content?.videoReel} />
@@ -513,10 +514,10 @@ export default function CinematicEvents({ events = [], teamMembers = [], content
             <EmployeeTestimonials teamMembers={teamMembers} data={content?.testimonials} />
             <EventsCTA data={content?.cta} />
 
-            <EventGalleryModal 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
-                event={selectedEvent} 
+            <EventGalleryModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                event={selectedEvent}
             />
         </div>
     );

@@ -138,7 +138,7 @@ export default function Hero({ cmsData = {} }) {
 
     // ── Auto-slide timer ─────
     const [loadedSlides, setLoadedSlides] = useState([0]);
-    
+
     useEffect(() => {
         setLoadedSlides(prev => prev.includes(current) ? prev : [...prev, current]);
     }, [current]);

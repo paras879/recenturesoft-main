@@ -35,7 +35,7 @@ export default function Counter3D({ icon, value, suffix = "", label }) {
       >
         {/* Scale the icon down slightly */}
         <div className="scale-90">
-            {icon}
+          {icon}
         </div>
       </motion.div>
 

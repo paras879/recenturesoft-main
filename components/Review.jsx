@@ -137,7 +137,7 @@ export default function Review({ initialReviews }) {
     const scrollLeftRef = useRef(0);
     const requestRef = useRef(null);
     const isPausedRef = useRef(false);
-    
+
     // Initialize state with server-fetched reviews immediately to avoid flicker/delay
     const [reviewsData, setReviewsData] = useState(() => {
         if (initialReviews && initialReviews.length > 0) {

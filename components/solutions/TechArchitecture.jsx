@@ -238,7 +238,8 @@ export default function TechArchitecture({ dynamicData }) {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-slate-200 dark:border-white/[0.07] rounded-full border-dashed pointer-events-none animate-spin" style={{ width: radius * 2.3, height: radius * 2.3, animationDuration: '40s' }} />
 
                     {/* CSS styles for SVG dashed animation */}
-                    <style dangerouslySetInnerHTML={{__html: `
+                    <style dangerouslySetInnerHTML={{
+                        __html: `
                         @keyframes flowDash {
                             to {
                                 stroke-dashoffset: -24;
