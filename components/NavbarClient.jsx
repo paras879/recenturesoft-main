@@ -103,17 +103,37 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
         ...category,
         items: [...category.items]
     }));
+
+    // Fallback category for uncategorized solutions
+    const otherSolutionsCategory = {
+        title: "Other Services",
+        icon: Briefcase,
+        color: "text-slate-500",
+        bg: "bg-slate-500/10",
+        items: []
+    };
+
     if (dynamicPages && dynamicPages.length > 0) {
         dynamicPages.forEach(dp => {
-            if (dp.category === "Solutions" && dp.subcategory) {
-                const cat = combinedSolutionsMenu.find(c => c.title === dp.subcategory);
-                if (cat) {
-                    if (dp.path !== "/ai-services" && dp.path !== "/dashboard" && !cat.items.some(item => item.href === dp.path)) {
-                        cat.items.push({ name: dp.name, href: dp.path });
+            if (dp.category === "Solutions") {
+                if (dp.path !== "/ai-services" && dp.path !== "/dashboard") {
+                    const cat = combinedSolutionsMenu.find(c => c.title === dp.subcategory);
+                    if (cat) {
+                        if (!cat.items.some(item => item.href === dp.path)) {
+                            cat.items.push({ name: dp.name, href: dp.path });
+                        }
+                    } else {
+                        if (!otherSolutionsCategory.items.some(item => item.href === dp.path)) {
+                            otherSolutionsCategory.items.push({ name: dp.name, href: dp.path });
+                        }
                     }
                 }
             }
         });
+    }
+
+    if (otherSolutionsCategory.items.length > 0) {
+        combinedSolutionsMenu.push(otherSolutionsCategory);
     }
 
     // Filter solutions menu categories and their items
