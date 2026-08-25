@@ -155,7 +155,7 @@ export default function IpadAppsContent({ dynamicData }) {
             </div>
 
             {/* Development Process */}
-            <div className="py-[120px]">
+            <div className="pt-4 pb-[120px]">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <motion.h3 
                         initial="hidden"
