@@ -21,7 +21,7 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-  preload: false,
+  preload: true,
   display: "swap",
 });
 
@@ -66,16 +66,6 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} h-full antialiased`}
     >
-      <head>
-        {/* Preload hero background image for faster LCP on mobile */}
-        <link
-          rel="preload"
-          as="image"
-          href="/hero_bg_1.webp"
-          fetchPriority="high"
-          imageSizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 100vw"
-        />
-      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ProjectModalProvider>
