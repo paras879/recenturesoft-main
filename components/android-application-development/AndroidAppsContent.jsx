@@ -94,9 +94,10 @@ export default function AndroidAppsContent({ dynamicData }) {
         <div className="w-full mt-4 mb-4">
             {/* Intro Section */}
             <div className="prose prose-slate dark:prose-invert max-w-none mb-16 text-center px-4">
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">
-                    {introText}
-                </p>
+                <div 
+                    className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: introText }}
+                />
             </div>
 
             {/* Core Value Proposition */}
