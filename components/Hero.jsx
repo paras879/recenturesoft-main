@@ -188,9 +188,9 @@ export default function Hero({ cmsData = {} }) {
                                 fill
                                 priority={i === 0}
                                 fetchPriority={i === 0 ? "high" : "auto"}
-                                sizes="100vw"
+                                sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 100vw"
                                 className="object-cover"
-                                quality={60}
+                                quality={i === 0 ? 55 : 40}
                             />
                         </div>
                     );

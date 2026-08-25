@@ -287,9 +287,12 @@ body {
   .animate-floatShape,
   .animate-neonEdge,
   .animate-dataPulse,
-  .animate-shimmer {
+  .animate-shimmer,
+  .animate-fade-in-up {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
