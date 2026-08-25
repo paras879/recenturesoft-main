@@ -76,12 +76,26 @@ export default function AndroidAppsContent({ dynamicData }) {
     const [openIndex, setOpenIndex] = useState(0);
     const toggleFaq = (index) => setOpenIndex(openIndex === index ? -1 : index);
 
+    const introText = dynamicData?.content?.introText || (
+        <>
+            Android technology has a market share of <strong className="text-blue-500">more than 80%</strong> in the smartphone segment. Investing in a robust mobile app can help you reach a massive global audience and build unparalleled brand recognition.
+        </>
+    );
+
+    const scalableTitle = dynamicData?.content?.scalableTitle || "Unique Yet Scalable Android Solutions";
+    const scalableDesc = dynamicData?.content?.scalableDesc || "In an expanding and competitive market, finding the right company is vital. Our experienced and skilled team solves complex mobile-related problems, assisting startups and enterprises in getting the best Android applications loaded with cutting-edge capabilities and cross-browser compatibility.";
+    const scalableList = dynamicData?.content?.scalableList || [
+        "Expert Consultation",
+        "Thorough QA Testing",
+        "Fast Maintenance"
+    ];
+
     return (
         <div className="w-full mt-4 mb-4">
             {/* Intro Section */}
             <div className="prose prose-slate dark:prose-invert max-w-none mb-16 text-center px-4">
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">
-                    Android technology has a market share of <strong className="text-blue-500">more than 80%</strong> in the smartphone segment. Investing in a robust mobile app can help you reach a massive global audience and build unparalleled brand recognition.
+                    {introText}
                 </p>
             </div>
 
@@ -91,25 +105,19 @@ export default function AndroidAppsContent({ dynamicData }) {
                 
                 <div className="relative z-10">
                     <h4 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white text-center">
-                        Unique Yet Scalable Android Solutions
+                        {scalableTitle}
                     </h4>
                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
-                        In an expanding and competitive market, finding the right company is vital. Our experienced and skilled team solves complex mobile-related problems, assisting startups and enterprises in getting the best Android applications loaded with cutting-edge capabilities and cross-browser compatibility.
+                        {scalableDesc}
                     </p>
                     
                     <div className="flex flex-wrap justify-center gap-4 mt-8">
-                        <div className="flex items-center gap-2 bg-white dark:bg-slate-800 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <CheckCircle2 className="w-5 h-5 text-blue-500" />
-                            <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Expert Consultation</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-white dark:bg-slate-800 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <CheckCircle2 className="w-5 h-5 text-blue-500" />
-                            <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Thorough QA Testing</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-white dark:bg-slate-800 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <CheckCircle2 className="w-5 h-5 text-blue-500" />
-                            <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">Fast Maintenance</span>
-                        </div>
+                        {scalableList.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2 bg-white dark:bg-slate-800 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <CheckCircle2 className="w-5 h-5 text-blue-500" />
+                                <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
