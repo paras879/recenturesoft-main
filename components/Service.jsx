@@ -107,9 +107,9 @@ function ServiceCard({ service, activeSlide }) {
             <div className={`pointer-events-none absolute inset-0 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-transparent group-hover:border-slate-300 dark:group-hover:border-white/20 transition-all duration-700 bg-gradient-to-br ${service.accent || 'from-cyan-500/20 to-blue-500/20'} opacity-0 group-hover:opacity-[0.03]`} />
 
             {/* Content Left/Top */}
-            <div className="relative z-10 flex flex-col gap-3 w-full lg:w-1/2 justify-center transition-all duration-700 ease-out group-hover:translate-x-2 group-hover:-translate-y-1">
-                <h3 className="text-[1.4rem] md:text-[1.8rem] lg:text-[2rem] font-[600] text-slate-900 dark:text-white tracking-[-0.03em] leading-[1.1] transition-colors duration-500">{service.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-[0.95rem] md:text-base leading-7 font-[400] mt-2 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors duration-500">{service.description || service.shortDescription}</p>
+            <div className="relative z-10 flex flex-col gap-3 w-full lg:w-7/12 justify-center transition-all duration-700 ease-out group-hover:translate-x-2 group-hover:-translate-y-1">
+                <h3 className="text-[1.3rem] md:text-[1.6rem] lg:text-[1.8rem] font-[600] text-slate-900 dark:text-white tracking-[-0.03em] leading-[1.1] transition-colors duration-500 whitespace-nowrap overflow-hidden text-ellipsis">{service.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-[0.95rem] md:text-base leading-7 font-[400] mt-2 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors duration-500 whitespace-pre-line">{service.description || service.shortDescription}</p>
 
                 <div className="flex flex-wrap gap-2 mt-4">
                     {(service.features || []).map((tag, idx) => (
@@ -133,7 +133,7 @@ function ServiceCard({ service, activeSlide }) {
             </div>
 
             {/* Scene / Mockup Right */}
-            <div className="relative z-0 h-[220px] md:h-[260px] lg:h-[320px] w-full lg:w-1/2 flex items-center justify-center pointer-events-none mt-3 md:mt-0 transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:-translate-y-2 group-hover:-translate-x-1">
+            <div className="relative z-0 h-[220px] md:h-[260px] lg:h-[320px] w-full lg:w-5/12 flex items-center justify-center pointer-events-none mt-8 md:mt-12 transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:-translate-y-2 group-hover:-translate-x-1">
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.accent || 'from-cyan-500/20 to-blue-500/20'} blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity duration-700`} />
                 {service.scene && SceneMap[service.scene] ? (
                     React.createElement(SceneMap[service.scene], { activeSlide, images: service.images || [] })
