@@ -34,29 +34,11 @@ export default function ContentWritingContent({ dynamicData }) {
         }
     ];
 
-    const process = dynamicData?.content?.process || [
-        { title: "Research", desc: "Brainstorming ideas and analyzing your business model to persuade and inform your end-users." },
-        { title: "Roadmap", desc: "Setting milestones and structuring a framework for seamless delivery and content creation." },
-        { title: "Development", desc: "Crafting SEO-friendly, error-free content packed with top-performing keywords." },
-        { title: "Reviewing", desc: "Thorough checking for grammar, spelling errors, and ensuring keywords fit naturally." },
-        { title: "Deploying", desc: "Publishing the content at the right time using optimal design layouts and methods." },
-        { title: "Support", desc: "Frequent updates and continuous monitoring to boost your ongoing search engine ranking." }
-    ];
-
     const benefits = dynamicData?.content?.benefits || [
         { icon: LucideIcons.RefreshCw, title: "Give Outdated Content New Life", desc: "Evaluate existing data and refresh or repurpose it for webinars, podcasts, or infographics to reach a broader audience." },
         { icon: LucideIcons.TrendingUp, title: "Increases Search Rankings", desc: "Publishing high-quality content with strategic keywords, headlines, and meta descriptions to rank up fast on Google." },
         { icon: LucideIcons.Zap, title: "Increases Conversions", desc: "Adding strong, relevant, and appealing calls-to-action to effectively encourage visitors to take the desired action." },
         { icon: LucideIcons.MessageSquare, title: "Creates a Voice for Business", desc: "Establishing a solid brand voice and maintaining constant goodwill across different digital marketing channels." }
-    ];
-
-    const whyChooseUs = dynamicData?.content?.whyChooseUs || [
-        "Highly Reliable Content Services",
-        "Responsible & Transparent Work",
-        "Quick Customer Support",
-        "Result-Oriented Methodologies",
-        "Grammarly Checked Content",
-        "100% Zero-Plagiarism Guarantee"
     ];
 
     return (
@@ -106,21 +88,36 @@ export default function ContentWritingContent({ dynamicData }) {
                 })}
             </div>
 
-            {/* Development Process Timeline */}
+            {/* Impact Section */}
             <div className="bg-slate-50 dark:bg-slate-900/50 rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-slate-800 mb-20">
-                <h3 className="text-2xl md:text-3xl font-bold mb-10 text-slate-900 dark:text-white text-center">
-                    Content Development Process
+                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-slate-900 dark:text-white text-center">
+                    How Content Marketing Services Impact Your Business
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {process.map((step, index) => (
-                        <div key={index} className="relative">
-                            <div className="w-10 h-10 bg-blue-500 text-white font-bold rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-white dark:border-[#020617]">
-                                {index + 1}
+                <div className="max-w-4xl mx-auto">
+                    <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed text-center">
+                        Content is one of the most valuable assets of any digital business. By utilizing the content, the company can reach its customers through various formats. This way, the business gains organic traffic by providing the exact information the customer needs at the exact moment they need it. Moreover, content marketing impacts your business in the following ways:
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                        {[
+                            "Increase organic traffic",
+                            "Build authority and credibility",
+                            "Increase website visitors' engagement rate",
+                            "Boost search engine rankings",
+                            "Attract high-quality leads",
+                            "Attract customers and increase conversions",
+                            "Improve social media presence",
+                            "Enhance email marketing",
+                            "Increase ROI"
+                        ].map((item, index) => (
+                            <div key={index} className="flex items-center gap-3 bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                                <LucideIcons.TrendingUp className="w-5 h-5 text-blue-500 shrink-0" />
+                                <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{item}</span>
                             </div>
-                            <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{step.title}</h4>
-                            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{step.desc}</p>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-center font-medium">
+                        These are important metrics for running a profitable business, and our content marketing agency in India ensures your business grows.
+                    </p>
                 </div>
             </div>
 
@@ -147,21 +144,35 @@ export default function ContentWritingContent({ dynamicData }) {
                 </div>
 
                 <div>
-                    <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Why Choose Recenturesoft?</h3>
-                    <div className="bg-slate-50 dark:bg-slate-900/40 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 h-full relative overflow-hidden">
+                    <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Why Choose RecentureSoft?</h3>
+                    <div className="bg-slate-50 dark:bg-slate-900/40 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 h-full relative overflow-hidden flex flex-col">
                         <div className="absolute -right-[10%] top-[10%] w-[50%] h-[80%] bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-[80px] pointer-events-none" />
                         
-                        <div className="relative z-10">
-                            <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
-                                Our industry specialists have decades of knowledge and experience in delivering the best content that will engage customers on different devices and platforms. We ensure you get the finest and most budget-friendly solutions.
+                        <div className="relative z-10 flex-grow">
+                            <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                                Every business deserves a competent content marketing company in India to help them deliver quality content. We want to be your partner in maintaining and ranking your website's content. We bring many advantages with our services, some of them are:
                             </p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {whyChooseUs.map((reason, i) => (
-                                    <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
-                                        <LucideIcons.ShieldCheck className="w-5 h-5 text-blue-500 shrink-0" />
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                                {[
+                                    "Professional SEO writers",
+                                    "Unique and non-plagiarized content",
+                                    "Industry research",
+                                    "Search intent optimization",
+                                    "Easy-to-read content",
+                                    "Strong branding",
+                                    "On-time delivery",
+                                    "Transparent communication"
+                                ].map((reason, i) => (
+                                    <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                                        <LucideIcons.ShieldCheck className="w-4 h-4 text-blue-500 shrink-0" />
                                         <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{reason}</span>
                                     </div>
                                 ))}
+                            </div>
+                            <div className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed space-y-4">
+                                <p>Our content marketing packages in India vary from business to business and are customizable based on the required services.</p>
+                                <p>Let's create high-quality content for your business together to drive better engagement and increase profits.</p>
+                                <p className="font-semibold text-blue-600 dark:text-blue-400">Talk to our experts today to get started and discuss the project, goals and outcomes.</p>
                             </div>
                         </div>
                     </div>
