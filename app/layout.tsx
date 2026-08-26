@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
+import { preload } from "react-dom";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import RoutePreloader from "@/components/RoutePreloader";
@@ -60,6 +61,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Use React 18 preload API to guarantee LCP images are prioritized by the browser
+  preload('/mobile__hero_bg_1.webp', { as: 'image', fetchPriority: 'high', media: '(max-width: 767px)' });
+  preload('/hero_bg_1.webp', { as: 'image', fetchPriority: 'high', media: '(min-width: 768px)' });
+
   return (
     <html
       lang="en" data-scroll-behavior="smooth"

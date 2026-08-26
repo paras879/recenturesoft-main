@@ -186,7 +186,6 @@ export default function Hero({ cmsData = {} }) {
                         className: "object-cover w-full h-full",
                         fill: true,
                         priority: i === 0, // This is the magic that tells Next.js to auto-inject <link rel="preload">
-                        unoptimized: true, // Bypass Next.js processing API to serve directly from CDN instantly
                     };
 
                     const {
