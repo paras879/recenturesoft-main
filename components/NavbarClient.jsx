@@ -270,10 +270,15 @@ export default function NavbarClient({ logoUrl = "/Logo.png", inactivePaths = []
                     <div className="hidden lg:flex items-center gap-4">
                         <ThemeToggle />
                         {isPathActive("/contact") && (
-                            <button className="relative group px-6 py-3.5 rounded-full min-h-[44px] overflow-hidden font-semibold text-sm text-white shadow-lg shadow-cyan-500/20 hover:scale-105 hover:shadow-cyan-500/40 transition-all duration-300">
+                            <Link
+                                href="/contact"
+                                prefetch={true}
+                                className="relative group px-6 py-3 rounded-full min-h-[44px] min-w-[120px] inline-flex items-center justify-center font-semibold text-sm text-white shadow-lg shadow-cyan-500/20 hover:scale-105 hover:shadow-cyan-500/40 transition-all duration-300 overflow-hidden"
+                                style={{ background: "linear-gradient(to right, var(--color-primary), var(--color-accent))" }}
+                            >
                                 <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent dark:from-cyan-500 dark:to-indigo-600 transition-transform duration-300 group-hover:scale-105" />
-                                <Link href="/contact" prefetch={true} className="relative z-10">Get A Quote</Link>
-                            </button>
+                                <span className="relative z-10">Get A Quote</span>
+                            </Link>
                         )}
                     </div>
 

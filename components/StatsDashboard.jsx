@@ -262,15 +262,13 @@ function AnalyticsBar({ data, maxValue, index, peakValue, chartHeight }) {
                 }}
             >
                 <span
-                    className="hidden sm:block text-[11px] font-semibold tabular-nums transition-colors duration-300"
-                    style={{ color: hovered ? C.primary : isPeak ? C.primary : "#64748b" }}
+                    className={`hidden sm:block text-[11px] font-semibold tabular-nums transition-colors duration-300 ${hovered || isPeak ? 'text-sky-600 dark:text-[#06E6FF]' : 'text-slate-500 dark:text-slate-400'}`}
                 >
                     {data.value >= 1000 ? (data.value / 1000).toFixed(1) + 'k' : data.value}
                 </span>
                 {isPeak && (
                     <span
-                        className="hidden sm:block text-[7px] sm:text-[8px] font-semibold uppercase tracking-widest mt-0.5"
-                        style={{ color: C.primary }}
+                        className="hidden sm:block text-[7px] sm:text-[8px] font-semibold uppercase tracking-widest mt-0.5 text-sky-600 dark:text-[#06E6FF]"
                     >
                         Record
                     </span>
@@ -342,8 +340,7 @@ function AnalyticsBar({ data, maxValue, index, peakValue, chartHeight }) {
 
             {/* Month label */}
             <span
-                className="mt-2 sm:mt-3 text-[7px] sm:text-[11px] uppercase tracking-wider font-medium transition-colors duration-300 block -rotate-45 sm:rotate-0 origin-top-left"
-                style={{ color: hovered ? C.primary : isPeak ? C.primary : "#475569" }}
+                className={`mt-2 sm:mt-3 text-[7px] sm:text-[11px] uppercase tracking-wider font-medium transition-colors duration-300 block -rotate-45 sm:rotate-0 origin-top-left ${hovered || isPeak ? 'text-sky-600 dark:text-[#06E6FF]' : 'text-slate-500 dark:text-slate-400'}`}
             >
                 {data.month}
             </span>
@@ -576,8 +573,8 @@ export default function StatsDashboard({ cmsData = {} }) {
                                             border: `1px solid ${C.primary}20`,
                                         }}
                                     >
-                                        <div className="w-1.5 h-1.5 rounded-full" style={{ background: C.primary }} />
-                                        <span className="text-[10px] font-semibold uppercase" style={{ color: C.primary }}>Live</span>
+                                        <div className="w-1.5 h-1.5 rounded-full bg-sky-600 dark:bg-[#06E6FF]" />
+                                        <span className="text-[10px] font-semibold uppercase text-sky-600 dark:text-[#06E6FF]">Live</span>
                                     </div>
                                 </div>
                                 <p className="text-sm text-slate-500 dark:text-gray-500 mt-1">
@@ -654,14 +651,14 @@ export default function StatsDashboard({ cmsData = {} }) {
                                 </div>
                                 <div>
                                     <p className="text-[9px] sm:text-[10px] text-slate-500 dark:text-gray-500 uppercase tracking-widest font-medium">Peak</p>
-                                    <p className="text-sm sm:text-base font-semibold tabular-nums tracking-tight mt-0.5" style={{ color: C.primary }}>
-                                        {maxValue >= 1000 ? (maxValue / 1000).toFixed(1) + 'k' : maxValue} <span className="text-[9px] text-slate-400 dark:text-gray-400 font-medium">Dec</span>
+                                    <p className="text-sm sm:text-base font-semibold tabular-nums tracking-tight mt-0.5 text-sky-600 dark:text-[#06E6FF]">
+                                        {maxValue >= 1000 ? (maxValue / 1000).toFixed(1) + 'k' : maxValue} <span className="text-[9px] text-slate-500 dark:text-gray-400 font-medium">Dec</span>
                                     </p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 text-[10px] text-slate-700 dark:text-gray-400 col-span-2 sm:col-span-1">
                                 <span className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.05]">
-                                    <svg className="w-3 h-3" style={{ color: C.primary }} viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="w-3 h-3 text-sky-600 dark:text-[#06E6FF]" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
                                     </svg>
                                     +233% YoY Growth
