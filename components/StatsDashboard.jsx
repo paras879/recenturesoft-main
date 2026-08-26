@@ -492,13 +492,13 @@ export default function StatsDashboard({ cmsData = {} }) {
     return (
         <section
             ref={containerRef}
-            className="relative py-[clamp(1.5rem,4vw,4.5rem)] overflow-hidden bg-background transition-colors duration-300"
+            className="relative pt-6 pb-[clamp(1.5rem,4vw,4.5rem)] overflow-hidden bg-background transition-colors duration-300"
         >
             {/* Background ambience */}
             <BackgroundEffect />
 
             {/* ═══ Section header ═══ */}
-            <div className="relative z-10 text-center max-w-3xl mx-auto px-6 mb-8 md:mb-12">
+            <div className="relative z-10 text-center max-w-5xl mx-auto px-6 mb-8 md:mb-12">
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-3 md:mb-4">
                     {cmsData.stats?.heading1 || "Business Intelligence"}{" "}
                     <span
