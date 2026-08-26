@@ -66,6 +66,23 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} h-full antialiased`}
     >
+      <head>
+        {/* Preload hero images with media queries to eliminate LCP resource load delay */}
+        <link
+          rel="preload"
+          as="image"
+          href="/mobile__hero_bg_1.webp"
+          media="(max-width: 767px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/hero_bg_1.webp"
+          media="(min-width: 768px)"
+          fetchPriority="high"
+        />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ProjectModalProvider>
