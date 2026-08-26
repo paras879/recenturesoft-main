@@ -287,12 +287,15 @@ body {
   .animate-floatShape,
   .animate-neonEdge,
   .animate-dataPulse,
-  .animate-shimmer,
-  .animate-fade-in-up {
+  .animate-shimmer {
     animation: none !important;
     transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
+  }
+
+  /* Don't fully disable, just make it near-instant to avoid FOUT CLS */
+  .animate-fade-in-up {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
   }
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import dynamic from "next/dynamic";
 import { useProjectModal } from "@/components/providers/ProjectModalProvider";
 import { useMeetingModal } from "@/components/providers/MeetingModalProvider";
@@ -179,26 +179,41 @@ export default function Hero({ cmsData = {} }) {
                     */}
                 {SLIDES.map((s, i) => {
                     if (!loadedSlides.includes(i)) return null;
+                    
+                    const commonProps = {
+                        alt: "Hero Background",
+                        sizes: "100vw",
+                        className: "object-cover w-full h-full",
+                        fill: true,
+                        priority: i === 0, // This is the magic that tells Next.js to auto-inject <link rel="preload">
+                    };
+
+                    const {
+                        props: { srcSet: mobileSrcSet },
+                    } = getImageProps({ ...commonProps, src: s.mobileBg });
+
+                    const {
+                        props: { srcSet: desktopSrcSet, ...restProps },
+                    } = getImageProps({ ...commonProps, src: s.bg });
+
                     return (
                         <div
                             key={s.id}
                             className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0"}`}
                             aria-hidden={i !== current}
                         >
-                            {/* Native <picture> element: mobile browser downloads only mobile image,
-                                desktop browser downloads only desktop image. Zero wasted bandwidth. */}
+                            {/* Native <picture> element powered by Next.js getImageProps for safe preloading */}
                             <picture className="absolute inset-0 w-full h-full">
                                 <source
                                     media="(max-width: 767px)"
-                                    srcSet={s.mobileBg}
+                                    srcSet={mobileSrcSet}
+                                />
+                                <source
+                                    media="(min-width: 768px)"
+                                    srcSet={desktopSrcSet}
                                 />
                                 <img
-                                    src={s.bg}
-                                    alt="Hero Background"
-                                    className="object-cover w-full h-full"
-                                    fetchPriority={i === 0 ? "high" : "auto"}
-                                    loading={i === 0 ? "eager" : "lazy"}
-                                    decoding={i === 0 ? "sync" : "async"}
+                                    {...restProps}
                                 />
                             </picture>
                         </div>
