@@ -43,6 +43,7 @@ const SLIDES = [
     {
         id: 0,
         bg: "/hero_bg_1.webp",
+        mobileBg: "/mobile__hero_bg_1.webp",
         accent: "#0ea5e9",
         accentGrad: "from-cyan-500 via-blue-500 to-indigo-500",
         glowColor: "bg-cyan-500/20",
@@ -59,6 +60,7 @@ const SLIDES = [
     {
         id: 1,
         bg: "/hero_bg_2.webp",
+        mobileBg: "/mobile_hero_bg_2.webp",
         accent: "#a855f7",
         accentGrad: "from-purple-500 via-pink-500 to-indigo-500",
         glowColor: "bg-purple-500/20",
@@ -75,6 +77,7 @@ const SLIDES = [
     {
         id: 2,
         bg: "/hero_bg_3.webp",
+        mobileBg: "/mobile_hero_bg_3.webp",
         accent: "#10b981",
         accentGrad: "from-emerald-500 via-teal-500 to-cyan-500",
         glowColor: "bg-emerald-500/20",
@@ -182,16 +185,22 @@ export default function Hero({ cmsData = {} }) {
                             className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0"}`}
                             aria-hidden={i !== current}
                         >
-                            <Image
-                                src={s.bg}
-                                alt="Hero Background"
-                                fill
-                                priority={i === 0}
-                                fetchPriority={i === 0 ? "high" : "auto"}
-                                sizes="100vw"
-                                className="object-cover"
-                                quality={60}
-                            />
+                            {/* Native <picture> element: mobile browser downloads only mobile image,
+                                desktop browser downloads only desktop image. Zero wasted bandwidth. */}
+                            <picture className="absolute inset-0 w-full h-full">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcSet={s.mobileBg}
+                                />
+                                <img
+                                    src={s.bg}
+                                    alt="Hero Background"
+                                    className="object-cover w-full h-full"
+                                    fetchPriority={i === 0 ? "high" : "auto"}
+                                    loading={i === 0 ? "eager" : "lazy"}
+                                    decoding={i === 0 ? "sync" : "async"}
+                                />
+                            </picture>
                         </div>
                     );
                 })}
